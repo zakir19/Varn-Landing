@@ -1,0 +1,117 @@
+{
+  "title": "Varn documentation",
+  "groups": [
+    {
+      "title": "Getting started",
+      "icon": "rocket",
+      "pages": [
+        "index",
+        "getting-started/introduction",
+        "getting-started/quick-start",
+        "getting-started/install",
+        "getting-started/first-swatches",
+        "getting-started/dashboard"
+      ]
+    },
+    {
+      "title": "Core concepts",
+      "icon": "layers",
+      "pages": [
+        "concepts/how-it-works",
+        "concepts/surfaces",
+        "concepts/swatches-vs-variants",
+        "concepts/assignments"
+      ]
+    },
+    {
+      "title": "Swatches",
+      "icon": "swatch",
+      "pages": [
+        "guides/color-swatches",
+        "guides/image-swatches",
+        "guides/ai-setup",
+        "guides/auto-configure"
+      ]
+    },
+    {
+      "title": "Variant photos",
+      "icon": "image",
+      "pages": [
+        "guides/variant-galleries",
+        "guides/photo-sequencing",
+        "guides/sync-variant-photos",
+        "guides/ai-photo-match"
+      ]
+    },
+    {
+      "title": "Reach more pages",
+      "icon": "globe",
+      "pages": [
+        "guides/collection-search",
+        "guides/quick-view",
+        "guides/product-grouping",
+        "guides/more-in-this-color"
+      ]
+    },
+    {
+      "title": "Style studio",
+      "icon": "sliders",
+      "pages": [
+        "style/overview",
+        "style/appearance",
+        "style/sold-out",
+        "style/advanced",
+        "style/custom-css",
+        "style/backups"
+      ]
+    },
+    {
+      "title": "Analytics",
+      "icon": "chart",
+      "pages": [
+        "analytics/overview",
+        "analytics/merchandising-advice",
+        "analytics/tracking-and-privacy"
+      ]
+    },
+    {
+      "title": "Agent readiness",
+      "icon": "robot",
+      "pages": ["agent/overview", "agent/fixes"]
+    },
+    {
+      "title": "Plans and billing",
+      "icon": "card",
+      "pages": ["billing/plans", "billing/trial", "billing/manage"]
+    },
+    {
+      "title": "Reference",
+      "icon": "code",
+      "pages": [
+        "reference/feature-matrix",
+        "reference/metafields",
+        "reference/storefront-reference",
+        "reference/performance",
+        "reference/themes",
+        "reference/languages",
+        "reference/permissions-privacy"
+      ]
+    },
+    {
+      "title": "Troubleshooting",
+      "icon": "wrench",
+      "pages": [
+        "troubleshooting/swatches-not-showing",
+        "troubleshooting/duplicates",
+        "troubleshooting/galleries-and-cards",
+        "troubleshooting/analytics-zero",
+        "troubleshooting/faq"
+      ]
+    },
+    {
+      "title": "Resources",
+      "icon": "life",
+      "pages": ["resources/glossary", "resources/support"]
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One-click AI setup | Varn docs</title>
+<meta name="description" content="Two levels of automatic setup: name matching in more than ten languages on Free, and true color detection from photos on Pro.">
+<link rel="canonical" href="https://varn.enstacked.com/docs/guides/ai-setup.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Varn docs">
+<meta property="og:title" content="One-click AI setup">
+<meta property="og:description" content="Two levels of automatic setup: name matching in more than ten languages on Free, and true color detection from photos on Pro.">
+<meta property="og:url" content="https://varn.enstacked.com/docs/guides/ai-setup.html">
+<meta property="og:image" content="https://varn.enstacked.com/assets/img/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../../assets/fonts/inter-tight-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/docs.css">
+<script>
+/* Resolve the theme before first paint so the page never flashes the wrong one. */
+(function(){try{var t=localStorage.getItem("varn-docs-theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";}document.documentElement.dataset.theme=t;}catch(e){}})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+
+<div class="progress" data-progress aria-hidden="true"><span class="progress__bar" data-progress-bar></span></div>
+
+<header class="top">
+  <div class="top__inner">
+    <button class="top__burger" type="button" data-menu aria-label="Open navigation" aria-expanded="false">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3.5 6h13M3.5 10h13M3.5 14h13"/></svg>
+    </button>
+
+    <a class="top__brand" href="../index.html">
+      <img class="top__mark" src="../../assets/img/varn-mark.svg" width="26" height="26" alt="">
+      <span class="top__name">Varn</span>
+      <span class="top__docs">Docs</span>
+    </a>
+
+    <button class="searchbtn" type="button" data-search-open>
+      <svg class="searchbtn__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="4.8"/><path d="m12.6 12.6 3.4 3.4"/></svg>
+      <span class="searchbtn__label">Search documentation</span>
+      <kbd class="searchbtn__kbd">Ctrl K</kbd>
+    </button>
+
+    <nav class="top__links" aria-label="Site">
+      <a class="top__link" href="../../index.html">Website</a>
+      <a class="top__link" href="../../index.html#pricing">Pricing</a>
+      <a class="top__link" href="mailto:support@enstacked.com">Support</a>
+    </nav>
+
+    <button class="themebtn" type="button" data-theme-toggle aria-label="Switch between light and dark">
+      <svg class="themebtn__sun" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="3.4"/><path d="M10 2.6v2M10 15.4v2M2.6 10h2M15.4 10h2M4.8 4.8l1.4 1.4M13.8 13.8l1.4 1.4M15.2 4.8l-1.4 1.4M6.2 13.8l-1.4 1.4"/></svg>
+      <svg class="themebtn__moon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M16 11.7A6.5 6.5 0 0 1 8.3 4a6.5 6.5 0 1 0 7.7 7.7Z"/></svg>
+    </button>
+
+    <a class="top__cta" href="https://apps.shopify.com/varn-variants-swatches-ai" target="_blank" rel="noopener">Add Varn free</a>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sb" data-sidebar>
+    <div class="sb__inner">
+      <nav class="sb__nav" aria-label="Documentation"><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 12.5 4 11l2-3.5 3 .5M7.5 11.5 9 16l3.5-2-.5-3M6.5 13.5 4.5 15.5M9.5 10.5c3-3 5.5-4.5 8-4.5 0 2.5-1.5 5-4.5 8"/></svg></span><span class="sb__grouptitle">Getting started</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../index.html"><span>Varn documentation</span></a></li><li><a class="sb__link" href="../getting-started/introduction.html"><span>Introduction</span></a></li><li><a class="sb__link" href="../getting-started/quick-start.html"><span>Quick start</span></a></li><li><a class="sb__link" href="../getting-started/install.html"><span>Install and activate</span></a></li><li><a class="sb__link" href="../getting-started/first-swatches.html"><span>Your first swatches</span></a></li><li><a class="sb__link" href="../getting-started/dashboard.html"><span>Dashboard tour</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 3.5 6.5 3.2L10 9.9 3.5 6.7Zm6.5 6.6L10 13.3l-6.5-3.2M16.5 13.3 10 16.5l-6.5-3.2"/></svg></span><span class="sb__grouptitle">Core concepts</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../concepts/how-it-works.html"><span>How Varn works</span></a></li><li><a class="sb__link" href="../concepts/surfaces.html"><span>Where swatches appear</span></a></li><li><a class="sb__link" href="../concepts/swatches-vs-variants.html"><span>Swatches vs Variants</span></a></li><li><a class="sb__link" href="../concepts/assignments.html"><span>Assignments and resolution</span></a></li></ul></div><div class="sb__group is-open" data-group><button class="sb__grouphead" type="button" aria-expanded="true"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="7" r="3.2"/><circle cx="13" cy="13" r="3.2"/><path d="M13 4.2v5.6M4.2 13h5.6"/></svg></span><span class="sb__grouptitle">Swatches</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../guides/color-swatches.html"><span>Color swatches</span></a></li><li><a class="sb__link" href="../guides/image-swatches.html"><span>Image swatches</span></a></li><li><a class="sb__link is-active" href="../guides/ai-setup.html" aria-current="page"><span>One-click AI setup</span></a></li><li><a class="sb__link" href="../guides/auto-configure.html"><span>Auto-configure your catalogue</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="13" height="11" rx="2"/><circle cx="7.5" cy="8.5" r="1.2"/><path d="m4 13.5 3.5-3 3 2.5 2.5-2 3 2.5"/></svg></span><span class="sb__grouptitle">Variant photos</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../guides/variant-galleries.html"><span>Per-color photo galleries</span></a></li><li><a class="sb__link" href="../guides/photo-sequencing.html"><span>Photo sequencing</span></a></li><li><a class="sb__link" href="../guides/sync-variant-photos.html"><span>Sync to variant photos</span></a></li><li><a class="sb__link" href="../guides/ai-photo-match.html"><span>AI photo match</span><span class="sb__badge sb__badge--pro">Pro</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M3.5 10h13M10 3.5c1.9 2 2.9 4.2 2.9 6.5S11.9 14.5 10 16.5C8.1 14.5 7.1 12.3 7.1 10S8.1 5.5 10 3.5Z"/></svg></span><span class="sb__grouptitle">Reach more pages</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../guides/collection-search.html"><span>Collection and search swatches</span><span class="sb__badge sb__badge--growth">Growth</span></a></li><li><a class="sb__link" href="../guides/quick-view.html"><span>Quick view swatches</span><span class="sb__badge sb__badge--growth">Growth</span></a></li><li><a class="sb__link" href="../guides/product-grouping.html"><span>Product grouping</span><span class="sb__badge sb__badge--growth">Growth</span></a></li><li><a class="sb__link" href="../guides/more-in-this-color.html"><span>More in this color</span><span class="sb__badge sb__badge--pro">Pro</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h8M15 6h1M4 14h1M8 14h8"/><circle cx="13.5" cy="6" r="1.6"/><circle cx="6.5" cy="14" r="1.6"/></svg></span><span class="sb__grouptitle">Style studio</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../style/overview.html"><span>Style studio</span></a></li><li><a class="sb__link" href="../style/appearance.html"><span>Appearance</span></a></li><li><a class="sb__link" href="../style/sold-out.html"><span>Sold-out appearance</span></a></li><li><a class="sb__link" href="../style/advanced.html"><span>Advanced customization</span></a></li><li><a class="sb__link" href="../style/custom-css.html"><span>Custom CSS</span><span class="sb__badge sb__badge--pro">Pro</span></a></li><li><a class="sb__link" href="../style/backups.html"><span>Backups and restore</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16V9M8 16V5M12 16v-4M16 16V8"/><path d="M3 16.5h14" opacity=".45"/></svg></span><span class="sb__grouptitle">Analytics</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../analytics/overview.html"><span>Swatch analytics</span><span class="sb__badge sb__badge--pro">Pro</span></a></li><li><a class="sb__link" href="../analytics/merchandising-advice.html"><span>Merchandising advice</span><span class="sb__badge sb__badge--pro">Pro</span></a></li><li><a class="sb__link" href="../analytics/tracking-and-privacy.html"><span>Tracking and privacy</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="12" height="8" rx="2"/><path d="M10 4v3M7.5 10.5h.01M12.5 10.5h.01M8 15v1.5M12 15v1.5"/></svg></span><span class="sb__grouptitle">Agent readiness</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../agent/overview.html"><span>Agent readiness</span></a></li><li><a class="sb__link" href="../agent/fixes.html"><span>One-click fixes</span><span class="sb__badge sb__badge--pro">Pro</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="13" height="10" rx="2"/><path d="M3.5 8.5h13"/></svg></span><span class="sb__grouptitle">Plans and billing</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../billing/plans.html"><span>Plans and pricing</span></a></li><li><a class="sb__link" href="../billing/trial.html"><span>The 14-day trial</span></a></li><li><a class="sb__link" href="../billing/manage.html"><span>Manage your plan</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 7-3 3 3 3M13 7l3 3-3 3M11.2 5.5l-2.4 9"/></svg></span><span class="sb__grouptitle">Reference</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../reference/feature-matrix.html"><span>Feature matrix</span></a></li><li><a class="sb__link" href="../reference/metafields.html"><span>Metafields reference</span></a></li><li><a class="sb__link" href="../reference/storefront-reference.html"><span>Storefront reference</span></a></li><li><a class="sb__link" href="../reference/performance.html"><span>Performance</span></a></li><li><a class="sb__link" href="../reference/themes.html"><span>Theme compatibility</span></a></li><li><a class="sb__link" href="../reference/languages.html"><span>Languages</span></a></li><li><a class="sb__link" href="../reference/permissions-privacy.html"><span>Permissions and privacy</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 3.8a3.6 3.6 0 0 0-4.3 4.7L4 13.7l1.9 1.9 5.2-5.2a3.6 3.6 0 0 0 4.7-4.3l-2 2-1.9-.5-.5-1.9Z"/></svg></span><span class="sb__grouptitle">Troubleshooting</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../troubleshooting/swatches-not-showing.html"><span>Swatches are not showing</span></a></li><li><a class="sb__link" href="../troubleshooting/duplicates.html"><span>Duplicate or flickering swatches</span></a></li><li><a class="sb__link" href="../troubleshooting/galleries-and-cards.html"><span>Galleries and card chips</span></a></li><li><a class="sb__link" href="../troubleshooting/analytics-zero.html"><span>Analytics shows zero</span></a></li><li><a class="sb__link" href="../troubleshooting/faq.html"><span>Frequently asked questions</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><circle cx="10" cy="10" r="2.6"/><path d="m5.4 5.4 2.7 2.7m3.8 3.8 2.7 2.7m0-9.2-2.7 2.7m-3.8 3.8-2.7 2.7"/></svg></span><span class="sb__grouptitle">Resources</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../resources/glossary.html"><span>Glossary</span></a></li><li><a class="sb__link" href="../resources/support.html"><span>Support</span></a></li></ul></div></nav>
+      <div class="sb__foot">
+        <a class="sb__footlink" href="mailto:support@enstacked.com"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><circle cx="10" cy="10" r="2.6"/><path d="m5.4 5.4 2.7 2.7m3.8 3.8 2.7 2.7m0-9.2-2.7 2.7m-3.8 3.8-2.7 2.7"/></svg><span>Email support</span></a>
+      </div>
+    </div>
+  </aside>
+  <div class="sb__scrim" data-scrim hidden></div>
+
+  <main class="doc" id="content">
+    <article class="doc__body">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="../index.html">Docs</a>
+        <span class="crumbs__sep" aria-hidden="true">/</span><span>Swatches</span>
+        <span class="crumbs__sep" aria-hidden="true">/</span>
+        <span class="crumbs__now">One-click AI setup</span>
+      </nav>
+
+      <h1 class="doc__title">One-click AI setup</h1>
+      <p class="doc__lead">Two levels of automatic setup: name matching in more than ten languages on Free, and true color detection from photos on Pro.</p>
+
+      <div class="prose">
+<p class="md-p">Varn has two kinds of AI setup. Both fill in only values that are <strong>not configured yet</strong>, both leave everything editable, and neither will ever overwrite a decision you made.</p>
+<div class="table-wrap"><table class="md-table"><thead><tr><th></th><th>Reads</th><th>Plan</th></tr></thead><tbody><tr><td><strong>One-click AI setup</strong></td><td>Option value names, in more than ten languages.</td><td>Free</td></tr><tr><td><strong>Full AI setup</strong></td><td>The actual pixels of your product photos.</td><td>Pro</td></tr></tbody></table></div>
+<h2 id="one-click-ai-setup-free" class="md-h2">One-click AI setup (Free)<a class="anchor" href="#one-click-ai-setup-free" aria-label="Link to this section">#</a></h2>
+<p class="md-p">Press <strong>One-click AI setup</strong> in the Configure step. Varn matches each unconfigured value against a color dictionary and applies the confident matches.</p>
+<h3 id="what-it-recognises" class="md-h3">What it recognises<a class="anchor" href="#what-it-recognises" aria-label="Link to this section">#</a></h3>
+<ul class="md-list"><li>Plain color names in English, French, German, Spanish, Italian, Dutch, Portuguese, Danish, Swedish, Norwegian and more: <code>Rouge</code>, <code>Rot</code>, <code>Rosso</code>, <code>Rood</code>, <code>Rojo</code>.</li><li>Compound names where the color is one of the words: &quot;Midnight Blue&quot;, &quot;Forest Green&quot;, &quot;Dusty Rose&quot;.</li><li>Common non-literal names that have a settled meaning: Charcoal, Ivory, Sand, Camel, Wine, Mint.</li></ul>
+<h3 id="what-it-deliberately-skips" class="md-h3">What it deliberately skips<a class="anchor" href="#what-it-deliberately-skips" aria-label="Link to this section">#</a></h3>
+<p class="md-p">If it is not confident, it does nothing and leaves the value for you. &quot;Assorted&quot;, &quot;Print 4&quot;, &quot;Summer Edition&quot; and &quot;Multi&quot; stay untouched, because a wrong guess on a product page is worse than a blank.</p>
+<aside class="callout callout--note"><svg class="callout__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5h4a2 2 0 0 1 2 2v9a1.6 1.6 0 0 0-1.6-1.6H4Zm12 0h-4a2 2 0 0 0-2 2v9a1.6 1.6 0 0 1 1.6-1.6H16Z"/></svg><div class="callout__body"><p class="callout__title">Word matching, not substring matching</p><p class="md-p">The multilingual dictionary matches whole words only. Substring matching would turn &quot;Assorted&quot; into &quot;sort&quot; and then into black, which is exactly the class of confident-and-wrong result this avoids.</p></div></aside>
+<h3 id="doing-the-whole-catalogue" class="md-h3">Doing the whole catalogue<a class="anchor" href="#doing-the-whole-catalogue" aria-label="Link to this section">#</a></h3>
+<p class="md-p">The button above covers one product. For everything at once, use <a class="link" href="../guides/auto-configure.html">Auto-configure all products</a>, which runs the same matcher over your entire catalogue and is also free.</p>
+<h2 id="full-ai-setup-pro" class="md-h2">Full AI setup (Pro)<a class="anchor" href="#full-ai-setup-pro" aria-label="Link to this section">#</a></h2>
+<div class="planrow"><span class="planrow__label">Included on</span><span class="planpill planpill--free is-off">Free</span><span class="planpill planpill--growth is-off">Growth</span><span class="planpill planpill--pro is-on"><svg class="planpill__tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 10.5 3.5 3.5 7.5-8"/></svg>Pro</span></div>
+<p class="md-p">Full AI setup reads your product photos and extracts the dominant color of the garment itself.</p>
+<p class="md-p">Press <strong>Full AI setup (photos)</strong> for the selected product, or run it across the catalogue from the same panel.</p>
+<h3 id="how-the-color-is-chosen" class="md-h3">How the color is chosen<a class="anchor" href="#how-the-color-is-chosen" aria-label="Link to this section">#</a></h3>
+<p class="md-p">It is not a naive average, which on a white studio shot returns &quot;very light gray&quot; every time. The analysis:</p>
+<ul class="md-list"><li>weights the <strong>centre</strong> of the image, where the product is</li><li>recognises and discounts a <strong>near-white studio background</strong></li><li>bins similar pixels and clusters neighbouring bins, so a shadow does not split one color into three</li></ul>
+<h3 id="cost-and-limits" class="md-h3">Cost and limits<a class="anchor" href="#cost-and-limits" aria-label="Link to this section">#</a></h3>
+<p class="md-p">There are no credits and no per-image fees. Catalogue runs are sequential, cancellable at any time, and capped per run so a huge catalogue cannot run away. Progress is shown while it works.</p>
+<h3 id="when-it-beats-name-matching" class="md-h3">When it beats name matching<a class="anchor" href="#when-it-beats-name-matching" aria-label="Link to this section">#</a></h3>
+<ul class="md-list"><li>Value names that are style codes, &quot;SS24-07&quot;.</li><li>Brand color names with no dictionary meaning, &quot;Atelier Rust&quot;.</li><li>Any catalogue where names were entered inconsistently.</li></ul>
+<h3 id="when-name-matching-is-better" class="md-h3">When name matching is better<a class="anchor" href="#when-name-matching-is-better" aria-label="Link to this section">#</a></h3>
+<ul class="md-list"><li>Values that are already plain color names. Free matching is instant and exact.</li><li>Products photographed on models in busy settings, where the dominant color may be the background.</li></ul>
+<aside class="callout callout--tip"><svg class="callout__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 3.5 1.7 4.3 4.3 1.7-4.3 1.7L10 15.5l-1.7-4.3L4 9.5l4.3-1.7Z"/></svg><div class="callout__body"><p class="callout__title">A good workflow</p><p class="md-p">Run the free catalogue pass first. It handles most values in seconds. Then run Full AI on whatever is left, and hand-check the results for your best sellers.</p></div></aside>
+<h2 id="everything-stays-editable" class="md-h2">Everything stays editable<a class="anchor" href="#everything-stays-editable" aria-label="Link to this section">#</a></h2>
+<p class="md-p">Both passes write ordinary assignments. Change any of them by hand, or clear one to fall back to your theme's native swatch. There is no &quot;AI mode&quot; to leave.</p>
+<h2 id="photos-not-just-colors" class="md-h2">Photos, not just colors<a class="anchor" href="#photos-not-just-colors" aria-label="Link to this section">#</a></h2>
+<p class="md-p">To assign existing product <strong>photos</strong> to colors instead of picking colors, see <a class="link" href="../guides/ai-photo-match.html">AI photo match</a>, which is also Pro.</p>
+      </div>
+
+      <nav class="pager" aria-label="Pagination"><a class="pager__card pager__card--prev" href="../guides/image-swatches.html"><span class="pager__dir">Previous</span><span class="pager__title">Image swatches</span></a><a class="pager__card pager__card--next" href="../guides/auto-configure.html"><span class="pager__dir">Next</span><span class="pager__title">Auto-configure your catalogue</span></a></nav>
+
+      <footer class="doc__foot">
+        <p>Still stuck? <a class="link" href="mailto:support@enstacked.com">Email support@enstacked.com</a> with your store URL and theme name and we will take a look.</p>
+      </footer>
+    </article>
+
+    <aside class="toc" aria-label="On this page">
+      <div class="toc__inner">
+        <p class="toc__head">
+          <svg class="toc__headicon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 5.5h12M4 10h9M4 14.5h6"/></svg>
+          On this page
+        </p>
+        <div class="toc__rail" data-toc-rail>
+          <svg class="toc__svg" data-toc-svg aria-hidden="true" focusable="false" preserveAspectRatio="none">
+            <path class="toc__track" data-toc-track fill="none" />
+            <path class="toc__thumb" data-toc-thumb fill="none" />
+            <circle class="toc__dot" data-toc-dot r="2.75" cx="-10" cy="-10" />
+          </svg>
+          <ul class="toc__list"><li class="toc__item toc__item--h2" data-depth="0"><a class="toc__link" href="#one-click-ai-setup-free">One-click AI setup (Free)</a></li><li class="toc__item toc__item--h3" data-depth="1"><a class="toc__link" href="#what-it-recognises">What it recognises</a></li><li class="toc__item toc__item--h3" data-depth="1"><a class="toc__link" href="#what-it-deliberately-skips">What it deliberately skips</a></li><li class="toc__item toc__item--h3" data-depth="1"><a class="toc__link" href="#doing-the-whole-catalogue">Doing the whole catalogue</a></li><li class="toc__item toc__item--h2" data-depth="0"><a class="toc__link" href="#full-ai-setup-pro">Full AI setup (Pro)</a></li><li class="toc__item toc__item--h3" data-depth="1"><a class="toc__link" href="#how-the-color-is-chosen">How the color is chosen</a></li><li class="toc__item toc__item--h3" data-depth="1"><a class="toc__link" href="#cost-and-limits">Cost and limits</a></li><li class="toc__item toc__item--h3" data-depth="1"><a class="toc__link" href="#when-it-beats-name-matching">When it beats name matching</a></li><li class="toc__item toc__item--h3" data-depth="1"><a class="toc__link" href="#when-name-matching-is-better">When name matching is better</a></li><li class="toc__item toc__item--h2" data-depth="0"><a class="toc__link" href="#everything-stays-editable">Everything stays editable</a></li><li class="toc__item toc__item--h2" data-depth="0"><a class="toc__link" href="#photos-not-just-colors">Photos, not just colors</a></li></ul>
+        </div>
+        <a class="toc__top" href="#content"><svg class="toc__topicon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11m0 0-4-4m4 4-4 4"/></svg><span>Back to top</span></a>
+      </div>
+    </aside>
+  </main>
+</div>
+
+<div class="searchdlg" data-search-dialog hidden>
+  <div class="searchdlg__scrim" data-search-close></div>
+  <div class="searchdlg__panel" role="dialog" aria-modal="true" aria-label="Search documentation">
+    <div class="searchdlg__bar">
+      <svg class="searchdlg__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="4.8"/><path d="m12.6 12.6 3.4 3.4"/></svg>
+      <input class="searchdlg__input" type="search" placeholder="Search the documentation" autocomplete="off" spellcheck="false" data-search-input aria-label="Search the documentation">
+      <kbd class="searchdlg__esc">Esc</kbd>
+    </div>
+    <ul class="searchdlg__results" data-search-results></ul>
+    <p class="searchdlg__empty" data-search-empty hidden>No matches. Try a page name, a feature, or a plan.</p>
+    <p class="searchdlg__hint"><kbd>&uarr;</kbd><kbd>&darr;</kbd> to move, <kbd>Enter</kbd> to open, <kbd>Esc</kbd> to close</p>
+  </div>
+</div>
+
+<script>window.VARN_DOCS_PAGE="guides/ai-setup";window.VARN_DOCS_ROOT="../";</script>
+<script src="../assets/search-index.js" defer></script>
+<script src="../assets/vendor/gsap.min.js" defer></script>
+<script src="../assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="../assets/vendor/lenis.min.js" defer></script>
+<script src="../assets/docs.js" defer></script>
+<script src="../assets/motion.js" defer></script>
+</body>
+</html>

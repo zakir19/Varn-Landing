@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Performance | Varn docs</title>
+<meta name="description" content="The byte budget, the request count, and what Varn does to protect your Core Web Vitals.">
+<link rel="canonical" href="https://varn.enstacked.com/docs/reference/performance.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Varn docs">
+<meta property="og:title" content="Performance">
+<meta property="og:description" content="The byte budget, the request count, and what Varn does to protect your Core Web Vitals.">
+<meta property="og:url" content="https://varn.enstacked.com/docs/reference/performance.html">
+<meta property="og:image" content="https://varn.enstacked.com/assets/img/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../../assets/fonts/inter-tight-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/docs.css">
+<script>
+/* Resolve the theme before first paint so the page never flashes the wrong one. */
+(function(){try{var t=localStorage.getItem("varn-docs-theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";}document.documentElement.dataset.theme=t;}catch(e){}})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+
+<div class="progress" data-progress aria-hidden="true"><span class="progress__bar" data-progress-bar></span></div>
+
+<header class="top">
+  <div class="top__inner">
+    <button class="top__burger" type="button" data-menu aria-label="Open navigation" aria-expanded="false">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3.5 6h13M3.5 10h13M3.5 14h13"/></svg>
+    </button>
+
+    <a class="top__brand" href="../index.html">
+      <img class="top__mark" src="../../assets/img/varn-mark.svg" width="26" height="26" alt="">
+      <span class="top__name">Varn</span>
+      <span class="top__docs">Docs</span>
+    </a>
+
+    <button class="searchbtn" type="button" data-search-open>
+      <svg class="searchbtn__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="4.8"/><path d="m12.6 12.6 3.4 3.4"/></svg>
+      <span class="searchbtn__label">Search documentation</span>
+      <kbd class="searchbtn__kbd">Ctrl K</kbd>
+    </button>
+
+    <nav class="top__links" aria-label="Site">
+      <a class="top__link" href="../../index.html">Website</a>
+      <a class="top__link" href="../../index.html#pricing">Pricing</a>
+      <a class="top__link" href="mailto:support@enstacked.com">Support</a>
+    </nav>
+
+    <button class="themebtn" type="button" data-theme-toggle aria-label="Switch between light and dark">
+      <svg class="themebtn__sun" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="3.4"/><path d="M10 2.6v2M10 15.4v2M2.6 10h2M15.4 10h2M4.8 4.8l1.4 1.4M13.8 13.8l1.4 1.4M15.2 4.8l-1.4 1.4M6.2 13.8l-1.4 1.4"/></svg>
+      <svg class="themebtn__moon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M16 11.7A6.5 6.5 0 0 1 8.3 4a6.5 6.5 0 1 0 7.7 7.7Z"/></svg>
+    </button>
+
+    <a class="top__cta" href="https://apps.shopify.com/varn-variants-swatches-ai" target="_blank" rel="noopener">Add Varn free</a>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sb" data-sidebar>
+    <div class="sb__inner">
+      <nav class="sb__nav" aria-label="Documentation"><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 12.5 4 11l2-3.5 3 .5M7.5 11.5 9 16l3.5-2-.5-3M6.5 13.5 4.5 15.5M9.5 10.5c3-3 5.5-4.5 8-4.5 0 2.5-1.5 5-4.5 8"/></svg></span><span class="sb__grouptitle">Getting started</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../index.html"><span>Varn documentation</span></a></li><li><a class="sb__link" href="../getting-started/introduction.html"><span>Introduction</span></a></li><li><a class="sb__link" href="../getting-started/quick-start.html"><span>Quick start</span></a></li><li><a class="sb__link" href="../getting-started/install.html"><span>Install and activate</span></a></li><li><a class="sb__link" href="../getting-started/first-swatches.html"><span>Your first swatches</span></a></li><li><a class="sb__link" href="../getting-started/dashboard.html"><span>Dashboard tour</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 3.5 6.5 3.2L10 9.9 3.5 6.7Zm6.5 6.6L10 13.3l-6.5-3.2M16.5 13.3 10 16.5l-6.5-3.2"/></svg></span><span class="sb__grouptitle">Core concepts</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../concepts/how-it-works.html"><span>How Varn works</span></a></li><li><a class="sb__link" href="../concepts/surfaces.html"><span>Where swatches appear</span></a></li><li><a class="sb__link" href="../concepts/swatches-vs-variants.html"><span>Swatches vs Variants</span></a></li><li><a class="sb__link" href="../concepts/assignments.html"><span>Assignments and resolution</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="7" r="3.2"/><circle cx="13" cy="13" r="3.2"/><path d="M13 4.2v5.6M4.2 13h5.6"/></svg></span><span class="sb__grouptitle">Swatches</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../guides/color-swatches.html"><span>Color swatches</span></a></li><li><a class="sb__link" href="../guides/image-swatches.html"><span>Image swatches</span></a></li><li><a class="sb__link" href="../guides/ai-setup.html"><span>One-click AI setup</span></a></li><li><a class="sb__link" href="../guides/auto-configure.html"><span>Auto-configure your catalogue</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="13" height="11" rx="2"/><circle cx="7.5" cy="8.5" r="1.2"/><path d="m4 13.5 3.5-3 3 2.5 2.5-2 3 2.5"/></svg></span><span class="sb__grouptitle">Variant photos</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../guides/variant-galleries.html"><span>Per-color photo galleries</span></a></li><li><a class="sb__link" href="../guides/photo-sequencing.html"><span>Photo sequencing</span></a></li><li><a class="sb__link" href="../guides/sync-variant-photos.html"><span>Sync to variant photos</span></a></li><li><a class="sb__link" href="../guides/ai-photo-match.html"><span>AI photo match</span><span class="sb__badge sb__badge--pro">Pro</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M3.5 10h13M10 3.5c1.9 2 2.9 4.2 2.9 6.5S11.9 14.5 10 16.5C8.1 14.5 7.1 12.3 7.1 10S8.1 5.5 10 3.5Z"/></svg></span><span class="sb__grouptitle">Reach more pages</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../guides/collection-search.html"><span>Collection and search swatches</span><span class="sb__badge sb__badge--growth">Growth</span></a></li><li><a class="sb__link" href="../guides/quick-view.html"><span>Quick view swatches</span><span class="sb__badge sb__badge--growth">Growth</span></a></li><li><a class="sb__link" href="../guides/product-grouping.html"><span>Product grouping</span><span class="sb__badge sb__badge--growth">Growth</span></a></li><li><a class="sb__link" href="../guides/more-in-this-color.html"><span>More in this color</span><span class="sb__badge sb__badge--pro">Pro</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h8M15 6h1M4 14h1M8 14h8"/><circle cx="13.5" cy="6" r="1.6"/><circle cx="6.5" cy="14" r="1.6"/></svg></span><span class="sb__grouptitle">Style studio</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../style/overview.html"><span>Style studio</span></a></li><li><a class="sb__link" href="../style/appearance.html"><span>Appearance</span></a></li><li><a class="sb__link" href="../style/sold-out.html"><span>Sold-out appearance</span></a></li><li><a class="sb__link" href="../style/advanced.html"><span>Advanced customization</span></a></li><li><a class="sb__link" href="../style/custom-css.html"><span>Custom CSS</span><span class="sb__badge sb__badge--pro">Pro</span></a></li><li><a class="sb__link" href="../style/backups.html"><span>Backups and restore</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16V9M8 16V5M12 16v-4M16 16V8"/><path d="M3 16.5h14" opacity=".45"/></svg></span><span class="sb__grouptitle">Analytics</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../analytics/overview.html"><span>Swatch analytics</span><span class="sb__badge sb__badge--pro">Pro</span></a></li><li><a class="sb__link" href="../analytics/merchandising-advice.html"><span>Merchandising advice</span><span class="sb__badge sb__badge--pro">Pro</span></a></li><li><a class="sb__link" href="../analytics/tracking-and-privacy.html"><span>Tracking and privacy</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="12" height="8" rx="2"/><path d="M10 4v3M7.5 10.5h.01M12.5 10.5h.01M8 15v1.5M12 15v1.5"/></svg></span><span class="sb__grouptitle">Agent readiness</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../agent/overview.html"><span>Agent readiness</span></a></li><li><a class="sb__link" href="../agent/fixes.html"><span>One-click fixes</span><span class="sb__badge sb__badge--pro">Pro</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="13" height="10" rx="2"/><path d="M3.5 8.5h13"/></svg></span><span class="sb__grouptitle">Plans and billing</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../billing/plans.html"><span>Plans and pricing</span></a></li><li><a class="sb__link" href="../billing/trial.html"><span>The 14-day trial</span></a></li><li><a class="sb__link" href="../billing/manage.html"><span>Manage your plan</span></a></li></ul></div><div class="sb__group is-open" data-group><button class="sb__grouphead" type="button" aria-expanded="true"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 7-3 3 3 3M13 7l3 3-3 3M11.2 5.5l-2.4 9"/></svg></span><span class="sb__grouptitle">Reference</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../reference/feature-matrix.html"><span>Feature matrix</span></a></li><li><a class="sb__link" href="../reference/metafields.html"><span>Metafields reference</span></a></li><li><a class="sb__link" href="../reference/storefront-reference.html"><span>Storefront reference</span></a></li><li><a class="sb__link is-active" href="../reference/performance.html" aria-current="page"><span>Performance</span></a></li><li><a class="sb__link" href="../reference/themes.html"><span>Theme compatibility</span></a></li><li><a class="sb__link" href="../reference/languages.html"><span>Languages</span></a></li><li><a class="sb__link" href="../reference/permissions-privacy.html"><span>Permissions and privacy</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 3.8a3.6 3.6 0 0 0-4.3 4.7L4 13.7l1.9 1.9 5.2-5.2a3.6 3.6 0 0 0 4.7-4.3l-2 2-1.9-.5-.5-1.9Z"/></svg></span><span class="sb__grouptitle">Troubleshooting</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../troubleshooting/swatches-not-showing.html"><span>Swatches are not showing</span></a></li><li><a class="sb__link" href="../troubleshooting/duplicates.html"><span>Duplicate or flickering swatches</span></a></li><li><a class="sb__link" href="../troubleshooting/galleries-and-cards.html"><span>Galleries and card chips</span></a></li><li><a class="sb__link" href="../troubleshooting/analytics-zero.html"><span>Analytics shows zero</span></a></li><li><a class="sb__link" href="../troubleshooting/faq.html"><span>Frequently asked questions</span></a></li></ul></div><div class="sb__group" data-group><button class="sb__grouphead" type="button" aria-expanded="false"><span class="sb__groupicon"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><circle cx="10" cy="10" r="2.6"/><path d="m5.4 5.4 2.7 2.7m3.8 3.8 2.7 2.7m0-9.2-2.7 2.7m-3.8 3.8-2.7 2.7"/></svg></span><span class="sb__grouptitle">Resources</span><svg class="sb__chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6.5 8.5 3.5 3.5 3.5-3.5"/></svg></button><ul class="sb__list"><li><a class="sb__link" href="../resources/glossary.html"><span>Glossary</span></a></li><li><a class="sb__link" href="../resources/support.html"><span>Support</span></a></li></ul></div></nav>
+      <div class="sb__foot">
+        <a class="sb__footlink" href="mailto:support@enstacked.com"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><circle cx="10" cy="10" r="2.6"/><path d="m5.4 5.4 2.7 2.7m3.8 3.8 2.7 2.7m0-9.2-2.7 2.7m-3.8 3.8-2.7 2.7"/></svg><span>Email support</span></a>
+      </div>
+    </div>
+  </aside>
+  <div class="sb__scrim" data-scrim hidden></div>
+
+  <main class="doc" id="content">
+    <article class="doc__body">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="../index.html">Docs</a>
+        <span class="crumbs__sep" aria-hidden="true">/</span><span>Reference</span>
+        <span class="crumbs__sep" aria-hidden="true">/</span>
+        <span class="crumbs__now">Performance</span>
+      </nav>
+
+      <h1 class="doc__title">Performance</h1>
+      <p class="doc__lead">The byte budget, the request count, and what Varn does to protect your Core Web Vitals.</p>
+
+      <div class="prose">
+<p class="md-p">Swatch apps sit on your most valuable page. This is what Varn costs you, measured rather than claimed.</p>
+<h2 id="the-numbers" class="md-h2">The numbers<a class="anchor" href="#the-numbers" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap"><table class="md-table"><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>Core storefront JavaScript</td><td>under 10 KB gzipped</td></tr><tr><td>Extras chunk, only when needed</td><td>under 7 KB gzipped</td></tr><tr><td>Storefront CSS</td><td>about 5 KB gzipped</td></tr><tr><td>Network requests to render swatches</td><td><strong>zero</strong></td></tr><tr><td>Theme files edited</td><td>zero</td></tr><tr><td>Render-blocking resources added</td><td>zero</td></tr></tbody></table></div>
+<h2 id="zero-requests-and-why" class="md-h2">Zero requests, and why<a class="anchor" href="#zero-requests-and-why" aria-label="Link to this section">#</a></h2>
+<p class="md-p">Your settings are read from Shopify metafields <strong>in Liquid</strong>, while your page is being built, and written into the HTML. By the time the browser runs Varn's script, everything it needs is already in the page.</p>
+<p class="md-p">There is no API call, no round trip to our servers and no third party connection. If our servers went down, your swatches would keep rendering.</p>
+<h2 id="the-byte-budget-is-enforced" class="md-h2">The byte budget is enforced<a class="anchor" href="#the-byte-budget-is-enforced" aria-label="Link to this section">#</a></h2>
+<p class="md-p">Under 10 KB gzipped per chunk is not an aspiration, it is a build-time check. A change that pushes a chunk over the limit fails the build, and the fix is to split the code or move a feature into the optional chunk, never to raise the limit.</p>
+<p class="md-p">That is why the engine is split in two:</p>
+<div class="table-wrap"><table class="md-table"><thead><tr><th>Chunk</th><th>Contains</th><th>Downloaded</th></tr></thead><tbody><tr><td><strong>Core</strong></td><td>Product page swatches, selection, hover, gallery filtering, styling.</td><td>Always</td></tr><tr><td><strong>Extras</strong></td><td>Card chips, quick view, product groups, more in this color, analytics.</td><td>Only when a feature that needs it is switched on</td></tr></tbody></table></div>
+<p class="md-p">A Free-plan store downloads the core chunk only. The extras chunk is not disabled code sitting in your page, it is absent.</p>
+<h2 id="both-scripts-are-deferred" class="md-h2">Both scripts are deferred<a class="anchor" href="#both-scripts-are-deferred" aria-label="Link to this section">#</a></h2>
+<p class="md-p">Nothing Varn adds blocks your page from rendering or delays first paint.</p>
+<h2 id="layout-stability" class="md-h2">Layout stability<a class="anchor" href="#layout-stability" aria-label="Link to this section">#</a></h2>
+<p class="md-p">Cumulative Layout Shift is the metric a swatch app is most likely to damage, because it inserts elements into a page that has already been laid out. Varn protects it by:</p>
+<ul class="md-list"><li>reserving the swatch row's height before painting the chips</li><li>clamping labels to a bounded height by default, so a long value name cannot change the row height</li><li>giving every labelled chip cell a uniform width, so wrapped rows do not reflow</li><li>animating only <code>transform</code> and <code>opacity</code>, never layout properties</li></ul>
+<h2 id="interaction" class="md-h2">Interaction<a class="anchor" href="#interaction" aria-label="Link to this section">#</a></h2>
+<p class="md-p">Selecting a swatch clicks your theme's own input. The work Varn does on that click is trivial; the time you observe is your theme responding, exactly as it does when someone uses the dropdown.</p>
+<h2 id="images" class="md-h2">Images<a class="anchor" href="#images" aria-label="Link to this section">#</a></h2>
+<ul class="md-list"><li>Swatch chips request a small, correctly sized version from Shopify's CDN, not your full-resolution photo.</li><li>The gallery swap requests an appropriately sized image for the main view.</li><li>Uploaded swatch images are stored as CDN URLs, so your metafields stay tiny regardless of image quality.</li></ul>
+<h2 id="the-card-fetch-exception" class="md-h2">The card-fetch exception<a class="anchor" href="#the-card-fetch-exception" aria-label="Link to this section">#</a></h2>
+<p class="md-p">The one place Varn makes requests is <a class="link" href="../guides/collection-search.html">&quot;cards everywhere&quot;</a> on templates that cannot expose their products to Liquid. There it fetches Shopify's own public product JSON.</p>
+<p class="md-p">Those requests are same origin, cached by the browser, deduplicated per product, hard capped per page, and only happen when you have switched that surface on. Cards on collection, search and product templates make no requests at all.</p>
+<h2 id="the-admin-side" class="md-h2">The admin side<a class="anchor" href="#the-admin-side" aria-label="Link to this section">#</a></h2>
+<p class="md-p">The Varn admin is also built to Shopify's Built for Shopify performance bar:</p>
+<ul class="md-list"><li>Slow reads are streamed rather than blocking the page, so content paints immediately.</li><li>Every screen paints real text before the interface loads, rather than showing a spinner.</li><li>Large tables page rather than growing without limit.</li><li>Heavy interface code loads only when the feature that needs it is opened.</li></ul>
+<h2 id="measuring-it-yourself" class="md-h2">Measuring it yourself<a class="anchor" href="#measuring-it-yourself" aria-label="Link to this section">#</a></h2>
+<ol class="steps"><li class="step"><h3 class="step__title" id="run-lighthouse-before-and-after">Run Lighthouse before and after<a class="anchor" href="#run-lighthouse-before-and-after" aria-label="Link to this step">#</a></h3><div class="step__body"><p class="md-p">Test a product page with the app embed off, then on. The honest comparison is same page, same connection, back to back.</p></div></li><li class="step"><h3 class="step__title" id="check-the-request-waterfall">Check the request waterfall<a class="anchor" href="#check-the-request-waterfall" aria-label="Link to this step">#</a></h3><div class="step__body"><p class="md-p">Filter your browser's network panel to the product page load. You should see the two Varn assets from Shopify's CDN and nothing else.</p></div></li><li class="step"><h3 class="step__title" id="watch-for-layout-shift">Watch for layout shift<a class="anchor" href="#watch-for-layout-shift" aria-label="Link to this step">#</a></h3><div class="step__body"><p class="md-p">Enable layout shift regions in your browser dev tools and reload. The swatch row should not move anything.</p></div></li></ol>
+<aside class="callout callout--note"><svg class="callout__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5h4a2 2 0 0 1 2 2v9a1.6 1.6 0 0 0-1.6-1.6H4Zm12 0h-4a2 2 0 0 0-2 2v9a1.6 1.6 0 0 1 1.6-1.6H16Z"/></svg><div class="callout__body"><p class="callout__title">Where numbers come from</p><p class="md-p">Shopify's own Web Vitals report in your Partner or store dashboard is the number that matters, and it uses real visitor data over 28 days. A single Lighthouse run on your laptop is a useful smoke test, not a verdict.</p></div></aside>
+      </div>
+
+      <nav class="pager" aria-label="Pagination"><a class="pager__card pager__card--prev" href="../reference/storefront-reference.html"><span class="pager__dir">Previous</span><span class="pager__title">Storefront reference</span></a><a class="pager__card pager__card--next" href="../reference/themes.html"><span class="pager__dir">Next</span><span class="pager__title">Theme compatibility</span></a></nav>
+
+      <footer class="doc__foot">
+        <p>Still stuck? <a class="link" href="mailto:support@enstacked.com">Email support@enstacked.com</a> with your store URL and theme name and we will take a look.</p>
+      </footer>
+    </article>
+
+    <aside class="toc" aria-label="On this page">
+      <div class="toc__inner">
+        <p class="toc__head">
+          <svg class="toc__headicon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 5.5h12M4 10h9M4 14.5h6"/></svg>
+          On this page
+        </p>
+        <div class="toc__rail" data-toc-rail>
+          <svg class="toc__svg" data-toc-svg aria-hidden="true" focusable="false" preserveAspectRatio="none">
+            <path class="toc__track" data-toc-track fill="none" />
+            <path class="toc__thumb" data-toc-thumb fill="none" />
+            <circle class="toc__dot" data-toc-dot r="2.75" cx="-10" cy="-10" />
+          </svg>
+          <ul class="toc__list"><li class="toc__item toc__item--h2" data-depth="0"><a class="toc__link" href="#the-numbers">The numbers</a></li><li class="toc__item toc__item--h2" data-depth="0"><a class="toc__link" href="#zero-requests-and-why">Zero requests, and why</a></li><li class="toc__item toc__item--h2" data-depth="0"><a class="toc__link" href="#the-byte-budget-is-enforced">The byte budget is enforced</a></li><li class="toc__item toc__item--h2" data-depth="0"><a class="toc__link" href="#both-scripts-are-deferred">Both scripts are deferred</a></li><li class="toc__item toc__item--h2" data-depth="0"><a class="toc__link" href="#layout-stability">Layout stability</a></li><li class="toc__item toc__item--h2" data-depth="0"><a class="toc__link" href="#interaction">Interaction</a></li><li class="toc__item toc__item--h2" data-depth="0"><a class="toc__link" href="#images">Images</a></li><li class="toc__item toc__item--h2" data-depth="0"><a class="toc__link" href="#the-card-fetch-exception">The card-fetch exception</a></li><li class="toc__item toc__item--h2" data-depth="0"><a class="toc__link" href="#the-admin-side">The admin side</a></li><li class="toc__item toc__item--h2" data-depth="0"><a class="toc__link" href="#measuring-it-yourself">Measuring it yourself</a></li><li class="toc__item toc__item--h3" data-depth="1"><a class="toc__link" href="#run-lighthouse-before-and-after">Run Lighthouse before and after</a></li><li class="toc__item toc__item--h3" data-depth="1"><a class="toc__link" href="#check-the-request-waterfall">Check the request waterfall</a></li><li class="toc__item toc__item--h3" data-depth="1"><a class="toc__link" href="#watch-for-layout-shift">Watch for layout shift</a></li></ul>
+        </div>
+        <a class="toc__top" href="#content"><svg class="toc__topicon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11m0 0-4-4m4 4-4 4"/></svg><span>Back to top</span></a>
+      </div>
+    </aside>
+  </main>
+</div>
+
+<div class="searchdlg" data-search-dialog hidden>
+  <div class="searchdlg__scrim" data-search-close></div>
+  <div class="searchdlg__panel" role="dialog" aria-modal="true" aria-label="Search documentation">
+    <div class="searchdlg__bar">
+      <svg class="searchdlg__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="4.8"/><path d="m12.6 12.6 3.4 3.4"/></svg>
+      <input class="searchdlg__input" type="search" placeholder="Search the documentation" autocomplete="off" spellcheck="false" data-search-input aria-label="Search the documentation">
+      <kbd class="searchdlg__esc">Esc</kbd>
+    </div>
+    <ul class="searchdlg__results" data-search-results></ul>
+    <p class="searchdlg__empty" data-search-empty hidden>No matches. Try a page name, a feature, or a plan.</p>
+    <p class="searchdlg__hint"><kbd>&uarr;</kbd><kbd>&darr;</kbd> to move, <kbd>Enter</kbd> to open, <kbd>Esc</kbd> to close</p>
+  </div>
+</div>
+
+<script>window.VARN_DOCS_PAGE="reference/performance";window.VARN_DOCS_ROOT="../";</script>
+<script src="../assets/search-index.js" defer></script>
+<script src="../assets/vendor/gsap.min.js" defer></script>
+<script src="../assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="../assets/vendor/lenis.min.js" defer></script>
+<script src="../assets/docs.js" defer></script>
+<script src="../assets/motion.js" defer></script>
+</body>
+</html>
