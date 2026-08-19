@@ -11,11 +11,11 @@ Everything happens on the **Plan and billing** page, and every change routes thr
 
 ### Choose monthly or yearly
 
-The billing cycle selector is at the top. Yearly is roughly two months free, and each plan shows the equivalent monthly price so you can compare honestly.
+The billing cycle selector is at the top. Yearly saves exactly 17% on every paid plan, and each plan shows the saving in dollars so you can compare honestly.
 
 ### Press the plan's button
 
-You are taken to **Shopify's** subscription confirmation page. Varn cannot charge you; only Shopify can, and only after you approve it there.
+You are taken to **Shopify's** subscription confirmation page, which also states your 7-day free trial. Varn cannot charge you; only Shopify can, and only after you approve it there.
 
 ### Approve
 
@@ -42,7 +42,7 @@ Varn uses Shopify's own app billing. That means:
 
 ## Yearly billing
 
-Growth is $79/yr against $95.88 monthly. Pro is $149/yr against $179.88 monthly.
+Grow is $149/yr against $179.88 paid monthly, Advance is $249/yr against $299.88, and Premium is $499/yr against $599.88 — a 17% saving on each.
 
 Switching between cycles is a plan change like any other, and goes through the same Shopify confirmation.
 

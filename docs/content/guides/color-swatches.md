@@ -3,7 +3,7 @@ title: Color swatches
 description: Solid chips, two tone chips and gradients, and how to pick colors that read well at 40 pixels.
 ---
 
-::: plans free growth pro
+::: plans free grow advance premium
 :::
 
 A color swatch is a chip filled with a color you choose. It is the fastest kind to set up and the most reliable to read at small sizes.
@@ -57,7 +57,7 @@ A swatch is roughly 40 pixels across. If two of your colors are hard to tell apa
 
 ## Letting Varn do the first pass
 
-You do not have to fill these in by hand. [One-click AI setup](guides/ai-setup) matches your option values against a color dictionary in more than ten languages and fills in the confident matches, leaving anything ambiguous for you.
+You do not have to fill these in by hand. [One-click Auto Detect setup](guides/ai-setup) matches your option values against a color dictionary in more than ten languages and fills in the confident matches, leaving anything ambiguous for you.
 
 For the whole catalogue at once, use [Auto-configure all products](guides/auto-configure), which is free.
 

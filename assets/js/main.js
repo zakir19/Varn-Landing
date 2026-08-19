@@ -1,5 +1,5 @@
 /* =========================================================================
-   Varn - Variants & Swatches AI  |  Marketing site behaviour
+   Varn - Variants & Swatches  |  Marketing site behaviour
    Built by Enstacked Technologies
 
    One IIFE, no globals, no dependencies. Every module queries its own
@@ -615,12 +615,12 @@
   }
 
   /* =======================================================================
-     MODULE - AI setup demo
-     A push-button reproduction of one-click AI setup, including the value
+     MODULE - Auto Detect demo
+     A push-button reproduction of one-click Auto Detect, including the value
      it deliberately leaves alone.
      ===================================================================== */
 
-  var AI_MATCHES = ["#1F3A6E", "#D85A30", "#9CAF88", "#ED93B1", null];
+  var AUTO_DETECT_MATCHES = ["#1F3A6E", "#D85A30", "#9CAF88", "#ED93B1", null];
 
   function initAiDemo() {
     var root = qs("[data-ai-demo]");
@@ -644,7 +644,7 @@
         row.classList.remove("is-matched");
       });
       if (note) note.textContent = "5 values waiting.";
-      button.textContent = "Run one-click AI setup";
+      button.textContent = "Run one-click Auto Detect";
       button.disabled = false;
     }
 
@@ -658,7 +658,7 @@
           window.setTimeout(function () {
             var chip = qs(".mock__row-chip", row);
             var state = qs(".mock__row-state", row);
-            var match = AI_MATCHES[index];
+            var match = AUTO_DETECT_MATCHES[index];
 
             if (match) {
               if (chip) chip.style.backgroundColor = match;
@@ -702,8 +702,12 @@
 
     var amounts = qsa("[data-price-monthly]");
     var periods = qsa("[data-period]");
-    var savings = qsa("[data-save-yearly]");
+    var notes = qsa("[data-note-monthly]");
 
+    /* Every string comes from a data attribute on the element that shows it,
+       so the monthly and yearly wording lives beside the price it belongs to
+       and cannot drift from the plan card in the app. The Free card carries
+       none of these attributes, so it is never rewritten. */
     function apply(mode) {
       var yearly = mode === "yearly";
 
@@ -714,14 +718,15 @@
       });
 
       periods.forEach(function (period) {
-        period.textContent = yearly ? "per year" : "per month";
+        period.textContent = yearly
+          ? period.getAttribute("data-period-yearly")
+          : period.getAttribute("data-period");
       });
 
-      savings.forEach(function (saving) {
-        // Truly empty when monthly, so the :empty CSS rule hides the pill.
-        saving.textContent = yearly
-          ? saving.getAttribute("data-save-yearly")
-          : "";
+      notes.forEach(function (note) {
+        note.textContent = yearly
+          ? note.getAttribute("data-note-yearly")
+          : note.getAttribute("data-note-monthly");
       });
     }
 
@@ -919,15 +924,15 @@
        aria-labelledby, so reordering sections cannot mislabel a stop. */
     var STOP_NOTES = {
       "themes-title": { text: "Works with the theme you already have" },
-      "how-title": { text: "Set up in about two minutes" },
+      "how-title": { text: "The app does most of the setup" },
       "features-title": { text: "Everything a swatch should do" },
       "agent-title": { text: "Ready for AI shoppers" },
       "variants-title": { text: "Every color gets its own gallery" },
       "studio-title": { text: "Style it like your store" },
       "surfaces-title": { text: "Swatches everywhere shoppers browse" },
-      "ai-title": { text: "AI names your colors in one pass" },
+      "ai-title": { text: "Auto Detect names your colors in one pass" },
       "analytics-title": { text: "Every click becomes a signal" },
-      "proof-title": { text: "Safe to install, by design" },
+      "proof-title": { text: "What it touches, and what it leaves alone" },
       "pricing-title": { text: "Free forever", cta: "Install app", href: APP_URL },
       "maker-title": {
         text: "Built by Enstacked Technologies",

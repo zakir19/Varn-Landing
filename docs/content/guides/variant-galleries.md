@@ -3,15 +3,15 @@ title: Per-color photo galleries
 description: Show only the photos that belong to the color a shopper picked, in the order you choose.
 ---
 
-::: plans free growth pro
+::: plans free grow advance premium
 :::
 
 By default a Shopify product page shows every photo, whichever color is selected. Shoppers pick red and scroll past eleven blue photos.
 
 Per-color galleries fix that: pick which photos belong to each color, and Varn hides the rest when that color is chosen.
 
-::: note Free for your first 10 products
-Photo mapping is free on up to 10 products so you can use it on your hero products without paying. Beyond that it is a Growth feature. The Variants page shows a meter with how much of the free allowance you have used.
+::: note Free for your first 5 products
+Photo mapping is free on up to 5 products so you can use it on your hero products without paying. Paid plans raise the limit: 50 products on Grow, 100 on Advance, 1,000 on Premium. The Variants page shows a meter with how much of your allowance you have used.
 :::
 
 ## Mapping photos to a color
@@ -80,6 +80,6 @@ Uploading here adds real media to your Shopify product, unlike everything else i
 
 ::: cards
 - [Photo sequencing](guides/photo-sequencing): {image} The drag-and-drop picker, the cover slot and keyboard support.
-- [AI photo match](guides/ai-photo-match): {wand} Let Varn assign existing photos to colors for you.
+- [Auto Detect photo match](guides/ai-photo-match): {wand} Let Varn assign existing photos to colors for you.
 - [Sync to variant photos](guides/sync-variant-photos): {layers} Push an image swatch into Shopify as the variant's photo.
 :::

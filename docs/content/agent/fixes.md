@@ -1,10 +1,9 @@
 ---
 title: One-click fixes
 description: Fix alt text and target gender straight from the readiness table.
-badge: Pro
 ---
 
-::: plans pro
+::: plans free grow advance premium
 :::
 
 Two of the five [agent readiness](agent/overview) checks can be fixed safely and automatically. The other three are decisions only you can make.
@@ -22,7 +21,7 @@ Alt text describing what an image shows is factually correct by construction, an
 
 **What it improves**
 
-Accessibility for screen reader users, image search, agent comprehension, and Varn's own [AI photo match](guides/ai-photo-match), which reads alt text first.
+Accessibility for screen reader users, image search, agent comprehension, and Varn's own [Auto Detect photo match](guides/ai-photo-match), which reads alt text first.
 :::
 
 You can edit any generated text in the Agent View modal before or after applying.

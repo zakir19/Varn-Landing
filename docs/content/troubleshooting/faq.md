@@ -8,15 +8,15 @@ description: The things merchants ask first, answered short.
 ::: faq
 ### What is Varn?
 
-Varn turns your product variants into color and image swatches, with one-click AI setup for your whole catalogue. See [Introduction](getting-started/introduction).
+Varn turns your product variants into color and image swatches, with one-click Auto Detect setup for your whole catalogue. See [Introduction](getting-started/introduction).
 
 ### How do I get started?
 
-Two steps: activate the app embed on your theme, then run one-click AI setup. The dashboard guide walks you through both. See [Quick start](getting-started/quick-start).
+Two steps: activate the app embed on your theme, then run one-click Auto Detect setup. The dashboard guide walks you through both. See [Quick start](getting-started/quick-start).
 
 ### Is the free plan really free?
 
-Yes. $0, no card, no hidden trial. Color and image swatches on unlimited products, permanently. See [Plans](billing/plans).
+Yes. $0 with no time limit. Unlimited color swatches, card surfaces and agent readiness, permanently. See [Plans](billing/plans).
 
 ### Do I need a developer?
 
@@ -38,9 +38,9 @@ Click **Activate on your theme** in the setup guide, toggle the embed on, and pr
 
 Yes. The theme picker lists every theme and deep-links into the right one. Activation travels with the theme when you publish.
 
-### What does one-click AI setup do?
+### What does one-click Auto Detect setup do?
 
-It reads your option value names in more than ten languages and configures the confident matches, leaving anything ambiguous for you. Full AI setup on Pro reads the photos themselves. See [AI setup](guides/ai-setup).
+It reads your option value names in more than ten languages and configures the confident matches, leaving anything ambiguous for you. Full Auto Detect setup on Advance and Premium reads the photos themselves. See [Auto Detect setup](guides/ai-setup).
 
 ### Does it leave code behind when I uninstall?
 
@@ -68,7 +68,7 @@ Crossed out by default, and not clickable. You can change how the mark looks in 
 
 ### Can swatches show on collection pages?
 
-Yes, on Growth, along with search results and quick view. See [Collection and search swatches](guides/collection-search).
+Yes, on every plan including Free, along with search results and quick view. See [Collection and search swatches](guides/collection-search).
 
 ### My color option is called "Shade". Will it work?
 
@@ -84,15 +84,15 @@ No, and deliberately. A swatch is a visual stand-in for a color, and rendering s
 ::: faq
 ### What do the paid plans add?
 
-Growth ($7.99/mo) adds card swatches, quick view, unlimited photo galleries and grouping. Pro ($14.99/mo) adds full AI, photo matching and analytics. See [Plans](billing/plans).
+Grow ($14.99/mo) raises the variant-image limit to 50 products and grouping to 5 groups. Advance ($24.99/mo) adds full Auto Detect, photo matching, advanced styling and analytics. Premium ($49.99/mo) carries the highest limits: 1,000 products and 50 groups. See [Plans](billing/plans).
 
-### How does the 14-day trial work?
+### How does the free trial work?
 
-Every install starts with 14 days of full Pro, no card. After that you drop to Free automatically, never a surprise bill. See [The trial](billing/trial).
+Every paid plan includes a 7-day free trial through Shopify's own confirmation screen. Cancel during the trial and you are never billed; otherwise the plan simply continues. See [The trial](billing/trial).
 
 ### Is there a discount for paying yearly?
 
-Yes, roughly two months free: Growth $79/yr, Pro $149/yr.
+Yes, exactly 17% off: Grow $149/yr, Advance $249/yr, Premium $499/yr.
 
 ### What happens to my setup if I downgrade?
 
@@ -116,7 +116,7 @@ Your theme is probably drawing its own swatches too. Keep one source. See [Dupli
 
 ### My analytics dashboard shows zero.
 
-Analytics is Pro only and needs a real storefront click after you upgraded. There is a Test tracking button that checks the whole pipeline. See [Analytics shows zero](troubleshooting/analytics-zero).
+Analytics is on Advance and Premium and needs a real storefront click after you upgraded. There is a Test tracking button that checks the whole pipeline. See [Analytics shows zero](troubleshooting/analytics-zero).
 
 ### A swatch shows a photo of a different product.
 
@@ -124,5 +124,5 @@ That photo is attached to that variant in Shopify, and Varn renders what the var
 
 ### How fast is support?
 
-Typically within 24 to 48 hours, faster on Growth and Pro. [Email support@enstacked.com](mailto:support@enstacked.com).
+Typically within 24 hours, on every plan. [Email support@enstacked.com](mailto:support@enstacked.com).
 :::

@@ -36,7 +36,7 @@ Both are explicit buttons you press. Neither happens as a side effect of saving,
 | Swatch assignments, style, groups, backups | Shopify metafields, in your store |
 | Uploaded swatch images | Shopify Files, in your store |
 | Your Shopify session | Our database, so the app can authenticate you |
-| Anonymous swatch click events, Pro only | Our database, deleted after 90 days |
+| Anonymous swatch click events, Advance and Premium only | Our database, deleted after 90 days |
 
 Your catalogue is not copied to our servers. The editors read your products live from Shopify each time you open them.
 

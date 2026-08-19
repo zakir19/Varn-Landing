@@ -38,7 +38,7 @@ The result: **Varn makes zero network requests to render swatches.** No API call
 
 The only exceptions are optional and specific:
 
-- **Analytics** sends one small anonymous beacon after a click, on Pro only. See [Tracking and privacy](analytics/tracking-and-privacy).
+- **Analytics** sends one small anonymous beacon after a click, on Advance and Premium only. See [Tracking and privacy](analytics/tracking-and-privacy).
 - **Cards everywhere** may fetch Shopify's own public product JSON for product cards it cannot read from Liquid. Same origin, browser cached, hard capped. See [Collection and search swatches](guides/collection-search).
 
 ## Two JavaScript files, both tiny

@@ -1,10 +1,10 @@
 ---
 title: Swatch analytics
 description: Which colors shoppers click, which sold-out colors they still want, and what to do about it.
-badge: Pro
+badge: Advance
 ---
 
-::: plans pro
+::: plans advance premium
 :::
 
 Your Shopify reports tell you what **sold**. Swatch analytics tells you what shoppers **wanted**, including the colors you could not sell them.
@@ -54,15 +54,15 @@ Deliberately, and permanently:
 
 An event is: a kind (click or add to cart), a product handle, an option value, and whether it was sold out. See [Tracking and privacy](analytics/tracking-and-privacy).
 
-## Why Pro only
+## Why Advance and Premium only
 
-Analytics is the one feature that stores data on our servers rather than in your Shopify metafields, because a high-volume time series is exactly what metafields cannot do. Free and Growth stores ship the tracker **not at all**: the code never runs and no beacon is ever sent.
+Analytics is the one feature that stores data on our servers rather than in your Shopify metafields, because a high-volume time series is exactly what metafields cannot do. Free and Grow stores ship the tracker **not at all**: the code never runs and no beacon is ever sent.
 
 ## If the dashboard shows zero
 
 Check, in order:
 
-1. Are you on Pro, or inside your 14-day trial?
+1. Are you on Advance or Premium, including its trial?
 2. Has anyone visited a product page and clicked a swatch **since** you upgraded?
 3. Is the storefront password-protected? Tracking still works for anyone who has entered the password.
 

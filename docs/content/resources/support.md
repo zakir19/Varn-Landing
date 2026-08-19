@@ -7,7 +7,7 @@ description: How to reach us, what to include, and how to get an answer on the f
 
 [support@enstacked.com](mailto:support@enstacked.com)
 
-Typical response is 24 to 48 hours, faster on Growth and Pro.
+Typical response is within 24 hours, on every plan including Free.
 
 ## What to include
 
@@ -45,8 +45,8 @@ On the affected page, in the browser console:
 
 ```js
 window.VarnConfig            // the settings your storefront received
-window.VarnConfig.pro        // whether your storefront sees a Pro entitlement
-window.VarnTrack.state()     // analytics tracker status, Pro only
+window.VarnConfig.pro        // whether your storefront sees a paid entitlement
+window.VarnTrack.state()     // analytics tracker status, Advance and Premium
 ```
 
 Pasting the output saves a round trip. See [Storefront reference](reference/storefront-reference).
@@ -59,7 +59,7 @@ Most reports match one of these, and they answer in less time than an email take
 - [Swatches are not showing](troubleshooting/swatches-not-showing): {wrench} Usually the app embed on the theme you are actually browsing.
 - [Duplicate swatches](troubleshooting/duplicates): {wrench} Your theme is drawing its own too.
 - [Galleries and card chips](troubleshooting/galleries-and-cards): {image} Photos not filtering, or gray chips.
-- [Analytics shows zero](troubleshooting/analytics-zero): {chart} Pro only, and needs a real click.
+- [Analytics shows zero](troubleshooting/analytics-zero): {chart} Advance and Premium, and needs a real click.
 - [FAQ](troubleshooting/faq): {life} The things merchants ask first.
 :::
 

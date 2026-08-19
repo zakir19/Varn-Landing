@@ -1,6 +1,6 @@
-# Varn — Variants & Swatches AI · Landing page
+# Varn — Variants & Swatches · Landing page
 
-Marketing site for the Shopify app **Varn - Variants & Swatches AI**, built by
+Marketing site for the Shopify app **Varn - Variants & Swatches**, built by
 **Enstacked Technologies**.
 
 Static, zero build step, zero dependencies.
@@ -135,16 +135,18 @@ in exactly one place.
    chips. It plays itself once when the demo first scrolls into view.
 3. **Theme compatibility marquee** — the Shopify-specific trust band.
 4. **How it works** — the real five-step wizard, with a pinned admin mock that
-   advances as you scroll. Step 4 animates the AI colour matching.
-5. **Feature bento** — six capabilities, each tagged Free / Growth / Pro.
+   advances as you scroll. Step 4 animates the Auto Detect colour matching.
+5. **Feature bento** — six capabilities, each tagged with the plan it starts on
+   (Free / Free to start / Advance).
 6. **Style studio** — an interactive playground mirroring the app's own style
    page (shape, size, spacing, border, labels, text pills).
 7. **Where swatches show up** — collection, search, quick view, everywhere else.
-8. **AI setup** — with a push-button demo that also shows the value it
+8. **Auto Detect setup** — with a push-button demo that also shows the value it
    deliberately *doesn't* guess.
 9. **Proof pillars** — the four objections every Shopify merchant has.
 10. **Agent readiness** — the differentiator no competitor has.
-11. **Pricing** — Free / Growth / Pro with a monthly–yearly switch.
+11. **Pricing** — Free / Grow / Advance / Premium with a monthly–yearly switch,
+    mirroring `app/data/plans.ts` in the app repo (the single source of truth).
 12. **Enstacked Technologies** — dedicated maker section with the logo.
 13. **FAQ** — native `<details>`, works with JavaScript disabled.
 14. **Closing CTA + footer + mobile sticky bar.**
@@ -160,7 +162,7 @@ in exactly one place.
 | Prices and plan features | the `pricing` section in `index.html` |
 | Theme / app names in the marquee | `THEME_ITEMS` in `assets/js/main.js` |
 | Demo colours, stock states, gallery sets | `DEMO_COLOURS` in `assets/js/main.js` |
-| AI demo outcome | `AI_MATCHES` in `assets/js/main.js` |
+| Auto Detect demo outcome | `AUTO_DETECT_MATCHES` in `assets/js/main.js` |
 | Brand palette, type scale, spacing | the `:root` token block in `assets/css/styles.css` |
 
 The four brand colours live in one place:
@@ -186,14 +188,26 @@ passes WCAG AA. If you change a brand colour, re-derive its `-deep` companion.
 
 ## Copy accuracy
 
-Every product claim on the page was checked against the Varn codebase:
+Every product claim on the page was checked against the Varn codebase
+(re-verified 2026-08-19 for the four-tier pricing restructure):
 
-- **9.98 KB / 5.96 KB** — the real gzipped sizes of the two storefront chunks,
-  enforced by `test/storefront-build.test.ts`.
-- **341 tests** — the current green suite count.
+- **Three storefront chunks** (core / cards / media), each under the 9.5 KB
+  gzipped budget enforced by `test/storefront-build.test.ts`. The page claims
+  "split by feature with a size budget", never an exact byte count, so this
+  cannot rot.
 - **18 storefront locales**, **10+ colour-dictionary languages**.
-- **$7.99 / $79 and $14.99 / $149** with savings of **$16.88** and **$30.88**,
-  computed the same way as `annualSavings()` in `app/data/plans.ts`.
+- **Free $0 / Grow $14.99 ($149 yr) / Advance $24.99 ($249 yr) / Premium
+  $49.99 ($499 yr)**, yearly savings **$30.88 / $50.88 / $100.88** — computed
+  the same way as `annualSavings()` in `app/data/plans.ts`, and every yearly
+  price is exactly 17% off (`YEARLY_SAVINGS_PCT`).
+- **7-day free trial on every paid plan** (`TRIAL_DAYS`), Shopify's own
+  subscription trial. The old 14-day card-free reverse trial is gone — never
+  re-add "no card" wording.
+- Limits: variant-image setup **5 / 50 / 100 / 1,000 products**
+  (`MEDIA_PRODUCT_LIMIT`), grouping **1 / 5 / 15 / 50 groups** (`GROUP_LIMIT`).
+- Free now includes collection / search / quick-view swatches and the whole
+  agent-readiness suite, one-click fixes included. Analytics and advanced
+  styling start at Advance.
 - **85/100 agent score** — 30 + 25 + 15 + 15 + 0, matching the real scorer's
   weights (category 30, colour 25, size 15, gender 15, alt text 15).
 

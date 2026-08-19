@@ -705,12 +705,13 @@
     text-transform: uppercase;
   }
 
-  .sb__badge--growth {
+  .sb__badge--grow {
     background: var(--violet-soft);
     color: var(--violet-deep);
   }
 
-  .sb__badge--pro {
+  .sb__badge--advance,
+  .sb__badge--premium {
     background: var(--clay-soft);
     color: var(--clay-deep);
   }
@@ -1378,13 +1379,14 @@
     color: var(--success);
   }
 
-  .planpill--growth.is-on {
+  .planpill--grow.is-on {
     background: var(--violet-soft);
     border-color: transparent;
     color: var(--violet-deep);
   }
 
-  .planpill--pro.is-on {
+  .planpill--advance.is-on,
+  .planpill--premium.is-on {
     background: var(--clay-soft);
     border-color: transparent;
     color: var(--clay-deep);

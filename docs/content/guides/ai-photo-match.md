@@ -1,17 +1,17 @@
 ---
-title: AI photo match
+title: Auto Detect photo match
 description: Let Varn work out which of your existing product photos belong to which color.
-badge: Pro
+badge: Advance
 ---
 
-::: plans pro
+::: plans advance premium
 :::
 
-[Per-color galleries](guides/variant-galleries) are the highest-impact feature in Varn and the most tedious to set up by hand. AI photo match does the first pass for you, using photos you already have.
+[Per-color galleries](guides/variant-galleries) are the highest-impact feature in Varn and the most tedious to set up by hand. Auto Detect photo match does the first pass for you, using photos you already have.
 
 ## Running it
 
-Open the **Variants** editor, pick a product, and press **AI photo match** in the Configure step.
+Open the **Variants** editor, pick a product, and press **Auto Detect photo match** in the Configure step.
 
 Varn analyses the product's media and proposes an assignment for each color. Review it, adjust anything you disagree with, and save.
 
@@ -56,10 +56,10 @@ Look at products where two colors are close in tone. That is where a wrong assig
 
 ## Cost
 
-No credits, no per-image charge. It is included in Pro. Runs are sequential and cancellable.
+No credits, no per-image charge. It is included in Advance and Premium. Runs are sequential and cancellable.
 
 ## After the run
 
 The result is an ordinary photo map, identical to one you built by hand. Open the [photo picker](guides/photo-sequencing) for any color to adjust the selection, set a different cover, or change the order.
 
-Order is worth a second pass: AI photo match decides **which** photos belong to a color, and it has no opinion about which one should be the cover.
+Order is worth a second pass: Auto Detect photo match decides **which** photos belong to a color, and it has no opinion about which one should be the cover.

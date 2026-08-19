@@ -1,10 +1,10 @@
 ---
 title: Merchandising advice
 description: Turning swatch clicks into decisions: restock, feature, investigate, retire.
-badge: Pro
+badge: Advance
 ---
 
-::: plans pro
+::: plans advance premium
 :::
 
 Numbers are not decisions. The advice card on the Analytics page reads your click data and states what it suggests you do.
@@ -30,10 +30,10 @@ Alongside the advice, Varn flags colors whose share of clicks is falling over th
 
 ## Self-optimizing order
 
-::: plans pro
+::: plans advance premium
 :::
 
-Turn this on in **Style, Pro features** and Varn quietly reorders each swatch row so colors shoppers click most drift toward the front.
+Turn this on in **Style, Advance features** and Varn quietly reorders each swatch row so colors shoppers click most drift toward the front.
 
 How it behaves:
 

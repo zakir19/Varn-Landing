@@ -1,10 +1,9 @@
 ---
 title: Quick view swatches
 description: Swatches inside your theme's quick view and quick add pop-ups.
-badge: Growth
 ---
 
-::: plans growth pro
+::: plans free grow advance premium
 :::
 
 Many themes offer a quick view or quick add pop-up from a product card. It usually contains a real product form with a real variant picker, which means Varn can enhance it.
@@ -36,7 +35,7 @@ If that produces a double row in your theme's pop-up, turn quick view swatches o
 | Price and availability update | Yes, through your theme |
 | Add to cart from the pop-up | Yes, your theme's button, untouched |
 | Per-color gallery filtering | Product page only |
-| Analytics tracking of the click | Yes on Pro |
+| Analytics tracking of the click | Yes on Advance and Premium |
 
 ## Themes without quick view
 

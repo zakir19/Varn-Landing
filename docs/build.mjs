@@ -24,7 +24,7 @@ const CONTENT = path.join(ROOT, "content");
 const SITE = {
   name: "Varn",
   docsName: "Varn docs",
-  tagline: "Variants & Swatches AI for Shopify",
+  tagline: "Variants & Swatches for Shopify",
   origin: "https://varn.enstacked.com",
   docsBase: "/docs",
   appListing: "https://apps.shopify.com/varn-variants-swatches-ai",
@@ -399,10 +399,10 @@ function directive(kind, title, body, ctx, toc) {
       .join("")}</div>`;
   }
 
-  /* plan availability strip:  ::: plans free growth pro */
+  /* plan availability strip:  ::: plans free grow advance premium */
   if (kind === "plans") {
     const on = new Set(title.toLowerCase().split(/[\s,]+/).filter(Boolean));
-    const row = ["free", "growth", "pro"]
+    const row = ["free", "grow", "advance", "premium"]
       .map(
         (p) =>
           `<span class="planpill planpill--${p} ${on.has(p) ? "is-on" : "is-off"}">` +

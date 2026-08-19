@@ -3,7 +3,7 @@ title: Sold-out appearance
 description: How unavailable colors are marked, and why they are always marked.
 ---
 
-::: plans free growth pro
+::: plans free grow advance premium
 :::
 
 A color whose variants are all unavailable is **always** rendered with a sold-out mark and is not clickable. That is not a preference, it is correctness: it stops a shopper choosing something your theme's own control would refuse, which is the wrong-variant bug class Varn is built to avoid.
@@ -32,7 +32,7 @@ If you want sold-out colors to disappear entirely, that is a merchandising decis
 
 ## Why sold-out clicks are worth tracking
 
-::: plans pro
+::: plans advance premium
 :::
 
 A shopper tapping a sold-out color is the clearest demand signal you will ever get: they wanted it, and you did not have it.

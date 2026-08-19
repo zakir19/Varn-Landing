@@ -1,69 +1,58 @@
 ---
-title: The 14-day trial
-description: Every install starts on full Pro with no card, and drops to Free automatically.
+title: The free trial
+description: Every paid plan includes a 7-day free trial through Shopify's own billing. The Free plan has no time limit.
 ---
 
-Varn uses a **reverse trial**. You get the best version of the app first, and you land somewhere useful if you do nothing.
+Two honest ways to try Varn: start on the **Free plan**, which never expires, or pick a paid plan and use its **7-day free trial**.
 
-## How it works
+## How the trial works
 
 ::: steps
 
-### Install
+### Pick a plan
 
-Your store is on **full Pro** from the moment you install. Every feature is unlocked: analytics, full AI, photo matching, unlimited grouping, custom CSS.
+Choose Grow, Advance or Premium on the **Plan and billing** page, monthly or yearly.
 
-### No card, no charge
+### Approve it on Shopify's page
 
-You are not asked for payment details. Nothing is authorised, nothing is held, nothing can be charged.
+You are taken to Shopify's own subscription confirmation screen, which states the price and the trial. Varn cannot charge you; only Shopify can, and only after you approve it there.
 
-### 14 days
+### 7 days free
 
-The Plan page shows a live countdown of days remaining, and the trial banner is visible while it runs.
+The plan is active immediately and the first 7 days cost nothing. The Plan page shows the exact date your trial ends.
 
-### Day 15
+### Then billing simply continues
 
-Your store drops to **Free Forever** automatically. No bill, no email chase, no expired-account state.
+After 7 days the plan you picked keeps running and Shopify bills it as normal. Cancel any time during the trial and you are never billed at all.
 
 :::
 
-## What happens on day 15, precisely
+## What happens if you cancel during the trial
 
-Pro features stop. Concretely:
+You return to the Free plan. Concretely:
 
-| Feature | After the trial |
+| Feature | On Free |
 | --- | --- |
-| Product page swatches | Keep working, unlimited products |
-| Style studio | Keeps working, minus effects and Pro-only controls |
-| Collection, search, quick view | Stop rendering |
-| Photo galleries | Keep working on your first 10 products |
-| Product groups | Stop rendering |
+| Product page swatches | Keep working, unlimited color swatches |
+| Style studio | Keeps working, minus the Advance-plan styling extras |
+| Collection, search, quick view | Keep working |
+| Photo galleries | Keep working on your first 5 products |
+| Product groups | Your first group keeps rendering |
 | Analytics | Stops collecting, dashboard locks |
 | Custom CSS | Stops being emitted |
 
-**Nothing is deleted.** Your assignments, style settings, photo maps and groups all stay exactly as you left them. Subscribe at any point later and everything comes straight back on.
-
-## The trial does not reset
-
-The trial start date is recorded against your shop, not against the install. Uninstalling and reinstalling to get another 14 days does not work, by design.
-
-That is also why a reinstall is safe: your configuration and your trial state both survive it.
+**Nothing is deleted.** Your assignments, style settings, photo maps and groups all stay exactly as you left them. Subscribe again later and everything comes straight back on.
 
 ## Checking where you are
 
-The Plan page shows a meter counting down the days left. During the trial:
+During a trial the Plan page shows your plan as active with the line **"Trial ends on \<date\>"**, so there is never a surprise about when billing starts.
 
-- your **standing plan** is shown as Free, which is what you drop to
-- Pro carries a **"Your trial tier"** badge
+## Subscribing to a different plan
 
-That distinction is deliberate. Showing Pro as your current plan during a trial would be misleading on day 13.
+A plan change during the trial is a plan change like any other: it goes through Shopify's confirmation screen. See [Manage your plan](billing/manage).
 
-## Subscribing before it ends
+## If paid features stop unexpectedly
 
-You can upgrade at any point. See [Manage your plan](billing/manage). Upgrading during the trial simply makes the drop on day 15 not happen.
-
-## If Pro features stop unexpectedly
-
-If a storefront feature stops working and you believe you are on Pro, the trial has probably expired. Check the Plan page.
+If a storefront feature stops working and you believe you are on a paid plan, check the Plan page first.
 
 The storefront reads your plan from a value stored on your shop, so the admin and storefront can in rare cases disagree. The **Test tracking** button on the Analytics page checks that specific link and repairs it if it finds a mismatch. See [Analytics shows zero](troubleshooting/analytics-zero).

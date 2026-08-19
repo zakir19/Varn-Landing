@@ -1,10 +1,9 @@
 ---
 title: Collection and search swatches
 description: Put a chip row on every product card, so shoppers see the color range before they click.
-badge: Growth
 ---
 
-::: plans growth pro
+::: plans free grow advance premium
 :::
 
 A shopper scrolling a collection sees one photo per product. If the jacket comes in six colors and the photo is black, five of those colors do not exist as far as that shopper is concerned.

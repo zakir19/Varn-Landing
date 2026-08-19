@@ -1,17 +1,17 @@
 ---
 title: More in this color
 description: Show other products in the color the shopper just picked, on the product page.
-badge: Pro
+badge: Advance
 ---
 
-::: plans pro
+::: plans advance premium
 :::
 
 A shopper who picks Sand has told you something specific: they are shopping for Sand. **More in this color** puts a row of other products in that same color right there on the product page, and the row follows their selection.
 
 ## Turning it on
 
-**Style, Pro features, More in this color.**
+**Style, Advance features, More in this color.**
 
 Varn then builds a color index across your catalogue. That is a one-off pass over your products, mapping each one to the colors it comes in.
 
@@ -39,7 +39,7 @@ The index refreshes as your catalogue changes. After a large import or a bulk re
 
 Product pages only. It does not appear on collection cards, in search or in quick view, where the shopper has not yet made a color choice for it to respond to.
 
-## Related Pro discovery features
+## Related discovery features on Advance and Premium
 
 ::: cards
 - [Self-optimizing order](analytics/merchandising-advice): {chart} Let popular colors drift to the front of the row.

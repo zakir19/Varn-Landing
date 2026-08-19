@@ -23,6 +23,10 @@ The first photo in a color's [photo sequence](guides/photo-sequencing), which be
 
 What your store is currently allowed to use, derived from your subscription or your trial. Checked in the admin, on the server when saving, and again on your storefront.
 
+## Free trial
+
+The first 7 days of any paid plan, granted by Shopify's own subscription billing. Cancel inside those 7 days and you are never billed. The Free plan needs no trial: it has no time limit. See [The free trial](billing/trial).
+
 ## Group
 
 Several separate products joined so they render as one swatch row on each other's product pages. See [Product grouping](guides/product-grouping).
@@ -50,10 +54,6 @@ One choice within an option: "Sand" within "Color". Assignments are keyed by opt
 ## Photo map
 
 The ordered list of product photos belonging to one color. Drives [per-color galleries](guides/variant-galleries).
-
-## Reverse trial
-
-Starting on the highest plan and dropping to the lowest if you do nothing, rather than starting free and being cut off. Varn gives 14 days of Pro with no card. See [The trial](billing/trial).
 
 ## Scope
 

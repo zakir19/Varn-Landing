@@ -1,10 +1,10 @@
 ---
 title: Custom CSS
 description: Your own rules on top of Varn's storefront styles, with the safety rules that apply.
-badge: Pro
+badge: Advance
 ---
 
-::: plans pro
+::: plans advance premium
 :::
 
 When the style controls do not reach far enough, Custom CSS lets you write rules that ship with the swatch styles on your storefront.

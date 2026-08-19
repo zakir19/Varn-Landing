@@ -3,7 +3,7 @@ title: Sync to variant photos
 description: Push your uploaded image swatches into Shopify so they become the variant's own photo.
 ---
 
-::: plans free growth pro
+::: plans free grow advance premium
 :::
 
 This is the one action in Varn that writes to your **product** rather than to Varn's own data, so it lives behind its own button and is never part of a normal save.

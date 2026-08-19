@@ -3,7 +3,7 @@ title: Auto-configure your catalogue
 description: One button that sets up color swatches across every product in your store, free.
 ---
 
-::: plans free growth pro
+::: plans free grow advance premium
 :::
 
 If you sell hundreds of products, configuring them one at a time is not a plan. **Auto-configure all products** runs the color matcher over your whole catalogue in one pass.
@@ -26,7 +26,7 @@ It is deliberately conservative. On each page of products it:
 
 1. Looks only at options it recognises as **color options**. Size and Material are never touched.
 2. Looks only at values with **no assignment yet**.
-3. Applies a match **only when confident**, using the same multilingual dictionary as [one-click AI setup](guides/ai-setup).
+3. Applies a match **only when confident**, using the same multilingual dictionary as [one-click Auto Detect setup](guides/ai-setup).
 4. Merges the result into that product's existing record, leaving your manual work alone.
 
 ::: note Your decisions always win
@@ -49,7 +49,7 @@ Open two or three important products in the Swatches editor and look at the valu
 
 ### Fill in what it skipped
 
-Use the product filters to find products that still have unconfigured values, and set those by hand or with [Full AI setup](guides/ai-setup) on Pro.
+Use the product filters to find products that still have unconfigured values, and set those by hand or with [Full Auto Detect setup](guides/ai-setup) on Advance and Premium.
 
 ### Look at a real product page
 

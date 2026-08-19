@@ -3,7 +3,7 @@ title: Backups and restore
 description: Automatic snapshots of your configuration, with one-tap restore.
 ---
 
-::: plans free growth pro
+::: plans free grow advance premium
 :::
 
 Varn keeps a rolling history of your configuration so a change you regret is a one-click undo rather than an afternoon.
@@ -33,7 +33,7 @@ If you need to protect a specific product's setup, note its values before a big 
 Pick a snapshot and press **Restore**. The restore goes through the normal save path, which means it is validated exactly like a manual save.
 
 ::: note Plan checks apply to restores too
-If you snapshot during your Pro trial and restore after dropping to Free, the Pro-only settings in that snapshot are stripped on the way in. A restore can never re-enable a feature your plan does not include, which is why a restore is safe to press without checking what it contained.
+If you snapshot while on a paid plan or trial and restore after moving to a lower plan, the settings your current plan does not include are stripped on the way in. A restore can never re-enable a feature your plan does not include, which is why a restore is safe to press without checking what it contained.
 :::
 
 ## After a restore

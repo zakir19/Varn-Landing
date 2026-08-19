@@ -15,7 +15,7 @@ You need a Shopify store you can edit, and at least one product with a color opt
 
 Add the app from the [Shopify App Store listing](https://apps.shopify.com/varn-variants-swatches-ai) and approve the permissions. You land on the Varn dashboard with a three-step setup guide.
 
-Your 14 days of Pro start now, with no card. See [The 14-day trial](billing/trial) for what happens on day 15.
+You start on the Free plan, which has no time limit. Every paid plan includes a [7-day free trial](billing/trial).
 
 ### Activate the app embed on your theme
 
@@ -37,13 +37,13 @@ Open **Swatches** in the left navigation and choose a product from the table. Se
 
 Varn only lists options it recognises as color options: Color, Colour, Couleur, Farbe, Colore, Kleur, Farve. If your color option is called something else, add its name in [Style, Option names](style/advanced#option-names).
 
-### Let AI do the first pass
+### Let Auto Detect do the first pass
 
-Press **One-click AI setup**. Varn matches each option value against a multilingual color dictionary and fills in the confident matches only. "Midnight Blue" becomes navy, "Assorted" is left alone for you to decide.
+Press **One-click Auto Detect setup**. Varn matches each option value against a multilingual color dictionary and fills in the confident matches only. "Midnight Blue" becomes navy, "Assorted" is left alone for you to decide.
 
 Everything it does is a normal, editable assignment. Change any value by hand, upload a photo instead, or use a two tone chip for something like "Black and White".
 
-Read more in [One-click AI setup](guides/ai-setup).
+Read more in [One-click Auto Detect setup](guides/ai-setup).
 
 ### Save and look at your storefront
 
@@ -59,7 +59,7 @@ You should see the chips replace the dropdown, the selected chip take a ring, an
 - [Configure the rest of your catalogue](guides/auto-configure): {wand} One button, whole catalogue, free.
 - [Style your swatches](style/overview): {sliders} Shape, size, labels and effects, previewed live.
 - [Map photos to colors](guides/variant-galleries): {image} Show only the photos that match the chosen color.
-- [Put swatches on collection pages](guides/collection-search): {globe} Growth plan, one toggle.
+- [Put swatches on collection pages](guides/collection-search): {globe} Free on every plan, one toggle.
 :::
 
 ## If nothing appeared

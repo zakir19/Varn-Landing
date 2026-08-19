@@ -37,7 +37,7 @@ The master switch at the top, **Show swatches on your storefront**, is the one t
 
 ## Analytics
 
-Which colors get clicked, which sold-out colors people still want, and merchandising advice once you have enough data. Pro plan. See [Swatch analytics](analytics/overview).
+Which colors get clicked, which sold-out colors people still want, and merchandising advice once you have enough data. Advance and Premium. See [Swatch analytics](analytics/overview).
 
 ## Agent readiness
 

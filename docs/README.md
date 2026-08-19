@@ -1,6 +1,6 @@
 # Varn documentation
 
-The documentation site for **Varn - Variants & Swatches AI**, served at `/docs`.
+The documentation site for **Varn - Variants & Swatches**, served at `/docs`.
 
 Static HTML with no build dependencies and no framework. Content is Markdown,
 a small generator turns it into one real `.html` file per page, and the design
@@ -51,12 +51,12 @@ exactly as they will in production. Any static server works.
 ---
 title: Page title
 description: One sentence, used for the meta description and search results.
-badge: Pro
+badge: Advance
 ---
 ```
 
-`badge` is optional and renders next to the page in the sidebar. Use `Growth`
-or `Pro`.
+`badge` is optional and renders next to the page in the sidebar. Use `Grow`,
+`Advance` or `Premium`.
 
 A page listed in `meta.json` but not yet written is reported as a warning and
 skipped, so you can plan the tree before writing it.
@@ -125,12 +125,12 @@ Right column.
 ### Plan availability
 
 ```markdown
-::: plans growth pro
+::: plans advance premium
 :::
 ```
 
-Renders a row of Free / Growth / Pro pills with the named ones ticked and the
-rest struck through.
+Renders a row of Free / Grow / Advance / Premium pills with the named ones
+ticked and the rest struck through.
 
 ## Linking
 

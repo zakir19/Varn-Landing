@@ -1,10 +1,9 @@
 ---
 title: Product grouping
 description: Show separate products as one swatch row, for stores that list every color as its own product.
-badge: Growth
 ---
 
-::: plans growth pro
+::: plans free grow advance premium
 :::
 
 Plenty of stores list each color as a separate product: "Aria Tee, Red", "Aria Tee, Blue", "Aria Tee, Sand". Shoppers land on one of them and never find out the other two exist.
@@ -15,8 +14,10 @@ A **group** joins those products into one swatch row on each of their product pa
 
 | Plan | Groups |
 | --- | --- |
-| Growth | Up to 5 |
-| Pro | Unlimited |
+| Free | 1 |
+| Grow | Up to 5 |
+| Advance | Up to 15 |
+| Premium | Up to 50 |
 
 The Groups page shows a meter for groups used and products per group, so you always know where you stand.
 

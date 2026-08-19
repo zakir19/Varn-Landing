@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Varn - Variants &amp; Swatches AI for Shopify | Color &amp; image swatches</title>
-  <meta name="description" content="Varn turns Shopify variant dropdowns into color and image swatches on product pages, collections, search and quick view. AI setup, under 10 KB of JavaScript, no theme edits. Built by Enstacked Technologies.">
+  <title>Varn - Variants &amp; Swatches for Shopify | Color and image swatches</title>
+  <meta name="description" content="Varn turns Shopify variant dropdowns into color and image swatches on product pages, collections, search and quick view. Automatic color setup, no theme edits. Built by Enstacked Technologies.">
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="https://varn.enstacked.com/">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Varn">
-  <meta property="og:title" content="Varn - Variants &amp; Swatches AI for Shopify">
-  <meta property="og:description" content="Turn variant dropdowns into color and image swatches shoppers can actually see. AI setup, under 10 KB of JavaScript, no theme edits.">
+  <meta property="og:title" content="Varn - Variants &amp; Swatches for Shopify">
+  <meta property="og:description" content="Turn variant dropdowns into color and image swatches shoppers can see. Automatic color setup, no theme edits.">
   <meta property="og:url" content="https://varn.enstacked.com/">
   <meta property="og:image" content="https://varn.enstacked.com/assets/img/og-cover.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -35,14 +35,15 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Varn - Variants & Swatches AI",
+    "name": "Varn - Variants & Swatches",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Shopify",
-    "description": "Turns Shopify product variants into color and image swatches on product pages, collection pages, search results and quick view, with AI color setup, a style studio, product grouping and swatch analytics.",
+    "description": "Turns Shopify product variants into color and image swatches on product pages, collection pages, search results and quick view, with automatic color setup, a style studio, product grouping and swatch analytics.",
     "offers": [
-      { "@type": "Offer", "name": "Free Forever", "price": "0", "priceCurrency": "USD" },
-      { "@type": "Offer", "name": "Growth", "price": "7.99", "priceCurrency": "USD" },
-      { "@type": "Offer", "name": "Pro", "price": "14.99", "priceCurrency": "USD" }
+      { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "Grow", "price": "14.99", "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "Advance", "price": "24.99", "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "Premium", "price": "49.99", "priceCurrency": "USD" }
     ],
     "publisher": {
       "@type": "Organization",
@@ -70,7 +71,7 @@
         "name": "Will Varn slow my store down?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The storefront engine is 9.4 KB gzipped, with a second 6.1 KB chunk that only downloads if a feature needs it. An automated test fails the build if either file goes over 10 KB. Swatch data arrives inside the page your theme already renders, so there is no extra network request and no layout shift."
+          "text": "The storefront script is deferred and split, so a page downloads only the part your settings actually use, and the build enforces a size budget on it. Swatch data arrives inside the page your theme already renders, so Varn does not add a network request for it and does not shift your layout."
         }
       },
       {
@@ -94,7 +95,7 @@
         "name": "How does the free trial work?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Every new install starts on full Pro for 14 days without entering a card. When the 14 days are up you drop to the Free plan automatically. There is no surprise bill, and reinstalling does not reset the trial."
+          "text": "Every paid plan includes a 7-day free trial. You pick a plan, approve it on Shopify's own confirmation screen, and the first 7 days are free. Cancel during the trial and you are never billed. The Free plan needs no trial at all, it has no time limit."
         }
       }
     ]
@@ -155,7 +156,7 @@
         <div class="hero__copy">
           <p class="hero__pill">
             <span class="hero__pill-dot" aria-hidden="true"></span>
-            Variants &amp; Swatches AI for Shopify
+            Variants &amp; Swatches for Shopify
           </p>
 
           <h1 class="hero__title" id="hero-title">
@@ -164,8 +165,8 @@
 
           <p class="hero__lead">
             Varn turns your variant dropdown into color and image swatches that
-            drive your theme&rsquo;s own picker. Under 10&nbsp;KB of JavaScript,
-            no theme files touched, and setup takes about two minutes.
+            drive your theme&rsquo;s own picker. No theme files are touched, and
+            the setup wizard walks you through it step by step.
           </p>
 
           <div class="hero__actions">
@@ -182,7 +183,7 @@
             <svg class="hero__note-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
               <path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
-            Free plan forever. Every new install gets 14 days of Pro, no card.
+            Free plan forever. Every paid plan includes a 7-day free trial.
           </p>
         </div>
 
@@ -300,12 +301,12 @@
 
         <dl class="facts">
           <div class="facts__item">
-            <dt class="facts__label">Storefront JavaScript</dt>
-            <dd class="facts__value" data-count-to="9.4" data-count-decimals="1" data-count-suffix=" KB">9.4 KB</dd>
+            <dt class="facts__label">Works with</dt>
+            <dd class="facts__value">OS 2.0 themes</dd>
           </div>
           <div class="facts__item">
             <dt class="facts__label">Theme files edited</dt>
-            <dd class="facts__value">Zero</dd>
+            <dd class="facts__value">None</dd>
           </div>
           <div class="facts__item">
             <dt class="facts__label">Storefront languages</dt>
@@ -410,16 +411,16 @@
             <li class="step" data-step="3">
               <h3 class="step__head">
                 <span class="step__index" aria-hidden="true">4</span>
-                <span class="step__title">Let the AI color it in</span>
+                <span class="step__title">Let Auto Detect fill in the colors</span>
               </h3>
               <div class="step__body">
                 <p>
                   One click reads your option names and fills in the colors it
-                  is confident about, in ten languages. On Pro it reads the
-                  actual product photos instead. Everything stays editable, and
-                  a live preview shows the result as you work.
+                  is confident about, in ten languages. On Advance and Premium
+                  it reads the actual product photos instead. Everything stays
+                  editable, and a live preview shows the result as you work.
                 </p>
-                <p class="step__meta">No credits, no external AI vendor</p>
+                <p class="step__meta">No credits, no external service</p>
               </div>
             </li>
 
@@ -493,7 +494,7 @@
                 <div class="mock__row" data-ai-row><span class="mock__row-chip"></span><span class="mock__row-name">Blush</span><span class="mock__row-state">Waiting</span></div>
                 <div class="mock__row" data-ai-row><span class="mock__row-chip"></span><span class="mock__row-name">Terracotta</span><span class="mock__row-state">Waiting</span></div>
                 <div class="mock__row" data-ai-row><span class="mock__row-chip"></span><span class="mock__row-name">Sage</span><span class="mock__row-state">Waiting</span></div>
-                <p class="mock__note" data-ai-note>One-click AI setup reads the value names and fills in what it is confident about.</p>
+                <p class="mock__note" data-ai-note>One-click Auto Detect reads the value names and fills in what it is confident about.</p>
               </div>
 
               <div class="mock__panel" data-mock-panel="4" hidden>
@@ -574,12 +575,13 @@
                 <rect x="58" y="64" width="28" height="10" rx="3" fill="#7F77DD" opacity=".55"></rect>
               </svg>
             </div>
-            <span class="tile__tag tile__tag--growth">Growth</span>
+            <span class="tile__tag tile__tag--free">Free to start</span>
             <h3 class="tile__title">The gallery follows the color</h3>
             <p class="tile__text">
               Pick Lilac and the gallery shows only the lilac photos, in the
               order you dragged them, with your chosen cover first. It re-applies
-              itself even after your theme re-renders the section.
+              itself even after your theme re-renders the section. Free on your
+              first 5 products; plans raise the limit to 50, 100 or 1,000.
             </p>
           </article>
 
@@ -596,12 +598,13 @@
                 <circle cx="79" cy="62" r="10" fill="none" stroke="#26242E" stroke-width="1.6"></circle>
               </svg>
             </div>
-            <span class="tile__tag tile__tag--growth">Growth</span>
+            <span class="tile__tag tile__tag--free">Free to start</span>
             <h3 class="tile__title">Separate products, one swatch row</h3>
             <p class="tile__text">
               If your reds and blues live as different products, group them and
               they appear as one color row on every page. Drag to set the order,
-              and a product can never sit in two groups by mistake.
+              and a product can never sit in two groups by mistake. Your first
+              group is free; plans raise it to 5, 15 or 50.
             </p>
           </article>
 
@@ -616,13 +619,13 @@
                 <path d="M8 12h64" stroke="#26242E" stroke-opacity=".14" stroke-width="2" stroke-linecap="round"></path>
               </svg>
             </div>
-            <span class="tile__tag tile__tag--pro">Pro</span>
+            <span class="tile__tag tile__tag--advance">Advance</span>
             <h3 class="tile__title">Find out which colors actually sell</h3>
             <p class="tile__text">
-              Anonymous click and add-to-cart tracking per color, plus the one
-              number no other report gives you: how many shoppers clicked a
-              color that was sold out. Then plain-language advice on what to
-              restock, feature, investigate or retire.
+              Anonymous click and add-to-cart tracking per color, plus sold-out
+              demand: how many shoppers clicked a color that was not available.
+              Then plain-language advice on what to restock, feature,
+              investigate or retire.
             </p>
           </article>
 
@@ -640,7 +643,7 @@
                 </g>
               </svg>
             </div>
-            <span class="tile__tag tile__tag--growth">Growth</span>
+            <span class="tile__tag tile__tag--free">Free</span>
             <h3 class="tile__title">Swatches everywhere shoppers browse</h3>
             <p class="tile__text">
               Collection pages, search results, quick-view pop-ups and featured
@@ -653,29 +656,30 @@
     </section>
 
     <!-- =================================================================
-         AGENT READINESS - the section no other swatch app has, so it sits
-         right behind the feature grid instead of at the bottom of the page.
+         AGENT READINESS - a differentiator, so it sits right behind the
+         feature grid instead of at the bottom of the page.
          ================================================================= -->
     <section class="section section--sunk" id="agent" aria-labelledby="agent-title">
       <div class="shell">
         <div class="split split--reverse reveal">
           <div class="split__copy">
-            <p class="eyebrow">Agent readiness &middot; Only in Varn</p>
+            <p class="eyebrow">Agent readiness</p>
             <h2 class="section__title" id="agent-title">
-              Your next shopper might be an <span class="accent accent--violet">AI</span>.
+              Your next shopper might be an <span class="accent accent--violet">AI agent</span>.
             </h2>
             <p class="split__text">
-              When someone asks an AI assistant for &ldquo;a sage green linen
-              shirt in a medium&rdquo;, it does not look at your photography. It
-              reads structured data: category, color, size, target gender, image
-              alt text. Miss those and you are invisible to that shopper.
+              When someone asks an AI shopping assistant for &ldquo;a sage green
+              linen shirt in a medium&rdquo;, it does not look at your
+              photography. It reads structured data: category, color, size,
+              target gender, image alt text. Miss those and you are invisible to
+              that shopper.
             </p>
             <p class="split__text">
               Varn scores every product out of 100 on exactly those signals,
-              shows you the literal record an agent receives, and on Pro fixes
-              the gaps in one click. It also publishes proper ProductGroup
-              structured data for you, rendered server-side, at zero JavaScript
-              cost.
+              shows you the literal record an agent receives, and fixes the gaps
+              in one click, on every plan including Free. It also publishes
+              proper ProductGroup structured data for you, rendered server-side,
+              at zero JavaScript cost.
             </p>
             <p class="actions">
               <a class="btn btn--secondary" href="#pricing">See what&rsquo;s included</a>
@@ -688,6 +692,7 @@
                 <div>
                   <p class="eyebrow">Agent readiness</p>
                   <p class="scorecard__score" data-count-to="85" data-count-suffix="/100">85/100</p>
+                  <p class="scorecard__note">Example score</p>
                 </div>
                 <p class="scorecard__grade" aria-label="Grade A">A</p>
               </div>
@@ -763,7 +768,7 @@
               </li>
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <span><strong>Free on your first 10 products.</strong> Growth removes the limit.</span>
+                <span><strong>Free on your first 5 products.</strong> Paid plans raise the limit to 50, 100 or 1,000 products.</span>
               </li>
             </ul>
           </div>
@@ -981,21 +986,20 @@
     </section>
 
     <!-- =================================================================
-         AI SETUP
+         AUTO DETECT
          ================================================================= -->
     <section class="section section--sunk" aria-labelledby="ai-title">
       <div class="shell">
         <div class="split reveal">
           <div class="split__copy">
-            <p class="eyebrow">AI setup</p>
+            <p class="eyebrow">Auto Detect</p>
             <h2 class="section__title" id="ai-title">
               A catalog of colors, named in <span class="accent accent--violet">one pass</span>.
             </h2>
             <p class="split__text">
-              Most swatch apps hand you an empty color picker and a thousand
-              products. Varn fills them in. It reads your option names in ten
-              languages, and on Pro it reads the dominant color straight out of
-              your product photography.
+              Auto Detect fills your color values in for you. It reads your
+              option names in ten languages, and on Advance and Premium it reads
+              the dominant color straight out of your product photography.
             </p>
             <ul class="split__list">
               <li class="split__list-item">
@@ -1004,7 +1008,7 @@
               </li>
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <span><strong>No credits and no AI vendor.</strong> The matching and the color extraction both run as plain code, so there is nothing to top up.</span>
+                <span><strong>No credits and no outside service.</strong> The matching and the color extraction both run inside the app, so there is nothing to top up.</span>
               </li>
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -1012,7 +1016,7 @@
               </li>
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <span><strong>Photos too.</strong> AI photo match pairs the right existing photo with the right color, so you are not uploading anything twice.</span>
+                <span><strong>Photos too.</strong> Auto Detect photo match pairs the right existing photo with the right color, so you are not uploading anything twice.</span>
               </li>
             </ul>
           </div>
@@ -1020,7 +1024,7 @@
           <div class="split__media">
             <div class="mock" data-ai-demo>
               <p class="mock__bar">
-                <span>One-click AI setup</span>
+                <span>One-click Auto Detect setup</span>
               </p>
               <div class="mock__panel">
                 <div class="mock__row" data-ai2-row><span class="mock__row-chip"></span><span class="mock__row-name">Bleu Nuit</span><span class="mock__row-state">Not set</span></div>
@@ -1029,7 +1033,7 @@
                 <div class="mock__row" data-ai2-row><span class="mock__row-chip"></span><span class="mock__row-name">Rosa Cipria</span><span class="mock__row-state">Not set</span></div>
                 <div class="mock__row" data-ai2-row><span class="mock__row-chip"></span><span class="mock__row-name">Atelier Special</span><span class="mock__row-state">Not set</span></div>
                 <p class="mock__note" data-ai2-note>5 values waiting.</p>
-                <button class="btn btn--primary btn--sm mock__cta" type="button" data-ai2-run>Run one-click AI setup</button>
+                <button class="btn btn--primary btn--sm mock__cta" type="button" data-ai2-run>Run one-click Auto Detect</button>
               </div>
             </div>
           </div>
@@ -1044,15 +1048,15 @@
       <div class="shell">
         <div class="split split--reverse reveal">
           <div class="split__copy">
-            <p class="eyebrow">Swatch analytics &middot; Pro</p>
+            <p class="eyebrow">Swatch analytics &middot; Advance</p>
             <h2 class="section__title" id="analytics-title">
               Every click is a <span class="accent accent--clay">merchandising signal</span>.
             </h2>
             <p class="split__text">
               Varn counts swatch clicks and add-to-carts per color,
-              anonymously: no shopper data, no cookies. And it reports the one
-              number no other report gives you: how many shoppers clicked a
-              color that was sold out.
+              anonymously: no shopper data, no cookies. It also reports sold-out
+              demand, meaning how many shoppers clicked a color that was not
+              available to buy.
             </p>
             <ul class="split__list">
               <li class="split__list-item">
@@ -1069,13 +1073,13 @@
               </li>
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <span><strong>Self-optimizing order.</strong> On Pro, swatches can re-rank themselves by demand, never under a shopper&rsquo;s finger.</span>
+                <span><strong>Self-optimizing order.</strong> Swatches can re-rank themselves by demand, never under a shopper&rsquo;s finger.</span>
               </li>
             </ul>
           </div>
 
           <div class="split__media">
-            <div class="dash" role="img" aria-label="The Varn analytics dashboard: swatch clicks, add-to-carts and sold-out demand per color">
+            <div class="dash" role="img" aria-label="Illustration of the Varn analytics dashboard with sample figures: swatch clicks, add-to-carts and sold-out demand per color">
               <div class="dash__head">
                 <p class="eyebrow">Swatch analytics</p>
                 <span class="dash__range">Last 30 days</span>
@@ -1124,6 +1128,8 @@
                 <strong>Advice:</strong> 86 shoppers clicked Terracotta while it
                 was sold out. Restock it.
               </p>
+
+              <p class="dash__note">Sample data, shown to illustrate the report.</p>
             </div>
           </div>
         </div>
@@ -1136,13 +1142,12 @@
     <section class="section section--ink" aria-labelledby="proof-title">
       <div class="shell">
         <div class="section__head section__head--center reveal">
-          <p class="eyebrow">Why it is safe to install</p>
+          <p class="eyebrow">How Varn behaves in your store</p>
           <h2 class="section__title" id="proof-title">
-            Every merchant has been burned by an app <span class="accent">once</span>.
+            Exactly what it touches, and what it <span class="accent">leaves alone</span>.
           </h2>
           <p class="section__lead">
-            So here is exactly what Varn does to your store, and what it
-            deliberately does not.
+            Four design decisions that shape how Varn runs on your storefront.
           </p>
         </div>
 
@@ -1151,14 +1156,14 @@
             <svg class="pillar__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path>
             </svg>
-            <h3 class="pillar__title">It will not slow your store</h3>
+            <h3 class="pillar__title">It loads deferred, and only what you use</h3>
             <p class="pillar__text">
-              The whole storefront engine is under 10&nbsp;KB gzipped, deferred,
-              and enforced by an automated size budget that fails our build if it
-              grows. Swatch data is read by your theme at render time, so there
-              is no extra request and no layout shift.
+              The storefront script is deferred and split by feature, so a page
+              downloads only the part your settings actually need, and the build
+              enforces a size budget on it. Swatch data is read by your theme at
+              render time, so Varn adds no request for it and no layout shift.
             </p>
-            <p class="pillar__stat">core 9.4 KB &middot; extras 6.1 KB</p>
+            <p class="pillar__stat">deferred, split by feature</p>
           </article>
 
           <article class="pillar">
@@ -1166,7 +1171,7 @@
               <path d="M12 2.6 20 6v6.2c0 4.6-3.3 8.1-8 9.2-4.7-1.1-8-4.6-8-9.2V6l8-3.4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path>
               <path d="M8.4 12.2 11 14.8l4.8-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
-            <h3 class="pillar__title">It will not break your cart</h3>
+            <h3 class="pillar__title">Your theme still owns the cart</h3>
             <p class="pillar__text">
               Varn does not build its own variant picker. Clicking a swatch
               selects the option in your theme&rsquo;s own control, so add to cart
@@ -1181,7 +1186,7 @@
             <svg class="pillar__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M4 7h16M9.5 7V4.8h5V7M6.5 7l.9 12.4A1.8 1.8 0 0 0 9.2 21h5.6a1.8 1.8 0 0 0 1.8-1.6L17.5 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
-            <h3 class="pillar__title">It will not leave a mess</h3>
+            <h3 class="pillar__title">Uninstalling removes it completely</h3>
             <p class="pillar__text">
               Varn is a theme app extension, not a script tag, so there is
               nothing to inject and nothing to clean up. Uninstall it and your
@@ -1196,7 +1201,7 @@
               <circle cx="12" cy="8.2" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"></circle>
               <path d="M4.8 20.4a7.4 7.4 0 0 1 14.4 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
             </svg>
-            <h3 class="pillar__title">It will not need a developer</h3>
+            <h3 class="pillar__title">No code and no theme editing</h3>
             <p class="pillar__text">
               No code, no theme editing, no Liquid. The setup wizard verifies
               each step for you and blocks the ones you are not ready for, with
@@ -1213,105 +1218,140 @@
          PRICING
          ================================================================= -->
     <section class="section section--sunk" id="pricing" aria-labelledby="pricing-title">
-      <div class="shell">
+      <div class="shell shell--mid">
         <div class="section__head section__head--center reveal">
           <p class="eyebrow">Pricing</p>
           <h2 class="section__title" id="pricing-title">
-            Free is <span class="accent accent--clay">actually</span> free.
+            Start free, upgrade only for <span class="accent accent--clay">reach</span>.
           </h2>
           <p class="section__lead">
-            Color and image swatches on unlimited products, the whole style
-            studio and AI setup, all on the $0 plan. Paid plans add reach and
-            intelligence, never the basics.
+            Color and image swatches, the whole style studio, Auto Detect setup
+            and swatches on every page are all on the $0 plan. Paid plans raise
+            the limits and add analytics and advanced styling, never the basics.
           </p>
         </div>
 
         <div class="pricing__switch reveal">
           <div class="toggle toggle--framed" role="group" aria-label="Choose monthly or yearly billing" data-billing>
             <span class="toggle__thumb" data-billing-thumb aria-hidden="true"></span>
-            <button class="toggle__option" type="button" aria-pressed="true" data-billing-option="monthly">Monthly</button>
-            <button class="toggle__option" type="button" aria-pressed="false" data-billing-option="yearly">Yearly &middot; save ~17%</button>
+            <button class="toggle__option" type="button" aria-pressed="true" data-billing-option="monthly">Pay monthly</button>
+            <button class="toggle__option" type="button" aria-pressed="false" data-billing-option="yearly">Pay yearly, save 17%</button>
           </div>
         </div>
 
         <div class="pricing__grid reveal">
           <article class="plan plan--free">
             <div class="plan__head">
-              <h3 class="plan__name"><span class="plan__dot plan__dot--free" aria-hidden="true"></span>Free Forever</h3>
+              <h3 class="plan__name">Free</h3>
             </div>
             <p class="plan__price">
-              <span class="plan__amount">$0</span>
+              <span class="plan__amount">Free</span>
               <span class="plan__period">forever</span>
             </p>
-            <p class="plan__tagline">Everything you need to launch beautiful swatches. No card, no expiry.</p>
-            <p class="plan__includes">What&rsquo;s included</p>
-            <ul class="plan__features">
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Color, two-tone, gradient and image swatches on product pages</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited products</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>The full style studio</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>One-click AI setup in 10+ languages</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Image swap and automatic sold-out marks</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Agent-readiness score and Agent View</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Per-variant image galleries on your first 10 products</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Config backups with one-tap restore</span></li>
-            </ul>
-            <p class="plan__cta"><a class="btn btn--secondary btn--block" href="https://apps.shopify.com/varn-variants-swatches-ai">Start free</a></p>
-          </article>
-
-          <article class="plan plan--growth plan--highlight">
-            <div class="plan__head">
-              <h3 class="plan__name"><span class="plan__dot plan__dot--growth" aria-hidden="true"></span>Growth</h3>
-              <span class="plan__flag">Most popular</span>
-            </div>
-            <p class="plan__price">
-              <span class="plan__amount" data-price-monthly="$7.99" data-price-yearly="$79">$7.99</span>
-              <span class="plan__period" data-period>per month</span>
-              <span class="plan__save" data-save-yearly="Save $16.88 a year"></span>
+            <p class="plan__note">No time limit.</p>
+            <p class="plan__tagline">Everything you need to launch swatches, free for good.</p>
+            <p class="plan__cta">
+              <a class="btn btn--secondary" href="https://apps.shopify.com/varn-variants-swatches-ai">Start free</a>
             </p>
-            <p class="plan__tagline">Put swatches everywhere shoppers browse, not just on the product page.</p>
-            <p class="plan__includes">What&rsquo;s included</p>
             <ul class="plan__features">
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Everything in Free</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Collection, search and quick-view swatches</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Cards everywhere, on any template</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Per-variant image galleries, unlimited products</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Product grouping, up to 5 groups</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Hover and selected effects from the style studio</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Priority support</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited color swatches</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Products with variant images, up to 5 products</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited auto setup from color names</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Multiple variant options</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Product grouping, up to 1 group</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Swatches on collections, search and quick view</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Agent readiness for all products</span></li>
             </ul>
-            <p class="plan__cta"><a class="btn btn--primary btn--block" href="https://apps.shopify.com/varn-variants-swatches-ai">Start 14-day Pro trial</a></p>
           </article>
 
-          <article class="plan plan--pro">
+          <article class="plan plan--grow">
             <div class="plan__head">
-              <h3 class="plan__name"><span class="plan__dot plan__dot--pro" aria-hidden="true"></span>Pro</h3>
+              <h3 class="plan__name">Grow</h3>
             </div>
             <p class="plan__price">
               <span class="plan__amount" data-price-monthly="$14.99" data-price-yearly="$149">$14.99</span>
-              <span class="plan__period" data-period>per month</span>
-              <span class="plan__save" data-save-yearly="Save $30.88 a year"></span>
+              <span class="plan__period" data-period="/month" data-period-yearly="/year">/month</span>
             </p>
-            <p class="plan__tagline">AI photo setup, analytics and the merchandising signals nobody else reports.</p>
-            <p class="plan__includes">What&rsquo;s included</p>
+            <p class="plan__note" data-note-monthly="Billed monthly, cancel any time" data-note-yearly="Billed yearly, save $30.88 a year">Billed monthly, cancel any time</p>
+            <p class="plan__tagline">More products and groups as your catalog grows.</p>
+            <p class="plan__cta">
+              <a class="btn btn--primary" href="https://apps.shopify.com/varn-variants-swatches-ai">Start with Grow</a>
+              <span class="plan__trial">Includes 7 day trial</span>
+            </p>
             <ul class="plan__features">
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Everything in Growth</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Full AI setup that reads your product photos</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>AI photo match, no credits</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Swatch analytics, sold-out demand and merchandising advice</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Self-optimizing swatch order</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>&ldquo;More in this color&rdquo; discovery and unlimited grouping</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Slider layout, custom CSS and per-value style overrides</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>One-click agent-readiness fixes</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited color swatches</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Products with variant images, up to 50 products</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited auto setup from color names</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Multiple variant options</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Product grouping, up to 5 groups</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Swatches on collections, search and quick view</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Agent readiness for all products</span></li>
             </ul>
-            <p class="plan__cta"><a class="btn btn--secondary btn--block" href="https://apps.shopify.com/varn-variants-swatches-ai">Start 14-day Pro trial</a></p>
+          </article>
+
+          <article class="plan plan--advance plan--highlight">
+            <div class="plan__head">
+              <h3 class="plan__name">Advance</h3>
+              <span class="plan__flag"><svg class="plan__flag-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 2.2 9.7 5.9l4 .5-2.9 2.8.7 4L8 11.3l-3.5 1.9.7-4L2.3 6.4l4-.5Z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"></path></svg>Most popular</span>
+            </div>
+            <p class="plan__price">
+              <span class="plan__amount" data-price-monthly="$24.99" data-price-yearly="$249">$24.99</span>
+              <span class="plan__period" data-period="/month" data-period-yearly="/year">/month</span>
+            </p>
+            <p class="plan__note" data-note-monthly="Billed monthly, cancel any time" data-note-yearly="Billed yearly, save $50.88 a year">Billed monthly, cancel any time</p>
+            <p class="plan__tagline">Adds advanced styling and swatch click analytics.</p>
+            <p class="plan__cta">
+              <a class="btn btn--primary" href="https://apps.shopify.com/varn-variants-swatches-ai">Start with Advance</a>
+              <span class="plan__trial">Includes 7 day trial</span>
+            </p>
+            <ul class="plan__features">
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited color swatches</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Products with variant images, up to 100 products</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited auto setup from color names</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Multiple variant options</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Product grouping, up to 15 groups</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Swatches on collections, search and quick view</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Agent readiness for all products</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Advanced styling options</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Auto Detect photos for each variant</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Swatch &amp; variant click analytics</span></li>
+            </ul>
+          </article>
+
+          <article class="plan plan--premium">
+            <div class="plan__head">
+              <h3 class="plan__name">Premium</h3>
+            </div>
+            <p class="plan__price">
+              <span class="plan__amount" data-price-monthly="$49.99" data-price-yearly="$499">$49.99</span>
+              <span class="plan__period" data-period="/month" data-period-yearly="/year">/month</span>
+            </p>
+            <p class="plan__note" data-note-monthly="Billed monthly, cancel any time" data-note-yearly="Billed yearly, save $100.88 a year">Billed monthly, cancel any time</p>
+            <p class="plan__tagline">For large catalogs that need the highest limits.</p>
+            <p class="plan__cta">
+              <a class="btn btn--primary" href="https://apps.shopify.com/varn-variants-swatches-ai">Start with Premium</a>
+              <span class="plan__trial">Includes 7 day trial</span>
+            </p>
+            <ul class="plan__features">
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited color swatches</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Products with variant images, up to 1,000 products</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited auto setup from color names</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Multiple variant options</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Product grouping, up to 50 groups</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Swatches on collections, search and quick view</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Agent readiness for all products</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Advanced styling options</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Auto Detect photos for each variant</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Swatch &amp; variant click analytics</span></li>
+            </ul>
           </article>
         </div>
 
         <p class="pricing__note">
-          Every new install starts with 14 days of full Pro, with no card
-          required, then continues on the Free plan unless you upgrade. Upgrades
-          run through Shopify&rsquo;s own confirmation screen and appear on your
-          Shopify bill.
+          Every paid plan includes a 7-day free trial. Billing runs through
+          Shopify&rsquo;s own confirmation screen and appears on your Shopify
+          bill, and you can change or cancel your plan any time from inside the
+          app.
         </p>
       </div>
     </section>
@@ -1331,7 +1371,7 @@
           <div class="maker__copy">
             <p class="eyebrow">Powered by Enstacked Technologies</p>
             <h2 class="section__title" id="maker-title">
-              Built by people who ship <span class="accent accent--clay">Shopify</span> for a living.
+              Built by people who work on <span class="accent accent--clay">commerce</span> every day.
             </h2>
             <p class="split__text">
               Varn is made by Enstacked Technologies, a commerce engineering
@@ -1350,8 +1390,8 @@
 
             <dl class="maker__stats">
               <div>
-                <dt class="maker__stat-label">Automated tests, green</dt>
-                <dd class="maker__stat-value" data-count-to="349">349</dd>
+                <dt class="maker__stat-label">Test suite</dt>
+                <dd class="maker__stat-value">Green to ship</dd>
               </div>
               <div>
                 <dt class="maker__stat-label">Storefront locales shipped</dt>
@@ -1411,13 +1451,13 @@
             </summary>
             <div class="faq__answer">
               <p>
-                The storefront engine is 9.4&nbsp;KB gzipped, with a second
-                6.1&nbsp;KB chunk that only downloads if you have turned on a
-                feature that needs it. A free-plan product page loads the core
-                file only. An automated test fails our build if either file goes
-                over 10&nbsp;KB, so the budget cannot quietly creep. Swatch data
-                arrives inside the page your theme already renders, so there is
-                no extra network request and no layout shift.
+                The storefront script is deferred and split by feature into a
+                core file plus small feature files that only download when a
+                page actually needs them, so a basic product page loads the core
+                file only. Our build enforces a size budget on every one of
+                them, so none can quietly creep. Swatch data arrives inside the
+                page your theme already renders, so there is no extra network
+                request for it and no layout shift.
               </p>
             </div>
           </details>
@@ -1445,8 +1485,7 @@
             </summary>
             <div class="faq__answer">
               <p>
-                No, and this is the main architectural reason to choose Varn.
-                Clicking a swatch selects the value in your theme&rsquo;s own
+                No. Clicking a swatch selects the value in your theme&rsquo;s own
                 option control and fires its native change event. Your
                 theme&rsquo;s form is still what submits to Shopify, so there is
                 no parallel cart path that could disagree with the picker. Varn
@@ -1464,8 +1503,9 @@
               <p>
                 No. Setup is a five-step wizard that verifies your theme for you,
                 shows only the options that are actually colors, and fills in
-                the colors it recognizes. If you do want to go further, Pro adds
-                a custom CSS field, but nothing on any plan requires it.
+                the colors it recognizes. If you do want to go further, the
+                Advance plan adds a custom CSS field, but nothing on any plan
+                requires it.
               </p>
             </div>
           </details>
@@ -1487,19 +1527,19 @@
 
           <details class="faq__item">
             <summary class="faq__question">
-              What exactly is the &ldquo;AI&rdquo; doing?
+              What is Auto Detect actually doing?
               <svg class="faq__icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 3v12M3 9h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
             </summary>
             <div class="faq__answer">
               <p>
                 Two things, and we would rather be specific than mysterious about
-                it. One-click AI setup matches your option value names against a
-                color dictionary spanning ten languages and only applies matches
-                it is confident about. Full AI setup on Pro analyzes the actual
-                pixels of your product photos to find each variant&rsquo;s
-                dominant color, ignoring near-white backgrounds. Both run as
-                ordinary code, which is why there are no credits to buy and no
-                third-party AI service involved.
+                it. One-click Auto Detect matches your option value names against
+                a color dictionary spanning ten languages and only applies matches
+                it is confident about. Full Auto Detect on Advance and Premium
+                analyzes the actual pixels of your product photos to find each
+                variant&rsquo;s dominant color, ignoring studio backgrounds. Both
+                run as ordinary code inside the app, which is why there are no
+                credits to buy and no third-party service is involved.
               </p>
             </div>
           </details>
@@ -1527,10 +1567,11 @@
             </summary>
             <div class="faq__answer">
               <p>
-                Backwards, on purpose. You start on full Pro for 14 days without
-                entering a card, so you can evaluate everything. When the 14 days
-                are up you drop to the Free plan automatically. There is no
-                surprise bill, and reinstalling does not reset the trial.
+                Every paid plan includes a 7-day free trial. Pick a plan, approve
+                it on Shopify&rsquo;s own confirmation screen, and the first 7
+                days are free; cancel during the trial and you are never billed.
+                The Free plan needs no trial at all, it has no time limit, so you
+                can also simply start there and upgrade whenever you are ready.
               </p>
             </div>
           </details>
@@ -1579,7 +1620,7 @@
             <span class="brand__name">Varn</span>
           </a>
           <p class="site-footer__blurb">
-            Variants &amp; Swatches AI for Shopify. Color and image swatches
+            Variants &amp; Swatches for Shopify. Color and image swatches
             that drive your theme&rsquo;s own picker, on product pages,
             collections, search and quick view.
           </p>
@@ -1603,6 +1644,7 @@
             <li><a class="site-footer__link" href="https://enstacked.com" rel="noopener">Enstacked Technologies</a></li>
             <li><a class="site-footer__link" href="mailto:support@enstacked.com">support@enstacked.com</a></li>
             <li><a class="site-footer__link" href="https://apps.shopify.com/varn-variants-swatches-ai">Shopify App Store</a></li>
+            <li><a class="site-footer__link" href="privacy.html">Privacy policy</a></li>
           </ul>
         </nav>
       </div>
@@ -1621,7 +1663,7 @@
   <div class="mobile-cta" data-mobile-cta>
     <p class="mobile-cta__copy">
       <b>Free plan forever</b>
-      14 days of Pro, no card
+      Paid plans: 7-day free trial
     </p>
     <a class="btn btn--primary btn--sm" href="https://apps.shopify.com/varn-variants-swatches-ai">Add Varn</a>
   </div>

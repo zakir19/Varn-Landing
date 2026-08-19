@@ -61,7 +61,7 @@ Scale and lift are motion, so they are disabled automatically for shoppers who h
 
 ## Hover effects
 
-::: plans growth pro
+::: plans advance premium
 :::
 
 Optional feedback when a shopper hovers a chip: a glow, a lift or a subtle scale, in an accent color you choose.
@@ -80,7 +80,7 @@ Force labels to sentence case, title case or uppercase, so a catalogue with inco
 
 Standard is a wrapping row.
 
-::: plans pro
+::: plans advance premium
 :::
 
 **Slider** puts the swatches in a horizontal scroller with arrows, which is useful for products with a very large number of colors where a wrapping row would push the buy button below the fold.

@@ -43,7 +43,7 @@ The page uses Shopify's context save bar, which appears when you have unsaved ch
 - [Appearance](style/appearance): {sliders} Shape, size, spacing, labels, borders and hover effects.
 - [Sold-out appearance](style/sold-out): {swatch} How unavailable colors are marked.
 - [Advanced customization](style/advanced): {wand} Option names, per-color overrides, card image source.
-- [Custom CSS](style/custom-css): {code} Pro. Your own rules, sanitised.
+- [Custom CSS](style/custom-css): {code} Advance. Your own rules, sanitised.
 - [Backups](style/backups): {shield} Snapshots of your configuration with one-tap restore.
 :::
 
@@ -51,7 +51,7 @@ The page uses Shopify's context save bar, which appears when you have unsaved ch
 
 Free covers shape, size, spacing, borders, labels and sold-out styling: everything that shapes the swatches you already have.
 
-Growth adds hover and selection effects and the card surfaces. Pro adds per-color overrides, custom CSS, the slider layout and the Pro storefront features.
+The card surfaces are free too. Advance and Premium add hover and selection effects, per-color overrides, custom CSS, the slider layout and the other advanced styling features.
 
 Anything your plan does not include renders **visibly disabled with the plan named**. It is never a live control that fails when you press it. See [Feature matrix](reference/feature-matrix).
 

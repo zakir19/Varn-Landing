@@ -41,17 +41,17 @@ Only values you deliberately configured are written. Open the product in the Swa
 
 Remember that an auto-seeded default is **not** saved unless you touched it, by design.
 
-## 6. Is it a Growth or Pro surface?
+## 6. Is it a paid surface?
 
-If swatches show on product pages but not elsewhere, that is expected on Free:
+If swatches show on product pages but a paid feature is missing, check the plan it needs:
 
 | Missing on | Needs |
 | --- | --- |
-| Collection pages, search, quick view, other cards | Growth, plus the surface toggle in Style, Global |
-| The group row | Growth, plus a saved [group](guides/product-grouping) |
-| More in this color | Pro |
+| Collection pages, search, quick view, other cards | Free on every plan, but the surface toggle in Style, Global must be on |
+| The group row | A saved [group](guides/product-grouping); your first group is free |
+| More in this color | Advance or Premium |
 
-If you are past day 14, your [trial](billing/trial) has ended. Check the Plan page.
+If a paid feature stopped, your subscription may have lapsed or a [trial](billing/trial) was cancelled. Check the Plan page.
 
 ## 7. Is your theme drawing its own swatches?
 
@@ -71,7 +71,7 @@ window.VarnConfig
 | --- | --- |
 | `undefined` | The app embed is not active on this theme. Back to step 1. |
 | An object with `enabled: false` | The master switch is off. Step 3. |
-| An object with `pro: false` | Your storefront sees a non-Pro entitlement. Check the Plan page. |
+| An object with `pro: false` | Your storefront sees a plan below Advance. Check the Plan page. |
 | An object that looks right | The config arrived. The problem is in rendering, and it is worth reporting. |
 
 ## 9. Single-value options

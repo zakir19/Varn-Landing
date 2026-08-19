@@ -9,7 +9,7 @@ Installing the app and activating it on a theme are two separate things. The ins
 
 Add Varn from the [App Store listing](https://apps.shopify.com/varn-variants-swatches-ai). Shopify shows you the permissions before you approve them. See [Permissions and privacy](reference/permissions-privacy) for what each one is used for and why.
 
-After approving, you land on the Varn dashboard. Your [14-day Pro trial](billing/trial) starts here, with no card and no charge.
+After approving, you land on the Varn dashboard on the Free plan, which has no time limit. Every paid plan includes a [7-day free trial](billing/trial).
 
 ## Activate the app embed
 

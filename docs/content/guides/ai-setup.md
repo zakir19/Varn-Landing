@@ -1,18 +1,18 @@
 ---
-title: One-click AI setup
-description: Two levels of automatic setup: name matching in more than ten languages on Free, and true color detection from photos on Pro.
+title: One-click Auto Detect setup
+description: Two levels of automatic setup: name matching in more than ten languages on Free, and true color detection from photos on Advance and Premium.
 ---
 
-Varn has two kinds of AI setup. Both fill in only values that are **not configured yet**, both leave everything editable, and neither will ever overwrite a decision you made.
+Varn has two kinds of Auto Detect setup. Both fill in only values that are **not configured yet**, both leave everything editable, and neither will ever overwrite a decision you made.
 
 | | Reads | Plan |
 | --- | --- | --- |
-| **One-click AI setup** | Option value names, in more than ten languages. | Free |
-| **Full AI setup** | The actual pixels of your product photos. | Pro |
+| **One-click Auto Detect setup** | Option value names, in more than ten languages. | Free |
+| **Full Auto Detect setup** | The actual pixels of your product photos. | Advance |
 
-## One-click AI setup (Free)
+## One-click Auto Detect setup (Free)
 
-Press **One-click AI setup** in the Configure step. Varn matches each unconfigured value against a color dictionary and applies the confident matches.
+Press **One-click Auto Detect setup** in the Configure step. Varn matches each unconfigured value against a color dictionary and applies the confident matches.
 
 ### What it recognises
 
@@ -32,14 +32,14 @@ The multilingual dictionary matches whole words only. Substring matching would t
 
 The button above covers one product. For everything at once, use [Auto-configure all products](guides/auto-configure), which runs the same matcher over your entire catalogue and is also free.
 
-## Full AI setup (Pro)
+## Full Auto Detect setup (Advance and Premium)
 
-::: plans pro
+::: plans advance premium
 :::
 
-Full AI setup reads your product photos and extracts the dominant color of the garment itself.
+Full Auto Detect setup reads your product photos and extracts the dominant color of the garment itself.
 
-Press **Full AI setup (photos)** for the selected product, or run it across the catalogue from the same panel.
+Press **Full Auto Detect setup (photos)** for the selected product, or run it across the catalogue from the same panel.
 
 ### How the color is chosen
 
@@ -65,13 +65,13 @@ There are no credits and no per-image fees. Catalogue runs are sequential, cance
 - Products photographed on models in busy settings, where the dominant color may be the background.
 
 ::: tip A good workflow
-Run the free catalogue pass first. It handles most values in seconds. Then run Full AI on whatever is left, and hand-check the results for your best sellers.
+Run the free catalogue pass first. It handles most values in seconds. Then run Full Auto Detect on whatever is left, and hand-check the results for your best sellers.
 :::
 
 ## Everything stays editable
 
-Both passes write ordinary assignments. Change any of them by hand, or clear one to fall back to your theme's native swatch. There is no "AI mode" to leave.
+Both passes write ordinary assignments. Change any of them by hand, or clear one to fall back to your theme's native swatch. There is no "Auto Detect mode" to leave.
 
 ## Photos, not just colors
 
-To assign existing product **photos** to colors instead of picking colors, see [AI photo match](guides/ai-photo-match), which is also Pro.
+To assign existing product **photos** to colors instead of picking colors, see [Auto Detect photo match](guides/ai-photo-match), which is also on Advance and Premium.

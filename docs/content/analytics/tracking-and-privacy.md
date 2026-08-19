@@ -41,11 +41,11 @@ Events are not linkable to a person, or to each other. There is no session ident
 
 Only when **all** of these are true:
 
-1. Your store is on Pro, or inside the [14-day trial](billing/trial).
+1. Your store is on Advance or Premium, including their [7-day free trial](billing/trial).
 2. The shopper is on a page where swatches rendered.
 3. They clicked a swatch.
 
-On Free and Growth the tracker is not merely idle: the code path never runs and nothing is ever sent.
+On Free and Grow the tracker is not merely idle: the code path never runs and nothing is ever sent.
 
 ## How events travel
 
@@ -76,7 +76,7 @@ Varn implements Shopify's mandatory data webhooks:
 Three ways, any of which is complete:
 
 - Turn off the master switch in [Style](style/overview). Nothing renders and nothing is tracked.
-- Move to Free or Growth. The tracker does not ship.
+- Move to Free or Grow. The tracker does not ship.
 - Uninstall. Shopify removes the storefront code and signals redaction.
 
 ## For your privacy policy

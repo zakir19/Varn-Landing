@@ -24,7 +24,7 @@ Answers "which of my product photos belong to **Blue**, and in what order?"
 
 Picks from the product's existing media and sets the sequence, including which one is the cover.
 
-Free for your first 10 products, then Growth.
+Free for your first 5 products; paid plans raise the limit.
 
 [Open the guide](guides/variant-galleries)
 :::
@@ -47,8 +47,8 @@ Because both write the same record, both apply the same plan checks server side.
 | Show only the 3 photos of the red version when red is picked | Variants |
 | Change which photo is the cover for a color | Variants |
 | Add a new photo to the product from inside Varn | Variants |
-| Let AI guess colors from value names | Swatches |
-| Let AI assign existing photos to colors | Variants |
+| Let Auto Detect guess colors from value names | Swatches |
+| Let Auto Detect assign existing photos to colors | Variants |
 
 ## Why two editors and not one screen
 

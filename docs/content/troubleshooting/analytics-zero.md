@@ -18,21 +18,21 @@ On the Analytics page's empty state, press **Test tracking**. It checks the whol
 
 ## The checks, in order
 
-### 1. Are you on Pro?
+### 1. Are you on Advance or Premium?
 
-Analytics is Pro only. On Free and Growth the tracker is not shipped at all, so nothing can be recorded.
+Analytics is on Advance and Premium. On Free and Grow the tracker is not shipped at all, so nothing can be recorded.
 
-If you were on Pro yesterday, check your [trial](billing/trial). Every install gets 14 days of Pro, then drops to Free.
+If it worked yesterday, check the Plan page: a cancelled [trial](billing/trial) or lapsed subscription returns the store to Free.
 
 ### 2. Has anyone clicked a swatch since?
 
-Events only exist from real storefront interactions after you were on Pro. A store that upgraded an hour ago with no traffic since will show zero, correctly.
+Events only exist from real storefront interactions after you were on Advance or Premium. A store that upgraded an hour ago with no traffic since will show zero, correctly.
 
 Test it yourself: open a product page on your storefront, click two or three colors, wait a moment and reload the Analytics page.
 
-### 3. Does your storefront see the Pro entitlement?
+### 3. Does your storefront see your plan?
 
-The storefront reads your plan from a value stored on your shop. In rare cases the admin and the storefront can disagree, and the symptom is exactly this: the admin says Pro, the storefront never tracks.
+The storefront reads your plan from a value stored on your shop. In rare cases the admin and the storefront can disagree, and the symptom is exactly this: the admin shows Advance or Premium, the storefront never tracks.
 
 On a product page:
 
@@ -40,7 +40,7 @@ On a product page:
 window.VarnConfig.pro
 ```
 
-`true` means the storefront agrees you are on Pro. `false` while the admin shows Pro is the mismatch, and **Test tracking** detects it, repairs it, and then re-reads to confirm the repair actually stuck before telling you it worked.
+`true` means the storefront agrees you are on Advance or Premium. `false` while the admin shows a paid plan is the mismatch, and **Test tracking** detects it, repairs it, and then re-reads to confirm the repair actually stuck before telling you it worked.
 
 ### 4. Is the tracker running?
 
@@ -50,7 +50,7 @@ On a product page:
 window.VarnTrack.state()
 ```
 
-It reports whether the tracker is enabled, whether it sees a Pro entitlement, how many events it has sent and queued, and whether it has backed off after failures.
+It reports whether the tracker is enabled, whether it sees a paid entitlement, how many events it has sent and queued, and whether it has backed off after failures.
 
 `window.VarnTrack.flush()` forces a send. `window.VarnTrack.reset()` clears a backoff.
 

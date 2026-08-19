@@ -25,7 +25,7 @@ If a product's color option is not recognised, the Options step says so, names t
 
 ## Per-color overrides
 
-::: plans pro
+::: plans advance premium
 :::
 
 **Style one color differently.**

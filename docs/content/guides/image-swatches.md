@@ -3,7 +3,7 @@ title: Image swatches
 description: Use a real photo as the chip, for prints, textures and anything a flat color cannot describe.
 ---
 
-::: plans free growth pro
+::: plans free grow advance premium
 :::
 
 An image swatch renders a photo, cropped into the chip. Use it whenever a single color would be a lie: leopard print, oak, marble, tartan, tie-dye, glitter.

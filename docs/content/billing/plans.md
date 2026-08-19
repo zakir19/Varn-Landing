@@ -1,59 +1,64 @@
 ---
 title: Plans and pricing
-description: What Free, Growth and Pro include, monthly and yearly, with no asterisks.
+description: What Free, Grow, Advance and Premium include, monthly and yearly, with no asterisks.
 ---
 
-Three plans. Free is genuinely free and permanent. Every new install gets [14 days of Pro with no card](billing/trial).
+Four plans. Free is genuinely free and permanent, and every paid plan includes a [7-day free trial](billing/trial).
 
-| | Free Forever | Growth | Pro |
-| --- | --- | --- | --- |
-| **Monthly** | $0 | $7.99 | $14.99 |
-| **Yearly** | $0 | $79 | $149 |
-| **Yearly saving** | | about 2 months free | about 2 months free |
+| | Free | Grow | Advance | Premium |
+| --- | --- | --- | --- | --- |
+| **Monthly** | $0 | $14.99 | $24.99 | $49.99 |
+| **Yearly** | $0 | $149 | $249 | $499 |
+| **Yearly saving** | | $30.88 (17%) | $50.88 (17%) | $100.88 (17%) |
 
-## Free Forever
+## Free
 
-Everything you need to launch swatches, on unlimited products, with no card and no time limit.
+Everything you need to launch swatches, free for good.
 
-- Color and image swatches on product pages
-- Unlimited products
+- Unlimited color swatches on product pages
+- Two-tone, gradient and image swatches
 - The full Style studio: shape, size, spacing, borders, labels, layout, sold-out styling
-- One-click AI setup (lite) in more than ten languages
+- One-click Auto Detect setup from color names, in more than ten languages
 - Auto-configure the whole catalogue
 - Image swap when a swatch is picked
-- Per-color photo galleries on up to 10 products
+- [Collection, search and quick-view swatches](guides/collection-search), and cards everywhere
+- Per-color photo galleries on up to 5 products
+- [Product grouping](guides/product-grouping), 1 group
 - Sold-out variants marked automatically
-- Agent-Readiness score and Agent View
-- Variant SEO data, smooth image swaps and hover preloading
+- The whole [agent-readiness suite](agent/overview): score, Agent View and the one-click fixes
 - Config backups with one-tap restore
 
-## Growth, $7.99/mo
+## Grow, $14.99/mo
 
-Puts swatches everywhere shoppers browse.
+More products and groups as your catalog grows.
 
 - Everything in Free
-- [Collection and search swatches](guides/collection-search)
-- [Quick-view swatches](guides/quick-view) and cards everywhere
-- [Per-color photo galleries](guides/variant-galleries) beyond the free 10-product allowance
+- [Per-color photo galleries](guides/variant-galleries) on up to 50 products
 - [Product grouping](guides/product-grouping), up to 5 groups
-- Hover and selection effects
-- Priority support
 
-## Pro, $14.99/mo
+## Advance, $24.99/mo
 
-The full toolkit.
+Adds advanced styling and swatch click analytics.
 
-- Everything in Growth
-- [Full AI setup](guides/ai-setup) that reads colors from your photos
-- [AI photo match](guides/ai-photo-match), no credits
-- [One-click agent-readiness fixes](agent/fixes)
-- Unlimited product grouping
+- Everything in Grow
+- Per-color photo galleries on up to 100 products
+- Product grouping, up to 15 groups
+- [Full Auto Detect setup](guides/ai-setup) that reads colors from your photos
+- [Auto Detect photo match](guides/ai-photo-match), no credits
 - [Swatch analytics](analytics/overview) and [merchandising advice](analytics/merchandising-advice)
 - Sold-out demand and colors-going-cold reports
 - Self-optimizing swatch order
 - ["More in this color"](guides/more-in-this-color) discovery
 - Slider layout and [custom CSS](style/custom-css)
-- Per-color style overrides
+- Per-color style overrides and hover/selection effects
+
+## Premium, $49.99/mo
+
+For large catalogs that need the highest limits.
+
+- Everything in Advance
+- Per-color photo galleries on up to 1,000 products
+- Product grouping, up to 50 groups
 
 ## How gating actually behaves
 
@@ -63,7 +68,7 @@ Three things are true of every paid feature, and they are worth knowing before y
 2. **The server checks too.** The plan is enforced when your settings are saved, not just in the interface.
 3. **The storefront checks too.** A feature that ships bytes to your storefront checks your plan in the page itself, so downgrading takes effect on your storefront automatically with nothing to clean up.
 
-A consequence worth knowing: on Free and Growth, the analytics tracker is **not shipped at all**. It is not disabled code sitting in your page, it is absent.
+A consequence worth knowing: on Free and Grow, the analytics tracker is **not shipped at all**. It is not disabled code sitting in your page, it is absent.
 
 ## Changing plans
 

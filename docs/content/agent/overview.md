@@ -3,7 +3,7 @@ title: Agent readiness
 description: How well AI shopping agents can understand your products, scored, with the gaps named.
 ---
 
-::: plans free growth pro
+::: plans free grow advance premium
 :::
 
 A growing share of shopping starts with an AI assistant rather than a search box. Those agents read structured product data, and they are unforgiving: if your product does not clearly state its color, category and gender, it does not get recommended.
@@ -34,10 +34,10 @@ It is the quickest way to understand the score, because the gap is usually obvio
 
 ## Fixing the gaps
 
-::: plans pro
+::: plans free grow advance premium
 :::
 
-Pro adds one-click fixes for the two gaps that are safe to fix automatically:
+Every plan, including Free, has one-click fixes for the two gaps that are safe to fix automatically:
 
 - **Alt text**, generated from the product and color.
 - **Target gender**, written to Shopify's own product metafield.

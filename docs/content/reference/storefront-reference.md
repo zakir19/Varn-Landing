@@ -99,11 +99,11 @@ The app embed writes small JSON islands into the page. They are read once at sta
 
 | Object | Purpose |
 | --- | --- |
-| `window.VarnConfig` | The resolved configuration for this page, including your style settings and whether Pro features are on. |
+| `window.VarnConfig` | The resolved configuration for this page, including your style settings and whether the paid features are on. |
 | `window.VarnExtras` | The optional second chunk, present only when a feature needs it. |
-| `window.VarnTrack` | Analytics diagnostics, Pro only. `state()` reports the tracker's status, `flush()` forces a send, `reset()` re-arms it. Read-only diagnostics; it cannot create events. |
+| `window.VarnTrack` | Analytics diagnostics, Advance and Premium only. `state()` reports the tracker's status, `flush()` forces a send, `reset()` re-arms it. Read-only diagnostics; it cannot create events. |
 
-Checking `window.VarnConfig.pro` on a product page is the fastest way to confirm whether your storefront currently sees a Pro entitlement.
+Checking `window.VarnConfig.pro` on a product page is the fastest way to confirm whether your storefront currently sees an Advance or Premium entitlement. The property keeps its original name for backwards compatibility.
 
 ## Accessibility contract
 
