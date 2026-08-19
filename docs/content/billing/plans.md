@@ -3,13 +3,10 @@ title: Plans and pricing
 description: What Free, Grow, Advance and Premium include, monthly and yearly, with no asterisks.
 ---
 
-Four plans. Free is genuinely free and permanent, and every paid plan includes a [7-day free trial](billing/trial).
+Four plans. Free is genuinely free and permanent, every paid plan is [free for 7 days](billing/trial), and paying yearly saves exactly 17%.
 
-| | Free | Grow | Advance | Premium |
-| --- | --- | --- | --- | --- |
-| **Monthly** | $0 | $14.99 | $24.99 | $49.99 |
-| **Yearly** | $0 | $149 | $249 | $499 |
-| **Yearly saving** | | $30.88 (17%) | $50.88 (17%) | $100.88 (17%) |
+::: pricing
+:::
 
 ## Free
 

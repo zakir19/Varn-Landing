@@ -1,9 +1,9 @@
 ---
 title: The free trial
-description: Every paid plan includes a 7-day free trial through Shopify's own billing. The Free plan has no time limit.
+description: Every paid plan is free for 7 days through Shopify's own billing. The Free plan has no time limit.
 ---
 
-Two honest ways to try Varn: start on the **Free plan**, which never expires, or pick a paid plan and use its **7-day free trial**.
+Two honest ways to try Varn: start on the **Free plan**, which never expires, or pick a paid plan and take its **first 7 days free**.
 
 ## How the trial works
 

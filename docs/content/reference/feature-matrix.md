@@ -80,7 +80,7 @@ A line-by-line comparison. For prices and the plan summaries, see [Plans and pri
 | Hover preloading | Yes | Yes | Yes | Yes |
 | Storefront JavaScript on a hard size budget | Yes | Yes | Yes | Yes |
 | No theme files edited | Yes | Yes | Yes | Yes |
-| 7-day free trial | — | Yes | Yes | Yes |
+| Free for the first 7 days | - | Yes | Yes | Yes |
 | Support | Yes | Yes | Yes | Yes |
 
 ::: note How gating behaves

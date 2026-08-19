@@ -122,6 +122,22 @@ Right column.
 :::
 ```
 
+### Pricing cards
+
+```markdown
+::: pricing
+:::
+```
+
+Renders the four plan cards as a 2x2 grid, matching the marketing site and the
+Plan and billing screen in the app. It takes no arguments: the plans, prices,
+limits and feature rows live in the `PRICING` array near the top of
+`build.mjs`, so a price change is one edit in one place.
+
+`app/data/plans.ts` in the Varn app repo is the source of truth for what
+merchants are actually charged. Change it there first, then mirror it into
+`build.mjs` and the marketing site's pricing section.
+
 ### Plan availability
 
 ```markdown

@@ -15,7 +15,7 @@ The billing cycle selector is at the top. Yearly saves exactly 17% on every paid
 
 ### Press the plan's button
 
-You are taken to **Shopify's** subscription confirmation page, which also states your 7-day free trial. Varn cannot charge you; only Shopify can, and only after you approve it there.
+You are taken to **Shopify's** subscription confirmation page, which also states that your first 7 days are free. Varn cannot charge you; only Shopify can, and only after you approve it there.
 
 ### Approve
 

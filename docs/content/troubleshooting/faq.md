@@ -88,7 +88,7 @@ Grow ($14.99/mo) raises the variant-image limit to 50 products and grouping to 5
 
 ### How does the free trial work?
 
-Every paid plan includes a 7-day free trial through Shopify's own confirmation screen. Cancel during the trial and you are never billed; otherwise the plan simply continues. See [The trial](billing/trial).
+Every paid plan is free for 7 days, through Shopify's own confirmation screen. Cancel during the trial and you are never billed; otherwise the plan simply continues. See [The trial](billing/trial).
 
 ### Is there a discount for paying yearly?
 

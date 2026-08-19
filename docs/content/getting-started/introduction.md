@@ -48,7 +48,7 @@ They write to the same record, so a value can have both a swatch and a photo set
 
 ## Pricing in one line
 
-Free covers unlimited color swatches, swatches on collection, search and quick view, and the whole agent-readiness suite, forever. Grow ($14.99/mo) raises the variant-image and grouping limits. Advance ($24.99/mo) adds full Auto Detect, photo matching, advanced styling and analytics. Premium ($49.99/mo) carries the highest limits for large catalogs. Every paid plan includes a **7-day free trial**. See [Plans](billing/plans) and [The free trial](billing/trial).
+Free covers unlimited color swatches, swatches on collection, search and quick view, and the whole agent-readiness suite, forever. Grow ($14.99/mo) raises the variant-image and grouping limits. Advance ($24.99/mo) adds full Auto Detect, photo matching, advanced styling and analytics. Premium ($49.99/mo) carries the highest limits for large catalogs. Every paid plan is **free for 7 days**. See [Plans](billing/plans) and [The free trial](billing/trial).
 
 ::: tip Next step
 [Run the quick start](getting-started/quick-start). It is three screens and about two minutes.

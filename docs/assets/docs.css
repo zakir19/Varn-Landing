@@ -1392,6 +1392,155 @@
     color: var(--clay-deep);
   }
 
+  /* ---------------------------------------------------------- pricing -- */
+  /* The four plan cards, laid out 2x2 to match the marketing site and the
+     Plan and billing screen in the app. Every colour is a token, so the grid
+     follows the docs light/dark theme. */
+  .pricing {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.9rem;
+    margin-block: 1.6rem;
+  }
+
+  @media (min-width: 46rem) {
+    .pricing {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .pcard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.15rem 1.15rem 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Emphasis is drawn INSIDE the border box (an inset ring), so the featured
+     card's content sits on exactly the same baseline as its neighbours. */
+  .pcard--featured {
+    border-color: var(--accent);
+    box-shadow: inset 0 0 0 1px var(--accent), var(--shadow-md);
+  }
+
+  .pcard__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .pcard__name {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+  }
+
+  .pcard__flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.16rem 0.55rem;
+    border: 1px solid var(--accent);
+    border-radius: var(--r-pill);
+    background: var(--accent-soft);
+    color: var(--accent-text);
+    font-size: 0.72rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .pcard__flag-icon {
+    inline-size: 13px;
+    block-size: 13px;
+    flex: none;
+  }
+
+  .pcard__price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3rem;
+    margin: 0;
+  }
+
+  .pcard__amount {
+    font-size: 1.9rem;
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .pcard__per {
+    font-size: 0.85rem;
+    color: var(--ink-subtle);
+  }
+
+  .pcard__note,
+  .pcard__tagline {
+    margin: 0;
+    font-size: 0.85rem;
+  }
+
+  .pcard__note {
+    color: var(--ink-subtle);
+  }
+
+  .pcard__tagline {
+    color: var(--ink-muted);
+  }
+
+  .pcard__cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.6rem;
+    margin: 0.15rem 0 0;
+  }
+
+  .pcard__cta .btn {
+    block-size: 36px;
+    font-size: 0.84rem;
+  }
+
+  .pcard__trial {
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--ink-subtle);
+  }
+
+  /* The lists differ in length, so the rule hangs off the list itself
+     rather than the card edge. */
+  .pcard__rows {
+    display: grid;
+    gap: 0.4rem;
+    margin: 0.35rem 0 0;
+    padding: 0.85rem 0 0;
+    border-block-start: 1px solid var(--line);
+    list-style: none;
+    font-size: 0.86rem;
+  }
+
+  .pcard__row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.45rem;
+    margin: 0;
+  }
+
+  .pcard__tick {
+    inline-size: 16px;
+    block-size: 16px;
+    flex: none;
+    margin-block-start: 2px;
+    color: var(--accent-text);
+  }
+
   /* ------------------------------------------------------------ pager -- */
   .pager {
     display: grid;

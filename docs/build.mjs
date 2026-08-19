@@ -31,6 +31,74 @@ const SITE = {
   support: "mailto:support@enstacked.com",
 };
 
+/* ------------------------------------------------------------- pricing -- */
+/* Mirrors app/data/plans.ts in the Varn app repo, which is the source of
+   truth for what merchants are actually charged and what each tier unlocks.
+   Change it there first, then here and on the marketing site. */
+const TRIAL_DAYS = 7;
+
+const coreRows = (products, groups) => [
+  "Unlimited color swatches",
+  `Products with variant images, up to ${products}`,
+  "Unlimited auto setup from color names",
+  "Multiple variant options",
+  `Product grouping, up to ${groups}`,
+  "Swatches on collections, search and quick view",
+  "Agent readiness for all products",
+];
+
+/* The rows Advance and Premium add on top, declared once so the two cards
+   can never describe the same capability differently. */
+const ADVANCED_ROWS = [
+  "Advanced styling options",
+  "Auto Detect photos for each variant",
+  "Swatch and variant click analytics",
+];
+
+const PRICING = [
+  {
+    name: "Free",
+    price: "Free",
+    per: "forever",
+    note: "No time limit.",
+    tagline: "Everything you need to launch swatches, free for good.",
+    cta: "Start free",
+    trial: false,
+    rows: coreRows("5 products", "1 group"),
+  },
+  {
+    name: "Grow",
+    price: "$14.99",
+    per: "/month",
+    note: "or $149 a year, saving $30.88",
+    tagline: "More products and groups as your catalog grows.",
+    cta: "Start with Grow",
+    trial: true,
+    rows: coreRows("50 products", "5 groups"),
+  },
+  {
+    name: "Advance",
+    price: "$24.99",
+    per: "/month",
+    note: "or $249 a year, saving $50.88",
+    tagline: "Adds advanced styling and swatch click analytics.",
+    cta: "Start with Advance",
+    trial: true,
+    flag: "Most popular",
+    rows: [...coreRows("100 products", "15 groups"), ...ADVANCED_ROWS],
+  },
+  {
+    name: "Premium",
+    price: "$49.99",
+    per: "/month",
+    note: "or $499 a year, saving $100.88",
+    tagline: "For large catalogs that need the highest limits.",
+    cta: "Start with Premium",
+    trial: true,
+    rows: [...coreRows("1,000 products", "50 groups"), ...ADVANCED_ROWS],
+  },
+];
+
 /* ---------------------------------------------------------------- icons -- */
 /* 20x20 stroke icons, currentColor. Small, consistent set. */
 const ICONS = {
@@ -397,6 +465,41 @@ function directive(kind, title, body, ctx, toc) {
       .split(/^---$/m)
       .map((c) => `<div class="col">${render(c, ctx).html}</div>`)
       .join("")}</div>`;
+  }
+
+  /* pricing cards:  ::: pricing
+     The same four-plan 2x2 grid the marketing site shows. Both cycles are
+     printed on the card rather than behind a toggle: the docs are reference
+     material, so seeing the yearly figure without interacting is the point,
+     and it keeps this page working with JavaScript disabled. */
+  if (kind === "pricing") {
+    const cards = PRICING.map((plan) => {
+      const rows = plan.rows
+        .map(
+          (r) =>
+            `<li class="pcard__row">${icon("check", "pcard__tick")}<span>${inline(r)}</span></li>`,
+        )
+        .join("");
+      const flag = plan.flag
+        ? `<span class="pcard__flag">${icon("spark", "pcard__flag-icon")}${esc(plan.flag)}</span>`
+        : "";
+      const trial = plan.trial
+        ? `<span class="pcard__trial">Free for ${TRIAL_DAYS} days</span>`
+        : "";
+      return (
+        `<article class="pcard${plan.flag ? " pcard--featured" : ""}">` +
+        `<div class="pcard__head"><h3 class="pcard__name">${esc(plan.name)}</h3>${flag}</div>` +
+        `<p class="pcard__price"><span class="pcard__amount">${esc(plan.price)}</span>` +
+        `<span class="pcard__per">${esc(plan.per)}</span></p>` +
+        `<p class="pcard__note">${esc(plan.note)}</p>` +
+        `<p class="pcard__tagline">${esc(plan.tagline)}</p>` +
+        `<p class="pcard__cta"><a class="btn ${plan.flag ? "btn--primary" : "btn--secondary"}" ` +
+        `href="${SITE.appListing}" target="_blank" rel="noopener">${esc(plan.cta)}</a>${trial}</p>` +
+        `<ul class="pcard__rows">${rows}</ul>` +
+        `</article>`
+      );
+    }).join("");
+    return `<div class="pricing">${cards}</div>`;
   }
 
   /* plan availability strip:  ::: plans free grow advance premium */

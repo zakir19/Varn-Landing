@@ -200,7 +200,7 @@ Every product claim on the page was checked against the Varn codebase
   $49.99 ($499 yr)**, yearly savings **$30.88 / $50.88 / $100.88** — computed
   the same way as `annualSavings()` in `app/data/plans.ts`, and every yearly
   price is exactly 17% off (`YEARLY_SAVINGS_PCT`).
-- **7-day free trial on every paid plan** (`TRIAL_DAYS`), Shopify's own
+- **Every paid plan free for 7 days** (`TRIAL_DAYS`), Shopify's own
   subscription trial. The old 14-day card-free reverse trial is gone — never
   re-add "no card" wording.
 - Limits: variant-image setup **5 / 50 / 100 / 1,000 products**

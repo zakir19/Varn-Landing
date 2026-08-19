@@ -15,7 +15,7 @@ You need a Shopify store you can edit, and at least one product with a color opt
 
 Add the app from the [Shopify App Store listing](https://apps.shopify.com/varn-variants-swatches-ai) and approve the permissions. You land on the Varn dashboard with a three-step setup guide.
 
-You start on the Free plan, which has no time limit. Every paid plan includes a [7-day free trial](billing/trial).
+You start on the Free plan, which has no time limit. Every paid plan is [free for 7 days](billing/trial).
 
 ### Activate the app embed on your theme
 

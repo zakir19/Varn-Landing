@@ -41,7 +41,7 @@ Events are not linkable to a person, or to each other. There is no session ident
 
 Only when **all** of these are true:
 
-1. Your store is on Advance or Premium, including their [7-day free trial](billing/trial).
+1. Your store is on Advance or Premium, including the [free trial](billing/trial).
 2. The shopper is on a page where swatches rendered.
 3. They clicked a swatch.
 
