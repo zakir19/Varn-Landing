@@ -11,7 +11,7 @@ By default a Shopify product page shows every photo, whichever color is selected
 Per-color galleries fix that: pick which photos belong to each color, and Varn hides the rest when that color is chosen.
 
 ::: note Free for your first 5 products
-Photo mapping is free on up to 5 products so you can use it on your hero products without paying. Paid plans raise the limit: 50 products on Grow, 100 on Advance, 1,000 on Premium. The Variants page shows a meter with how much of your allowance you have used.
+Photo mapping is free on up to 5 products so you can use it on your hero products without paying. Paid plans raise the limit: 150 products on Grow, 1,500 on Advance, unlimited on Premium. The Variants page shows a meter with how much of your allowance you have used.
 :::
 
 ## Mapping photos to a color
@@ -52,7 +52,7 @@ If they pick a color with no map, the full gallery comes back. Nothing is ever p
 
 Galleries are the most theme-specific part of any storefront, so Varn is careful:
 
-- Reordering only happens for a map **you** built. Auto-detected photo matches are filtered but never reordered, because an automatic match carries no intent about order.
+- Reordering only happens for a map **you** built. Automatic photo matches are filtered but never reordered, because an automatic match carries no intent about order.
 - If any step fails, the gallery is left exactly as your theme rendered it. A broken gallery is far worse than an unfiltered one.
 - The filter is re-applied after your theme re-renders the gallery, which most themes do asynchronously on every variant change.
 
@@ -80,6 +80,6 @@ Uploading here adds real media to your Shopify product, unlike everything else i
 
 ::: cards
 - [Photo sequencing](guides/photo-sequencing): {image} The drag-and-drop picker, the cover slot and keyboard support.
-- [Auto Detect photo match](guides/ai-photo-match): {wand} Let Varn assign existing photos to colors for you.
+- [AI photo match](guides/ai-photo-match): {wand} Let Varn assign existing photos to colors for you.
 - [Sync to variant photos](guides/sync-variant-photos): {layers} Push an image swatch into Shopify as the variant's photo.
 :::

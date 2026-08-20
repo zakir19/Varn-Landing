@@ -240,10 +240,11 @@
 
         <h2>Who else sees the data</h2>
         <p>
-          We do not sell, rent or trade any data, and we do not share it for advertising. The only
+          We do not sell, rent or trade any data, and we do not share it for advertising. The
           third parties involved are the infrastructure providers that host the app server and its
-          database on our behalf, under contract and only to run the service. There are no
-          advertising networks, no analytics pixels and no data brokers in Varn.
+          database on our behalf, and the AI vision provider described below, all under contract
+          and only to run the service. There are no advertising networks, no analytics pixels and
+          no data brokers in Varn.
         </p>
         <p>
           We may disclose data where we are legally required to, or to protect our rights or the
@@ -252,14 +253,22 @@
 
         <h2>Artificial intelligence and machine learning</h2>
         <p>
-          Varn&rsquo;s Auto Detect color setup runs entirely inside the app. It matches option names
-          against a built-in color dictionary and, for the photo-based setup, reads the dominant
-          color out of the image pixels. It does not send your products, your images or any other
-          store data to an external AI service.
+          Most of Varn&rsquo;s AI setup runs entirely inside the app: it matches your option names
+          against a built-in color dictionary, reads photo file names and alt text, and can read the
+          dominant color out of the image pixels. None of that leaves the app.
+        </p>
+        <p>
+          One pass does call an outside service. When a photo cannot be placed any other way, Varn
+          sends it to an AI vision provider (currently OpenAI) to find out which color it shows.
+          What is sent is the photo&rsquo;s public Shopify CDN URL, the option value names you chose
+          and the product title, and nothing else. No shopper data, customer data or order data is
+          ever sent. It only runs when you press one of the AI setup buttons, and each photo the
+          model reads spends one of your plan&rsquo;s monthly AI usage credits.
         </p>
         <p>
           We do not use merchant data or customer data, including in aggregated or derived form, to
-          train or develop artificial intelligence or machine learning models.
+          train or develop artificial intelligence or machine learning models, and we do not permit
+          our AI provider to use what we send for training.
         </p>
 
         <h2>Security</h2>

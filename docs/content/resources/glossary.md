@@ -3,6 +3,14 @@ title: Glossary
 description: The words used across these docs and in the app, defined once.
 ---
 
+## AI setup
+
+The two passes that fill your color values in for you: name matching against a multilingual color dictionary, which is free and unlimited, and a photo pass that sends a photo to a vision model, which spends an AI usage credit. Both run on every plan. See [AI setup](guides/ai-setup).
+
+## AI usage credit
+
+One product photo the AI vision model looks at. Each plan includes a monthly allowance, 250 on Free through 50,000 on Premium, and it resets every month. Nothing else in Varn spends one. See [AI usage credits](billing/ai-credits).
+
 ## App embed
 
 The Shopify mechanism that lets an app add code to your storefront without editing theme files. Varn's storefront code is an app embed, which is why it installs and uninstalls cleanly. See [Install and activate](getting-started/install).

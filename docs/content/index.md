@@ -17,7 +17,7 @@ description: Everything about Varn, the Shopify app that turns variant dropdowns
 
 ::: cards
 - [Introduction](getting-started/introduction): {book} What Varn does, who it is for, and what it deliberately does not do.
-- [Quick start](getting-started/quick-start): {rocket} Activate, pick a product, run Auto Detect setup, go live.
+- [Quick start](getting-started/quick-start): {rocket} Activate, pick a product, run AI setup, go live.
 - [Install and activate](getting-started/install): {bolt} Turn the app embed on, including unpublished themes.
 - [Your first swatches](getting-started/first-swatches): {swatch} Walk through the Swatches editor value by value.
 :::
@@ -25,7 +25,7 @@ description: Everything about Varn, the Shopify app that turns variant dropdowns
 ## Popular guides
 
 ::: cards
-- [One-click Auto Detect setup](guides/ai-setup): {wand} Let Varn name your colors from option values and photos.
+- [AI setup](guides/ai-setup): {wand} Let Varn name your colors from option values and photos.
 - [Per-color photo galleries](guides/variant-galleries): {image} Show only the photos that belong to the chosen color.
 - [Swatches on collection pages](guides/collection-search): {globe} Reach shoppers before they open a product.
 - [Style studio](style/overview): {sliders} Shape, size, labels, borders and effects, with a live preview.

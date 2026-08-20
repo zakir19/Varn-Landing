@@ -21,7 +21,7 @@ Alt text describing what an image shows is factually correct by construction, an
 
 **What it improves**
 
-Accessibility for screen reader users, image search, agent comprehension, and Varn's own [Auto Detect photo match](guides/ai-photo-match), which reads alt text first.
+Accessibility for screen reader users, image search, agent comprehension, and Varn's own [AI photo match](guides/ai-photo-match), which reads alt text first.
 :::
 
 You can edit any generated text in the Agent View modal before or after applying.

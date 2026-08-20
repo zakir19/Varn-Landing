@@ -26,7 +26,7 @@ Varn stores a **position map** alongside your assignments, so the third value in
 
 ## The color dictionary is multilingual
 
-[One-click Auto Detect setup](guides/ai-setup) matches values against a color dictionary in more than ten languages, so `Rouge`, `Rot`, `Rosso`, `Rojo` and `Rood` all resolve to red.
+[One-click AI setup](guides/ai-setup) matches values against a color dictionary in more than ten languages, so `Rouge`, `Rot`, `Rosso`, `Rojo` and `Rood` all resolve to red.
 
 Matching is whole-word only. Substring matching would turn "Assorted" into "sort" and then into black, which is exactly the confident-and-wrong result the app avoids.
 

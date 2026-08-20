@@ -8,11 +8,11 @@ description: The things merchants ask first, answered short.
 ::: faq
 ### What is Varn?
 
-Varn turns your product variants into color and image swatches, with one-click Auto Detect setup for your whole catalogue. See [Introduction](getting-started/introduction).
+Varn turns your product variants into color and image swatches, with one-click AI setup for your whole catalogue. See [Introduction](getting-started/introduction).
 
 ### How do I get started?
 
-Two steps: activate the app embed on your theme, then run one-click Auto Detect setup. The dashboard guide walks you through both. See [Quick start](getting-started/quick-start).
+Two steps: activate the app embed on your theme, then run one-click AI setup. The dashboard guide walks you through both. See [Quick start](getting-started/quick-start).
 
 ### Is the free plan really free?
 
@@ -38,9 +38,9 @@ Click **Activate on your theme** in the setup guide, toggle the embed on, and pr
 
 Yes. The theme picker lists every theme and deep-links into the right one. Activation travels with the theme when you publish.
 
-### What does one-click Auto Detect setup do?
+### What does one-click AI setup do?
 
-It reads your option value names in more than ten languages and configures the confident matches, leaving anything ambiguous for you. Full Auto Detect setup on Advance and Premium reads the photos themselves. See [Auto Detect setup](guides/ai-setup).
+It reads your option value names in more than ten languages and configures the confident matches, leaving anything ambiguous for you. When a name is not a color, the photo pass looks at the product photo itself. Both run on every plan; the photo pass spends [AI usage credits](billing/ai-credits). See [AI setup](guides/ai-setup).
 
 ### Does it leave code behind when I uninstall?
 
@@ -84,7 +84,7 @@ No, and deliberately. A swatch is a visual stand-in for a color, and rendering s
 ::: faq
 ### What do the paid plans add?
 
-Grow ($14.99/mo) raises the variant-image limit to 50 products and grouping to 5 groups. Advance ($24.99/mo) adds full Auto Detect, photo matching, advanced styling and analytics. Premium ($49.99/mo) carries the highest limits: 1,000 products and 50 groups. See [Plans](billing/plans).
+Grow ($14.99/mo) raises the variant-image limit to 150 products, grouping to 5 groups and [AI credits](billing/ai-credits) to 1,500 a month. Advance ($39.99/mo) adds advanced styling and analytics. Premium ($69.99/mo) carries the highest limits: unlimited variant-image products, 50 groups and 50,000 credits. See [Plans](billing/plans).
 
 ### How does the free trial work?
 
@@ -92,7 +92,7 @@ Every paid plan is free for 7 days, through Shopify's own confirmation screen. C
 
 ### Is there a discount for paying yearly?
 
-Yes, exactly 17% off: Grow $149/yr, Advance $249/yr, Premium $499/yr.
+Yes: Grow $129/yr instead of $179.88, Advance $339/yr instead of $479.88, Premium $599/yr instead of $839.88.
 
 ### What happens to my setup if I downgrade?
 

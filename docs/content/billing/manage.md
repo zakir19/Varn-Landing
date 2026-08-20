@@ -11,7 +11,7 @@ Everything happens on the **Plan and billing** page, and every change routes thr
 
 ### Choose monthly or yearly
 
-The billing cycle selector is at the top. Yearly saves exactly 17% on every paid plan, and each plan shows the saving in dollars so you can compare honestly.
+The billing cycle selector is at the top. Switch to yearly and each card crosses out what twelve monthly payments would cost, so you can see the saving in dollars rather than work out a percentage.
 
 ### Press the plan's button
 
@@ -42,7 +42,7 @@ Varn uses Shopify's own app billing. That means:
 
 ## Yearly billing
 
-Grow is $149/yr against $179.88 paid monthly, Advance is $249/yr against $299.88, and Premium is $499/yr against $599.88 — a 17% saving on each.
+Grow is $129/yr against $179.88 paid monthly, Advance is $339/yr against $479.88, and Premium is $599/yr against $839.88.
 
 Switching between cycles is a plan change like any other, and goes through the same Shopify confirmation.
 

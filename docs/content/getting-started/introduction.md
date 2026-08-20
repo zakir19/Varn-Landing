@@ -11,7 +11,7 @@ It is built around one rule that shapes every other decision in the app: **Varn 
 
 ::: cards
 - [Color and image swatches](guides/color-swatches): {swatch} Solid, two tone, gradient or a real product photo, on unlimited products.
-- [One-click Auto Detect setup](guides/ai-setup): {wand} Varn reads your option values and photos and configures colors for you.
+- [One-click AI setup](guides/ai-setup): {wand} Varn reads your option values and photos and configures colors for you.
 - [Per-color photo galleries](guides/variant-galleries): {image} Pick which photos belong to which color, and their order.
 - [Swatches beyond the product page](guides/collection-search): {globe} Collection pages, search results, quick view and everywhere else.
 - [A real style studio](style/overview): {sliders} Shape, size, spacing, labels, borders, effects, with a live preview.
@@ -48,7 +48,7 @@ They write to the same record, so a value can have both a swatch and a photo set
 
 ## Pricing in one line
 
-Free covers unlimited color swatches, swatches on collection, search and quick view, and the whole agent-readiness suite, forever. Grow ($14.99/mo) raises the variant-image and grouping limits. Advance ($24.99/mo) adds full Auto Detect, photo matching, advanced styling and analytics. Premium ($49.99/mo) carries the highest limits for large catalogs. Every paid plan is **free for 7 days**. See [Plans](billing/plans) and [The free trial](billing/trial).
+Free covers unlimited color swatches, swatches on collection, search and quick view, AI setup and the whole agent-readiness suite, forever. Grow ($14.99/mo) raises the variant-image, grouping and [AI credit](billing/ai-credits) limits. Advance ($39.99/mo) adds advanced styling and analytics. Premium ($69.99/mo) carries the highest limits for large catalogs. Every paid plan is **free for 7 days**. See [Plans](billing/plans) and [The free trial](billing/trial).
 
 ::: tip Next step
 [Run the quick start](getting-started/quick-start). It is three screens and about two minutes.

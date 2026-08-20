@@ -3,20 +3,21 @@ title: Plans and pricing
 description: What Free, Grow, Advance and Premium include, monthly and yearly, with no asterisks.
 ---
 
-Four plans. Free is genuinely free and permanent, every paid plan is [free for 7 days](billing/trial), and paying yearly saves exactly 17%.
+Four plans. Free is genuinely free and permanent, every paid plan is [free for 7 days](billing/trial), and paying yearly costs less than twelve monthly payments on every paid plan.
 
 ::: pricing
 :::
 
 ## Free
 
-Everything you need to launch swatches, free for good.
+Everything you need to launch swatches on your store.
 
 - Unlimited color swatches on product pages
 - Two-tone, gradient and image swatches
 - The full Style studio: shape, size, spacing, borders, labels, layout, sold-out styling
-- One-click Auto Detect setup from color names, in more than ten languages
+- One-click [AI setup](guides/ai-setup) from color names, in more than ten languages
 - Auto-configure the whole catalogue
+- 250 [AI usage credits](billing/ai-credits) a month for the photo pass
 - Image swap when a swatch is picked
 - [Collection, search and quick-view swatches](guides/collection-search), and cards everywhere
 - Per-color photo galleries on up to 5 products
@@ -27,21 +28,22 @@ Everything you need to launch swatches, free for good.
 
 ## Grow, $14.99/mo
 
-More products and groups as your catalog grows.
+More products and groups as your catalog grows. $129 a year instead of $179.
 
 - Everything in Free
-- [Per-color photo galleries](guides/variant-galleries) on up to 50 products
+- [Per-color photo galleries](guides/variant-galleries) on up to 150 products
 - [Product grouping](guides/product-grouping), up to 5 groups
+- 1,500 [AI usage credits](billing/ai-credits) a month
+- Swatches on products you have not set up yet
 
-## Advance, $24.99/mo
+## Advance, $39.99/mo
 
-Adds advanced styling and swatch click analytics.
+Adds advanced styling and swatch click analytics. $339 a year instead of $479.
 
 - Everything in Grow
-- Per-color photo galleries on up to 100 products
+- Per-color photo galleries on up to 1,500 products
 - Product grouping, up to 15 groups
-- [Full Auto Detect setup](guides/ai-setup) that reads colors from your photos
-- [Auto Detect photo match](guides/ai-photo-match), no credits
+- 15,000 [AI usage credits](billing/ai-credits) a month
 - [Swatch analytics](analytics/overview) and [merchandising advice](analytics/merchandising-advice)
 - Sold-out demand and colors-going-cold reports
 - Self-optimizing swatch order
@@ -49,13 +51,18 @@ Adds advanced styling and swatch click analytics.
 - Slider layout and [custom CSS](style/custom-css)
 - Per-color style overrides and hover/selection effects
 
-## Premium, $49.99/mo
+## Premium, $69.99/mo
 
-For large catalogs that need the highest limits.
+For large catalogs that need the highest limits. $599 a year instead of $839.
 
 - Everything in Advance
-- Per-color photo galleries on up to 1,000 products
+- Per-color photo galleries on an unlimited number of products
 - Product grouping, up to 50 groups
+- 50,000 [AI usage credits](billing/ai-credits) a month
+
+## What is not gated
+
+[AI setup](guides/ai-setup) is on every plan, names and photos alike. There is no plan you have to reach before Varn will configure your colors for you, and no separate credit pack to buy: each plan simply includes a bigger monthly allowance for the pass that uses a vision model. The same is true of the [agent-readiness suite](agent/overview), including its one-click fixes.
 
 ## How gating actually behaves
 

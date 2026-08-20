@@ -11,7 +11,7 @@ Open the [Variants editor](guides/variant-galleries), pick the product, and chec
 
 **2. Are you past the free allowance?**
 
-Photo mapping is free on your first 5 products. Paid plans raise the limit to 50, 100 or 1,000 products. The Variants page shows a meter for the allowance.
+Photo mapping is free on your first 5 products. Paid plans raise the limit to 150, 1,500 or unlimited. The Variants page shows a meter for the allowance.
 
 **3. Does your theme show variant photos at all?**
 

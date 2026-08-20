@@ -15,19 +15,20 @@ A line-by-line comparison. For prices and the plan summaries, see [Plans and pri
 | Unlimited color swatches | Yes | Yes | Yes | Yes |
 | Image swap when a swatch is picked | Yes | Yes | Yes | Yes |
 | Sold-out variants marked automatically | Yes | Yes | Yes | Yes |
-| One-click Auto Detect setup (names, 10+ languages) | Yes | Yes | Yes | Yes |
+| One-click AI setup (names, 10+ languages) | Yes | Yes | Yes | Yes |
 | Auto-configure the whole catalogue | Yes | Yes | Yes | Yes |
-| Full Auto Detect setup (reads colors from photos) | No | No | Yes | Yes |
+| AI setup from your photos (vision model) | Yes | Yes | Yes | Yes |
+| AI usage credits a month | 250 | 1,500 | 15,000 | 50,000 |
 
 ## Variant photos
 
 | Feature | Free | Grow | Advance | Premium |
 | --- | --- | --- | --- | --- |
-| Per-color photo galleries | 5 products | 50 products | 100 products | 1,000 products |
+| Per-color photo galleries | 5 products | 150 products | 1,500 products | Unlimited |
 | Photo sequencing and cover slot | Yes | Yes | Yes | Yes |
 | Upload a photo into the product | Yes | Yes | Yes | Yes |
 | Sync image swatches to variant photos | Yes | Yes | Yes | Yes |
-| Auto Detect photo match | No | No | Yes | Yes |
+| AI photo match | Yes | Yes | Yes | Yes |
 
 ## Storefront surfaces
 
@@ -39,6 +40,7 @@ A line-by-line comparison. For prices and the plan summaries, see [Plans and pri
 | Quick view | Yes | Yes | Yes | Yes |
 | Cards everywhere else | Yes | Yes | Yes | Yes |
 | Product grouping | 1 group | 5 groups | 15 groups | 50 groups |
+| Swatches on products you have not set up yet | No | Yes | Yes | Yes |
 | More in this color | No | No | Yes | Yes |
 
 ## Style studio

@@ -135,13 +135,13 @@ in exactly one place.
    chips. It plays itself once when the demo first scrolls into view.
 3. **Theme compatibility marquee** — the Shopify-specific trust band.
 4. **How it works** — the real five-step wizard, with a pinned admin mock that
-   advances as you scroll. Step 4 animates the Auto Detect colour matching.
+   advances as you scroll. Step 4 animates the AI setup colour matching.
 5. **Feature bento** — six capabilities, each tagged with the plan it starts on
    (Free / Free to start / Advance).
 6. **Style studio** — an interactive playground mirroring the app's own style
    page (shape, size, spacing, border, labels, text pills).
 7. **Where swatches show up** — collection, search, quick view, everywhere else.
-8. **Auto Detect setup** — with a push-button demo that also shows the value it
+8. **AI setup** — with a push-button demo that also shows the value it
    deliberately *doesn't* guess.
 9. **Proof pillars** — the four objections every Shopify merchant has.
 10. **Agent readiness** — the differentiator no competitor has.
@@ -162,7 +162,7 @@ in exactly one place.
 | Prices and plan features | the `pricing` section in `index.html` |
 | Theme / app names in the marquee | `THEME_ITEMS` in `assets/js/main.js` |
 | Demo colours, stock states, gallery sets | `DEMO_COLOURS` in `assets/js/main.js` |
-| Auto Detect demo outcome | `AUTO_DETECT_MATCHES` in `assets/js/main.js` |
+| AI setup demo outcome | `AI_SETUP_MATCHES` in `assets/js/main.js` |
 | Brand palette, type scale, spacing | the `:root` token block in `assets/css/styles.css` |
 
 The four brand colours live in one place:
@@ -196,18 +196,27 @@ Every product claim on the page was checked against the Varn codebase
   "split by feature with a size budget", never an exact byte count, so this
   cannot rot.
 - **18 storefront locales**, **10+ colour-dictionary languages**.
-- **Free $0 / Grow $14.99 ($149 yr) / Advance $24.99 ($249 yr) / Premium
-  $49.99 ($499 yr)**, yearly savings **$30.88 / $50.88 / $100.88** — computed
-  the same way as `annualSavings()` in `app/data/plans.ts`, and every yearly
-  price is exactly 17% off (`YEARLY_SAVINGS_PCT`).
+- **Free $0 / Grow $14.99 ($129 yr) / Advance $39.99 ($339 yr) / Premium
+  $69.99 ($599 yr)**. The yearly view crosses out what twelve monthly payments
+  would cost (**$179 / $479 / $839**, floored to whole dollars exactly as
+  `priceStrikeFor()` in `app/data/plans.ts` does), and states no percentage
+  anywhere — the saving is no longer a single figure across the three plans.
 - **Every paid plan free for 7 days** (`TRIAL_DAYS`), Shopify's own
   subscription trial. The old 14-day card-free reverse trial is gone — never
   re-add "no card" wording.
-- Limits: variant-image setup **5 / 50 / 100 / 1,000 products**
-  (`MEDIA_PRODUCT_LIMIT`), grouping **1 / 5 / 15 / 50 groups** (`GROUP_LIMIT`).
-- Free now includes collection / search / quick-view swatches and the whole
-  agent-readiness suite, one-click fixes included. Analytics and advanced
-  styling start at Advance.
+- Limits: variant-image setup **5 / 150 / 1,500 / unlimited products**
+  (`MEDIA_PRODUCT_LIMIT`), grouping **1 / 5 / 15 / 50 groups** (`GROUP_LIMIT`),
+  AI usage credits **250 / 1,500 / 15,000 / 50,000 a month** (`AI_PHOTO_LIMIT`).
+  One credit is one photo the vision model looks at.
+- Free now includes collection / search / quick-view swatches, the whole
+  agent-readiness suite with its one-click fixes, and **AI setup in full** —
+  names and photos alike, on every plan, metered only by the AI credit
+  allowance. "Swatches on products you have not set up yet" starts at Grow;
+  analytics and advanced styling start at Advance.
+- The AI photo pass **does call an outside service** (a vision model), so the
+  page must never claim "no credits and no third-party service" again. It sends
+  the photo's public CDN URL, the option value names and the product title, and
+  nothing else. `privacy.html` says the same thing.
 - **85/100 agent score** — 30 + 25 + 15 + 15 + 0, matching the real scorer's
   weights (category 30, colour 25, size 15, gender 15, alt text 15).
 

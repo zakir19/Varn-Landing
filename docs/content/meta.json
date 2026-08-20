@@ -82,7 +82,7 @@
     {
       "title": "Plans and billing",
       "icon": "card",
-      "pages": ["billing/plans", "billing/trial", "billing/manage"]
+      "pages": ["billing/plans", "billing/ai-credits", "billing/trial", "billing/manage"]
     },
     {
       "title": "Reference",

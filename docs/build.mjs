@@ -37,21 +37,25 @@ const SITE = {
    Change it there first, then here and on the marketing site. */
 const TRIAL_DAYS = 7;
 
-const coreRows = (products, groups) => [
+const coreRows = (products, groups, credits) => [
+  `Products with variant images, ${products}`,
   "Unlimited color swatches",
-  `Products with variant images, up to ${products}`,
-  "Unlimited auto setup from color names",
+  "Unlimited AI setup from color names",
   "Multiple variant options",
-  `Product grouping, up to ${groups}`,
+  `Product grouping, ${groups}`,
+  `AI usage credits, ${credits} a month`,
   "Swatches on collections, search and quick view",
   "Agent readiness for all products",
 ];
 
-/* The rows Advance and Premium add on top, declared once so the two cards
-   can never describe the same capability differently. */
+/* The row Grow adds, and the two Advance and Premium add on top, declared once
+   so no two cards can describe the same capability differently. Each maps to a
+   real gate in the app: showOnAllProducts is Grow+, the styling effects and the
+   analytics dashboard are Advance+. AI setup is NOT here, it is on every plan
+   and metered by the credit allowance in coreRows. */
+const BARE_ROW = "Swatches on products you have not set up yet";
 const ADVANCED_ROWS = [
   "Advanced styling options",
-  "Auto Detect photos for each variant",
   "Swatch and variant click analytics",
 ];
 
@@ -61,41 +65,41 @@ const PRICING = [
     price: "Free",
     per: "forever",
     note: "No time limit.",
-    tagline: "Everything you need to launch swatches, free for good.",
+    tagline: "Everything you need to launch swatches on your store.",
     cta: "Start free",
     trial: false,
-    rows: coreRows("5 products", "1 group"),
+    rows: coreRows("up to 5", "only 1 group", "250"),
   },
   {
     name: "Grow",
     price: "$14.99",
     per: "/month",
-    note: "or $149 a year, saving $30.88",
+    note: "or $129 a year, instead of $179",
     tagline: "More products and groups as your catalog grows.",
     cta: "Start with Grow",
     trial: true,
-    rows: coreRows("50 products", "5 groups"),
+    rows: [...coreRows("up to 150", "up to 5 groups", "1,500"), BARE_ROW],
   },
   {
     name: "Advance",
-    price: "$24.99",
+    price: "$39.99",
     per: "/month",
-    note: "or $249 a year, saving $50.88",
+    note: "or $339 a year, instead of $479",
     tagline: "Adds advanced styling and swatch click analytics.",
     cta: "Start with Advance",
     trial: true,
     flag: "Most popular",
-    rows: [...coreRows("100 products", "15 groups"), ...ADVANCED_ROWS],
+    rows: [...coreRows("up to 1,500", "up to 15 groups", "15,000"), BARE_ROW, ...ADVANCED_ROWS],
   },
   {
     name: "Premium",
-    price: "$49.99",
+    price: "$69.99",
     per: "/month",
-    note: "or $499 a year, saving $100.88",
+    note: "or $599 a year, instead of $839",
     tagline: "For large catalogs that need the highest limits.",
     cta: "Start with Premium",
     trial: true,
-    rows: [...coreRows("1,000 products", "50 groups"), ...ADVANCED_ROWS],
+    rows: [...coreRows("unlimited", "up to 50 groups", "50,000"), BARE_ROW, ...ADVANCED_ROWS],
   },
 ];
 

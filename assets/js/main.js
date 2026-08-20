@@ -615,12 +615,12 @@
   }
 
   /* =======================================================================
-     MODULE - Auto Detect demo
-     A push-button reproduction of one-click Auto Detect, including the value
+     MODULE - AI setup demo
+     A push-button reproduction of one-click AI setup, including the value
      it deliberately leaves alone.
      ===================================================================== */
 
-  var AUTO_DETECT_MATCHES = ["#1F3A6E", "#D85A30", "#9CAF88", "#ED93B1", null];
+  var AI_SETUP_MATCHES = ["#1F3A6E", "#D85A30", "#9CAF88", "#ED93B1", null];
 
   function initAiDemo() {
     var root = qs("[data-ai-demo]");
@@ -644,7 +644,7 @@
         row.classList.remove("is-matched");
       });
       if (note) note.textContent = "5 values waiting.";
-      button.textContent = "Run one-click Auto Detect";
+      button.textContent = "Run one-click AI setup";
       button.disabled = false;
     }
 
@@ -658,7 +658,7 @@
           window.setTimeout(function () {
             var chip = qs(".mock__row-chip", row);
             var state = qs(".mock__row-state", row);
-            var match = AUTO_DETECT_MATCHES[index];
+            var match = AI_SETUP_MATCHES[index];
 
             if (match) {
               if (chip) chip.style.backgroundColor = match;
@@ -701,6 +701,7 @@
     if (!root || !thumb) return;
 
     var amounts = qsa("[data-price-monthly]");
+    var strikes = qsa("[data-strike-yearly]");
     var periods = qsa("[data-period]");
     var notes = qsa("[data-note-monthly]");
 
@@ -715,6 +716,13 @@
         amount.textContent = yearly
           ? amount.getAttribute("data-price-yearly")
           : amount.getAttribute("data-price-monthly");
+      });
+
+      /* The yearly discount is shown as the crossed-out monthly-for-a-year
+         price, never a percentage, matching the app plan cards. It is hidden
+         entirely on the monthly view so there is nothing to cross out. */
+      strikes.forEach(function (strike) {
+        strike.hidden = !yearly;
       });
 
       periods.forEach(function (period) {
@@ -930,7 +938,7 @@
       "variants-title": { text: "Every color gets its own gallery" },
       "studio-title": { text: "Style it like your store" },
       "surfaces-title": { text: "Swatches everywhere shoppers browse" },
-      "ai-title": { text: "Auto Detect names your colors in one pass" },
+      "ai-title": { text: "AI setup names your colors in one pass" },
       "analytics-title": { text: "Every click becomes a signal" },
       "proof-title": { text: "What it touches, and what it leaves alone" },
       "pricing-title": { text: "Free forever", cta: "Install app", href: APP_URL },

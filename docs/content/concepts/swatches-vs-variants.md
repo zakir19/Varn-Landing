@@ -47,8 +47,8 @@ Because both write the same record, both apply the same plan checks server side.
 | Show only the 3 photos of the red version when red is picked | Variants |
 | Change which photo is the cover for a color | Variants |
 | Add a new photo to the product from inside Varn | Variants |
-| Let Auto Detect guess colors from value names | Swatches |
-| Let Auto Detect assign existing photos to colors | Variants |
+| Let AI setup guess colors from value names | Swatches |
+| Let AI setup assign existing photos to colors | Variants |
 
 ## Why two editors and not one screen
 

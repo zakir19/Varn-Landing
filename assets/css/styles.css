@@ -2222,6 +2222,22 @@
     font-variant-numeric: tabular-nums;
   }
 
+  /* The yearly discount is the crossed-out price of twelve monthly payments,
+     never a percentage, so the card reads the same way as the plan cards in
+     the app. Hidden on the monthly view by the `hidden` attribute. */
+  .plan__strike {
+    font-size: var(--text-lead);
+    font-weight: 600;
+    color: var(--color-ink-subtle);
+    /* Same line-height as the amount beside it: the default leading on a
+       smaller baseline-aligned flex item grew the price row by 3px, which put
+       the Free card's button above Grow's on the yearly view. */
+    line-height: 1;
+    text-decoration-line: line-through;
+    text-decoration-thickness: 1.5px;
+    font-variant-numeric: tabular-nums;
+  }
+
   .plan__period {
     font-size: var(--text-sm);
     color: var(--color-ink-subtle);

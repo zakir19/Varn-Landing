@@ -84,4 +84,6 @@ Every webhook request is signature-verified before it is processed. An unverifie
 
 Varn runs on standard cloud infrastructure and uses no third party analytics, advertising or tracking services in the app or on your storefront.
 
+One feature calls an outside service: the vision pass of [AI setup](guides/ai-setup) and [AI photo match](guides/ai-photo-match) sends product photos to an AI vision provider (currently OpenAI) to find out which color each photo shows. That call carries the photo's public Shopify CDN URL, your option value names and the product title, and nothing else. No shopper, order or customer data is ever sent, and the feature only runs when you press one of those buttons. Each photo the model reads spends one [AI usage credit](billing/ai-credits).
+
 For a data processing agreement or a security questionnaire, [email support@enstacked.com](mailto:support@enstacked.com).
