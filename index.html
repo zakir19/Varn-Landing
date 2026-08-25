@@ -157,45 +157,14 @@
       display: grid;
       place-items: center;
       padding: clamp(10px, 2vw, 28px);
-      background: #17141d;
+      /* Two STATIC brand glows on the dark ground - presence without
+         motion, and nothing behind the card competes with it. */
+      background:
+        radial-gradient(58% 46% at 22% 0%, rgb(127 119 221 / 16%), transparent 70%),
+        radial-gradient(48% 42% at 88% 100%, rgb(216 90 48 / 12%), transparent 70%),
+        #17141d;
       overflow: hidden;
       font-family: var(--font-sans);
-    }
-
-    /* ---- Liquid metaball field in the dark surround ------------------- */
-    .gate__liquid {
-      position: absolute;
-      inset: -8%;
-      inline-size: 116%;
-      block-size: 116%;
-      opacity: 0.5;
-      pointer-events: none;
-    }
-
-    .gate__goo {
-      filter: url(#gate-goo);
-    }
-
-    .gate__blob {
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: gate-drift 34s var(--ease-in-out) infinite alternate;
-      will-change: transform;
-    }
-
-    .gate__blob:nth-child(2) { animation-duration: 41s; animation-delay: -6s; }
-    .gate__blob:nth-child(3) { animation-duration: 29s; animation-delay: -13s; }
-    .gate__blob:nth-child(4) { animation-duration: 47s; animation-delay: -3s; }
-    .gate__blob:nth-child(5) { animation-duration: 37s; animation-delay: -20s; }
-    .gate__blob:nth-child(6) { animation-duration: 53s; animation-delay: -9s; }
-    .gate__blob:nth-child(7) { animation-duration: 31s; animation-delay: -26s; }
-
-    @keyframes gate-drift {
-      0%   { transform: translate(0, 0) scale(1); }
-      25%  { transform: translate(9%, -7%) scale(1.14); }
-      50%  { transform: translate(-6%, 8%) scale(0.9); }
-      75%  { transform: translate(7%, 5%) scale(1.08); }
-      100% { transform: translate(-8%, -6%) scale(0.96); }
     }
 
     /* ---- The card ----------------------------------------------------- */
@@ -204,11 +173,12 @@
       display: flex;
       flex-direction: column;
       inline-size: min(1120px, 100%);
-      /* Full height, always: the header and the giant wordmark stay pinned
-         and only the BODY scrolls, so the wordmark - the signature of the
-         reference layout - is visible at every viewport height instead of
-         sitting below a card-wide scroll fold. */
-      block-size: 100%;
+      /* Height FITS the content, capped at the viewport: a full-height card
+         parked all its spare space as dead white between the content and the
+         wordmark. When content exceeds the cap, the body inside scrolls and
+         the header + wordmark stay pinned. */
+      block-size: auto;
+      max-block-size: 100%;
       overflow: hidden;
       border-radius: 22px;
       background-color: #fbfaf8;
@@ -220,6 +190,12 @@
       background-position: 0 0, 17px 26px;
       box-shadow: 0 40px 120px -30px rgb(0 0 0 / 55%);
       color: var(--color-ink);
+      animation: gate-card-in 0.55s var(--ease-out) both;
+    }
+
+    @keyframes gate-card-in {
+      from { opacity: 0; transform: translateY(16px) scale(0.985); }
+      to   { opacity: 1; transform: none; }
     }
 
     /* ---- Header row ---------------------------------------------------- */
@@ -302,6 +278,14 @@
         grid-template-columns: 1.15fr 0.85fr;
         padding-block-start: clamp(20px, 3vh, 34px);
       }
+    }
+
+    /* The form's exit, played just before the thank-you view arrives, so
+       the swap reads as one motion instead of a cut. */
+    .gate__body.is-leaving {
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.24s var(--ease-out), transform 0.24s var(--ease-out);
     }
 
     .gate__chip {
@@ -486,7 +470,36 @@
       gap: var(--space-sm);
       padding: clamp(28px, 7vh, 84px) clamp(18px, 3.2vw, 40px) 0;
       text-align: center;
-      animation: gate-rise var(--dur-slow) var(--ease-spring) both;
+    }
+
+    /* Staggered arrival: title, then copy, then the pill - one motion,
+       read top to bottom. Each child animates on its own delay. */
+    .gate__done > * {
+      animation: gate-rise 0.55s var(--ease-spring) both;
+    }
+
+    .gate__done-title { animation-delay: 0.05s; }
+    .gate__done-copy  { animation-delay: 0.16s; }
+
+    .gate__done-pill {
+      animation-name: gate-pop;
+      animation-delay: 0.3s;
+    }
+
+    @keyframes gate-pop {
+      from { opacity: 0; transform: scale(0.6); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* The check draws itself once the pill has landed. */
+    .gate__done-pill path {
+      stroke-dasharray: 12;
+      stroke-dashoffset: 12;
+      animation: gate-draw 0.35s var(--ease-out) 0.55s forwards;
+    }
+
+    @keyframes gate-draw {
+      to { stroke-dashoffset: 0; }
     }
 
     .gate__done:focus-visible {
@@ -539,7 +552,15 @@
     .gate__word {
       position: relative;
       margin-block-start: auto;
-      padding-block-start: clamp(16px, 3vh, 30px);
+      /* The fade zone. The band fades from nothing to solid over exactly
+         this distance, and the letters start just below it - so the top of
+         the word area reads as a soft gradient BLOOM rising into the card,
+         never a hard edge (5px of fade read as a banner slapped on) and
+         never white letters on the white card (the letters sit strictly in
+         the solid zone). One custom property keeps the padding and the
+         mask geometry in lockstep. */
+      --word-fade: clamp(26px, 5vh, 50px);
+      padding-block-start: var(--word-fade);
       overflow: hidden;
       text-align: center;
       line-height: 0;
@@ -551,39 +572,108 @@
     .gate__word::before {
       content: "";
       position: absolute;
-      inset: 22% 0 0;
+      inset: 0;
       background: var(--grad-accent);
-      -webkit-mask-image: linear-gradient(to top, #000 55%, transparent);
-      mask-image: linear-gradient(to top, #000 55%, transparent);
+      /* Solid behind ALL of the ink, fading out over the --word-fade strip
+         above it. The +2px pulls the solid boundary slightly above the
+         padding line, so the letter tops keep a real margin inside solid
+         color at every font size. */
+      -webkit-mask-image: linear-gradient(to top, #000 calc(100% - var(--word-fade) + 2px), transparent);
+      mask-image: linear-gradient(to top, #000 calc(100% - var(--word-fade) + 2px), transparent);
     }
 
     .gate__word span {
       position: relative;
-      display: inline-block;
+      display: block;
       /* Sized against BOTH axes: vw so it fills the card on wide screens,
          vh so a short laptop still shows a real wordmark band instead of a
          sliver, with hard floors and ceilings either side. */
-      font-size: max(4.5rem, min(17rem, 22vw, 24vh));
+      font-size: max(4rem, min(15rem, 21vw, 22vh));
       font-weight: 600;
-      line-height: 0.78;
+      /* FULL line box, deliberately: a line-height under 1 lets the letter
+         TOPS overflow the line box upward, and the container's overflow
+         hidden then decapitates the word. The bottom crop comes from the
+         negative margin below instead - the container gets shorter, the
+         glyphs do not move, and the card edge slices the baseline exactly
+         like the reference. */
+      line-height: 1;
       letter-spacing: -0.045em;
       color: #fff;
-      /* Push the baseline past the card edge so the mark reads as cropped
-         by the card, exactly like the reference. */
-      transform: translateY(0.14em);
+      /* MEASURED, not guessed: canvas TextMetrics on Instrument Sans 600
+         puts the ink top of "Varn" 0.14em below the line-box top - pure
+         leading, pure white space. Pull all but 0.02em of it back out, so
+         the letters sit tight under the content and can still never clip. */
+      margin-block-start: -0.12em;
+      margin-block-end: -0.2em;
       text-shadow: 0 4px 40px rgb(38 36 46 / 18%);
     }
 
     @media (max-width: 899px) {
       .gate__launch { display: none; }
-      .gate__word span { transform: translateY(0.1em); }
+
+      .gate__word span {
+        font-size: max(3.2rem, min(15rem, 20vw, 13vh));
+        margin-block-end: -0.16em;
+      }
+    }
+
+    /* Phones and small tablets: the wordmark stays PINNED and visible,
+       same as desktop, but compact - and the scrollable body carries real
+       bottom clearance, so at full scroll the submit button sits clearly
+       above the band instead of being cut at its edge. */
+    @media (max-width: 899px) {
+      .gate__body,
+      .gate__done {
+        padding-block-end: var(--space-lg);
+      }
+    }
+
+    /* Phones: tighter frame, tighter rhythm, same anatomy. */
+    @media (max-width: 575px) {
+      .gate {
+        padding: 8px;
+      }
+
+      .gate__card {
+        border-radius: 18px;
+      }
+
+      .gate__head {
+        padding: 14px 16px;
+      }
+
+      .gate__body {
+        gap: 22px;
+        padding-inline: 16px;
+      }
+
+      .gate__lead {
+        font-size: var(--text-sm);
+      }
+
+      .gate__by {
+        margin-block-start: var(--space-md);
+      }
+
+      .gate__done {
+        padding: 24px 16px 0;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .gate__blob,
-      .gate__done,
+      .gate__card,
+      .gate__done > *,
+      .gate__done-pill path,
       .gate__spinner {
         animation: none !important;
+      }
+
+      .gate__done-pill path {
+        stroke-dashoffset: 0;
+      }
+
+      .gate__body.is-leaving {
+        transition: none;
       }
 
       .gate__icon-btn:hover,
@@ -594,32 +684,6 @@
   </style>
 
   <div class="gate" data-gate role="dialog" aria-modal="true" aria-labelledby="gate-title">
-    <!-- Liquid metaball field: seven brand-color circles under a goo filter.
-         Blur + a hard alpha ramp makes overlapping circles FUSE and pull
-         apart with a surface-tension neck - one swatch melting into the
-         next, which is the product in a single image. Decorative. -->
-    <svg class="gate__liquid" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <defs>
-        <filter id="gate-goo" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="22"></feGaussianBlur>
-          <feColorMatrix type="matrix"
-            values="1 0 0 0 0
-                    0 1 0 0 0
-                    0 0 1 0 0
-                    0 0 0 24 -11"></feColorMatrix>
-        </filter>
-      </defs>
-      <g class="gate__goo" filter="url(#gate-goo)">
-        <circle class="gate__blob" cx="330" cy="290" r="150" fill="#7F77DD"></circle>
-        <circle class="gate__blob" cx="470" cy="380" r="120" fill="#9B7BD8"></circle>
-        <circle class="gate__blob" cx="820" cy="300" r="140" fill="#ED93B1"></circle>
-        <circle class="gate__blob" cx="690" cy="440" r="105" fill="#C13D6E"></circle>
-        <circle class="gate__blob" cx="960" cy="520" r="125" fill="#D85A30"></circle>
-        <circle class="gate__blob" cx="240" cy="560" r="110" fill="#6C5FD3"></circle>
-        <circle class="gate__blob" cx="580" cy="180" r="90" fill="#F0A8BE"></circle>
-      </g>
-    </svg>
-
     <div class="gate__card">
       <header class="gate__head">
         <span class="gate__brand">
@@ -818,12 +882,25 @@
       function succeed(email) {
         var doneEmail = doneView.querySelector("[data-gate-email]");
         if (doneEmail) doneEmail.textContent = email;
-        formView.hidden = true;
-        doneView.hidden = false;
-        /* Move focus to the confirmation, or a keyboard / screen reader user
-           is left on a button that no longer exists. */
-        doneView.setAttribute("tabindex", "-1");
-        doneView.focus();
+
+        var swap = function () {
+          formView.hidden = true;
+          doneView.hidden = false;
+          /* Move focus to the confirmation, or a keyboard / screen reader
+             user is left on a button that no longer exists. */
+          doneView.setAttribute("tabindex", "-1");
+          doneView.focus({ preventScroll: true });
+        };
+
+        /* Play the form's exit first, then bring the thank-you view in with
+           its own staggered entrance - one continuous motion. With reduced
+           motion the swap is immediate and nothing animates. */
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          swap();
+          return;
+        }
+        formView.classList.add("is-leaving");
+        setTimeout(swap, 240);
       }
 
       form.addEventListener("submit", function (event) {
