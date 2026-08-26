@@ -157,14 +157,39 @@
       display: grid;
       place-items: center;
       padding: clamp(10px, 2vw, 28px);
-      /* Two STATIC brand glows on the dark ground - presence without
-         motion, and nothing behind the card competes with it. */
+      /* Static fallback ground, and what no-JS / no-WebGL visitors see: the
+         same silk palette the shader paints, frozen. The canvas below draws
+         the living version on top of it. */
       background:
-        radial-gradient(58% 46% at 22% 0%, rgb(127 119 221 / 16%), transparent 70%),
-        radial-gradient(48% 42% at 88% 100%, rgb(216 90 48 / 12%), transparent 70%),
-        #17141d;
+        radial-gradient(70% 60% at 18% 12%, rgb(255 255 255 / 85%), transparent 65%),
+        radial-gradient(55% 50% at 82% 30%, rgb(127 119 221 / 34%), transparent 70%),
+        radial-gradient(60% 55% at 70% 90%, rgb(237 147 177 / 38%), transparent 72%),
+        radial-gradient(45% 40% at 12% 85%, rgb(216 90 48 / 16%), transparent 70%),
+        #e9e6f5;
       overflow: hidden;
       font-family: var(--font-sans);
+    }
+
+    /* ---- The liquid-flow canvas ---------------------------------------
+       A WebGL fragment shader: domain-warped noise flowing through the
+       brand palette, big soft white blooms drifting the way ink moves in
+       milk. GPU-composited, DPR-capped, paused while the tab is hidden,
+       and a single still frame under prefers-reduced-motion. If WebGL is
+       unavailable the canvas stays transparent and the CSS ground above
+       simply shows through - the page never depends on it. */
+    .gate__flow {
+      position: absolute;
+      inset: 0;
+      inline-size: 100%;
+      block-size: 100%;
+      display: block;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 1.2s var(--ease-out);
+    }
+
+    .gate__flow.is-live {
+      opacity: 1;
     }
 
     /* ---- The card ----------------------------------------------------- */
@@ -188,13 +213,35 @@
         radial-gradient(rgb(38 36 46 / 5%) 1px, transparent 1.5px);
       background-size: 34px 34px, 52px 52px;
       background-position: 0 0, 17px 26px;
-      box-shadow: 0 40px 120px -30px rgb(0 0 0 / 55%);
+      border: 1px solid rgb(38 36 46 / 8%);
+      box-shadow:
+        0 2px 8px rgb(38 36 46 / 6%),
+        0 30px 80px -24px rgb(38 36 46 / 28%);
       color: var(--color-ink);
       animation: gate-card-in 0.55s var(--ease-out) both;
     }
 
     @keyframes gate-card-in {
       from { opacity: 0; transform: translateY(16px) scale(0.985); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .gate__chip,
+    .gate__title,
+    .gate__lead,
+    .gate__by,
+    .gate__panel {
+      animation: gate-up 0.55s var(--ease-out) both;
+    }
+
+    .gate__chip  { animation-delay: 0.12s; }
+    .gate__title { animation-delay: 0.18s; }
+    .gate__lead  { animation-delay: 0.26s; }
+    .gate__by    { animation-delay: 0.34s; }
+    .gate__panel { animation-delay: 0.24s; }
+
+    @keyframes gate-up {
+      from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: none; }
     }
 
@@ -291,16 +338,54 @@
     }
 
     .gate__chip {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       margin: 0 0 var(--space-sm);
-      padding: 0.32rem 0.8rem;
+      padding: 0.32rem 0.85rem 0.32rem 0.65rem;
       border: 1px solid var(--color-line-strong);
       border-radius: var(--radius-pill);
+      background: rgb(255 255 255 / 72%);
       color: var(--color-ink-muted);
       font-size: var(--text-eyebrow);
       font-weight: 600;
       letter-spacing: var(--tracking-wide);
       text-transform: uppercase;
+    }
+
+    .gate__chip-dot {
+      position: relative;
+      inline-size: 8px;
+      block-size: 8px;
+      border-radius: 50%;
+      background: var(--grad-accent);
+    }
+
+    /* The live ring pulses OUT of the dot; a separate ::after so the dot
+       itself never scales and the chip's layout never moves. */
+    .gate__chip-dot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: inherit;
+      animation: gate-ping 2.4s var(--ease-out) infinite;
+    }
+
+    @keyframes gate-ping {
+      0%   { transform: scale(1); opacity: 0.5; }
+      70%  { transform: scale(2.4); opacity: 0; }
+      100% { transform: scale(2.4); opacity: 0; }
+    }
+
+    /* The one word in the headline that carries color. Same treatment as
+       the site's .accent, restated here so the gate block stays
+       self-contained and strippable. */
+    .gate__accent {
+      background: var(--grad-accent);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
     .gate__title {
@@ -335,6 +420,16 @@
     .gate__by img {
       inline-size: 18px;
       block-size: 18px;
+    }
+
+    /* The form sits in its own quiet panel, so the right column reads as
+       one composed object instead of loose fields on the card. */
+    .gate__panel {
+      padding: clamp(18px, 2.4vw, 26px);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-md);
+      background: #fff;
+      box-shadow: var(--shadow-sm);
     }
 
     .gate__form-title {
@@ -405,6 +500,14 @@
 
     .gate__submit:active {
       transform: translateY(0);
+    }
+
+    .gate__submit svg {
+      transition: transform var(--dur-fast) var(--ease-out);
+    }
+
+    .gate__submit:hover svg {
+      transform: translateX(3px);
     }
 
     .gate__submit:disabled {
@@ -480,12 +583,54 @@
       animation: gate-rise 0.55s var(--ease-spring) both;
     }
 
-    .gate__done-title { animation-delay: 0.05s; }
-    .gate__done-copy  { animation-delay: 0.16s; }
+    .gate__done-title { animation-delay: 0.1s; }
+    .gate__done-copy  { animation-delay: 0.2s; }
+
+    /* The arrival moment: a gradient success disc that POPS in first, its
+       check drawing itself a beat later. */
+    .gate__done-mark {
+      display: grid;
+      place-items: center;
+      inline-size: 64px;
+      block-size: 64px;
+      border-radius: 50%;
+      background: var(--grad-accent);
+      color: #fff;
+      box-shadow: 0 16px 36px -10px rgb(127 119 221 / 50%);
+      animation-name: gate-pop;
+      animation-delay: 0s;
+    }
+
+    .gate__done-mark path {
+      stroke-dasharray: 20;
+      stroke-dashoffset: 20;
+      animation: gate-draw 0.4s var(--ease-out) 0.32s forwards;
+    }
 
     .gate__done-pill {
       animation-name: gate-pop;
-      animation-delay: 0.3s;
+      animation-delay: 0.32s;
+    }
+
+    /* Four swatches land last, left to right - the product signing off.
+       Overlapping, ringed in the card color so each reads as its own chip. */
+    .gate__done-swatches {
+      display: flex;
+      margin: 0;
+    }
+
+    .gate__done-swatch {
+      inline-size: 26px;
+      block-size: 26px;
+      border-radius: 50%;
+      border: 3px solid #fbfaf8;
+      box-shadow: 0 2px 8px rgb(38 36 46 / 14%);
+      animation: gate-pop 0.45s var(--ease-spring) both;
+      animation-delay: var(--d, 0.5s);
+    }
+
+    .gate__done-swatch + .gate__done-swatch {
+      margin-inline-start: -9px;
     }
 
     @keyframes gate-pop {
@@ -554,41 +699,26 @@
     .gate__word {
       position: relative;
       margin-block-start: auto;
-      /* The fade zone. The band fades from nothing to solid over exactly
-         this distance, and the letters start just below it - so the top of
-         the word area reads as a soft gradient BLOOM rising into the card,
-         never a hard edge (5px of fade read as a banner slapped on) and
-         never white letters on the white card (the letters sit strictly in
-         the solid zone). One custom property keeps the padding and the
-         mask geometry in lockstep. */
-      --word-fade: clamp(26px, 5vh, 50px);
-      padding-block-start: var(--word-fade);
+      padding-block-start: clamp(8px, 1.5vh, 16px);
       overflow: hidden;
       text-align: center;
       line-height: 0;
       user-select: none;
     }
 
-    /* The gradient band the wordmark sits on. Its top edge is masked to
-       nothing so it melts into the card instead of ending on a line. */
-    .gate__word::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: var(--grad-accent);
-      /* Solid behind ALL of the ink, fading out over the --word-fade strip
-         above it. The +2px pulls the solid boundary slightly above the
-         padding line, so the letter tops keep a real margin inside solid
-         color at every font size. */
-      -webkit-mask-image: linear-gradient(to top, #000 calc(100% - var(--word-fade) + 2px), transparent);
-      mask-image: linear-gradient(to top, #000 calc(100% - var(--word-fade) + 2px), transparent);
-    }
-
+    /* No band any more: the gradient lives INSIDE the letterforms
+       (background-clip: text) and flows slowly through them, so the
+       wordmark reads as typography, not as a colored slab - and a white
+       letter on the white card is impossible by construction. The soft
+       colored glow underneath is a drop-shadow FILTER, because filters
+       follow the rendered alpha of the gradient glyphs; a text-shadow
+       would paint behind the transparent text and show straight through
+       the clip. */
     .gate__word span {
       position: relative;
       display: block;
       /* Sized against BOTH axes: vw so it fills the card on wide screens,
-         vh so a short laptop still shows a real wordmark band instead of a
+         vh so a short laptop still shows a real wordmark instead of a
          sliver, with hard floors and ceilings either side. */
       font-size: max(4rem, min(15rem, 21vw, 22vh));
       font-weight: 600;
@@ -600,14 +730,26 @@
          like the reference. */
       line-height: 1;
       letter-spacing: -0.045em;
-      color: #fff;
+      /* The pan needs runway: the gradient is 3x the text width and loops
+         back to its first color, so the drift never hits a hard end. */
+      background: linear-gradient(94deg, #6c5fd3, #c13d6e, #c2491f, #6c5fd3);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 14px 34px rgb(127 119 221 / 28%));
+      animation: gate-word-flow 16s var(--ease-in-out) infinite alternate;
       /* MEASURED, not guessed: canvas TextMetrics on Instrument Sans 600
          puts the ink top of "Varn" 0.14em below the line-box top - pure
          leading, pure white space. Pull all but 0.02em of it back out, so
          the letters sit tight under the content and can still never clip. */
       margin-block-start: -0.12em;
       margin-block-end: -0.2em;
-      text-shadow: 0 4px 40px rgb(38 36 46 / 18%);
+    }
+
+    @keyframes gate-word-flow {
+      from { background-position: 0% 50%; }
+      to   { background-position: 100% 50%; }
     }
 
     @media (max-width: 899px) {
@@ -660,17 +802,35 @@
       .gate__done {
         padding: 24px 16px 0;
       }
+
+      .gate__panel {
+        padding: 16px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .gate__card,
+      .gate__chip,
+      .gate__title,
+      .gate__lead,
+      .gate__by,
+      .gate__panel,
+      .gate__chip-dot::after,
       .gate__done > *,
       .gate__done-pill path,
-      .gate__spinner {
+      .gate__done-mark path,
+      .gate__done-swatch,
+      .gate__spinner,
+      .gate__word span {
         animation: none !important;
       }
 
-      .gate__done-pill path {
+      .gate__submit:hover svg {
+        transform: none;
+      }
+
+      .gate__done-pill path,
+      .gate__done-mark path {
         stroke-dashoffset: 0;
       }
 
@@ -686,6 +846,8 @@
   </style>
 
   <div class="gate" data-gate role="dialog" aria-modal="true" aria-labelledby="gate-title">
+    <canvas class="gate__flow" data-gate-flow aria-hidden="true"></canvas>
+
     <div class="gate__card">
       <header class="gate__head">
         <span class="gate__brand">
@@ -714,8 +876,8 @@
       <!-- State 1: the waitlist form -->
       <div class="gate__body" data-gate-form-view>
         <div>
-          <p class="gate__chip">Launching soon</p>
-          <h1 class="gate__title" id="gate-title">If you are in Shopify ecosystem, you need to check out Varn.</h1>
+          <p class="gate__chip"><span class="gate__chip-dot" aria-hidden="true"></span>Launching soon</p>
+          <h1 class="gate__title" id="gate-title">If you are in Shopify ecosystem, you need to check out <span class="gate__accent">Varn</span>.</h1>
           <p class="gate__lead">
             Join the waitlist now. First movers get priority access, exclusive perks, and a head start when Varn goes live.
           </p>
@@ -726,7 +888,7 @@
           </p>
         </div>
 
-        <form data-gate-form novalidate>
+        <form class="gate__panel" data-gate-form novalidate>
           <h2 class="gate__form-title">Join waitlist</h2>
           <div class="gate__form">
             <label class="visually-hidden" for="gate-name">Your name</label>
@@ -763,7 +925,12 @@
 
       <!-- State 2: thank you, shown after a successful signup -->
       <div class="gate__done" data-gate-done-view hidden>
-        <h1 class="gate__done-title">Thank you for joining the waitlist.</h1>
+        <p class="gate__done-mark" aria-hidden="true">
+          <svg width="30" height="30" viewBox="0 0 24 24" focusable="false">
+            <path d="M6 12.6 10.2 16.8 18 8.4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </p>
+        <h1 class="gate__done-title">Thank you for joining the <span class="gate__accent">waitlist</span>.</h1>
         <p class="gate__done-copy">
           We will email <b data-gate-email>you</b> the moment your invite is
           ready. Invites go out in small batches, so we can help every store
@@ -775,6 +942,12 @@
             <circle cx="8" cy="8" r="7" fill="rgb(255 255 255 / 18%)"></circle>
             <path d="M4.6 8.4 7 10.8l4.4-5.2" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
+        </p>
+        <p class="gate__done-swatches" aria-hidden="true">
+          <span class="gate__done-swatch" style="--d: 0.5s; background: #7F77DD"></span>
+          <span class="gate__done-swatch" style="--d: 0.57s; background: #ED93B1"></span>
+          <span class="gate__done-swatch" style="--d: 0.64s; background: #D85A30"></span>
+          <span class="gate__done-swatch" style="--d: 0.71s; background: #F5F1E8"></span>
         </p>
       </div>
 
@@ -799,6 +972,143 @@
       var WAITLIST_ENDPOINT = "";
 
       document.documentElement.classList.add("varn-gated");
+
+      /* ----------------------------------------------------------------
+         LIQUID FLOW BACKGROUND
+         One full-screen triangle, one fragment shader. The shader domain-
+         warps fbm noise (Quilez's q/r construction) so the field flows
+         like liquid rather than wobbling in place, then maps it through
+         the brand palette with a large-scale white bloom on top. Slow by
+         design - the reference is silk, not lava.
+         ---------------------------------------------------------------- */
+      (function flow() {
+        var canvas = document.querySelector("[data-gate-flow]");
+        if (!canvas || !window.WebGLRenderingContext) return;
+
+        /* preserveDrawingBuffer keeps the last frame inspectable and makes
+           the reduced-motion single still trivially correct. The scene is
+           one triangle - the cost is irrelevant. */
+        var gl = canvas.getContext("webgl", {
+          alpha: true,
+          antialias: false,
+          depth: false,
+          stencil: false,
+          preserveDrawingBuffer: true
+        });
+        if (!gl) return; /* CSS ground shows through - fine. */
+
+        var VERT =
+          "attribute vec2 p;" +
+          "void main(){gl_Position=vec4(p,0.,1.);}";
+
+        var FRAG =
+          "precision mediump float;" +
+          "uniform vec2 R;uniform float T;" +
+          "float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}" +
+          "float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);" +
+          "return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}" +
+          "float fbm(vec2 p){float v=0.,a=.5;" +
+          "for(int i=0;i<5;i++){v+=a*n(p);p=p*2.03+vec2(11.3,7.9);a*=.5;}return v;}" +
+          "void main(){" +
+          "vec2 uv=gl_FragCoord.xy/R;" +
+          "vec2 p=uv*vec2(R.x/R.y,1.)*1.6;" +
+          "float t=T*.045;" +
+          /* two-level domain warp: q drifts, r flows through q */
+          "vec2 q=vec2(fbm(p+vec2(t*.9,t*.3)),fbm(p+vec2(5.2+t*.4,1.3-t*.5)));" +
+          "vec2 r=vec2(fbm(p+3.2*q+vec2(1.7+t*.35,9.2)),fbm(p+3.2*q+vec2(8.3-t*.3,2.8)));" +
+          "float v=fbm(p+2.6*r);" +
+          /* brand silk: pale violet ground -> violet -> blush -> clay kiss */
+          "vec3 c=mix(vec3(.878,.867,.957),vec3(.498,.467,.867),smoothstep(.25,.78,v));" +
+          "c=mix(c,vec3(.929,.576,.694),smoothstep(.35,.9,r.x)*.7);" +
+          "c=mix(c,vec3(.898,.560,.420),smoothstep(.55,.95,q.y)*.35);" +
+          /* big soft white blooms, the reference's signature */
+          "float bloom=fbm(p*.55+vec2(-t*.6,t*.25));" +
+          "c=mix(c,vec3(.988,.984,.976),smoothstep(.42,.85,bloom)*.85);" +
+          /* gentle vignette so the edges stay quieter than the middle */
+          "float vg=smoothstep(1.25,.45,distance(uv,vec2(.5,.45)));" +
+          "c=mix(c*.985,c,vg);" +
+          "gl_FragColor=vec4(c,1.);}";
+
+        function compile(type, src) {
+          var sh = gl.createShader(type);
+          gl.shaderSource(sh, src);
+          gl.compileShader(sh);
+          if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) return null;
+          return sh;
+        }
+
+        var vs = compile(gl.VERTEX_SHADER, VERT);
+        var fs = compile(gl.FRAGMENT_SHADER, FRAG);
+        if (!vs || !fs) return;
+        var prog = gl.createProgram();
+        gl.attachShader(prog, vs);
+        gl.attachShader(prog, fs);
+        gl.linkProgram(prog);
+        if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+        gl.useProgram(prog);
+
+        var buf = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+        var loc = gl.getAttribLocation(prog, "p");
+        gl.enableVertexAttribArray(loc);
+        gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+        var uR = gl.getUniformLocation(prog, "R");
+        var uT = gl.getUniformLocation(prog, "T");
+
+        function size() {
+          /* DPR capped at 1.5: the field is soft by nature, extra pixels
+             buy nothing but battery. */
+          var d = Math.min(window.devicePixelRatio || 1, 1.5);
+          var w = Math.round(canvas.clientWidth * d);
+          var hgt = Math.round(canvas.clientHeight * d);
+          if (canvas.width !== w || canvas.height !== hgt) {
+            canvas.width = w;
+            canvas.height = hgt;
+            gl.viewport(0, 0, w, hgt);
+          }
+        }
+
+        function draw(t) {
+          size();
+          gl.uniform2f(uR, canvas.width, canvas.height);
+          gl.uniform1f(uT, t);
+          gl.drawArrays(gl.TRIANGLES, 0, 3);
+        }
+
+        var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var start = null;
+        var raf = null;
+
+        function loop(now) {
+          if (start === null) start = now;
+          draw((now - start) / 1000);
+          raf = requestAnimationFrame(loop);
+        }
+
+        /* First frame synchronously, so there is never a blank flash and
+           the fade-in reveals a finished field. */
+        draw(0);
+        canvas.classList.add("is-live");
+
+        if (!still) {
+          raf = requestAnimationFrame(loop);
+          document.addEventListener("visibilitychange", function () {
+            if (document.hidden) {
+              if (raf) cancelAnimationFrame(raf);
+              raf = null;
+            } else if (!raf) {
+              start = null; /* re-anchor: no giant time jump on return */
+              raf = requestAnimationFrame(loop);
+            }
+          });
+        }
+
+        window.addEventListener("resize", function () {
+          if (still) draw(0);
+        });
+      })();
 
       var form = document.querySelector("[data-gate-form]");
       var formView = document.querySelector("[data-gate-form-view]");
