@@ -891,11 +891,6 @@
         <form class="gate__panel" data-gate-form novalidate>
           <h2 class="gate__form-title">Join waitlist</h2>
           <div class="gate__form">
-            <label class="visually-hidden" for="gate-name">Your name</label>
-            <input class="gate__input" id="gate-name" name="name" type="text"
-              autocomplete="name" placeholder="Your name" required
-              maxlength="80" aria-describedby="gate-msg">
-
             <label class="visually-hidden" for="gate-email">Your email address</label>
             <input class="gate__input" id="gate-email" name="email" type="email"
               inputmode="email" autocomplete="email" placeholder="you@yourstore.com"
@@ -1115,7 +1110,6 @@
       var doneView = document.querySelector("[data-gate-done-view]");
       if (!form || !formView || !doneView) return;
 
-      var nameInput = document.getElementById("gate-name");
       var emailInput = document.getElementById("gate-email");
       var button = form.querySelector("[data-gate-submit]");
       var label = form.querySelector("[data-gate-label]");
@@ -1129,21 +1123,10 @@
         return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
       }
 
-      /* Returns the cleaned values plus every problem found, in field order.
-         The submit handler marks ALL invalid fields and focuses the first,
-         so a visitor who skipped both is not corrected one field at a time. */
+      /* Returns the cleaned email plus any problem found. */
       function validate() {
-        var name = nameInput.value.trim().replace(/\s+/g, " ");
         var email = emailInput.value.trim();
         var problems = [];
-
-        if (!name) {
-          problems.push({ input: nameInput, text: "Enter your name so we know who the invite is for." });
-        } else if (name.length < 2) {
-          problems.push({ input: nameInput, text: "That name looks too short. Use at least 2 letters." });
-        } else if (looksLikeEmail(name)) {
-          problems.push({ input: nameInput, text: "That looks like an email address. Put your name here and the email below." });
-        }
 
         if (!email) {
           problems.push({ input: emailInput, text: "Enter your email address so we know where to send the invite." });
@@ -1151,11 +1134,10 @@
           problems.push({ input: emailInput, text: "That does not look like an email address. Check it and try again." });
         }
 
-        return { name: name, email: email, problems: problems };
+        return { email: email, problems: problems };
       }
 
       function showProblems(problems) {
-        nameInput.removeAttribute("data-state");
         emailInput.removeAttribute("data-state");
         problems.forEach(function (p) { p.input.setAttribute("data-state", "error"); });
         msg.textContent = problems[0].text;
@@ -1164,7 +1146,6 @@
 
       function clear() {
         msg.textContent = "";
-        nameInput.removeAttribute("data-state");
         emailInput.removeAttribute("data-state");
       }
 
@@ -1240,7 +1221,6 @@
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
           body: JSON.stringify({
-            name: v.name,
             email: email,
             source: "waitlist-gate"
           })
@@ -1255,25 +1235,11 @@
           });
       });
 
-      /* Typing is the visitor fixing what you complained about: the field
-         being typed in drops its own error at once, and the message goes
-         with the last errored field. */
-      [nameInput, emailInput].forEach(function (input) {
-        input.addEventListener("input", function () {
-          input.removeAttribute("data-state");
-          if (!nameInput.hasAttribute("data-state") && !emailInput.hasAttribute("data-state")) {
-            msg.textContent = "";
-            return;
-          }
-          /* Another field is still in error: retarget the message at IT, so
-             the line never describes a problem that has just been fixed.
-             Only fields already marked keep a message - the field being
-             typed in is never re-flagged mid-keystroke. */
-          var remaining = validate().problems.filter(function (p) {
-            return p.input.hasAttribute("data-state");
-          });
-          msg.textContent = remaining.length ? remaining[0].text : "";
-        });
+      /* Typing is the visitor fixing what you complained about, so the
+         complaint clears as they type. */
+      emailInput.addEventListener("input", function () {
+        emailInput.removeAttribute("data-state");
+        msg.textContent = "";
       });
     })();
   </script>
