@@ -544,6 +544,22 @@ function shell({ page, nav, contentHtml, toc, prev, next, breadcrumb }) {
   const site = toRoot + "../";
   const canonical = `${SITE.origin}${SITE.docsBase}/${id}.html`;
 
+  /* Every URL in this page is relative to the page's own directory. That holds
+     for every page except this one: index.html is also reachable as the bare
+     directory URL "/docs", and a host that serves it there without redirecting
+     to "/docs/" makes the browser resolve "./assets/docs.css" against "/" - so
+     the stylesheet 404s and the page renders as raw text. Pin the base to the
+     real directory before anything relative is parsed. The last path segment
+     tells us which case we are in, so a clean-URL host serving "/docs/index"
+     (already correct) is left alone. */
+  const baseGuard =
+    id === "index"
+      ? '<script>(function(){var p=location.pathname,s=p.split("/"),n=s[s.length-1];' +
+        'if(n!=="index"&&n!=="index.html"){var b=document.createElement("base");' +
+        'b.href=p+(p.slice(-1)==="/"?"":"/");' +
+        'document.head.insertBefore(b,document.head.firstChild);}})();</script>\n'
+      : "";
+
   const navHtml = nav
     .map((group) => {
       const open = group.pages.some((p) => p.id === id);
@@ -594,7 +610,7 @@ function shell({ page, nav, contentHtml, toc, prev, next, breadcrumb }) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(page.title)} | ${SITE.docsName}</title>
+${baseGuard}<title>${esc(page.title)} | ${SITE.docsName}</title>
 <meta name="description" content="${esc(page.description || SITE.tagline)}">
 <link rel="canonical" href="${canonical}">
 <meta property="og:type" content="article">
