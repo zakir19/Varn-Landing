@@ -25,67 +25,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&display=swap">
 
   <link rel="stylesheet" href="assets/css/styles.css">
-
-  <!-- Prose styles for the legal pages only. Kept inline because this is the
-       one page on the site that needs them, and the site is deliberately
-       zero-build: adding a second stylesheet request for one document would
-       cost more than it saves. Tokens come from styles.css. -->
-  <style>
-    .legal {
-      max-width: 46rem;
-      margin-inline: auto;
-      /* The site header is fixed, so the top pad has to clear it as well as
-         breathe. Measured at 76px tall on desktop. */
-      padding-block-start: 8.5rem;
-      padding-block-end: var(--space-2xl, 4rem);
-    }
-    .legal__title {
-      font-size: clamp(2rem, 1.4rem + 2.4vw, 3rem);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin: 0;
-    }
-    .legal__meta {
-      margin: 0.75rem 0 0;
-      color: var(--color-ink-subtle);
-      font-size: var(--text-sm);
-      line-height: 1.6;
-    }
-    .legal h2 {
-      color: var(--color-ink, #26242e);
-      margin: 2.75rem 0 0;
-      font-size: 1.25rem;
-      line-height: 1.3;
-      letter-spacing: -0.01em;
-    }
-    /* Size and ink are set explicitly: the sites global paragraph rule lands on
-       14px, which is fine for marketing captions and too small for a policy.
-       #3f3d4a on the page background measures 10.6:1, well past WCAG AA. */
-    .legal p,
-    .legal li {
-      font-size: 1rem;
-      color: #3f3d4a;
-    }
-    .legal p {
-      margin: 0.75rem 0 0;
-      line-height: 1.7;
-    }
-    .legal ul {
-      margin: 0.75rem 0 0;
-      padding-inline-start: 1.35rem;
-      line-height: 1.7;
-    }
-    .legal strong { color: var(--color-ink, #26242e); }
-    .legal li + li { margin-top: 0.6rem; }
-    .legal__back {
-      margin-top: 3rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--color-line, rgba(38, 36, 46, 0.12));
-    }
-  </style>
 </head>
 <body>
-  <a class="skip" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header" data-site-header>
     <div class="shell site-header__inner">
@@ -104,6 +46,7 @@
           <li><a class="site-header__link" href="index.html#features">Features</a></li>
           <li><a class="site-header__link" href="index.html#pricing">Pricing</a></li>
           <li><a class="site-header__link" href="docs/index.html">Docs</a></li>
+          <li><a class="site-header__link" href="status.html">Status</a></li>
         </ul>
       </nav>
 
@@ -114,7 +57,7 @@
   </header>
 
   <main id="main">
-    <div class="shell">
+    <div class="shell legal-page">
       <!-- EVERY STATEMENT BELOW DESCRIBES WHAT THE APP ACTUALLY DOES. If a
            scope, a stored field or a retention window changes in the app repo,
            change this page in the same release:
@@ -122,194 +65,339 @@
              stored events     -> prisma/schema.prisma, model SwatchEvent
              retention + purge -> app/lib/analytics.server.ts, webhooks.shop.redact
              settings storage  -> app/lib/swatch-store.server.ts (metafields) -->
-      <article class="legal">
-        <h1 class="legal__title">Privacy policy</h1>
-        <p class="legal__meta">
+
+      <div class="legal-hero">
+        <p class="legal-hero__stamp">
+          <svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M8 1.6 13.4 4v4.1c0 3-2.2 5.4-5.4 6.3-3.2-.9-5.4-3.3-5.4-6.3V4Z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"></path>
+            <path d="M5.7 8.1 7.3 9.7l3-3.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          Last updated 18 August 2026
+        </p>
+
+        <h1 class="legal-hero__title">Privacy policy</h1>
+
+        <p class="legal-hero__meta">
           For the Shopify app <strong>Varn - Variants &amp; Swatches</strong>, published by
-          Enstacked Technologies. Last updated 18 August 2026.
+          Enstacked Technologies. It describes exactly what the app reads from your store, what it
+          stores, for how long, and how to have it deleted.
         </p>
+      </div>
 
-        <h2>In short</h2>
-        <p>
-          Varn turns product options into swatches. To do that it reads and writes product, theme
-          and file data on the store that installs it, and it saves your swatch settings on your own
-          store as metafields. Varn does not collect names, email addresses, payment details or any
-          other personal information about your shoppers, and it never sells data.
-        </p>
+      <!-- The four things merchants actually ask before installing. Every
+           line here is a summary of a section below, never a new claim. -->
+      <ul class="legal-glance">
+        <li class="legal-glance__item">
+          <span class="legal-glance__icon" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 16 16" focusable="false">
+              <path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <span>
+            <p class="legal-glance__title">No shopper personal data</p>
+            <p class="legal-glance__copy">
+              No names, email addresses, payment details, IP addresses or cookies. Varn does not
+              request access to orders or to customers.
+            </p>
+          </span>
+        </li>
 
-        <h2>What Varn accesses through the Shopify APIs</h2>
-        <p>
-          When you install Varn, Shopify asks you to approve a fixed set of permissions. Varn
-          requests only what its features need:
-        </p>
-        <ul>
-          <li>
-            <strong>Products</strong> (read and write) &mdash; titles, handles, options, option
-            values, variants and product images, so swatches can be built and shown, and so an
-            image can be attached to a variant when you explicitly ask for it.
-          </li>
-          <li>
-            <strong>Themes</strong> (read) &mdash; to check whether the Varn app embed is switched
-            on in a theme. Varn never edits theme code.
-          </li>
-          <li>
-            <strong>Files</strong> (read and write) &mdash; to upload the swatch images you choose,
-            into your own Shopify Files library.
-          </li>
-          <li>
-            <strong>Metaobjects</strong> (write) &mdash; used for app-owned configuration storage.
-          </li>
-        </ul>
-        <p>
-          Varn does not request access to orders, to customers, or to Shopify&rsquo;s protected
-          customer data.
-        </p>
+        <li class="legal-glance__item">
+          <span class="legal-glance__icon" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 16 16" focusable="false">
+              <path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <span>
+            <p class="legal-glance__title">Your settings stay on your store</p>
+            <p class="legal-glance__copy">
+              Colors, images, styles, groups and backups are written to metafields on your own
+              Shopify store, not to our database.
+            </p>
+          </span>
+        </li>
 
-        <h2>What Varn stores, and where</h2>
-        <ul>
-          <li>
-            <strong>Your swatch settings stay on your store.</strong> Colors, images, styles, groups
-            and backups are written to metafields on your own Shopify store, not to our database.
-            They are still there if you uninstall and reinstall.
-          </li>
-          <li>
-            <strong>Uploaded swatch images stay on your store.</strong> They go into your own
-            Shopify Files library and are served from your store&rsquo;s CDN.
-          </li>
-          <li>
-            <strong>An installation session.</strong> We store your myshopify domain, the access
-            token Shopify issues at install, and the permission scopes you approved, so the app can
-            call the Shopify API on your behalf.
-          </li>
-          <li>
-            <strong>Anonymous swatch interaction events</strong> on the Advance and Premium plans, described next.
-          </li>
-        </ul>
+        <li class="legal-glance__item">
+          <span class="legal-glance__icon" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 16 16" focusable="false">
+              <path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <span>
+            <p class="legal-glance__title">Anonymous counts, kept 90 days</p>
+            <p class="legal-glance__copy">
+              On Advance and Premium, swatch interactions are counted with no shopper identifier of
+              any kind, and deleted automatically after 90 days.
+            </p>
+          </span>
+        </li>
 
-        <h2>Swatch analytics, and what it does not collect</h2>
-        <p>
-          On the Advance and Premium plans, Varn counts how shoppers interact with swatches so you can see which
-          colors get attention. Each recorded event contains four things and nothing else: whether
-          it was a swatch click or an add to cart, the product handle, the option value that was
-          clicked (for example &ldquo;Ruby Red&rdquo;), whether that option was sold out at the
-          time, and the timestamp.
-        </p>
-        <p>
-          Events carry no shopper identifier of any kind: no name, email, IP address, cookie, device
-          ID, session ID or order. They cannot be traced back to an individual shopper, and they are
-          never combined with another source to try to identify one. On the Free and Grow plans no
-          events are recorded at all, and the tracking code is not sent to your storefront.
-        </p>
-        <p>
-          The storefront script briefly holds not-yet-sent events in the browser&rsquo;s
-          sessionStorage, so a dropped network request does not lose a count. That data clears when
-          the tab closes, and it is not a tracking cookie.
-        </p>
+        <li class="legal-glance__item">
+          <span class="legal-glance__icon" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 16 16" focusable="false">
+              <path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <span>
+            <p class="legal-glance__title">One AI call, fully described</p>
+            <p class="legal-glance__copy">
+              The photo pass sends a public Shopify CDN image URL, your option names and the product
+              title to a vision provider. Nothing else, and never for training.
+            </p>
+          </span>
+        </li>
+      </ul>
 
-        <h2>How long data is kept</h2>
-        <ul>
-          <li>
-            <strong>Swatch interaction events: 90 days.</strong> Older events are deleted
-            automatically.
-          </li>
-          <li>
-            <strong>Installation session: until you uninstall.</strong> Shopify revokes the access
-            token on uninstall and we delete the stored session.
-          </li>
-          <li>
-            <strong>Your settings: for as long as you keep them.</strong> They live on your own
-            store, so they are yours to edit or delete at any time from inside the app, and they go
-            with the rest of your app data when Shopify asks us to erase your store.
-          </li>
-        </ul>
+      <div class="legal-body">
+        <!-- Contents. A plain anchor list: it works with JavaScript off,
+             and assets/js/legal.js only adds the current-section highlight. -->
+        <details class="legal-toc" data-toc open>
+          <summary class="legal-toc__summary">
+            Contents
+            <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <path d="M3.5 6 8 10.5 12.5 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </summary>
 
-        <h2>Deletion and data requests</h2>
-        <p>
-          Varn implements Shopify&rsquo;s mandatory privacy webhooks. When Shopify sends a customer
-          data request or a customer erasure request, we confirm that we hold no personal data for
-          that customer, because the app never stores any. When Shopify sends a shop erasure
-          request, which follows an uninstall, we delete that store&rsquo;s stored events and its
-          session.
-        </p>
-        <p>
-          You can also write to <a href="mailto:support@enstacked.com">support@enstacked.com</a> to
-          access, correct, export or delete anything we hold about your store, and we will respond
-          within 30 days. Depending on where you live you may also have the right to object to
-          processing, to restrict it, or to complain to your local data protection authority.
-        </p>
+          <nav aria-label="Sections of this policy">
+            <p class="legal-toc__title">Contents</p>
+            <ul class="legal-toc__list">
+              <li><a class="legal-toc__link" href="#in-short" data-toc-link>In short</a></li>
+              <li><a class="legal-toc__link" href="#shopify-access" data-toc-link>What Varn accesses</a></li>
+              <li><a class="legal-toc__link" href="#storage" data-toc-link>What Varn stores</a></li>
+              <li><a class="legal-toc__link" href="#analytics" data-toc-link>Swatch analytics</a></li>
+              <li><a class="legal-toc__link" href="#retention" data-toc-link>How long data is kept</a></li>
+              <li><a class="legal-toc__link" href="#deletion" data-toc-link>Deletion and data requests</a></li>
+              <li><a class="legal-toc__link" href="#sharing" data-toc-link>Who else sees the data</a></li>
+              <li><a class="legal-toc__link" href="#ai" data-toc-link>Artificial intelligence</a></li>
+              <li><a class="legal-toc__link" href="#security" data-toc-link>Security</a></li>
+              <li><a class="legal-toc__link" href="#transfers" data-toc-link>International transfers</a></li>
+              <li><a class="legal-toc__link" href="#children" data-toc-link>Children</a></li>
+              <li><a class="legal-toc__link" href="#changes" data-toc-link>Changes to this policy</a></li>
+              <li><a class="legal-toc__link" href="#contact" data-toc-link>Contact</a></li>
+            </ul>
+          </nav>
+        </details>
 
-        <h2>Who else sees the data</h2>
-        <p>
-          We do not sell, rent or trade any data, and we do not share it for advertising. The
-          third parties involved are the infrastructure providers that host the app server and its
-          database on our behalf, and the AI vision provider described below, all under contract
-          and only to run the service. There are no advertising networks, no analytics pixels and
-          no data brokers in Varn.
-        </p>
-        <p>
-          We may disclose data where we are legally required to, or to protect our rights or the
-          safety of others.
-        </p>
+        <article class="legal-doc">
+          <section id="in-short" aria-labelledby="in-short-h">
+            <h2 id="in-short-h">In short</h2>
+            <p>
+              Varn turns product options into swatches. To do that it reads and writes product, theme
+              and file data on the store that installs it, and it saves your swatch settings on your own
+              store as metafields. Varn does not collect names, email addresses, payment details or any
+              other personal information about your shoppers, and it never sells data.
+            </p>
+          </section>
 
-        <h2>Artificial intelligence and machine learning</h2>
-        <p>
-          Most of Varn&rsquo;s AI setup runs entirely inside the app: it matches your option names
-          against a built-in color dictionary, reads photo file names and alt text, and can read the
-          dominant color out of the image pixels. None of that leaves the app.
-        </p>
-        <p>
-          One pass does call an outside service. When a photo cannot be placed any other way, Varn
-          sends it to an AI vision provider (currently OpenAI) to find out which color it shows.
-          What is sent is the photo&rsquo;s public Shopify CDN URL, the option value names you chose
-          and the product title, and nothing else. No shopper data, customer data or order data is
-          ever sent. It only runs when you press one of the AI setup buttons, and each photo the
-          model reads spends one of your plan&rsquo;s monthly AI usage credits.
-        </p>
-        <p>
-          We do not use merchant data or customer data, including in aggregated or derived form, to
-          train or develop artificial intelligence or machine learning models, and we do not permit
-          our AI provider to use what we send for training.
-        </p>
+          <section id="shopify-access" aria-labelledby="shopify-access-h">
+            <h2 id="shopify-access-h">What Varn accesses through the Shopify APIs</h2>
+            <p>
+              When you install Varn, Shopify asks you to approve a fixed set of permissions. Varn
+              requests only what its features need:
+            </p>
+            <ul>
+              <li>
+                <strong>Products</strong> (read and write) &mdash; titles, handles, options, option
+                values, variants and product images, so swatches can be built and shown, and so an
+                image can be attached to a variant when you explicitly ask for it.
+              </li>
+              <li>
+                <strong>Themes</strong> (read) &mdash; to check whether the Varn app embed is switched
+                on in a theme. Varn never edits theme code.
+              </li>
+              <li>
+                <strong>Files</strong> (read and write) &mdash; to upload the swatch images you choose,
+                into your own Shopify Files library.
+              </li>
+              <li>
+                <strong>Metaobjects</strong> (write) &mdash; used for app-owned configuration storage.
+              </li>
+            </ul>
+            <p>
+              Varn does not request access to orders, to customers, or to Shopify&rsquo;s protected
+              customer data.
+            </p>
+          </section>
 
-        <h2>Security</h2>
-        <p>
-          All traffic to and from the app runs over TLS. Every request from the Shopify admin is
-          verified with Shopify&rsquo;s session tokens, every webhook is verified with its HMAC
-          signature, and every storefront request is verified before anything is recorded. Access
-          tokens are stored server-side and are never exposed to the browser.
-        </p>
+          <section id="storage" aria-labelledby="storage-h">
+            <h2 id="storage-h">What Varn stores, and where</h2>
+            <ul>
+              <li>
+                <strong>Your swatch settings stay on your store.</strong> Colors, images, styles, groups
+                and backups are written to metafields on your own Shopify store, not to our database.
+                They are still there if you uninstall and reinstall.
+              </li>
+              <li>
+                <strong>Uploaded swatch images stay on your store.</strong> They go into your own
+                Shopify Files library and are served from your store&rsquo;s CDN.
+              </li>
+              <li>
+                <strong>An installation session.</strong> We store your myshopify domain, the access
+                token Shopify issues at install, and the permission scopes you approved, so the app can
+                call the Shopify API on your behalf.
+              </li>
+              <li>
+                <strong>Anonymous swatch interaction events</strong> on the Advance and Premium plans, described next.
+              </li>
+            </ul>
+          </section>
 
-        <h2>International transfers</h2>
-        <p>
-          The app is operated from, and its data stored in, the regions used by our hosting
-          provider. Where data is transferred outside your own region, we rely on the safeguards
-          that provider offers. Write to
-          <a href="mailto:support@enstacked.com">support@enstacked.com</a> if you need the current
-          hosting region in writing.
-        </p>
+          <section id="analytics" aria-labelledby="analytics-h">
+            <h2 id="analytics-h">Swatch analytics, and what it does not collect</h2>
+            <p>
+              On the Advance and Premium plans, Varn counts how shoppers interact with swatches so you can see which
+              colors get attention. Each recorded event contains four things and nothing else: whether
+              it was a swatch click or an add to cart, the product handle, the option value that was
+              clicked (for example &ldquo;Ruby Red&rdquo;), whether that option was sold out at the
+              time, and the timestamp.
+            </p>
+            <div class="legal-callout">
+              <p class="legal-callout__title">
+                <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                  <circle cx="8" cy="8" r="6.4" fill="none" stroke="currentColor" stroke-width="1.4"></circle>
+                  <path d="M8 7.4v4M8 4.9v.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+                </svg>
+                No shopper identifier, ever
+              </p>
+              <p>
+                Events carry no shopper identifier of any kind: no name, email, IP address, cookie, device
+                ID, session ID or order. They cannot be traced back to an individual shopper, and they are
+                never combined with another source to try to identify one. On the Free and Grow plans no
+                events are recorded at all, and the tracking code is not sent to your storefront.
+              </p>
+            </div>
+            <p>
+              The storefront script briefly holds not-yet-sent events in the browser&rsquo;s
+              sessionStorage, so a dropped network request does not lose a count. That data clears when
+              the tab closes, and it is not a tracking cookie.
+            </p>
+          </section>
 
-        <h2>Children</h2>
-        <p>
-          Varn is a business tool for Shopify merchants. It is not directed at children and we do
-          not knowingly collect data from them.
-        </p>
+          <section id="retention" aria-labelledby="retention-h">
+            <h2 id="retention-h">How long data is kept</h2>
+            <ul>
+              <li>
+                <strong>Swatch interaction events: 90 days.</strong> Older events are deleted
+                automatically.
+              </li>
+              <li>
+                <strong>Installation session: until you uninstall.</strong> Shopify revokes the access
+                token on uninstall and we delete the stored session.
+              </li>
+              <li>
+                <strong>Your settings: for as long as you keep them.</strong> They live on your own
+                store, so they are yours to edit or delete at any time from inside the app, and they go
+                with the rest of your app data when Shopify asks us to erase your store.
+              </li>
+            </ul>
+          </section>
 
-        <h2>Changes to this policy</h2>
-        <p>
-          If this policy changes we update the date at the top of this page, and material changes
-          are also announced to merchants who have the app installed.
-        </p>
+          <section id="deletion" aria-labelledby="deletion-h">
+            <h2 id="deletion-h">Deletion and data requests</h2>
+            <p>
+              Varn implements Shopify&rsquo;s mandatory privacy webhooks. When Shopify sends a customer
+              data request or a customer erasure request, we confirm that we hold no personal data for
+              that customer, because the app never stores any. When Shopify sends a shop erasure
+              request, which follows an uninstall, we delete that store&rsquo;s stored events and its
+              session.
+            </p>
+            <p>
+              You can also write to <a href="mailto:support@enstacked.com">support@enstacked.com</a> to
+              access, correct, export or delete anything we hold about your store, and we will respond
+              within 30 days. Depending on where you live you may also have the right to object to
+              processing, to restrict it, or to complain to your local data protection authority.
+            </p>
+          </section>
 
-        <h2>Contact</h2>
-        <p>
-          Enstacked Technologies<br>
-          <a href="mailto:support@enstacked.com">support@enstacked.com</a>
-        </p>
+          <section id="sharing" aria-labelledby="sharing-h">
+            <h2 id="sharing-h">Who else sees the data</h2>
+            <p>
+              We do not sell, rent or trade any data, and we do not share it for advertising. The
+              third parties involved are the infrastructure providers that host the app server and its
+              database on our behalf, and the AI vision provider described below, all under contract
+              and only to run the service. There are no advertising networks, no analytics pixels and
+              no data brokers in Varn.
+            </p>
+            <p>
+              We may disclose data where we are legally required to, or to protect our rights or the
+              safety of others.
+            </p>
+          </section>
 
-        <p class="legal__back">
-          <a class="btn btn--secondary" href="index.html">Back to Varn</a>
-        </p>
-      </article>
+          <section id="ai" aria-labelledby="ai-h">
+            <h2 id="ai-h">Artificial intelligence and machine learning</h2>
+            <p>
+              Most of Varn&rsquo;s AI setup runs entirely inside the app: it matches your option names
+              against a built-in color dictionary, reads photo file names and alt text, and can read the
+              dominant color out of the image pixels. None of that leaves the app.
+            </p>
+            <p>
+              One pass does call an outside service. When a photo cannot be placed any other way, Varn
+              sends it to an AI vision provider (currently OpenAI) to find out which color it shows.
+              What is sent is the photo&rsquo;s public Shopify CDN URL, the option value names you chose
+              and the product title, and nothing else. No shopper data, customer data or order data is
+              ever sent. It only runs when you press one of the AI setup buttons, and each photo the
+              model reads spends one of your plan&rsquo;s monthly AI usage credits.
+            </p>
+            <p>
+              We do not use merchant data or customer data, including in aggregated or derived form, to
+              train or develop artificial intelligence or machine learning models, and we do not permit
+              our AI provider to use what we send for training.
+            </p>
+          </section>
+
+          <section id="security" aria-labelledby="security-h">
+            <h2 id="security-h">Security</h2>
+            <p>
+              All traffic to and from the app runs over TLS. Every request from the Shopify admin is
+              verified with Shopify&rsquo;s session tokens, every webhook is verified with its HMAC
+              signature, and every storefront request is verified before anything is recorded. Access
+              tokens are stored server-side and are never exposed to the browser.
+            </p>
+          </section>
+
+          <section id="transfers" aria-labelledby="transfers-h">
+            <h2 id="transfers-h">International transfers</h2>
+            <p>
+              The app is operated from, and its data stored in, the regions used by our hosting
+              provider. Where data is transferred outside your own region, we rely on the safeguards
+              that provider offers. Write to
+              <a href="mailto:support@enstacked.com">support@enstacked.com</a> if you need the current
+              hosting region in writing.
+            </p>
+          </section>
+
+          <section id="children" aria-labelledby="children-h">
+            <h2 id="children-h">Children</h2>
+            <p>
+              Varn is a business tool for Shopify merchants. It is not directed at children and we do
+              not knowingly collect data from them.
+            </p>
+          </section>
+
+          <section id="changes" aria-labelledby="changes-h">
+            <h2 id="changes-h">Changes to this policy</h2>
+            <p>
+              If this policy changes we update the date at the top of this page, and material changes
+              are also announced to merchants who have the app installed.
+            </p>
+          </section>
+
+          <section id="contact" aria-labelledby="contact-h">
+            <h2 id="contact-h">Contact</h2>
+            <p>
+              Enstacked Technologies<br>
+              <a href="mailto:support@enstacked.com">support@enstacked.com</a>
+            </p>
+          </section>
+
+          <div class="legal-doc__end">
+            <a class="btn btn--secondary" href="index.html">Back to Varn</a>
+            <a class="btn btn--ghost" href="mailto:support@enstacked.com?subject=Privacy%20question">Ask a privacy question</a>
+          </div>
+        </article>
+      </div>
     </div>
   </main>
 
@@ -324,5 +412,7 @@
       </div>
     </div>
   </footer>
+
+  <script src="assets/js/legal.js" defer></script>
 </body>
 </html>

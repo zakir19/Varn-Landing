@@ -52,6 +52,38 @@
   }
 
   /* =======================================================================
+     LAUNCH SWITCH  -  the one place the site flips from waitlist to live
+     =======================================================================
+     Before launch every call to action points at waitlist.html, which is
+     what the markup ships with, so the page is correct with JavaScript
+     disabled and correct if this file never loads.
+
+     ON LAUNCH DAY: paste the App Store listing URL into LAUNCH_URL below.
+     That single edit repoints every [data-launch] link, restores each
+     link's own launch-day wording from its data-launch-label, and drops
+     the "Launching soon" wording. Nothing else on the site has to change.
+     ===================================================================== */
+
+  var LAUNCH_URL = "";
+
+  (function launchSwitch() {
+    if (!LAUNCH_URL) return;
+
+    qsa("[data-launch]").forEach(function (link) {
+      link.setAttribute("href", LAUNCH_URL);
+
+      var label = link.getAttribute("data-launch-label");
+      var slot = qs("[data-launch-text]", link);
+      if (label && slot) slot.textContent = label;
+    });
+
+    /* Wording that is only true while the app is unreleased. */
+    qsa("[data-prelaunch]").forEach(function (node) {
+      node.parentNode.removeChild(node);
+    });
+  })();
+
+  /* =======================================================================
      Chip painting
      Colour values live in data attributes so the markup stays free of
      inline styles. This is also the seam a Liquid conversion would use:

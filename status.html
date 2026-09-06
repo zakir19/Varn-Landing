@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Varn status | Variants &amp; Swatches for Shopify</title>
+  <meta name="description" content="Live status for Varn — storefront swatches, the embedded admin, AI setup, analytics, webhooks and billing — with 90 days of daily history and every incident we have reported.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="https://varn.enstacked.com/status.html">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Varn">
+  <meta property="og:title" content="Varn status">
+  <meta property="og:description" content="Live status and 90 days of daily history for every Varn service.">
+  <meta property="og:url" content="https://varn.enstacked.com/status.html">
+  <meta property="og:image" content="https://varn.enstacked.com/assets/img/og-cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&display=swap">
+
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-site-header>
+    <div class="shell site-header__inner">
+      <a class="brand" href="index.html" aria-label="Varn, home">
+        <img class="brand__mark" src="assets/img/varn-mark.svg" width="30" height="30" alt="">
+        <span class="brand__name">Varn</span>
+        <span class="brand__by">
+          <img class="brand__by-mark" src="assets/img/enstacked-mark.svg" width="16" height="16" loading="lazy" decoding="async" alt="">
+          by Enstacked
+        </span>
+      </a>
+
+      <nav class="site-header__nav" aria-label="Primary">
+        <ul class="site-header__links">
+          <li><a class="site-header__link" href="index.html#how-it-works">How it works</a></li>
+          <li><a class="site-header__link" href="index.html#features">Features</a></li>
+          <li><a class="site-header__link" href="index.html#pricing">Pricing</a></li>
+          <li><a class="site-header__link" href="docs/index.html">Docs</a></li>
+          <li><a class="site-header__link" href="status.html" aria-current="page">Status</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-header__actions">
+        <a class="btn btn--secondary btn--sm" href="mailto:support@enstacked.com">Contact support</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="shell st-page" data-status-page>
+      <!-- Announced once per change, not per repaint. -->
+      <p class="visually-hidden" role="status" aria-live="polite" data-status-live></p>
+
+      <!-- Preview / stale / unreachable. Hidden until there is something
+           true to say. -->
+      <p class="st-note" data-status-note hidden></p>
+
+      <div class="st-hero">
+        <p class="st-pill" data-status-pill>
+          <span class="st-dot st-dot--live" data-status-pill-dot data-status="operational" aria-hidden="true"></span>
+          <span class="st-pill__label" data-status-pill-label>Checking status</span>
+          <span class="st-pill__sep" aria-hidden="true">·</span>
+          <span class="st-pill__checked" data-status-checked></span>
+        </p>
+
+        <h1 class="st-title" data-status-title>Checking Varn&rsquo;s status.</h1>
+
+        <p class="st-lead" data-status-lead>
+          Reading the latest health check from the Varn dashboard.
+        </p>
+
+        <p class="st-hero__actions">
+          <button class="btn btn--secondary btn--sm" type="button" data-status-retry hidden>
+            Try again
+          </button>
+        </p>
+      </div>
+
+      <noscript>
+        <p class="st-note" data-kind="error">
+          This page reads live data with JavaScript, which is switched off.
+          Write to <a href="mailto:support@enstacked.com">support@enstacked.com</a>
+          and we will tell you what we can see.
+        </p>
+      </noscript>
+
+      <!-- Anything still open goes here, above the component grid: when
+           something is wrong, "what is happening and are you on it" beats
+           a wall of green. These incidents also stay in the history below. -->
+      <section class="st-active" data-status-active hidden aria-labelledby="active-title">
+        <h2 class="st-section__title" id="active-title">Open right now</h2>
+        <div class="st-incidents" data-status-active-list></div>
+      </section>
+
+      <!-- =============================================================
+           COMPONENTS
+           ============================================================= -->
+      <section class="st-section" aria-labelledby="components-title">
+        <div class="st-toolbar">
+          <div>
+            <h2 class="st-section__title" id="components-title">Components</h2>
+            <p class="st-section__sub" data-status-sub>
+              Daily status per service. Select a day to see what happened.
+            </p>
+          </div>
+
+          <div class="segmented" role="group" aria-label="History range" data-status-ranges>
+            <button class="segmented__option" type="button" aria-pressed="false" data-status-range="30">30d</button>
+            <button class="segmented__option" type="button" aria-pressed="false" data-status-range="60">60d</button>
+            <button class="segmented__option" type="button" aria-pressed="true" data-status-range="90">90d</button>
+          </div>
+        </div>
+
+        <div class="st-groups" data-status-groups aria-busy="true"></div>
+
+        <ul class="st-legend" aria-label="What the colours mean" data-status-legend>
+          <li class="st-legend__item"><span class="st-dot" data-status="operational" aria-hidden="true"></span>Operational</li>
+          <li class="st-legend__item"><span class="st-dot" data-status="degraded" aria-hidden="true"></span>Degraded</li>
+          <li class="st-legend__item"><span class="st-dot" data-status="partial" aria-hidden="true"></span>Partial outage</li>
+          <li class="st-legend__item"><span class="st-dot" data-status="major" aria-hidden="true"></span>Major outage</li>
+          <li class="st-legend__item"><span class="st-dot" data-status="maintenance" aria-hidden="true"></span>Maintenance</li>
+        </ul>
+      </section>
+
+      <!-- =============================================================
+           MAINTENANCE
+           ============================================================= -->
+      <section class="st-section" aria-labelledby="maintenance-title">
+        <h2 class="st-section__title" id="maintenance-title">Scheduled maintenance</h2>
+        <div class="st-mnt-list" data-status-maintenance></div>
+      </section>
+
+      <!-- =============================================================
+           INCIDENTS
+           ============================================================= -->
+      <section class="st-section" aria-labelledby="incidents-title">
+        <h2 class="st-section__title" id="incidents-title">Incident history</h2>
+        <p class="st-section__sub">
+          Every incident we opened in this window, with the updates as they
+          were posted.
+        </p>
+        <div class="st-incidents" data-status-incidents></div>
+      </section>
+
+      <!-- =============================================================
+           WHAT THIS PAGE IS
+           ============================================================= -->
+      <section class="st-section st-about" aria-labelledby="about-title">
+        <h2 class="st-section__title" id="about-title">About this page</h2>
+        <div class="st-about__grid">
+          <p>
+            This page reads the health check the Varn dashboard runs against
+            its own services. It refreshes about once a minute while the tab
+            is open, and it reports what the check saw, including when the
+            check itself cannot be reached.
+          </p>
+          <p>
+            A green day does not promise your store saw no error, and swatches
+            keep working on your storefront even while the admin is degraded
+            &mdash; settings live on your own store as metafields. If something
+            looks wrong on your store and this page says everything is fine,
+            write to
+            <a href="mailto:support@enstacked.com?subject=Varn%20status">support@enstacked.com</a>.
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- One tooltip, moved to the hovered or focused day. Fixed to the
+       viewport so a scroll container can never clip it. -->
+  <div class="st-tip" role="tooltip" data-status-tip hidden>
+    <p class="st-tip__title" data-tip-title></p>
+    <p class="st-tip__body" data-tip-body></p>
+  </div>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="site-footer__bottom">
+        <p class="site-footer__made">
+          <img class="site-footer__made-mark" src="assets/img/enstacked-mark.svg" width="22" height="22" loading="lazy" decoding="async" alt="Enstacked Technologies">
+          <span>Powered by <strong>Enstacked Technologies</strong></span>
+        </p>
+        <p><span data-year>2026</span> Enstacked Technologies. Varn is not affiliated with or endorsed by Shopify Inc.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/status.js" defer></script>
+</body>
+</html>

@@ -30,10 +30,16 @@ to any static host or S3 bucket. There is nothing to compile.
 ## Structure
 
 ```
-index.html                     the whole page, semantic HTML only
+index.html                     the landing page, semantic HTML only
+waitlist.html                  pre-launch signup page, where every CTA goes
+privacy.html                   privacy policy
+status.html                    live system status, fed by the dashboard API
 assets/
   css/styles.css               design tokens + components, cascade layers
   js/main.js                   one IIFE, ten independent modules
+  js/waitlist.js               waitlist.html: brand field + signup form
+  js/legal.js                  privacy.html: contents list highlighting
+  js/status.js                 status.html + the strip on index.html
   fonts/                       legacy woff2 files, no longer referenced by
                                index.html (docs/ still uses Inter Tight)
   img/
@@ -157,7 +163,9 @@ in exactly one place.
 
 | What | Where |
 |---|---|
-| App Store URL (used by every CTA) | search `apps.shopify.com/varn-variants-swatches-ai` in `index.html` |
+| **Launch switch** (every CTA, all pages) | `LAUNCH_URL` at the top of `assets/js/main.js` |
+| **Waitlist signup endpoint** | `WAITLIST_ENDPOINT` at the top of `assets/js/waitlist.js` |
+| **Status API** | `STATUS_ENDPOINT` at the top of `assets/js/status.js` |
 | Canonical + `og:url` | `<head>` of `index.html` |
 | Prices and plan features | the `pricing` section in `index.html` |
 | Theme / app names in the marquee | `THEME_ITEMS` in `assets/js/main.js` |
@@ -183,6 +191,161 @@ stay >= 3:1 on both white and ink backgrounds (WCAG AA for large text).
 
 Darkened variants (`--color-violet-deep`, etc.) exist purely so text on cream
 passes WCAG AA. If you change a brand colour, re-derive its `-deep` companion.
+
+---
+
+## Pre-launch state
+
+The site currently sells a waitlist, not an install.
+
+- Every call to action on every page links to `waitlist.html` **in the markup**,
+  so it is correct with JavaScript disabled and correct if `main.js` never
+  loads. Each one also carries `data-launch` and a `data-launch-label` holding
+  the wording it should show on launch day.
+- `waitlist.html` collects the email and **sends it to MailerLite**. The two
+  ids at the top of `assets/js/waitlist.js` are the only part of MailerLite's
+  generated embed we kept — the markup, styling and states are ours, so the
+  page reads as Varn rather than as a MailerLite widget:
+
+  ```js
+  var MAILERLITE = { account: "2519972", form: "197865579280861031" };
+  ```
+
+  **Why it is not `fetch()`.** MailerLite's classic endpoint sends no CORS
+  headers, so a fetch is blocked by the browser before MailerLite ever sees
+  it — which is exactly why their own embed falls back to `target="_blank"`.
+  The path is literally `/jsonp/`, so we call it as JSONP: a `<script>` tag
+  is not subject to CORS, and a real response tells us the signup landed
+  instead of us assuming it did. Success is their callback firing, ours
+  firing, or a clean load; a 4xx, 5xx or dropped connection is a real failure
+  and is shown as one, with the address left in the field to retry.
+
+  **Without JavaScript it still works.** The `action`, `method="post"`,
+  `target="_blank"`, `name="fields[email]"` and MailerLite's two hidden
+  fields are all in the markup, so the form posts straight to MailerLite and
+  the visitor lands on MailerLite's own confirmation page.
+
+  `WAITLIST_ENDPOINT` in the same file overrides MailerLite with any endpoint
+  that accepts a JSON POST (`{ email, source, ts }`) — the seam to use if the
+  list moves or signups should hit your own server first. With both blank the
+  page runs in **demo mode**: the flow plays, nothing is stored, and the
+  console says so on every submit.
+- The form covers empty, invalid, submitting, success, network failure and
+  returning-visitor. A honeypot field catches bots and answers them exactly as
+  if they had succeeded.
+
+**On launch day:** paste the App Store listing URL into `LAUNCH_URL` at the top
+of `assets/js/main.js`. That one edit repoints every `[data-launch]` link,
+restores each link's own launch-day wording, and removes the "Launching soon"
+prefix in the hero. Nothing else changes. Note that `privacy.html` deliberately
+has no launch-dependent call to action, so it needs no edit and does not load
+`main.js`.
+
+---
+
+## System status
+
+`status.html` is the full board and `index.html` carries a one-line strip
+above the closing call to action. Both read the same endpoint through
+`assets/js/status.js`, and both ship in a resting state that never shifts the
+page while the fetch is in flight.
+
+**It is wired.** `STATUS_ENDPOINT` points at
+`https://varn.enstacked.com/api/status`, which is
+`app/routes/api.status.tsx` in the Varn app repo. That route answers `GET`
+with open CORS and a 15-second shared cache, so this site can be served from
+any host. Set the constant back to `""` to return both surfaces to labelled
+preview data.
+
+**Deploy order matters:** the app route has to be live before this site is,
+or the status page shows its "cannot reach the status API" state.
+
+The full shape is documented in a comment at the top of `assets/js/status.js`
+and in `app/lib/status.server.ts`; in outline:
+
+```jsonc
+{
+  "page":    { "name": "Varn Status", "updatedAt": "<ISO>" },
+  "status":  "operational | degraded | partial | major | maintenance",
+  "uptime":  99.98,
+  "services": [{ "id", "name", "description",
+                 "group": "product | platform | account",
+                 "status", "uptime",
+                 "days": [{ "date": "YYYY-MM-DD", "status", "incidentIds": [] }] }],
+  "incidents": [{ "id", "title", "severity", "state", "impact", "components",
+                  "startedAt", "resolvedAt", "summary",
+                  "updates": [{ "at", "state", "body" }] }],
+  "maintenance": [{ "id", "title", "startsAt", "duration", "componentIds", "impact" }]
+}
+```
+
+`days` is what draws the uptime bars, and the page trims it to the requested
+range so the bars can never disagree with the sentence above them.
+
+**The live endpoint does not send `days` today.** Daily bars need a stored
+sample per service per day, which means a third Prisma table, and that repo
+keeps Prisma session-only with two documented exceptions that were each an
+owner-level decision. So the route sends `history: false` and this page says
+plainly that these are live checks: no bars, no range switcher (a control
+that would do nothing is removed, not disabled), and the round-trip time of
+each check shown where the API measured one. Adding daily history is a
+decision to take on its own merits, not something to smuggle in behind a
+status page.
+
+**What the route actually measures:** the database round trip, whether the
+analytics store is readable, the recent AI failure share across catalogue
+runs, and photo-run workers whose heartbeat has gone stale. It deliberately
+reports nothing about Shopify's admin API, Shopify billing or the theme
+extension CDN — those are Shopify's to report, and a green tick we cannot
+justify is worse than an absent one. Nothing per-shop leaves the endpoint.
+
+**Incidents come from GitHub Issues.** An issue is the incident, its comments
+are the update timeline, and closing it resolves it — so posting an update
+mid-incident never needs a deploy, which is exactly when a deploy is the last
+thing anyone wants to be doing. The app fetches them server-side, cached, and
+each card links back to the issue it was written in.
+
+The label convention (only the first is required):
+
+| Label | Effect |
+| --- | --- |
+| `incident` | The opt-in. No label, not published. |
+| `maintenance` | Scheduled work; needs `Starts:` in the body. |
+| `severity:minor\|major\|critical` | The badge. Default `minor`. |
+| `impact:degraded\|partial\|major\|maintenance` | How bad it was. Default `degraded`. |
+| `status:investigating\|identified\|monitoring` | Ignored once the issue is closed. |
+| `component:<service id>` | Repeatable. Ids from `SERVICE_META`. |
+
+A comment starting with a bold state — `**Identified** the slow query is …` —
+becomes a timeline entry with that state. A comment without one is still
+published and inherits the incident's state.
+
+Configure it with `STATUS_GITHUB_REPO`, `STATUS_GITHUB_LABEL` and an optional
+`GITHUB_TOKEN` (see the app's `.env.example`).
+
+> **Use a dedicated public status repo.** Every issue carrying the label has
+> its title, body and comments rendered on a public page. Pointing this at the
+> private app repo means one stray internal comment on a labelled issue is
+> published.
+
+`app/data/status-incidents.ts` remains the break-glass path: it still works
+when GitHub is the thing that is down, and its entries are merged in alongside
+whatever GitHub returns (a GitHub issue wins a clash of ids). `incidents` and
+`maintenance` may be empty arrays; the page renders an empty state rather than
+hiding the section.
+
+**Until it is set,** both surfaces run on clearly labelled **preview data**
+and the page says so in those words. That banner is deliberate: a status page
+that invents uptime is worse than no status page, so preview mode is never
+silent.
+
+**States it covers:** loading skeleton, live, preview, an open incident
+(repeated above the component grid, because a reader arriving mid-incident
+should not scroll past nine healthy services), scheduled maintenance, a
+selected day filtering the history, the endpoint failing on first load, and
+the endpoint failing later — which keeps the last good reading on screen and
+says when it was taken. It re-checks about once a minute while the tab is
+visible.
 
 ---
 

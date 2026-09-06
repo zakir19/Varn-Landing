@@ -3035,3 +3035,1879 @@
     background: #fff;
   }
 }
+
+
+/* =========================================================================
+   WAITLIST  —  waitlist.html only
+   =========================================================================
+   The page ground is a WebGL liquid field (assets/js/waitlist.js) painted
+   into .wl__flow. Everything readable sits on an opaque white card above it,
+   so no text ever depends on the shader for its contrast. If WebGL is
+   missing the canvas stays transparent and the CSS gradient underneath is
+   the ground - the page is complete either way.
+   ========================================================================= */
+@layer components {
+  .wl {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    isolation: isolate;
+    background:
+      radial-gradient(120% 90% at 18% 8%, #efeefb 0%, rgb(239 238 251 / 0%) 55%),
+      radial-gradient(110% 80% at 88% 22%, #fdeef3 0%, rgb(253 238 243 / 0%) 52%),
+      radial-gradient(120% 100% at 55% 105%, #fbeee7 0%, rgb(251 238 231 / 0%) 55%),
+      var(--color-cream, #f5f1e8);
+  }
+
+  /* Fixed, not absolute: the page scrolls, the field does not. */
+  .wl__flow {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.9s var(--ease-out);
+  }
+
+  .wl__flow.is-live {
+    opacity: 1;
+  }
+
+  .wl__shell {
+    width: min(100% - (var(--shell-pad) * 2), 68rem);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: var(--space-lg);
+    padding-block: var(--space-md) var(--space-xl);
+  }
+
+  /* ---- Top bar ------------------------------------------------------- */
+  .wl__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    min-height: 44px;
+  }
+
+  .wl__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .wl__brand img {
+    border-radius: 7px;
+    display: block;
+  }
+
+  .wl__brand-by {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding-inline-start: 0.55rem;
+    margin-inline-start: 0.1rem;
+    border-inline-start: 1px solid var(--color-line);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--color-ink-subtle);
+  }
+
+  .wl__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 44px;
+    padding-inline: 0.9rem;
+    border-radius: var(--radius-pill);
+    background: rgb(255 255 255 / 72%);
+    border: 1px solid var(--color-line);
+    color: var(--color-ink);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-decoration: none;
+    backdrop-filter: blur(8px);
+    transition: background var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out);
+  }
+
+  .wl__back:hover {
+    background: #fff;
+    border-color: var(--color-line-strong);
+  }
+
+  .wl__back svg {
+    flex: none;
+  }
+
+  /* ---- The card ------------------------------------------------------ */
+  .wl__card {
+    position: relative;
+    flex: 1;
+    display: grid;
+    align-content: center;
+    gap: var(--space-lg);
+    padding: clamp(1.5rem, 1rem + 2.6vw, 3.25rem);
+    border-radius: var(--radius-xl);
+    background: rgb(255 255 255 / 92%);
+    border: 1px solid rgb(255 255 255 / 70%);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(18px) saturate(1.1);
+    overflow: hidden;
+  }
+
+  .wl__grid {
+    display: grid;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  @media (width >= 62rem) {
+    .wl__grid {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: clamp(2rem, 1rem + 3vw, 3.5rem);
+    }
+  }
+
+  .wl__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin: 0 0 var(--space-sm);
+    padding: 0.34rem 0.75rem 0.34rem 0.55rem;
+    border-radius: var(--radius-pill);
+    background: var(--color-violet-soft);
+    color: var(--color-violet-deep);
+    font-size: var(--text-eyebrow);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .wl__pill-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-violet);
+    position: relative;
+  }
+
+  .wl__pill-dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: inherit;
+    animation: wl-ping 2.4s var(--ease-out) infinite;
+  }
+
+  @keyframes wl-ping {
+    0% { transform: scale(1); opacity: 0.55; }
+    70%, 100% { transform: scale(2.6); opacity: 0; }
+  }
+
+  .wl__title {
+    margin: 0;
+    font-size: clamp(2.05rem, 1.3rem + 3.2vw, 3.5rem);
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-tight);
+    font-weight: 600;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .wl__lead {
+    margin: var(--space-sm) 0 0;
+    max-width: 34ch;
+    font-size: var(--text-lead);
+    line-height: 1.5;
+    color: var(--color-ink-muted);
+  }
+
+  .wl__by {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin: var(--space-md) 0 0;
+    font-size: var(--text-sm);
+    color: var(--color-ink-subtle);
+  }
+
+  /* ---- Form ---------------------------------------------------------- */
+  .wl__panel {
+    padding: clamp(1.15rem, 0.85rem + 1.2vw, 1.75rem);
+    border-radius: var(--radius-lg);
+    background: var(--color-well);
+    border: 1px solid var(--color-line-soft);
+  }
+
+  .wl__form-title {
+    margin: 0 0 0.25rem;
+    font-size: var(--text-h4);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+
+  .wl__form-note {
+    margin: 0 0 var(--space-sm);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    color: var(--color-ink-subtle);
+  }
+
+  .wl__field {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .wl__input {
+    width: 100%;
+    min-height: 52px;
+    padding: 0 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-line-strong);
+    background: #fff;
+    color: var(--color-ink);
+    font: inherit;
+    font-size: 1rem; /* >=16px: iOS must not zoom on focus */
+    transition: border-color var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-fast) var(--ease-out);
+  }
+
+  .wl__input::placeholder {
+    color: var(--color-ink-subtle);
+    opacity: 0.75;
+  }
+
+  .wl__input:focus-visible {
+    outline: none;
+    border-color: var(--color-violet);
+    box-shadow: 0 0 0 3px rgb(127 119 221 / 22%);
+  }
+
+  .wl__input[data-state="error"] {
+    border-color: var(--color-clay-deep);
+    box-shadow: 0 0 0 3px rgb(216 90 48 / 16%);
+  }
+
+  .wl__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    min-height: 52px;
+    padding-inline: 1.25rem;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: var(--color-ink);
+    color: #fff;
+    font: inherit;
+    font-size: var(--text-body);
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform var(--dur-fast) var(--ease-out),
+      background var(--dur-fast) var(--ease-out);
+  }
+
+  .wl__submit:hover:not(:disabled) {
+    background: #131119;
+  }
+
+  .wl__submit:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  .wl__submit:disabled {
+    cursor: default;
+    opacity: 0.72;
+  }
+
+  .wl__submit svg {
+    flex: none;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  .wl__submit:hover:not(:disabled) svg {
+    transform: translateX(3px);
+  }
+
+  .wl__spinner {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid rgb(255 255 255 / 32%);
+    border-top-color: #fff;
+    animation: wl-spin 0.7s linear infinite;
+  }
+
+  @keyframes wl-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Empty by default, so it takes no space until something is announced. */
+  .wl__msg {
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    color: var(--color-clay-deep);
+  }
+
+  .wl__msg:empty {
+    display: none;
+  }
+
+  .wl__msg[data-tone="ok"] {
+    color: var(--color-success);
+  }
+
+  .wl__proof {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: var(--space-sm) 0 0;
+    font-size: var(--text-xs);
+    line-height: 1.5;
+    color: var(--color-ink-subtle);
+  }
+
+  .wl__dots {
+    display: inline-flex;
+    flex: none;
+  }
+
+  .wl__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1.5px solid #fff;
+    margin-inline-start: -4px;
+  }
+
+  .wl__dot:first-child {
+    margin-inline-start: 0;
+  }
+
+  /* Honeypot: a real field for a bot to fill, invisible and unreachable
+     for a person. Not display:none - some bots skip those. */
+  .wl__trap {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* ---- Success state -------------------------------------------------- */
+  .wl__done {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: var(--space-sm);
+    padding-block: var(--space-md);
+  }
+
+  .wl__done:focus-visible {
+    outline: none;
+  }
+
+  .wl__done-mark {
+    display: grid;
+    place-items: center;
+    width: 62px;
+    height: 62px;
+    margin: 0;
+    border-radius: 50%;
+    background: var(--color-success-soft);
+    color: var(--color-success);
+  }
+
+  .wl__done-title {
+    margin: 0;
+    font-size: clamp(1.75rem, 1.2rem + 2.4vw, 2.75rem);
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-tight);
+    font-weight: 600;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .wl__done-copy {
+    margin: 0;
+    max-width: 46ch;
+    font-size: var(--text-body);
+    line-height: var(--leading-normal);
+    color: var(--color-ink-muted);
+  }
+
+  .wl__done-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2xs);
+    margin-top: var(--space-2xs);
+  }
+
+  .wl__done-swatches {
+    display: flex;
+    gap: 0.4rem;
+    margin: var(--space-2xs) 0 0;
+  }
+
+  .wl__done-swatch {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid var(--color-line);
+    animation: wl-pop 0.5s var(--ease-spring) both;
+    animation-delay: var(--d, 0s);
+  }
+
+  @keyframes wl-pop {
+    from { transform: scale(0.2); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  /* ---- What you get -------------------------------------------------- */
+  .wl__perks {
+    display: grid;
+    gap: var(--space-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (width >= 48rem) {
+    .wl__perks {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .wl__perk {
+    display: grid;
+    gap: 0.35rem;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    background: rgb(255 255 255 / 82%);
+    border: 1px solid rgb(255 255 255 / 65%);
+    box-shadow: var(--shadow-xs);
+    backdrop-filter: blur(10px);
+  }
+
+  .wl__perk-title {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .wl__perk-title svg {
+    flex: none;
+    color: var(--color-violet-deep);
+  }
+
+  .wl__perk-copy {
+    margin: 0;
+    font-size: var(--text-xs);
+    line-height: 1.55;
+    color: var(--color-ink-muted);
+  }
+
+  /* ---- Footer -------------------------------------------------------- */
+  .wl__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2xs) var(--space-md);
+    font-size: var(--text-xs);
+    color: var(--color-ink-subtle);
+  }
+
+  .wl__foot p {
+    margin: 0;
+  }
+
+  .wl__foot-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .wl__foot a {
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-line-strong);
+    padding-block-end: 1px;
+  }
+
+  .wl__foot a:hover {
+    color: var(--color-ink);
+    border-color: currentcolor;
+  }
+
+  /* Entrance: one staggered reveal, nothing loops. */
+  .wl__pill,
+  .wl__title,
+  .wl__lead,
+  .wl__by,
+  .wl__panel,
+  .wl__perk {
+    animation: wl-in 0.6s var(--ease-out) both;
+  }
+
+  .wl__pill  { animation-delay: 0.10s; }
+  .wl__title { animation-delay: 0.16s; }
+  .wl__lead  { animation-delay: 0.24s; }
+  .wl__by    { animation-delay: 0.32s; }
+  .wl__panel { animation-delay: 0.22s; }
+  .wl__perk:nth-child(1) { animation-delay: 0.34s; }
+  .wl__perk:nth-child(2) { animation-delay: 0.40s; }
+  .wl__perk:nth-child(3) { animation-delay: 0.46s; }
+
+  @keyframes wl-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .wl__view.is-leaving {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.22s var(--ease-out), transform 0.22s var(--ease-out);
+  }
+}
+
+
+/* =========================================================================
+   LEGAL  —  privacy.html and any future policy page
+   =========================================================================
+   A long document nobody reads front to back. The layout answers "is the
+   part I care about in here", so the contents list is a real control on
+   desktop and a native <details> on small screens, and every section owns
+   an anchor a merchant can paste into a compliance form.
+   ========================================================================= */
+@layer components {
+  .legal-page {
+    padding-block: calc(var(--header-h) + var(--space-2xl)) var(--space-3xl);
+  }
+
+  .legal-hero {
+    display: grid;
+    gap: var(--space-sm);
+    padding-block-end: var(--space-lg);
+    border-block-end: 1px solid var(--color-line);
+  }
+
+  .legal-hero__title {
+    margin: 0;
+    font-size: clamp(2.1rem, 1.4rem + 2.8vw, 3.25rem);
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-tight);
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .legal-hero__meta {
+    margin: 0;
+    max-width: 62ch;
+    font-size: var(--text-body);
+    line-height: var(--leading-normal);
+    color: var(--color-ink-muted);
+  }
+
+  .legal-hero__stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: var(--radius-pill);
+    background: var(--color-surface-sunk);
+    border: 1px solid var(--color-line);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--color-ink-muted);
+    width: max-content;
+  }
+
+  /* ---- At a glance ---------------------------------------------------- */
+  .legal-glance {
+    display: grid;
+    gap: var(--space-sm);
+    margin-block: var(--space-xl);
+  }
+
+  @media (width >= 48rem) {
+    .legal-glance {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .legal-glance__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem;
+    align-items: start;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-sunk);
+    border: 1px solid var(--color-line-soft);
+  }
+
+  .legal-glance__icon {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid var(--color-line);
+    color: var(--color-violet-deep);
+  }
+
+  .legal-glance__title {
+    margin: 0 0 0.15rem;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .legal-glance__copy {
+    margin: 0;
+    font-size: var(--text-xs);
+    line-height: 1.6;
+    color: var(--color-ink-muted);
+  }
+
+  /* ---- Two column shell ----------------------------------------------- */
+  .legal-body {
+    display: grid;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  @media (width >= 62rem) {
+    .legal-body {
+      grid-template-columns: 15rem minmax(0, 1fr);
+      gap: var(--space-2xl);
+    }
+  }
+
+  .legal-toc__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    min-height: 48px;
+    padding-inline: var(--space-md);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-sunk);
+    border: 1px solid var(--color-line);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-ink);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .legal-toc__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .legal-toc__summary svg {
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  .legal-toc[open] .legal-toc__summary svg {
+    transform: rotate(180deg);
+  }
+
+  .legal-toc__title {
+    display: none;
+    margin: 0 0 var(--space-2xs);
+    font-size: var(--text-eyebrow);
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-ink-subtle);
+  }
+
+  .legal-toc__list {
+    margin: var(--space-2xs) 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 1px;
+  }
+
+  .legal-toc__link {
+    display: block;
+    padding: 0.5rem 0.7rem;
+    border-radius: var(--radius-xs);
+    border-inline-start: 2px solid transparent;
+    font-size: var(--text-sm);
+    line-height: 1.4;
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out),
+      background var(--dur-fast) var(--ease-out);
+  }
+
+  .legal-toc__link:hover {
+    background: var(--color-surface-sunk);
+    color: var(--color-ink);
+  }
+
+  .legal-toc__link[aria-current="true"] {
+    border-inline-start-color: var(--color-violet);
+    background: var(--color-violet-soft);
+    color: var(--color-violet-deep);
+    font-weight: 600;
+  }
+
+  @media (width >= 62rem) {
+    .legal-toc {
+      position: sticky;
+      top: calc(var(--header-h) + var(--space-md));
+      max-height: calc(100svh - var(--header-h) - var(--space-xl));
+      overflow-y: auto;
+    }
+
+    /* On desktop the list is always open and the disclosure control is not
+       a control at all, so it is replaced by a plain heading. */
+    .legal-toc__summary {
+      display: none;
+    }
+
+    .legal-toc__title {
+      display: block;
+    }
+  }
+
+  /* ---- The document ---------------------------------------------------- */
+  .legal-doc {
+    max-width: 68ch;
+    font-size: var(--text-body);
+    line-height: var(--leading-normal);
+    color: var(--color-ink-muted);
+  }
+
+  .legal-doc > section + section {
+    margin-block-start: var(--space-xl);
+    padding-block-start: var(--space-lg);
+    border-block-start: 1px solid var(--color-line-soft);
+  }
+
+  .legal-doc h2 {
+    /* Anchor jumps must clear the fixed header. */
+    scroll-margin-top: calc(var(--header-h) + var(--space-md));
+    margin: 0 0 var(--space-xs);
+    font-size: var(--text-h3);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .legal-doc p {
+    margin: 0 0 var(--space-sm);
+  }
+
+  .legal-doc p:last-child {
+    margin-bottom: 0;
+  }
+
+  .legal-doc ul {
+    margin: 0 0 var(--space-sm);
+    padding-inline-start: 1.15rem;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .legal-doc li {
+    padding-inline-start: 0.2rem;
+  }
+
+  .legal-doc li::marker {
+    color: var(--color-violet);
+  }
+
+  .legal-doc strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .legal-doc a {
+    color: var(--color-violet-deep);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .legal-doc a:hover {
+    color: var(--color-ink);
+  }
+
+  .legal-callout {
+    display: grid;
+    gap: 0.4rem;
+    padding: var(--space-md);
+    margin-block: 0 var(--space-sm);
+    border-radius: var(--radius-md);
+    background: var(--color-violet-soft);
+    border: 1px solid rgb(127 119 221 / 22%);
+    color: var(--color-ink-muted);
+  }
+
+  .legal-callout__title {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-violet-deep);
+  }
+
+  .legal-doc__end {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+    margin-block-start: var(--space-xl);
+    padding-block-start: var(--space-lg);
+    border-block-start: 1px solid var(--color-line);
+  }
+}
+
+
+/* =========================================================================
+   MOTION PREFERENCES  —  waitlist + legal blocks
+   Everything lands on its final state; nothing is left mid-transition.
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .wl__flow {
+    transition: none;
+  }
+
+  .wl__pill,
+  .wl__title,
+  .wl__lead,
+  .wl__by,
+  .wl__panel,
+  .wl__perk,
+  .wl__done-swatch {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+
+  .wl__pill-dot::after,
+  .wl__spinner {
+    animation: none;
+  }
+
+  /* The spinner is the only signal that a submit is in flight, so with
+     motion off it becomes a static ring rather than nothing at all. */
+  .wl__spinner {
+    border-top-color: rgb(255 255 255 / 55%);
+  }
+
+  .wl__submit:hover svg,
+  .legal-toc[open] .legal-toc__summary svg {
+    transition: none;
+  }
+
+  .wl__view.is-leaving {
+    transition: none;
+  }
+}
+
+/* =========================================================================
+   PRINT  —  the policy is the one page people actually print or file.
+   ========================================================================= */
+@media print {
+  .legal-toc,
+  .legal-doc__end,
+  .legal-glance__icon {
+    display: none;
+  }
+
+  .legal-page {
+    padding-block: 0;
+  }
+
+  .legal-body {
+    display: block;
+  }
+
+  .legal-doc {
+    max-width: none;
+    color: #000;
+  }
+
+  .legal-doc > section + section {
+    break-inside: avoid;
+  }
+
+  .legal-doc a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+}
+
+
+/* =========================================================================
+   FIXES verified in the browser at 390 / 768 / 1440
+   ========================================================================= */
+@layer components {
+  /* Both waitlist views are display:grid, which OUTRANKS the user agent's
+     [hidden] rule, so the form stayed on screen underneath the thank-you.
+     Caught by rendering the success state, not by reading the markup. */
+  .wl [hidden] {
+    display: none !important;
+  }
+
+  /* The honeypot's input inherits no width, so it reported a box wider than
+     a phone. It is clipped either way; this keeps the geometry honest. */
+  .wl__trap input {
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+  }
+
+  /* 44px minimum on every target, the rule the rest of the site follows. */
+  .wl__brand {
+    min-height: 44px;
+  }
+
+  .wl__foot a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .legal-toc__link {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .brand {
+    min-height: 44px;
+  }
+}
+
+
+/* =========================================================================
+   REFINEMENTS after inspecting the render
+   ========================================================================= */
+@layer components {
+  /* The field is a moving image, so contrast over it cannot be measured or
+     promised. Everything outside the main card now carries its own light
+     ground instead of borrowing the shader's. */
+  .wl__brand {
+    padding-inline: 0.75rem 0.9rem;
+    border-radius: var(--radius-pill);
+    background: rgb(255 255 255 / 72%);
+    border: 1px solid var(--color-line);
+    backdrop-filter: blur(8px);
+  }
+
+  .wl__foot {
+    padding: 0.6rem var(--space-md);
+    border-radius: var(--radius-md);
+    background: rgb(255 255 255 / 78%);
+    border: 1px solid rgb(255 255 255 / 60%);
+    backdrop-filter: blur(10px);
+    color: var(--color-ink-muted);
+  }
+
+  .wl__shell {
+    padding-block-end: var(--space-lg);
+  }
+
+  /* On a phone the top row has to stay one row, and "Built by Enstacked
+     Technologies" is already spelled out inside the card. */
+  @media (width < 30rem) {
+    .wl__brand-by {
+      display: none;
+    }
+
+    .wl__back {
+      padding-inline: 0.75rem;
+    }
+  }
+
+  /* The policy's three blocks (title, summary, document) shared a 1280px
+     shell while the prose itself is capped at 68ch, which left the right
+     edge ragged. One measure for all three. */
+  .legal-page {
+    max-width: 64rem;
+    margin-inline: auto;
+  }
+}
+
+@layer components {
+  /* The 44px hit area made the border-bottom sit at the base of the box
+     rather than under the words. Underline the text, keep the target. */
+  .wl__foot a {
+    border-bottom: 0;
+    text-decoration: underline;
+    text-decoration-color: var(--color-line-strong);
+    text-underline-offset: 3px;
+  }
+
+  .wl__foot a:hover {
+    text-decoration-color: currentcolor;
+  }
+}
+
+
+/* =========================================================================
+   STATUS  —  status.html, plus the strip on index.html
+   =========================================================================
+   Status tones borrow the brand where the brand already means the right
+   thing: a partial outage is clay, maintenance is violet. Green and red
+   stay conventional, because guessing at those costs a reader real time.
+   Every tone has a fill (for ticks and dots) and a darker text pair that
+   passes AA on white.
+   ========================================================================= */
+@layer base {
+  :root {
+    --st-operational: #3f9a63;
+    --st-operational-ink: #2f6b41;
+    --st-degraded: #e0a02a;
+    --st-degraded-ink: #8a5a00;
+    --st-partial: #d85a30;
+    --st-partial-ink: #9c3d1a;
+    --st-major: #b3261e;
+    --st-major-ink: #8f1d17;
+    --st-maintenance: #7f77dd;
+    --st-maintenance-ink: #453aa3;
+
+    --st-tick-radius: 3px;
+  }
+}
+
+@layer components {
+  /* ---- tone plumbing: one attribute drives dot, tick and badge ------- */
+  [data-status="operational"] { --st-tone: var(--st-operational); --st-tone-ink: var(--st-operational-ink); }
+  [data-status="degraded"]    { --st-tone: var(--st-degraded);    --st-tone-ink: var(--st-degraded-ink); }
+  [data-status="partial"]     { --st-tone: var(--st-partial);     --st-tone-ink: var(--st-partial-ink); }
+  [data-status="major"]       { --st-tone: var(--st-major);       --st-tone-ink: var(--st-major-ink); }
+  [data-status="maintenance"] { --st-tone: var(--st-maintenance); --st-tone-ink: var(--st-maintenance-ink); }
+
+  .st-dot {
+    position: relative;
+    display: inline-block;
+    flex: none;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--st-tone, var(--st-operational));
+  }
+
+  .st-dot--live::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: inherit;
+    animation: st-ping 2.6s var(--ease-out) infinite;
+  }
+
+  @keyframes st-ping {
+    0% { transform: scale(1); opacity: 0.5; }
+    70%, 100% { transform: scale(2.8); opacity: 0; }
+  }
+
+  /* ---- page shell ---------------------------------------------------- */
+  .st-page {
+    max-width: 64rem;
+    margin-inline: auto;
+    padding-block: calc(var(--header-h) + var(--space-2xl)) var(--space-3xl);
+  }
+
+  .st-note {
+    margin: 0 0 var(--space-lg);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+  }
+
+  .st-note[data-kind="preview"] {
+    background: var(--color-warn-soft);
+    border: 1px solid rgb(138 90 0 / 22%);
+    color: var(--color-warn);
+  }
+
+  .st-note[data-kind="error"] {
+    background: var(--color-clay-soft);
+    border: 1px solid rgb(156 61 26 / 22%);
+    color: var(--color-clay-deep);
+  }
+
+  /* ---- hero ----------------------------------------------------------- */
+  .st-hero {
+    padding-block-end: var(--space-xl);
+    border-block-end: 1px solid var(--color-line);
+  }
+
+  .st-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 var(--space-md);
+    padding: 0.42rem 0.9rem;
+    border-radius: var(--radius-pill);
+    background: var(--color-surface-sunk);
+    border: 1px solid var(--color-line);
+    font-size: var(--text-sm);
+    color: var(--color-ink-subtle);
+  }
+
+  .st-pill__label {
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .st-pill__checked {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .st-pill__checked:empty {
+    display: none;
+  }
+
+  .st-title {
+    margin: 0;
+    max-width: 20ch;
+    font-size: clamp(2.1rem, 1.35rem + 3.2vw, 3.6rem);
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-tight);
+    font-weight: 600;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .st-lead {
+    margin: var(--space-sm) 0 0;
+    max-width: 54ch;
+    font-size: var(--text-lead);
+    line-height: 1.55;
+    color: var(--color-ink-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .st-hero__actions {
+    margin: var(--space-md) 0 0;
+  }
+
+  .st-hero__actions:has(button[hidden]) {
+    margin: 0;
+  }
+
+  /* ---- sections -------------------------------------------------------- */
+  .st-section {
+    margin-block-start: var(--space-2xl);
+  }
+
+  .st-section__title {
+    margin: 0;
+    font-size: var(--text-h3);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .st-section__sub {
+    margin: 0.35rem 0 0;
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--color-ink-subtle);
+  }
+
+  .st-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-block-end: var(--space-lg);
+  }
+
+  /* ---- component groups ------------------------------------------------ */
+  .st-groups {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .st-group {
+    display: grid;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-sunk);
+    border: 1px solid var(--color-line-soft);
+  }
+
+  .st-group__title {
+    margin: 0;
+    font-size: var(--text-eyebrow);
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-ink-subtle);
+  }
+
+  .st-svc {
+    display: grid;
+    gap: 0.6rem;
+    padding: var(--space-sm) var(--space-md) var(--space-md);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line-soft);
+  }
+
+  .st-svc__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.35rem var(--space-md);
+  }
+
+  .st-svc__name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    font-size: var(--text-body);
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .st-svc__desc {
+    margin: 0.15rem 0 0;
+    padding-inline-start: 1.05rem;
+    font-size: var(--text-xs);
+    line-height: 1.5;
+    color: var(--color-ink-subtle);
+  }
+
+  .st-svc__meta {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    white-space: nowrap;
+  }
+
+  .st-svc__state {
+    color: var(--color-ink-muted);
+  }
+
+  .st-svc__uptime {
+    font-weight: 600;
+    color: var(--color-ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---- the uptime bar --------------------------------------------------- */
+  .st-bar-wrap {
+    /* 90 thin ticks squeeze fine down to a phone, but if a longer range is
+       ever served this scrolls rather than shrinking to invisible. */
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+  }
+
+  .st-bar {
+    display: flex;
+    align-items: stretch;
+    gap: 1px;
+    height: 44px;
+    min-width: 100%;
+  }
+
+  .st-tick {
+    flex: 1 1 0;
+    min-width: 3px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--st-tick-radius);
+    background: var(--st-tone, var(--st-operational));
+    cursor: pointer;
+    transition: transform var(--dur-fast) var(--ease-out),
+      opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .st-tick:hover,
+  .st-tick:focus-visible {
+    transform: scaleY(1.12);
+    opacity: 1;
+  }
+
+  .st-tick:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  .st-tick[data-dim="true"] {
+    opacity: 0.32;
+  }
+
+  .st-tick[aria-pressed="true"] {
+    transform: scaleY(1.12);
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  .st-axis {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block-start: 0.45rem;
+    font-size: var(--text-xs);
+    color: var(--color-ink-subtle);
+  }
+
+  .st-axis__mid {
+    display: none;
+  }
+
+  @media (width >= 30rem) {
+    .st-axis__mid {
+      display: inline;
+    }
+  }
+
+  .st-bar-none {
+    margin: 0;
+    padding-block: var(--space-2xs);
+    font-size: var(--text-xs);
+    color: var(--color-ink-subtle);
+  }
+
+  /* ---- tooltip ----------------------------------------------------------- */
+  .st-tip {
+    position: fixed;
+    z-index: 60;
+    transform: translate(-50%, -100%);
+    padding: 0.45rem 0.65rem;
+    border-radius: var(--radius-xs);
+    background: var(--color-ink);
+    color: #fff;
+    pointer-events: none;
+    box-shadow: var(--shadow-md);
+  }
+
+  .st-tip__title {
+    margin: 0;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .st-tip__body {
+    margin: 0.1rem 0 0;
+    font-size: var(--text-xs);
+    color: rgb(255 255 255 / 72%);
+  }
+
+  /* ---- legend -------------------------------------------------------------- */
+  .st-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs) var(--space-md);
+    margin: var(--space-md) 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+  }
+
+  .st-legend__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  /* ---- incidents ----------------------------------------------------------- */
+  .st-incidents,
+  .st-mnt-list {
+    display: grid;
+    gap: var(--space-md);
+    margin-block-start: var(--space-lg);
+  }
+
+  .st-inc,
+  .st-mnt {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-xs);
+  }
+
+  .st-inc__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem var(--space-md);
+  }
+
+  .st-inc__title,
+  .st-mnt__title {
+    margin: 0;
+    font-size: var(--text-h4);
+    line-height: 1.3;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .st-inc__badges {
+    display: flex;
+    gap: 0.35rem;
+    margin: 0;
+  }
+
+  .st-inc__badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.55rem;
+    border-radius: var(--radius-pill);
+    background: var(--color-surface-sunk);
+    border: 1px solid var(--color-line);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--color-ink-muted);
+  }
+
+  .st-inc__badge[data-state="resolved"] {
+    background: var(--color-success-soft);
+    border-color: rgb(47 107 65 / 22%);
+    color: var(--color-success);
+  }
+
+  .st-inc__badge[data-state="investigating"],
+  .st-inc__badge[data-state="identified"],
+  .st-inc__badge[data-state="monitoring"] {
+    background: var(--color-warn-soft);
+    border-color: rgb(138 90 0 / 22%);
+    color: var(--color-warn);
+  }
+
+  .st-inc__meta {
+    margin: 0.5rem 0 0;
+    font-size: var(--text-xs);
+    color: var(--color-ink-subtle);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .st-inc__summary {
+    margin: var(--space-2xs) 0 0;
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    color: var(--color-ink-muted);
+  }
+
+  .st-inc__updates {
+    display: grid;
+    gap: var(--space-sm);
+    margin: var(--space-md) 0 0;
+    padding: 0 0 0 var(--space-md);
+    list-style: none;
+    border-inline-start: 2px solid var(--color-line);
+  }
+
+  .st-inc__update {
+    position: relative;
+  }
+
+  .st-inc__update::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: calc(var(--space-md) * -1 - 5px);
+    top: 0.42rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-line-strong);
+  }
+
+  .st-inc__update:first-child::before {
+    background: var(--color-violet);
+  }
+
+  .st-inc__update-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin: 0;
+  }
+
+  .st-inc__update-state {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .st-inc__update-at {
+    font-size: var(--text-xs);
+    color: var(--color-ink-subtle);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .st-inc__update-body {
+    margin: 0.15rem 0 0;
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    color: var(--color-ink-muted);
+  }
+
+  /* ---- empty, filter, skeleton ---------------------------------------------- */
+  .st-empty {
+    padding: var(--space-lg) var(--space-md);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-sunk);
+    border: 1px dashed var(--color-line-strong);
+    text-align: center;
+  }
+
+  .st-empty__title {
+    margin: 0;
+    font-size: var(--text-body);
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .st-empty__copy {
+    margin: 0.3rem 0 0;
+    max-width: 52ch;
+    margin-inline: auto;
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--color-ink-subtle);
+  }
+
+  .st-filter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2xs);
+    padding: 0.5rem 0.6rem 0.5rem var(--space-md);
+    border-radius: var(--radius-pill);
+    background: var(--color-violet-soft);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-violet-deep);
+  }
+
+  .st-skel {
+    display: grid;
+    gap: 0.6rem;
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-sunk);
+  }
+
+  .st-skel__line,
+  .st-skel__bar {
+    display: block;
+    border-radius: var(--radius-xs);
+    background: linear-gradient(
+      90deg,
+      var(--color-line-soft) 25%,
+      var(--color-line) 37%,
+      var(--color-line-soft) 63%
+    );
+    background-size: 400% 100%;
+    animation: st-shimmer 1.4s linear infinite;
+  }
+
+  .st-skel__line { width: 40%; height: 14px; }
+  .st-skel__bar  { width: 100%; height: 44px; }
+
+  @keyframes st-shimmer {
+    from { background-position: 100% 0; }
+    to   { background-position: 0 0; }
+  }
+
+  /* ---- about --------------------------------------------------------------- */
+  .st-about__grid {
+    display: grid;
+    gap: var(--space-md);
+    margin-block-start: var(--space-md);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    color: var(--color-ink-muted);
+  }
+
+  @media (width >= 48rem) {
+    .st-about__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+    }
+  }
+
+  .st-about__grid p {
+    margin: 0;
+  }
+
+  .st-about__grid a {
+    color: var(--color-violet-deep);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* =======================================================================
+     THE STRIP  —  index.html
+     A live line, not a badge: it says the state, the number behind it, and
+     where to go for the detail. It reserves its own height so arriving data
+     never shifts the page.
+     ===================================================================== */
+  .status-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm) var(--space-md);
+    min-height: 64px;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-pill);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-xs);
+  }
+
+  @media (width < 40rem) {
+    .status-strip {
+      border-radius: var(--radius-lg);
+    }
+  }
+
+  .status-strip__state {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-width: 0;
+  }
+
+  .status-strip__label {
+    font-size: var(--text-body);
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .status-strip__detail {
+    font-size: var(--text-sm);
+    color: var(--color-ink-subtle);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .status-strip__services {
+    display: flex;
+    gap: 3px;
+    margin-inline-start: auto;
+  }
+
+  @media (width < 48rem) {
+    .status-strip__services {
+      margin-inline-start: 0;
+    }
+  }
+
+  .status-strip__pip {
+    width: 8px;
+    height: 22px;
+    border-radius: var(--st-tick-radius);
+    background: var(--st-tone, var(--st-operational));
+  }
+
+  .status-strip__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 44px;
+    padding-inline: 0.9rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-line);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: background var(--dur-fast) var(--ease-out);
+  }
+
+  .status-strip__link:hover {
+    background: var(--color-surface-sunk);
+  }
+
+  /* Until the fetch lands there is nothing true to show but the shape. */
+  .status-strip[data-state="loading"] .status-strip__label {
+    color: var(--color-ink-subtle);
+  }
+
+  .status-strip[data-state="loading"] .st-dot {
+    background: var(--color-line-strong);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .st-dot--live::after,
+  .st-skel__line,
+  .st-skel__bar {
+    animation: none;
+  }
+
+  .st-skel__line,
+  .st-skel__bar {
+    background: var(--color-line-soft);
+  }
+
+  .st-tick {
+    transition: none;
+  }
+}
+
+@media print {
+  .st-tip,
+  .segmented,
+  .st-hero__actions {
+    display: none;
+  }
+}
+
+@layer components {
+  /* .btn sets display: inline-flex, which outranks the user agent's
+     [hidden] rule — so a hidden button stayed on screen. Caught by seeing
+     "Try again" sitting under a healthy status board. */
+  .btn[hidden],
+  .st-page [hidden] {
+    display: none !important;
+  }
+}
+
+@layer components {
+  /* Open incidents, above the grid. Marked by the clay edge rather than a
+     shouting background: it has to read as urgent without making the rest
+     of a mostly-healthy page feel broken. */
+  .st-active {
+    margin-block-start: var(--space-xl);
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
+    background: var(--color-clay-soft);
+    border: 1px solid rgb(216 90 48 / 22%);
+    border-inline-start: 3px solid var(--color-clay);
+  }
+
+  .st-active .st-incidents {
+    margin-block-start: var(--space-sm);
+  }
+
+  .st-active .st-section__title {
+    font-size: var(--text-h4);
+    color: var(--color-clay-deep);
+  }
+}
+
+@layer components {
+  /* At 390 the 90 ticks needed 359px and the bar scrolled, which puts
+     today off screen on the page where today matters most. Thinner ticks
+     fit the whole window; the row stays 44px tall, so the target only
+     narrows, it does not shrink. */
+  @media (width < 30rem) {
+    .st-tick {
+      min-width: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  /* The range switcher is a real control on a page people use on a phone. */
+  .segmented__option {
+    min-height: 44px;
+  }
+}
+
+@layer components {
+  /* Third time this has bitten on this site: a component with its own
+     `display` (.btn inline-flex, .segmented flex, the waitlist views grid)
+     outranks the user agent's [hidden] rule, so hiding it in JavaScript does
+     nothing. Anything inside the status page that sets [hidden] means it. */
+  .st-page [hidden] {
+    display: none !important;
+  }
+}
+
+@layer components {
+  /* "We do not know" is a real status and needs its own tone. Grey, not
+     green: the failure screenshot had a green dot beside a headline saying
+     the check could not be reached. */
+  [data-status="unknown"] {
+    --st-tone: var(--color-ink-subtle);
+    --st-tone-ink: var(--color-ink-muted);
+  }
+
+  /* The separator sits BEFORE the timestamp, so `:empty + *` pointed at the
+     wrong element and left a dangling "·" whenever there was no time to
+     print. Ask the pill about its own contents instead. */
+  .st-pill:has(.st-pill__checked:empty) .st-pill__sep {
+    display: none;
+  }
+}
+
+@layer components {
+  /* Where an incident was written. Quiet: it is provenance, not a call to
+     action, and it must not compete with the update timeline above it. */
+  .st-inc__source {
+    margin: var(--space-sm) 0 0;
+  }
+
+  .st-inc__source a,
+  .st-inc__all a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 44px;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-ink-muted);
+    text-decoration: none;
+  }
+
+  .st-inc__source a:hover,
+  .st-inc__all a:hover {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .st-inc__source svg,
+  .st-inc__all svg {
+    flex: none;
+  }
+
+  .st-inc__all {
+    margin: 0;
+    text-align: center;
+  }
+}
