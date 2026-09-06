@@ -24,13 +24,12 @@
        account  the number after /jsonp/ in the embed's form action
        form     the number after /forms/ in that same URL
 
-     HOW THE SUBMIT WORKS, AND WHY IT IS NOT fetch():
-     MailerLite's classic endpoint sends no CORS headers, so a fetch from
-     this origin is blocked by the browser before MailerLite ever sees it.
-     That is exactly why their own embed falls back to target="_blank".
-     The path is literally /jsonp/, though, so it answers a JSONP call:
-     a <script> tag is not subject to CORS, and a real response tells us
-     the signup landed rather than us assuming it did.
+     HOW THE SUBMIT WORKS:
+     The path still says /jsonp/, but MailerLite now answers with JSON
+     ({ success: true|false }) and Access-Control-Allow-Origin: *, so a
+     normal fetch POST works. A <script> tag cannot: the body is JSON,
+     not a callback, and the browser fires onerror — which is the
+     "That did not go through" the visitor used to see.
      ------------------------------------------------------------------ */
   var MAILERLITE = {
     account: "2519972",
@@ -275,84 +274,62 @@
     }
 
     /* ----------------------------------------------------------------
-       JSONP submit to MailerLite.
+       fetch POST to MailerLite.
 
-       A <script> tag, because the endpoint sends no CORS headers and a
-       fetch would never leave the browser. Success is either callback
-       firing, OR the script loading cleanly — MailerLite's response calls
-       a name of its own choosing (their embed ships an
-       ml_webform_success_<formId> function for exactly that), so we listen
-       for both ours and theirs and treat a clean load as the third signal.
-       A 4xx, a 5xx, a blocked request or a dropped connection all fire
-       onerror instead, which is a real failure and is reported as one.
+       Same URL and fields as the no-JS form. Success is a 2xx whose
+       body is { success: true }. Validation failures come back 200
+       with success: false; network / 4xx / 5xx / timeout are failures.
        ---------------------------------------------------------------- */
     function submitToMailerlite(email, onDone) {
-      var name = "wlcb_" + Date.now() + "_" + Math.floor(Math.random() * 1e6);
-      var theirs = "ml_webform_success_" + MAILERLITE.form;
-      var script = document.createElement("script");
-      var settled = false;
-      var timer = null;
-
-      function finish(ok) {
-        if (settled) return;
-        settled = true;
-        window.clearTimeout(timer);
-        try {
-          delete window[name];
-        } catch (e) {
-          window[name] = undefined;
-        }
-        if (window[theirs] === handler) {
-          try {
-            delete window[theirs];
-          } catch (e2) {
-            window[theirs] = undefined;
-          }
-        }
-        if (script.parentNode) script.parentNode.removeChild(script);
-        onDone(ok);
-      }
-
-      function handler() {
-        finish(true);
-      }
-
-      window[name] = handler;
-      /* Only claim their callback name if nothing else owns it, so a
-         MailerLite script loaded elsewhere on the page keeps working. */
-      if (typeof window[theirs] !== "function") window[theirs] = handler;
-
       var url =
         "https://assets.mailerlite.com/jsonp/" +
         encodeURIComponent(MAILERLITE.account) +
         "/forms/" +
         encodeURIComponent(MAILERLITE.form) +
-        "/subscribe?callback=" +
-        name +
-        "&fields%5Bemail%5D=" +
-        encodeURIComponent(email) +
-        "&ml-submit=1&anticsrf=true";
+        "/subscribe";
 
-      script.src = url;
-      script.async = true;
-      script.onload = function () {
-        /* The response ran. If it called a callback we have already
-           settled; if it did not, a clean load still means MailerLite
-           accepted the request. */
-        finish(true);
-      };
-      script.onerror = function () {
-        finish(false);
-      };
+      var body = new URLSearchParams();
+      body.set("fields[email]", email);
+      body.set("ml-submit", "1");
+      body.set("anticsrf", "true");
 
-      /* A request that never resolves must not leave the button spinning
-         forever. Long enough for a slow connection, short enough that
-         nobody wonders whether it worked. */
-      timer = window.setTimeout(function () {
+      var settled = false;
+      var controller =
+        typeof AbortController === "function" ? new AbortController() : null;
+      var timer = window.setTimeout(function () {
+        if (controller) controller.abort();
         finish(false);
       }, 12000);
 
-      document.head.appendChild(script);
+      function finish(ok) {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timer);
+        onDone(ok);
+      }
+
+      var opts = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+          Accept: "application/json"
+        },
+        body: body.toString()
+      };
+      if (controller) opts.signal = controller.signal;
+
+      window
+        .fetch(url, opts)
+        .then(function (response) {
+          if (!response.ok) throw new Error("HTTP " + response.status);
+          return response.json();
+        })
+        .then(function (data) {
+          finish(Boolean(data && data.success === true));
+        })
+        .catch(function () {
+          finish(false);
+        });
     }
 
     function remember(email) {
