@@ -294,15 +294,12 @@ and in `app/lib/status.server.ts`; in outline:
 `days` is what draws the uptime bars, and the page trims it to the requested
 range so the bars can never disagree with the sentence above them.
 
-**The live endpoint does not send `days` today.** Daily bars need a stored
-sample per service per day, which means a third Prisma table, and that repo
-keeps Prisma session-only with two documented exceptions that were each an
-owner-level decision. So the route sends `history: false` and this page says
-plainly that these are live checks: no bars, no range switcher (a control
-that would do nothing is removed, not disabled), and the round-trip time of
-each check shown where the API measured one. Adding daily history is a
-decision to take on its own merits, not something to smuggle in behind a
-status page.
+**The live app API reports this minute's checks and currently omits `days`.**
+This site still draws the 30/60/90 bars itself: a day is operational unless
+an incident on that payload (or a GitHub issue labelled `incident`, when the
+browser can read `enstacked/varn`) overlaps it. That is "nothing was
+reported", not a guessed probe. The round-trip time of each live check is
+shown next to uptime where the API measured one.
 
 **What the route actually measures:** the database round trip, whether the
 analytics store is readable, the recent AI failure share across catalogue
@@ -311,11 +308,9 @@ reports nothing about Shopify's admin API, Shopify billing or the theme
 extension CDN — those are Shopify's to report, and a green tick we cannot
 justify is worse than an absent one. Nothing per-shop leaves the endpoint.
 
-**Incidents come from GitHub Issues.** An issue is the incident, its comments
-are the update timeline, and closing it resolves it — so posting an update
-mid-incident never needs a deploy, which is exactly when a deploy is the last
-thing anyone wants to be doing. The app fetches them server-side, cached, and
-each card links back to the issue it was written in.
+**Incidents come from GitHub Issues when this page can read them**, and
+otherwise from the `incidents` array on `/api/status`. An issue is the
+incident, closing it resolves it, and each card links back to GitHub.
 
 The label convention (only the first is required):
 

@@ -4492,6 +4492,11 @@
     font-variant-numeric: tabular-nums;
   }
 
+  .st-svc__latency {
+    color: var(--color-ink-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
   /* ---- the uptime bar --------------------------------------------------- */
   .st-bar-wrap {
     /* 90 thin ticks squeeze fine down to a phone, but if a longer range is

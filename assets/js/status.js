@@ -42,10 +42,13 @@
                        "componentIds": [], "impact" }]
    }
 
-   `days` is optional but is what draws the uptime bars; without it each
-   service shows its current state only. `maintenance` and `incidents` may
-   be empty arrays — the page renders the empty state rather than hiding
-   the section. The range is passed as ?range=30|60|90.
+   `days` is optional. If the live API omits it (it currently sends
+   history:false), this page paints one bar per day from the incident
+   log: GitHub Issues when the browser can read them, otherwise the
+   incidents array on the payload. A day with nothing reported is
+   operational. `maintenance` and `incidents` may be empty arrays —
+   the page renders the empty state rather than hiding the section.
+   The range is passed as ?range=30|60|90.
 
    While STATUS_ENDPOINT is EMPTY both surfaces run on clearly labelled
    PREVIEW DATA so the design can be reviewed. Preview mode says so on the
@@ -65,15 +68,31 @@
      Set this back to "" to return both surfaces to labelled preview data. */
   var STATUS_ENDPOINT = "https://varn.enstacked.com/api/status";
 
-  /* THE ROUTE ABOVE IS NOT DEPLOYED YET.
-     While this is true, an endpoint that does not answer is expected rather
-     than news, so both surfaces fall back to labelled preview data instead of
-     a red "we cannot reach the status API" — which would be the loudest thing
-     on the site, about a page that is not connected yet.
+  /* Live. An unreachable endpoint is reported as an error, not silently
+     replaced with preview data. Set STATUS_ENDPOINT to "" to review the
+     layout on labelled preview data. */
+  var STATUS_ENDPOINT_PENDING = false;
 
-     SET THIS TO false ON THE DAY YOU DEPLOY app/routes/api.status.tsx.
-     After that, an unreachable endpoint IS the news and the page says so. */
-  var STATUS_ENDPOINT_PENDING = true;
+  /* Incident log for the history bars. GitHub's API allows CORS GET; a
+     private repo without a token 404s and we fall back to incidents on
+     the live status payload. */
+  var GITHUB_REPO = "enstacked/varn";
+  var GITHUB_LABEL = "incident";
+
+  var COMPONENT_ALIASES = {
+    storefront: "app",
+    admin: "app",
+    api: "app",
+    webhooks: "app",
+    assets: "app",
+    billing: "app",
+    docs: "app"
+  };
+
+  function resolveComponent(id) {
+    var key = String(id || "").trim().toLowerCase();
+    return COMPONENT_ALIASES[key] || key;
+  }
 
   /* How often to re-check while the tab is in front. */
   var REFRESH_MS = 60000;
@@ -245,18 +264,11 @@
 
   var PREVIEW_SERVICES = [
     {
-      id: "storefront",
-      name: "Storefront swatches",
-      description: "The script that draws swatches on your theme",
+      id: "analytics",
+      name: "Swatch analytics",
+      description: "Interaction counting on Advance and Premium",
       group: "product",
-      stability: 0.999
-    },
-    {
-      id: "admin",
-      name: "Embedded admin",
-      description: "Setup wizard, style studio and product assignment",
-      group: "product",
-      stability: 0.997
+      stability: 0.996
     },
     {
       id: "ai",
@@ -266,45 +278,24 @@
       stability: 0.994
     },
     {
-      id: "analytics",
-      name: "Swatch analytics",
-      description: "Interaction counting on Advance and Premium",
+      id: "jobs",
+      name: "Catalogue runs",
+      description: "Background setup of many products at once",
       group: "product",
-      stability: 0.996
+      stability: 0.995
     },
     {
-      id: "api",
+      id: "app",
       name: "App server",
-      description: "Shopify API calls and settings writes",
+      description: "The server behind the embedded admin and the storefront script",
       group: "platform",
       stability: 0.998
     },
     {
-      id: "webhooks",
-      name: "Shopify webhooks",
-      description: "Install, uninstall and mandatory privacy webhooks",
+      id: "database",
+      name: "Database",
+      description: "Install sessions and the analytics store",
       group: "platform",
-      stability: 0.999
-    },
-    {
-      id: "assets",
-      name: "Script delivery",
-      description: "Storefront bundles served to your shoppers",
-      group: "platform",
-      stability: 0.999
-    },
-    {
-      id: "billing",
-      name: "Plans and billing",
-      description: "Shopify subscriptions, trials and plan changes",
-      group: "account",
-      stability: 0.998
-    },
-    {
-      id: "docs",
-      name: "Documentation",
-      description: "The docs site and in-app help",
-      group: "account",
       stability: 0.997
     }
   ];
@@ -409,7 +400,7 @@
       page: {
         name: "Varn Status",
         updatedAt: new Date().toISOString(),
-        incidentsUrl: "https://github.com/enstacked/varn-status/issues"
+        incidentsUrl: "https://github.com/enstacked/varn/issues"
       },
       status: "operational",
       uptime: uptimeFromDays(all),
@@ -431,7 +422,7 @@
     return [
       {
         id: "inc-ai-queue",
-        url: "https://github.com/enstacked/varn-status/issues/1",
+        url: "https://github.com/enstacked/varn/issues/1",
         title: "AI setup jobs queued behind a slow vision response",
         severity: "minor",
         state: "resolved",
@@ -461,7 +452,7 @@
       },
       {
         id: "inc-analytics-lag",
-        url: "https://github.com/enstacked/varn-status/issues/2",
+        url: "https://github.com/enstacked/varn/issues/2",
         title: "Swatch analytics reporting lag",
         severity: "minor",
         state: "resolved",
@@ -485,6 +476,281 @@
         ]
       }
     ];
+  }
+
+  /* =====================================================================
+     HISTORY
+     The live app API reports this minute's checks and, today, omits daily
+     samples (history:false). Bars and the 30/60/90 switcher still have to
+     work, so this page paints one day per service from the incident log.
+     GitHub Issues are tried first (CORS GET); a private repo 404s and we
+     keep whatever incidents the status API already sent.
+     ===================================================================== */
+
+  var githubCache = { at: 0, value: null };
+  var GITHUB_TTL_MS = 5 * 60 * 1000;
+  var GITHUB_WAIT_MS = 2500;
+
+  function labelNames(issue) {
+    var labels = issue && issue.labels;
+    if (!Array.isArray(labels)) return [];
+    return labels
+      .map(function (label) {
+        if (typeof label === "string") return label;
+        return label && typeof label.name === "string" ? label.name : "";
+      })
+      .filter(Boolean)
+      .map(function (name) {
+        return name.trim().toLowerCase();
+      });
+  }
+
+  function pickLabel(labels, prefix, allowed, fallback) {
+    for (var i = 0; i < labels.length; i++) {
+      if (labels[i].indexOf(prefix) !== 0) continue;
+      var value = labels[i].slice(prefix.length).trim();
+      if (allowed.indexOf(value) !== -1) return value;
+    }
+    return fallback;
+  }
+
+  function canonicalComponents(ids) {
+    var out = [];
+    var seen = {};
+    (ids || []).forEach(function (id) {
+      var key = resolveComponent(id);
+      if (!key || seen[key]) return;
+      seen[key] = true;
+      out.push(key);
+    });
+    return out;
+  }
+
+  function incidentFromIssue(issue) {
+    if (!issue || issue.pull_request) return null;
+    var number = typeof issue.number === "number" ? issue.number : null;
+    var title = typeof issue.title === "string" ? issue.title.trim() : "";
+    var startedAt = issue.created_at;
+    if (!number || !title || !startedAt) return null;
+
+    var labels = labelNames(issue);
+    var closed = issue.state === "closed";
+    var components = canonicalComponents(
+      labels
+        .filter(function (label) {
+          return label.indexOf("component:") === 0;
+        })
+        .map(function (label) {
+          return label.slice("component:".length).trim();
+        })
+    );
+
+    return {
+      id: "gh-" + number,
+      title: title,
+      url: typeof issue.html_url === "string" ? issue.html_url : undefined,
+      severity: pickLabel(labels, "severity:", ["minor", "major", "critical"], "minor"),
+      state: closed
+        ? "resolved"
+        : pickLabel(
+            labels,
+            "status:",
+            ["investigating", "identified", "monitoring", "resolved"],
+            "investigating"
+          ),
+      impact: pickLabel(
+        labels,
+        "impact:",
+        ["operational", "degraded", "partial", "major", "maintenance"],
+        "degraded"
+      ),
+      components: components,
+      startedAt: startedAt,
+      resolvedAt: closed && issue.closed_at ? issue.closed_at : null,
+      summary: typeof issue.body === "string" ? issue.body.slice(0, 1200) : "",
+      updates: []
+    };
+  }
+
+  function maintenanceFromIssue(issue) {
+    if (!issue || issue.pull_request) return null;
+    var number = typeof issue.number === "number" ? issue.number : null;
+    var title = typeof issue.title === "string" ? issue.title.trim() : "";
+    var body = typeof issue.body === "string" ? issue.body : "";
+    if (!number || !title) return null;
+    var starts = body.match(/^\s*starts?\s*:\s*(.+)$/im);
+    if (!starts) return null;
+    var startsAt = new Date(starts[1].trim());
+    if (isNaN(startsAt.getTime())) return null;
+    var duration = body.match(/^\s*duration\s*:\s*(.+)$/im);
+    var labels = labelNames(issue);
+    return {
+      id: "gh-" + number,
+      title: title,
+      startsAt: startsAt.toISOString(),
+      duration: duration ? duration[1].trim() : "",
+      componentIds: canonicalComponents(
+        labels
+          .filter(function (label) {
+            return label.indexOf("component:") === 0;
+          })
+          .map(function (label) {
+            return label.slice("component:".length).trim();
+          })
+      ),
+      impact: body.replace(/^\s*(starts?|duration)\s*:.*$/gim, "").trim(),
+      url: typeof issue.html_url === "string" ? issue.html_url : undefined
+    };
+  }
+
+  function githubJson(url) {
+    return window
+      .fetch(url, {
+        method: "GET",
+        cache: "no-store",
+        credentials: "omit",
+        headers: { Accept: "application/vnd.github+json" }
+      })
+      .then(function (response) {
+        if (!response.ok) return null;
+        return response.json();
+      })
+      .catch(function () {
+        return null;
+      });
+  }
+
+  function emptyGithubLog() {
+    return {
+      incidents: [],
+      maintenance: [],
+      repoUrl: GITHUB_REPO ? "https://github.com/" + GITHUB_REPO + "/issues" : ""
+    };
+  }
+
+  function fetchGithubLog() {
+    if (!GITHUB_REPO) return Promise.resolve(emptyGithubLog());
+    var now = Date.now();
+    if (githubCache.value && now - githubCache.at < GITHUB_TTL_MS) {
+      return Promise.resolve(githubCache.value);
+    }
+
+    var base =
+      "https://api.github.com/repos/" +
+      GITHUB_REPO +
+      "/issues?state=all&per_page=50&sort=created&direction=desc";
+
+    var request = Promise.all([
+      githubJson(base + "&labels=" + encodeURIComponent(GITHUB_LABEL)),
+      githubJson(base + "&labels=maintenance")
+    ]).then(function (pair) {
+      var incidentIssues = pair[0];
+      var maintenanceIssues = pair[1];
+      var log = emptyGithubLog();
+      if (!incidentIssues && !maintenanceIssues) return log;
+
+      log.incidents = (incidentIssues || [])
+        .map(incidentFromIssue)
+        .filter(Boolean);
+      log.maintenance = (maintenanceIssues || [])
+        .map(maintenanceFromIssue)
+        .filter(Boolean);
+      githubCache = { at: Date.now(), value: log };
+      return log;
+    });
+
+    return new Promise(function (resolve) {
+      var settled = false;
+      var timer = window.setTimeout(function () {
+        if (settled) return;
+        settled = true;
+        resolve(emptyGithubLog());
+      }, GITHUB_WAIT_MS);
+      request.then(
+        function (log) {
+          if (settled) return;
+          settled = true;
+          window.clearTimeout(timer);
+          resolve(log);
+        },
+        function () {
+          if (settled) return;
+          settled = true;
+          window.clearTimeout(timer);
+          resolve(emptyGithubLog());
+        }
+      );
+    });
+  }
+
+  function paintServiceDays(services, incidents, range) {
+    var dates = daysBack(range);
+    var today = dates.length ? dates[dates.length - 1] : isoDay(new Date());
+
+    return services.map(function (service) {
+      var existing = Array.isArray(service.days) ? service.days : [];
+      var days = existing.length
+        ? existing.length > range
+          ? existing.slice(existing.length - range)
+          : existing
+        : dates.map(function (date) {
+            var ids = [];
+            var status = "operational";
+            incidents.forEach(function (incident) {
+              var comps = canonicalComponents(incident.components || []);
+              if (comps.length && comps.indexOf(service.id) === -1) return;
+              var start = String(incident.startedAt || "").slice(0, 10);
+              var end = incident.resolvedAt
+                ? String(incident.resolvedAt).slice(0, 10)
+                : today;
+              if (!start || date < start || date > end) return;
+              ids.push(incident.id);
+              status = worst(status, incident.impact);
+            });
+            return { date: date, status: status, incidentIds: ids };
+          });
+
+      var next = {};
+      Object.keys(service).forEach(function (key) {
+        next[key] = service[key];
+      });
+      next.days = days;
+      if (typeof next.uptime !== "number") next.uptime = uptimeFromDays(days);
+      return next;
+    });
+  }
+
+  function enhancePayload(payload, range) {
+    return fetchGithubLog().then(function (log) {
+      var byId = {};
+      (payload.incidents || []).forEach(function (incident) {
+        byId[incident.id] = incident;
+      });
+      (log.incidents || []).forEach(function (incident) {
+        byId[incident.id] = incident;
+      });
+      var incidents = Object.keys(byId).map(function (id) {
+        return byId[id];
+      });
+
+      var maintenance = (payload.maintenance || []).concat(log.maintenance || []);
+      var services = paintServiceDays(payload.services, incidents, range);
+      var all = [];
+      services.forEach(function (service) {
+        all = all.concat(service.days);
+      });
+
+      payload.incidents = incidents;
+      payload.maintenance = maintenance;
+      payload.services = services;
+      payload.history = true;
+      if (typeof payload.uptime !== "number") payload.uptime = uptimeFromDays(all);
+      payload.page = payload.page || {};
+      if (!payload.page.incidentsUrl && log.repoUrl) {
+        payload.page.incidentsUrl = log.repoUrl;
+      }
+      return payload;
+    });
   }
 
   /* =====================================================================
@@ -528,6 +794,9 @@
         if (!payload || !Array.isArray(payload.services)) {
           throw new Error("Unexpected payload");
         }
+        return enhancePayload(payload, range);
+      })
+      .then(function (payload) {
         cache.payload = payload;
         cache.at = Date.now();
         cache.range = range;
@@ -706,12 +975,7 @@
       hideTip();
     }
 
-    /* The live endpoint reports checks, not stored daily samples, and says so
-       with history:false. Nine repetitions of "no history for this service"
-       would be the page nagging about its own backend; it is said once, at the
-       section, and the controls that would do nothing are taken away. */
     function hasHistory(payload) {
-      if (payload.history === false) return false;
       return (payload.services || []).some(function (service) {
         return Array.isArray(service.days) && service.days.length > 0;
       });
@@ -838,12 +1102,11 @@
             meta.appendChild(
               el("span", "st-svc__uptime", formatUptime(service.uptime) + "%")
             );
-          } else if (typeof service.latencyMs === "number") {
-            /* With no uptime figure, the round trip is the honest number to
-               show: it is what was actually measured this minute. */
+          }
+          if (typeof service.latencyMs === "number") {
             var latency = el(
               "span",
-              "st-svc__uptime",
+              "st-svc__latency",
               Math.round(service.latencyMs) + " ms"
             );
             latency.title = "Round trip of the last check";
@@ -896,8 +1159,9 @@
       var span = duration(incident.startedAt, incident.resolvedAt);
       if (span) meta.push(span);
       var names = (incident.components || []).map(function (id) {
+        var canonical = resolveComponent(id);
         var match = services.filter(function (s) {
-          return s.id === id;
+          return s.id === canonical || s.id === id;
         })[0];
         return match ? match.name : id;
       });
@@ -1109,12 +1373,8 @@
           formatUptime(payload.uptime) +
           "%.";
       } else {
-        /* No stored history: say what this page IS rather than printing an
-           em dash where a number should be. */
         lead.textContent =
-          "Every service below is checked live, about once a minute. Daily " +
-          "uptime history is not being recorded yet, so there are no bars to " +
-          "show.";
+          "Every service below is checked live against the Varn app, about once a minute.";
       }
 
       /* A range switcher with nothing to range over is a control that lies. */
