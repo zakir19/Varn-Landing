@@ -42,7 +42,7 @@ Varn uses Shopify's own app billing. That means:
 
 ## Yearly billing
 
-Grow is $129/yr against $179.88 paid monthly, Advance is $339/yr against $479.88, and Premium is $599/yr against $839.88.
+Grow is $129/yr against $179.88 paid monthly, Advance is $349/yr against $479.88, and Premium is $599/yr against $839.88.
 
 Switching between cycles is a plan change like any other, and goes through the same Shopify confirmation.
 

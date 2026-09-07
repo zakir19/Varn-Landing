@@ -11,7 +11,7 @@ AI setup fills in the color values you have not configured yet. Both passes leav
 | **The photo pass** | Your product photos, through a vision model. | Every plan | 1 [AI usage credit](billing/ai-credits) per photo |
 
 ::: note There is no plan gate on AI setup
-Both passes run on every plan, Free included. What differs between plans is the monthly [AI usage credit](billing/ai-credits) allowance the photo pass spends: 250 on Free, 1,500 on Grow, 15,000 on Advance and 50,000 on Premium.
+Both passes run on every plan, Starter included. What differs between plans is the monthly [AI usage credit](billing/ai-credits) allowance the photo pass spends: 250 on Starter, 1,500 on Grow, 10,000 on Advance and 25,000 on Premium.
 :::
 
 ## One-click AI setup

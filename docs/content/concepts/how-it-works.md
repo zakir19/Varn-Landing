@@ -48,7 +48,7 @@ The only exceptions are optional and specific:
 | **Core** | Product page swatches, selection, hover, the gallery filter, style variables. | Always. |
 | **Extras** | Collection and search card chips, quick view, product groups, more in this color, the analytics tracker. | Only when a feature that needs it is on. |
 
-Both are under 10 KB gzipped and both are deferred, so they never block your page from rendering. A store on the Free plan downloads the core file only. See [Performance](reference/performance).
+Both are under 10 KB gzipped and both are deferred, so they never block your page from rendering. A store on Starter downloads the core file only. See [Performance](reference/performance).
 
 ## Progressive enhancement, all the way down
 

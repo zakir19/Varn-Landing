@@ -1,14 +1,14 @@
 ---
 title: Plans and pricing
-description: What Free, Grow, Advance and Premium include, monthly and yearly, with no asterisks.
+description: What Starter, Grow, Advance and Premium include, monthly and yearly, with no asterisks.
 ---
 
-Four plans. Free is genuinely free and permanent, every paid plan is [free for 7 days](billing/trial), and paying yearly costs less than twelve monthly payments on every paid plan.
+Four plans. Starter is genuinely free and permanent, every paid plan is [free for 7 days](billing/trial), and paying yearly costs less than twelve monthly payments on every paid plan.
 
 ::: pricing
 :::
 
-## Free
+## Starter
 
 Everything you need to launch swatches on your store.
 
@@ -30,7 +30,7 @@ Everything you need to launch swatches on your store.
 
 More products and groups as your catalog grows. $129 a year instead of $179.
 
-- Everything in Free
+- Everything in Starter
 - [Per-color photo galleries](guides/variant-galleries) on up to 150 products
 - [Product grouping](guides/product-grouping), up to 5 groups
 - 1,500 [AI usage credits](billing/ai-credits) a month
@@ -38,12 +38,12 @@ More products and groups as your catalog grows. $129 a year instead of $179.
 
 ## Advance, $39.99/mo
 
-Adds advanced styling and swatch click analytics. $339 a year instead of $479.
+Adds advanced styling and swatch click analytics. $349 a year instead of $479.
 
 - Everything in Grow
 - Per-color photo galleries on up to 1,500 products
 - Product grouping, up to 15 groups
-- 15,000 [AI usage credits](billing/ai-credits) a month
+- 10,000 [AI usage credits](billing/ai-credits) a month
 - [Swatch analytics](analytics/overview) and [merchandising advice](analytics/merchandising-advice)
 - Sold-out demand and colors-going-cold reports
 - Self-optimizing swatch order
@@ -58,7 +58,7 @@ For large catalogs that need the highest limits. $599 a year instead of $839.
 - Everything in Advance
 - Per-color photo galleries on an unlimited number of products
 - Product grouping, up to 50 groups
-- 50,000 [AI usage credits](billing/ai-credits) a month
+- 25,000 [AI usage credits](billing/ai-credits) a month
 
 ## What is not gated
 
@@ -72,7 +72,7 @@ Three things are true of every paid feature, and they are worth knowing before y
 2. **The server checks too.** The plan is enforced when your settings are saved, not just in the interface.
 3. **The storefront checks too.** A feature that ships bytes to your storefront checks your plan in the page itself, so downgrading takes effect on your storefront automatically with nothing to clean up.
 
-A consequence worth knowing: on Free and Grow, the analytics tracker is **not shipped at all**. It is not disabled code sitting in your page, it is absent.
+A consequence worth knowing: on Starter and Grow, the analytics tracker is **not shipped at all**. It is not disabled code sitting in your page, it is absent.
 
 ## Changing plans
 

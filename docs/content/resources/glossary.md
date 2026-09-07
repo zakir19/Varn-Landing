@@ -9,7 +9,7 @@ The two passes that fill your color values in for you: name matching against a m
 
 ## AI usage credit
 
-One product photo the AI vision model looks at. Each plan includes a monthly allowance, 250 on Free through 50,000 on Premium, and it resets every month. Nothing else in Varn spends one. See [AI usage credits](billing/ai-credits).
+One product photo the AI vision model looks at. Each plan includes a monthly allowance, 250 on Starter through 25,000 on Premium, and it resets every month. Nothing else in Varn spends one. See [AI usage credits](billing/ai-credits).
 
 ## App embed
 
@@ -33,7 +33,7 @@ What your store is currently allowed to use, derived from your subscription or y
 
 ## Free trial
 
-The first 7 days of any paid plan, granted by Shopify's own subscription billing. Cancel inside those 7 days and you are never billed. The Free plan needs no trial: it has no time limit. See [The free trial](billing/trial).
+The first 7 days of any paid plan, granted by Shopify's own subscription billing. Cancel inside those 7 days and you are never billed. Starter needs no trial: it has no time limit. See [The free trial](billing/trial).
 
 ## Group
 

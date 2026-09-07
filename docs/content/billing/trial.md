@@ -1,9 +1,9 @@
 ---
 title: The free trial
-description: Every paid plan is free for 7 days through Shopify's own billing. The Free plan has no time limit.
+description: Every paid plan is free for 7 days through Shopify's own billing. Starter has no time limit.
 ---
 
-Two honest ways to try Varn: start on the **Free plan**, which never expires, or pick a paid plan and take its **first 7 days free**.
+Two honest ways to try Varn: start on **Starter**, which never expires, or pick a paid plan and take its **first 7 days free**.
 
 ## How the trial works
 
@@ -29,9 +29,9 @@ After 7 days the plan you picked keeps running and Shopify bills it as normal. C
 
 ## What happens if you cancel during the trial
 
-You return to the Free plan. Concretely:
+You return to Starter. Concretely:
 
-| Feature | On Free |
+| Feature | On Starter |
 | --- | --- |
 | Product page swatches | Keep working, unlimited color swatches |
 | Style studio | Keeps working, minus the Advance-plan styling extras |

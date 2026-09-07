@@ -67,7 +67,7 @@ Look at products where two colors are close in tone. That is where a wrong assig
 
 ## Cost
 
-The first three passes are free and unmetered. The vision pass spends one [AI usage credit](billing/ai-credits) per photo it looks at, out of your plan's monthly allowance: 250 on Free, 1,500 on Grow, 15,000 on Advance, 50,000 on Premium.
+The first three passes are free and unmetered. The vision pass spends one [AI usage credit](billing/ai-credits) per photo it looks at, out of your plan's monthly allowance: 250 on Starter, 1,500 on Grow, 10,000 on Advance, 25,000 on Premium.
 
 Credits are claimed before the model is called and handed straight back if the call fails, so a failed run does not cost you anything. If the allowance runs out mid-run, Varn finishes with color detection and tells you. Runs are sequential and cancellable.
 

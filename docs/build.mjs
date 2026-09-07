@@ -38,14 +38,19 @@ const SITE = {
 const TRIAL_DAYS = 7;
 
 const coreRows = (products, groups, credits) => [
-  `Products with variant images, ${products}`,
-  "Unlimited color swatches",
-  "Unlimited AI setup from color names",
-  "Multiple variant options",
+  products.toLowerCase() === "unlimited"
+    ? "Products with variant images, unlimited"
+    : `Products with variant images, up to ${products}`,
   `Product grouping, ${groups}`,
   `AI usage credits, ${credits} a month`,
-  "Swatches on collections, search and quick view",
+];
+
+const SHARED_FEATURES = [
+  "Unlimited color swatches",
+  "Unlimited auto setup from color names",
+  "Multiple variant options",
   "Agent readiness for all products",
+  "Swatches on collections, search and quick view",
 ];
 
 /* The row Grow adds, and the two Advance and Premium add on top, declared once
@@ -61,14 +66,14 @@ const ADVANCED_ROWS = [
 
 const PRICING = [
   {
-    name: "Free",
+    name: "Starter",
     price: "Free",
     per: "forever",
     note: "No time limit.",
     tagline: "Everything you need to launch swatches on your store.",
     cta: "Start free",
     trial: false,
-    rows: coreRows("up to 5", "only 1 group", "250"),
+    rows: coreRows("5", "only 1 group", "250"),
   },
   {
     name: "Grow",
@@ -78,18 +83,18 @@ const PRICING = [
     tagline: "More products and groups as your catalog grows.",
     cta: "Start with Grow",
     trial: true,
-    rows: [...coreRows("up to 150", "up to 5 groups", "1,500"), BARE_ROW],
+    rows: [...coreRows("150", "up to 5 groups", "1,500"), BARE_ROW],
   },
   {
     name: "Advance",
     price: "$39.99",
     per: "/month",
-    note: "or $339 a year, instead of $479",
+    note: "or $349 a year, instead of $479",
     tagline: "Adds advanced styling and swatch click analytics.",
     cta: "Start with Advance",
     trial: true,
     flag: "Most popular",
-    rows: [...coreRows("up to 1,500", "up to 15 groups", "15,000"), BARE_ROW, ...ADVANCED_ROWS],
+    rows: [...coreRows("1,500", "up to 15 groups", "10,000"), BARE_ROW, ...ADVANCED_ROWS],
   },
   {
     name: "Premium",
@@ -99,7 +104,7 @@ const PRICING = [
     tagline: "For large catalogs that need the highest limits.",
     cta: "Start with Premium",
     trial: true,
-    rows: [...coreRows("unlimited", "up to 50 groups", "50,000"), BARE_ROW, ...ADVANCED_ROWS],
+    rows: [...coreRows("Unlimited", "up to 50 groups", "25,000"), BARE_ROW, ...ADVANCED_ROWS],
   },
 ];
 
@@ -503,18 +508,29 @@ function directive(kind, title, body, ctx, toc) {
         `</article>`
       );
     }).join("");
-    return `<div class="pricing">${cards}</div>`;
+    const shared = SHARED_FEATURES.map(
+      (r) =>
+        `<li class="pcard__row">${icon("check", "pcard__tick")}<span>${inline(r)}</span></li>`,
+    ).join("");
+    return (
+      `<div class="pricing">${cards}</div>` +
+      `<div class="pricing-includes">` +
+      `<p class="pricing-includes__title">Every plan includes</p>` +
+      `<ul class="pricing-includes__list">${shared}</ul>` +
+      `</div>`
+    );
   }
 
   /* plan availability strip:  ::: plans free grow advance premium */
   if (kind === "plans") {
+    const PLAN_PILL_LABEL = { free: "Starter", grow: "Grow", advance: "Advance", premium: "Premium" };
     const on = new Set(title.toLowerCase().split(/[\s,]+/).filter(Boolean));
     const row = ["free", "grow", "advance", "premium"]
       .map(
         (p) =>
           `<span class="planpill planpill--${p} ${on.has(p) ? "is-on" : "is-off"}">` +
           `${on.has(p) ? icon("check", "planpill__tick") : ""}` +
-          `${p[0].toUpperCase() + p.slice(1)}</span>`,
+          `${PLAN_PILL_LABEL[p]}</span>`,
       )
       .join("");
     return `<div class="planrow"><span class="planrow__label">Included on</span>${row}</div>`;

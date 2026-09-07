@@ -1541,6 +1541,42 @@
     color: var(--accent-text);
   }
 
+  .pricing-includes {
+    margin-block-start: 1.25rem;
+    padding: 1.1rem 1.15rem;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+  }
+
+  .pricing-includes__title {
+    margin: 0 0 0.75rem;
+    font-size: 1.05rem;
+    font-weight: 650;
+    letter-spacing: -0.015em;
+  }
+
+  .pricing-includes__list {
+    display: grid;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.86rem;
+  }
+
+  @media (min-width: 48em) {
+    .pricing-includes__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 75em) {
+    .pricing-includes__list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
   /* ------------------------------------------------------------ pager -- */
   .pager {
     display: grid;

@@ -1,13 +1,13 @@
 ---
 title: Feature matrix
-description: Every feature in Varn mapped to Free, Grow, Advance and Premium.
+description: Every feature in Varn mapped to Starter, Grow, Advance and Premium.
 ---
 
 A line-by-line comparison. For prices and the plan summaries, see [Plans and pricing](billing/plans).
 
 ## Swatches
 
-| Feature | Free | Grow | Advance | Premium |
+| Feature | Starter | Grow | Advance | Premium |
 | --- | --- | --- | --- | --- |
 | Color swatches on product pages | Yes | Yes | Yes | Yes |
 | Two tone and gradient swatches | Yes | Yes | Yes | Yes |
@@ -18,11 +18,11 @@ A line-by-line comparison. For prices and the plan summaries, see [Plans and pri
 | One-click AI setup (names, 10+ languages) | Yes | Yes | Yes | Yes |
 | Auto-configure the whole catalogue | Yes | Yes | Yes | Yes |
 | AI setup from your photos (vision model) | Yes | Yes | Yes | Yes |
-| AI usage credits a month | 250 | 1,500 | 15,000 | 50,000 |
+| AI usage credits a month | 250 | 1,500 | 10,000 | 25,000 |
 
 ## Variant photos
 
-| Feature | Free | Grow | Advance | Premium |
+| Feature | Starter | Grow | Advance | Premium |
 | --- | --- | --- | --- | --- |
 | Per-color photo galleries | 5 products | 150 products | 1,500 products | Unlimited |
 | Photo sequencing and cover slot | Yes | Yes | Yes | Yes |
@@ -32,7 +32,7 @@ A line-by-line comparison. For prices and the plan summaries, see [Plans and pri
 
 ## Storefront surfaces
 
-| Feature | Free | Grow | Advance | Premium |
+| Feature | Starter | Grow | Advance | Premium |
 | --- | --- | --- | --- | --- |
 | Product pages | Yes | Yes | Yes | Yes |
 | Collection pages | Yes | Yes | Yes | Yes |
@@ -45,7 +45,7 @@ A line-by-line comparison. For prices and the plan summaries, see [Plans and pri
 
 ## Style studio
 
-| Feature | Free | Grow | Advance | Premium |
+| Feature | Starter | Grow | Advance | Premium |
 | --- | --- | --- | --- | --- |
 | Shape, size, spacing | Yes | Yes | Yes | Yes |
 | Custom pixel size | Yes | Yes | Yes | Yes |
@@ -62,7 +62,7 @@ A line-by-line comparison. For prices and the plan summaries, see [Plans and pri
 
 ## Intelligence
 
-| Feature | Free | Grow | Advance | Premium |
+| Feature | Starter | Grow | Advance | Premium |
 | --- | --- | --- | --- | --- |
 | Agent-Readiness score and Agent View | Yes | Yes | Yes | Yes |
 | One-click agent fixes (alt text, gender) | Yes | Yes | Yes | Yes |
@@ -75,7 +75,7 @@ A line-by-line comparison. For prices and the plan summaries, see [Plans and pri
 
 ## Everything else
 
-| Feature | Free | Grow | Advance | Premium |
+| Feature | Starter | Grow | Advance | Premium |
 | --- | --- | --- | --- | --- |
 | 18 storefront languages | Yes | Yes | Yes | Yes |
 | Smooth image swaps (view transitions) | Yes | Yes | Yes | Yes |

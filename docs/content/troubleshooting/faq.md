@@ -84,7 +84,7 @@ No, and deliberately. A swatch is a visual stand-in for a color, and rendering s
 ::: faq
 ### What do the paid plans add?
 
-Grow ($14.99/mo) raises the variant-image limit to 150 products, grouping to 5 groups and [AI credits](billing/ai-credits) to 1,500 a month. Advance ($39.99/mo) adds advanced styling and analytics. Premium ($69.99/mo) carries the highest limits: unlimited variant-image products, 50 groups and 50,000 credits. See [Plans](billing/plans).
+Grow ($14.99/mo) raises the variant-image limit to 150 products, grouping to 5 groups and [AI credits](billing/ai-credits) to 1,500 a month. Advance ($39.99/mo) adds advanced styling and analytics. Premium ($69.99/mo) carries the highest limits: unlimited variant-image products, 50 groups and 25,000 credits. See [Plans](billing/plans).
 
 ### How does the free trial work?
 
@@ -92,7 +92,7 @@ Every paid plan is free for 7 days, through Shopify's own confirmation screen. C
 
 ### Is there a discount for paying yearly?
 
-Yes: Grow $129/yr instead of $179.88, Advance $339/yr instead of $479.88, Premium $599/yr instead of $839.88.
+Yes: Grow $129/yr instead of $179.88, Advance $349/yr instead of $479.88, Premium $599/yr instead of $839.88.
 
 ### What happens to my setup if I downgrade?
 

@@ -14,7 +14,7 @@ A **group** joins those products into one swatch row on each of their product pa
 
 | Plan | Groups |
 | --- | --- |
-| Free | 1 |
+| Starter | 1 |
 | Grow | Up to 5 |
 | Advance | Up to 15 |
 | Premium | Up to 50 |

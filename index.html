@@ -158,12 +158,11 @@
   <main id="main">
     <span id="top"></span>
 
-    <!-- Scroll journey: the SVG route from section to section is generated
-         into this host by main.js. Decorative only, hence aria-hidden.
-         The route itself sits UNDER the sections; the second host carries
-         the checkpoint notification bubbles, which sit above them. -->
+    <!-- Paper plane + dotted route: off for now. Uncomment the two hosts
+         to bring it back (main.js initJourney builds the SVG into them).
     <div class="journey" data-journey aria-hidden="true"></div>
     <div class="journey journey--top" data-journey-top aria-hidden="true"></div>
+    -->
 
     <!-- =================================================================
          HERO
@@ -615,10 +614,7 @@
                 <circle cx="79" cy="62" r="10" fill="none" stroke="#26242E" stroke-width="1.6"></circle>
               </svg>
             </div>
-            <!-- Plan tag commented out so grouping is shown as a first-class
-                 feature here and in the dedicated #groups section below.
-            <span class="tile__tag tile__tag--free">Free to start</span>
-            -->
+            <!-- Plan tag omitted so grouping reads as a first-class feature. -->
             <h3 class="tile__title">Separate products, one swatch row</h3>
             <p class="tile__text">
               If your reds and blues live as different products, group them and

@@ -33,7 +33,7 @@ That is why the engine is split in two:
 | **Core** | Product page swatches, selection, hover, gallery filtering, styling. | Always |
 | **Extras** | Card chips, quick view, product groups, more in this color, analytics. | Only when a feature that needs it is switched on |
 
-A Free-plan store downloads the core chunk only. The extras chunk is not disabled code sitting in your page, it is absent.
+A Starter-plan store downloads the core chunk only. The extras chunk is not disabled code sitting in your page, it is absent.
 
 ## Both scripts are deferred
 

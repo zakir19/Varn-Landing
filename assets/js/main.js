@@ -932,6 +932,10 @@
      ===================================================================== */
 
   function initJourney() {
+    /* Paper plane + dotted route is off for now. Remove this return
+       (and uncomment the two .journey hosts in index.html) to restore. */
+    return;
+
     var host = qs("[data-journey]");
     var topHost = qs("[data-journey-top]");
     var main = qs("#main");

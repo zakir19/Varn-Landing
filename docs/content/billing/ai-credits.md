@@ -11,10 +11,10 @@ Credits exist because that pass is the only part of Varn that calls a vision mod
 
 | Plan | AI usage credits a month |
 | --- | --- |
-| Free | 250 |
+| Starter | 250 |
 | Grow | 1,500 |
-| Advance | 15,000 |
-| Premium | 50,000 |
+| Advance | 10,000 |
+| Premium | 25,000 |
 
 The allowance is per calendar month and resets at the start of each one. Credits do not roll over, and there is nothing to buy separately.
 

@@ -93,7 +93,7 @@
 <p class="md-p">Under 10 KB gzipped per chunk is not an aspiration, it is a build-time check. A change that pushes a chunk over the limit fails the build, and the fix is to split the code or move a feature into the optional chunk, never to raise the limit.</p>
 <p class="md-p">That is why the engine is split in two:</p>
 <div class="table-wrap"><table class="md-table"><thead><tr><th>Chunk</th><th>Contains</th><th>Downloaded</th></tr></thead><tbody><tr><td><strong>Core</strong></td><td>Product page swatches, selection, hover, gallery filtering, styling.</td><td>Always</td></tr><tr><td><strong>Extras</strong></td><td>Card chips, quick view, product groups, more in this color, analytics.</td><td>Only when a feature that needs it is switched on</td></tr></tbody></table></div>
-<p class="md-p">A Free-plan store downloads the core chunk only. The extras chunk is not disabled code sitting in your page, it is absent.</p>
+<p class="md-p">A Starter-plan store downloads the core chunk only. The extras chunk is not disabled code sitting in your page, it is absent.</p>
 <h2 id="both-scripts-are-deferred" class="md-h2">Both scripts are deferred<a class="anchor" href="#both-scripts-are-deferred" aria-label="Link to this section">#</a></h2>
 <p class="md-p">Nothing Varn adds blocks your page from rendering or delays first paint.</p>
 <h2 id="layout-stability" class="md-h2">Layout stability<a class="anchor" href="#layout-stability" aria-label="Link to this section">#</a></h2>
