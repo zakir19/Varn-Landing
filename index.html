@@ -79,7 +79,15 @@
         "name": "What happens to my theme if I uninstall Varn?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Nothing is left behind. Varn never writes into a theme file and never injects a script tag, so removing the app removes the storefront code with it and your theme returns to its own dropdowns."
+          "text": "Nothing is left behind. Varn never writes into a theme file and never injects a script tag, so removing the app removes the storefront code with it and your theme returns to its own dropdowns. Your setup stays saved on your Shopify products, so reinstalling brings it back, and Shopify cancels any paid plan the moment you uninstall."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Varn change my products in Shopify?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In one place, and only when you ask for it. When you save per-color photos, the first photo you picked for each color is set as that color's variant image in Shopify, which is what makes the gallery follow the swatch in your theme. Varn only uses photos the product already has, and never uploads, edits or deletes a photo. Everything else Varn stores is kept separately rather than rewritten into your products."
         }
       },
       {
@@ -103,7 +111,7 @@
         "name": "What is an AI usage credit?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "One credit is one product photo the AI looks at. Matching your option value names against the color dictionary is unlimited on every plan and spends nothing; credits are only spent when Varn sends a photo to the vision model to find out which color it shows. Every plan includes a monthly allowance, from 250 on Starter to 25,000 on Premium, and it resets at the start of each month. Run out and AI setup keeps working from names and color detection until the reset."
+          "text": "One credit is one product photo the AI looks at. Credits are only spent by Set up with AI, which sends a photo to a vision model to find out which color it shows. Auto-detect, which reads your option value names against a color dictionary, is free and unlimited on every plan. Each plan includes a monthly allowance, from 250 on Starter to 25,000 on Premium, and the app shows the date yours resets. If you run out, Set up with AI stops until the reset, and auto-detect and assigning photos by hand carry on as normal."
         }
       },
       {
@@ -111,7 +119,7 @@
         "name": "How does the free trial work?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Every paid plan is free for 7 days. Pick a plan, approve it on Shopify's own confirmation screen, and the first 7 days cost nothing. Cancel inside those 7 days and you are never billed. Starter needs no trial at all: it has no time limit."
+          "text": "Every paid plan is free for 7 days. Pick a plan, approve it on Shopify's own confirmation screen, and the first 7 days cost nothing. Cancel inside those 7 days and you are never billed. Each store gets one trial, so switching plans during it keeps the days you have left rather than starting again, and trials run on the Starter allowance of 250 AI usage credits a month. Starter needs no trial at all: it has no time limit."
         }
       }
     ]
@@ -1592,8 +1600,27 @@
                 Nothing is left behind. Varn never writes into a theme file and
                 never injects a script tag, so removing the app removes the
                 storefront code with it and your theme returns to its own
-                dropdowns. Your product data is untouched, because Varn stores
-                its settings separately rather than rewriting your products.
+                dropdowns. Your setup stays saved on your Shopify products, so
+                reinstalling brings it back, and Shopify cancels any paid plan
+                the moment you uninstall.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__question">
+              Does Varn change my products in Shopify?
+              <svg class="faq__icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 3v12M3 9h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
+            </summary>
+            <div class="faq__answer">
+              <p>
+                In one place, and only when you ask for it. When you save
+                per-color photos, the first photo you picked for each color is
+                set as that color&rsquo;s variant image in Shopify, which is what
+                makes the gallery follow the swatch in your theme. Varn only uses
+                photos the product already has, and never uploads, edits or
+                deletes a photo. Everything else Varn stores is kept separately
+                rather than rewritten into your products.
               </p>
             </div>
           </details>
@@ -1621,11 +1648,11 @@
             </summary>
             <div class="faq__answer">
               <p>
-                No. Setup is a five-step wizard that verifies your theme for you,
-                shows only the options that are actually colors, and fills in
-                the colors it recognizes. If you do want to go further, the
-                Advance plan adds a custom CSS field, but nothing on any plan
-                requires it.
+                No. The setup guide on the home page checks your theme for you,
+                and the product pages show only the options that are actually
+                colors and fill in the colors they recognize. If you do want to
+                go further, the Advance plan adds a custom CSS field, but nothing
+                on any plan requires it.
               </p>
             </div>
           </details>
@@ -1639,28 +1666,30 @@
               <p>
                 Varn recognizes Color, Colour, Couleur, Farbe, Colore, Kleur and
                 Farve automatically. If yours is called Shade, Finish or anything
-                else, add the name once in the style studio and it is treated the
-                same way everywhere.
+                else, add the name once on the Appearance page and it is treated
+                the same way everywhere.
               </p>
             </div>
           </details>
 
           <details class="faq__item">
             <summary class="faq__question">
-              What is AI setup actually doing?
+              What is the AI actually doing?
               <svg class="faq__icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 3v12M3 9h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
             </summary>
             <div class="faq__answer">
               <p>
-                Two passes, and we would rather be specific than mysterious about
-                it. The first matches your option value names against a color
-                dictionary spanning ten languages, applies only the matches it is
-                confident about, runs inside the app and costs nothing. The second
-                is for the values a name cannot answer: Varn sends the product
-                photo to a vision model, which reports the color it can see, so
-                your existing photos get paired with the right variant. That pass
-                is metered in AI usage credits, one credit per photo. Anything
-                either pass is unsure about is left for you to set.
+                Two separate things, and we would rather be specific than
+                mysterious about them. Auto-detect matches your option value
+                names against a color dictionary spanning ten languages, applies
+                only the matches it is confident about, and is free and unlimited
+                on every plan. Set up with AI is for photos: it sends each product
+                photo to a vision model, files it under the color it can see, and
+                puts every color&rsquo;s photos in the same order so switching color
+                does not jump the shopper to a different angle. Shots that belong
+                to no single color, such as a size chart, are kept visible for
+                every color. That one is metered in AI usage credits, one credit
+                per photo. Anything either is unsure about is left for you to set.
               </p>
             </div>
           </details>
@@ -1709,14 +1738,14 @@
             </summary>
             <div class="faq__answer">
               <p>
-                One credit is one product photo the AI looks at. Matching your
-                option value names against the color dictionary is unlimited on
-                every plan and spends nothing. Credits are only spent when Varn
-                sends a photo to the vision model to find out which color it
-                shows. Every plan includes a monthly allowance, from 250 on
-                Starter to 25,000 on Premium, and it resets at the start of each
-                month. Run out and AI setup keeps working from names and color
-                detection until the reset.
+                One credit is one product photo the AI looks at. Credits are only
+                spent by Set up with AI, which sends a photo to the vision model
+                to find out which color it shows. Auto-detect, which reads your
+                option value names, is free and unlimited on every plan. Each
+                plan includes a monthly allowance, from 250 on Starter to 25,000
+                on Premium, and the app shows the date yours resets. If you run
+                out, Set up with AI stops until the reset, while auto-detect and
+                assigning photos by hand carry on as normal.
               </p>
             </div>
           </details>
@@ -1731,8 +1760,11 @@
                 Every paid plan is free for 7 days. Pick a plan, approve it on
                 Shopify&rsquo;s own confirmation screen, and the first 7 days
                 cost nothing. Cancel inside those 7 days and you are never
-                billed. Starter needs no trial at all, so you can equally
-                start there and upgrade the day you outgrow it.
+                billed. Each store gets one trial, so switching plans during it
+                keeps the days you have left rather than starting again, and
+                trials run on the Starter allowance of 250 AI usage credits a
+                month. Starter needs no trial at all, so you can equally start
+                there and upgrade the day you outgrow it.
               </p>
             </div>
           </details>

@@ -683,8 +683,8 @@ ${baseGuard}<title>${esc(page.title)} | ${SITE.docsName}</title>
 </header>
 
 <div class="layout">
-  <aside class="sb" data-sidebar>
-    <div class="sb__inner">
+  <aside class="sb" data-sidebar data-lenis-prevent>
+    <div class="sb__inner" data-lenis-prevent>
       <nav class="sb__nav" aria-label="Documentation">${navHtml}</nav>
       <div class="sb__foot">
         <a class="sb__footlink" href="${SITE.support}">${icon("life")}<span>Email support</span></a>
@@ -716,7 +716,7 @@ ${contentHtml}
       </footer>
     </article>
 
-    <aside class="toc" aria-label="On this page">
+    <aside class="toc" aria-label="On this page" data-lenis-prevent>
       <div class="toc__inner">
         <p class="toc__head">
           <svg class="toc__headicon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 5.5h12M4 10h9M4 14.5h6"/></svg>
@@ -744,7 +744,7 @@ ${contentHtml}
       <input class="searchdlg__input" type="search" placeholder="Search the documentation" autocomplete="off" spellcheck="false" data-search-input aria-label="Search the documentation">
       <kbd class="searchdlg__esc">Esc</kbd>
     </div>
-    <ul class="searchdlg__results" data-search-results></ul>
+    <ul class="searchdlg__results" data-search-results data-lenis-prevent></ul>
     <p class="searchdlg__empty" data-search-empty hidden>No matches. Try a page name, a feature, or a plan.</p>
     <p class="searchdlg__hint"><kbd>&uarr;</kbd><kbd>&darr;</kbd> to move, <kbd>Enter</kbd> to open, <kbd>Esc</kbd> to close</p>
   </div>

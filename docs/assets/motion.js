@@ -63,6 +63,13 @@
      ======================================================================= */
   var lenis = null;
 
+  /* Nested panes keep native overflow. Lenis listens on the window and
+     preventDefault()s the wheel; without this, hovering the sidebar or TOC
+     scrollbar scrolls the page instead of the pane. */
+  $$(".sb, .sb__inner, .toc, .searchdlg__results, .code pre, .table-wrap").forEach(function (el) {
+    el.setAttribute("data-lenis-prevent", "");
+  });
+
   if (window.Lenis && HAS_GSAP && !reduce && !coarse) {
     lenis = new window.Lenis({
       duration: 1.05,

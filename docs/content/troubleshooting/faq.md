@@ -8,11 +8,11 @@ description: The things merchants ask first, answered short.
 ::: faq
 ### What is Varn?
 
-Varn turns your product variants into color and image swatches, with one-click AI setup for your whole catalogue. See [Introduction](getting-started/introduction).
+Varn turns your product variants into color and image swatches, with AI that names your colors and files your photos under them. See [Introduction](getting-started/introduction).
 
 ### How do I get started?
 
-Two steps: activate the app embed on your theme, then run one-click AI setup. The dashboard guide walks you through both. See [Quick start](getting-started/quick-start).
+Activate the app embed on your theme, then set up your colors and their photos. The dashboard guide walks you through it. See [Quick start](getting-started/quick-start).
 
 ### Is the free plan really free?
 
@@ -38,17 +38,21 @@ Click **Activate on your theme** in the setup guide, toggle the embed on, and pr
 
 Yes. The theme picker lists every theme and deep-links into the right one. Activation travels with the theme when you publish.
 
-### What does one-click AI setup do?
+### What does the AI setup do?
 
-It reads your option value names in more than ten languages and configures the confident matches, leaving anything ambiguous for you. When a name is not a color, the photo pass looks at the product photo itself. Both run on every plan; the photo pass spends [AI usage credits](billing/ai-credits). See [AI setup](guides/ai-setup).
+Two separate things. Auto-detect reads your option value names in more than ten languages and configures the confident matches, leaving anything ambiguous for you; it is free and unlimited on every plan. Set up with AI is for photos: it looks at each product photo, files it under the color it shows, and puts every color's photos in the same order. That one spends [AI usage credits](billing/ai-credits), one per photo. See [AI setup](guides/ai-setup).
 
 ### Does it leave code behind when I uninstall?
 
-No. All storefront code is a theme app extension, which Shopify removes for you. Nothing is left in your theme files.
+No. All storefront code is a theme app extension, which Shopify removes for you. Nothing is left in your theme files. Your setup stays saved on your products, so reinstalling brings it back.
+
+### Does Varn change my products?
+
+In one place. When you save per-color photos, the first photo you picked for each color is set as that color's variant image in Shopify, which is what makes the gallery follow the swatch. Varn only uses photos the product already has, and never uploads, edits or deletes a photo. See [Sync variant photos](guides/sync-variant-photos).
 
 ### Will it slow my store down?
 
-Under 10 KB of gzipped JavaScript, deferred, with zero network requests to render. See [Performance](reference/performance).
+The storefront code is deferred and split by feature, so a page downloads only the parts your settings use, and every part is held to a size budget in the build. Nothing is fetched to render a swatch. See [Performance](reference/performance).
 :::
 
 ## Swatches and variants
@@ -88,7 +92,7 @@ Grow ($14.99/mo) raises the variant-image limit to 150 products, grouping to 5 g
 
 ### How does the free trial work?
 
-Every paid plan is free for 7 days, through Shopify's own confirmation screen. Cancel during the trial and you are never billed; otherwise the plan simply continues. See [The trial](billing/trial).
+Every paid plan is free for 7 days, through Shopify's own confirmation screen. Cancel during the trial and you are never billed; otherwise the plan simply continues. Each store gets one trial, so switching plans during it keeps the days you have left rather than starting again, and trials run on the Starter allowance of 250 AI usage credits a month. See [The trial](billing/trial).
 
 ### Is there a discount for paying yearly?
 
