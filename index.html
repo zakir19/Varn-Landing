@@ -40,7 +40,7 @@
     "operatingSystem": "Shopify",
     "description": "Turns Shopify product variants into color and image swatches on product pages, collection pages, search results and quick view, with AI setup that names your colors and matches your photos, a style studio, product grouping and swatch analytics.",
     "offers": [
-      { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "Starter", "price": "0", "priceCurrency": "USD" },
       { "@type": "Offer", "name": "Grow", "price": "14.99", "priceCurrency": "USD" },
       { "@type": "Offer", "name": "Advance", "price": "39.99", "priceCurrency": "USD" },
       { "@type": "Offer", "name": "Premium", "price": "69.99", "priceCurrency": "USD" }
@@ -95,7 +95,7 @@
         "name": "What do the paid plans actually add?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Room, mostly. The free plan gives you unlimited color swatches on product pages, collections, search and quick view, plus 250 AI usage credits a month. Paid plans raise three limits: how many products can have per-color photo galleries (5, 150, 1,500 or unlimited), how many AI usage credits you get each month (250, 1,500, 15,000 or 50,000) and how many product groups you can build (1, 5, 15 or 50). Grow and up also show swatches on products you have not set up yet, and Advance and Premium add swatch analytics and the advanced styling tools."
+          "text": "Room, mostly. Starter is free forever and gives you unlimited color swatches on product pages, collections, search and quick view, plus 250 AI usage credits a month. Paid plans raise three limits: how many products can have per-color photo galleries (5, 150, 1,500 or unlimited), how many AI usage credits you get each month (250, 1,500, 10,000 or 25,000) and how many product groups you can build (1, 5, 15 or 50). Grow and up also show swatches on products you have not set up yet, and Advance and Premium add swatch analytics and the advanced styling tools."
         }
       },
       {
@@ -103,7 +103,7 @@
         "name": "What is an AI usage credit?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "One credit is one product photo the AI looks at. Matching your option value names against the color dictionary is unlimited on every plan and spends nothing; credits are only spent when Varn sends a photo to the vision model to find out which color it shows. Every plan includes a monthly allowance, from 250 on Free to 50,000 on Premium, and it resets at the start of each month. Run out and AI setup keeps working from names and color detection until the reset."
+          "text": "One credit is one product photo the AI looks at. Matching your option value names against the color dictionary is unlimited on every plan and spends nothing; credits are only spent when Varn sends a photo to the vision model to find out which color it shows. Every plan includes a monthly allowance, from 250 on Starter to 25,000 on Premium, and it resets at the start of each month. Run out and AI setup keeps working from names and color detection until the reset."
         }
       },
       {
@@ -111,7 +111,7 @@
         "name": "How does the free trial work?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Every paid plan is free for 7 days. Pick a plan, approve it on Shopify's own confirmation screen, and the first 7 days cost nothing. Cancel inside those 7 days and you are never billed. The Free plan needs no trial at all: it has no time limit."
+          "text": "Every paid plan is free for 7 days. Pick a plan, approve it on Shopify's own confirmation screen, and the first 7 days cost nothing. Cancel inside those 7 days and you are never billed. Starter needs no trial at all: it has no time limit."
         }
       }
     ]
@@ -140,6 +140,7 @@
         <ul class="site-header__links">
           <li><a class="site-header__link" href="#how-it-works">How it works</a></li>
           <li><a class="site-header__link" href="#features">Features</a></li>
+          <li><a class="site-header__link" href="#groups">Groups</a></li>
           <li><a class="site-header__link" href="#studio">Style studio</a></li>
           <li><a class="site-header__link" href="#pricing">Pricing</a></li>
           <li><a class="site-header__link" href="docs/index.html">Docs</a></li>
@@ -328,7 +329,7 @@
             <dd class="facts__value" data-count-to="18">18</dd>
           </div>
           <div class="facts__item">
-            <dt class="facts__label">Products on Free</dt>
+            <dt class="facts__label">Products on Starter</dt>
             <dd class="facts__value">Unlimited</dd>
           </div>
         </dl>
@@ -614,13 +615,15 @@
                 <circle cx="79" cy="62" r="10" fill="none" stroke="#26242E" stroke-width="1.6"></circle>
               </svg>
             </div>
+            <!-- Plan tag commented out so grouping is shown as a first-class
+                 feature here and in the dedicated #groups section below.
             <span class="tile__tag tile__tag--free">Free to start</span>
+            -->
             <h3 class="tile__title">Separate products, one swatch row</h3>
             <p class="tile__text">
               If your reds and blues live as different products, group them and
               they appear as one color row on every page. Drag to set the order,
-              and a product can never sit in two groups by mistake. Your first
-              group is free; plans raise it to 5, 15 or 50.
+              and a product can never sit in two groups by mistake.
             </p>
           </article>
 
@@ -865,6 +868,107 @@
     </section>
 
     <!-- =================================================================
+         PRODUCT GROUPS - separate products, one swatch row
+         ================================================================= -->
+    <section class="section" id="groups" aria-labelledby="groups-title">
+      <div class="shell">
+        <div class="split split--reverse reveal">
+          <div class="split__copy">
+            <p class="eyebrow">Product groups</p>
+            <h2 class="section__title" id="groups-title">
+              Separate products, one <span class="accent accent--clay">swatch row</span>.
+            </h2>
+            <p class="split__text">
+              Plenty of stores list each color as its own product: Aria Tee,
+              Clay; Aria Tee, Blush; Aria Tee, Lilac. Shoppers land on one and
+              never find out the others exist. A group joins those products
+              into one color row on every member&rsquo;s page.
+            </p>
+            <ul class="split__list">
+              <li class="split__list-item">
+                <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <span><strong>Name the row shoppers see</strong>, for example &ldquo;Also in&rdquo;. That caption sits above the chips on each member&rsquo;s product page.</span>
+              </li>
+              <li class="split__list-item">
+                <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <span><strong>Add products, then drag.</strong> Search, tick, add. The member order is the swatch order shoppers see.</span>
+              </li>
+              <li class="split__list-item">
+                <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <span><strong>A product lives in one group.</strong> If it already belongs elsewhere, Varn shows a conflict and a Move here action, so nothing sits in two groups by mistake.</span>
+              </li>
+              <li class="split__list-item">
+                <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <span><strong>Find groups for me.</strong> Varn clusters titles that differ only by a color-like suffix, then you add, edit or dismiss each suggestion.</span>
+              </li>
+              <li class="split__list-item">
+                <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <span><strong>If colors are variants of one product, skip this.</strong> Groups are for the separate-products case. Ordinary swatches cover variants.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="split__media">
+            <div class="mock">
+              <p class="mock__bar">
+                <img src="assets/img/varn-mark.svg" width="14" height="14" alt="" loading="lazy" decoding="async">
+                <span>Varn &rsaquo; Product groups &rsaquo; Aria Tee</span>
+              </p>
+              <div class="gjoin">
+                <p class="gjoin__kicker">Preview on the product page</p>
+                <p class="gjoin__caption">Also in</p>
+                <div class="gjoin__chips" role="img" aria-label="Group chips for Clay, Blush and Lilac. Clay is the current product.">
+                  <span class="gjoin__chip is-current">
+                    <span class="gjoin__dot" style="background:#D85A30"></span>
+                    Clay
+                  </span>
+                  <span class="gjoin__chip">
+                    <span class="gjoin__dot" style="background:#ED93B1"></span>
+                    Blush
+                  </span>
+                  <span class="gjoin__chip">
+                    <span class="gjoin__dot" style="background:#7F77DD"></span>
+                    Lilac
+                  </span>
+                </div>
+
+                <p class="gjoin__kicker">Members, in swatch order</p>
+                <ul class="gjoin__members">
+                  <li class="gjoin__member is-here">
+                    <span class="gjoin__grip" aria-hidden="true"></span>
+                    <span class="gjoin__thumb" style="background:#D85A30"></span>
+                    <span class="gjoin__meta">
+                      <span class="gjoin__title">Aria Tee, Clay</span>
+                      <span class="gjoin__sub">This product</span>
+                    </span>
+                  </li>
+                  <li class="gjoin__member">
+                    <span class="gjoin__grip" aria-hidden="true"></span>
+                    <span class="gjoin__thumb" style="background:#ED93B1"></span>
+                    <span class="gjoin__meta">
+                      <span class="gjoin__title">Aria Tee, Blush</span>
+                      <span class="gjoin__sub">Opens that product</span>
+                    </span>
+                  </li>
+                  <li class="gjoin__member">
+                    <span class="gjoin__grip" aria-hidden="true"></span>
+                    <span class="gjoin__thumb" style="background:#7F77DD"></span>
+                    <span class="gjoin__meta">
+                      <span class="gjoin__title">Aria Tee, Lilac</span>
+                      <span class="gjoin__sub">Opens that product</span>
+                    </span>
+                  </li>
+                </ul>
+
+                <p class="mock__note">Three separate products. One row of chips. Tapping a chip goes to that product.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================
          STYLE STUDIO
          ================================================================= -->
     <section class="section section--sunk" id="studio" aria-labelledby="studio-title">
@@ -1025,7 +1129,7 @@
               </li>
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <span><strong>Names are free, photos are metered.</strong> Matching color names is unlimited on every plan. Reading a photo spends one AI usage credit, and every plan includes a monthly allowance, from 250 on Free to 50,000 on Premium.</span>
+                <span><strong>Names are free, photos are metered.</strong> Matching color names is unlimited on every plan. Reading a photo spends one AI usage credit, and every plan includes a monthly allowance, from 250 on Starter to 25,000 on Premium.</span>
               </li>
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -1242,7 +1346,7 @@
             Start free. Upgrade when you <span class="accent accent--clay">outgrow it</span>.
           </h2>
           <p class="section__lead">
-            Every swatch feature is on the free plan: product pages, collection
+            Every swatch feature is on Starter: product pages, collection
             pages, search and quick view included. Paid plans raise the product,
             group and AI credit limits, then add analytics and advanced styling
             on top.
@@ -1250,17 +1354,18 @@
         </div>
 
         <div class="pricing__switch reveal">
+          <p class="pricing__trial-line">7 day free trial on all paid plans</p>
           <div class="toggle toggle--framed" role="group" aria-label="Choose monthly or yearly billing" data-billing>
             <span class="toggle__thumb" data-billing-thumb aria-hidden="true"></span>
             <button class="toggle__option" type="button" aria-pressed="true" data-billing-option="monthly">Pay monthly</button>
-            <button class="toggle__option" type="button" aria-pressed="false" data-billing-option="yearly">Pay yearly</button>
+            <button class="toggle__option" type="button" aria-pressed="false" data-billing-option="yearly">Pay yearly <span class="toggle__save">26% off</span></button>
           </div>
         </div>
 
         <div class="pricing__grid reveal">
           <article class="plan plan--free">
             <div class="plan__head">
-              <h3 class="plan__name">Free</h3>
+              <h3 class="plan__name">Starter</h3>
             </div>
             <p class="plan__price">
               <span class="plan__amount">Free</span>
@@ -1273,13 +1378,8 @@
             </p>
             <ul class="plan__features">
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Products with variant images, up to 5</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited color swatches</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited AI setup from color names</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Multiple variant options</span></li>
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Product grouping, only 1 group</span></li>
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>AI usage credits, 250 a month</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Swatches on collections, search and quick view</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Agent readiness for all products</span></li>
             </ul>
           </article>
 
@@ -1300,13 +1400,8 @@
             </p>
             <ul class="plan__features">
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Products with variant images, up to 150</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited color swatches</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited AI setup from color names</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Multiple variant options</span></li>
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Product grouping, up to 5 groups</span></li>
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>AI usage credits, 1,500 a month</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Swatches on collections, search and quick view</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Agent readiness for all products</span></li>
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Swatches on products you have not set up yet</span></li>
             </ul>
           </article>
@@ -1318,7 +1413,7 @@
             </div>
             <p class="plan__price">
               <s class="plan__strike" data-strike-yearly="$479" hidden>$479</s>
-              <span class="plan__amount" data-price-monthly="$39.99" data-price-yearly="$339">$39.99</span>
+              <span class="plan__amount" data-price-monthly="$39.99" data-price-yearly="$349">$39.99</span>
               <span class="plan__period" data-period="/month" data-period-yearly="/year">/month</span>
             </p>
             <p class="plan__note" data-note-monthly="Billed monthly, cancel any time" data-note-yearly="Billed yearly, cancel any time">Billed monthly, cancel any time</p>
@@ -1329,13 +1424,8 @@
             </p>
             <ul class="plan__features">
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Products with variant images, up to 1,500</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited color swatches</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited AI setup from color names</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Multiple variant options</span></li>
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Product grouping, up to 15 groups</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>AI usage credits, 15,000 a month</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Swatches on collections, search and quick view</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Agent readiness for all products</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>AI usage credits, 10,000 a month</span></li>
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Swatches on products you have not set up yet</span></li>
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Advanced styling options</span></li>
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Swatch and variant click analytics</span></li>
@@ -1359,18 +1449,27 @@
             </p>
             <ul class="plan__features">
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Products with variant images, unlimited</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited color swatches</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited AI setup from color names</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Multiple variant options</span></li>
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Product grouping, up to 50 groups</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>AI usage credits, 50,000 a month</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Swatches on collections, search and quick view</span></li>
-              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Agent readiness for all products</span></li>
+              <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>AI usage credits, 25,000 a month</span></li>
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Swatches on products you have not set up yet</span></li>
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Advanced styling options</span></li>
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Swatch and variant click analytics</span></li>
             </ul>
           </article>
+        </div>
+
+        <!-- Shared rows, shown once instead of on every card — same as the
+             in-app plan page. Uncomment the matching lis on a card if you
+             ever want that card to list them again. -->
+        <div class="pricing__includes reveal">
+          <h3 class="pricing__includes-title">Every plan includes</h3>
+          <ul class="pricing__includes-list">
+            <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited color swatches</span></li>
+            <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited auto setup from color names</span></li>
+            <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Multiple variant options</span></li>
+            <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Agent readiness for all products</span></li>
+            <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Swatches on collections, search and quick view</span></li>
+          </ul>
         </div>
 
         <p class="pricing__note">
@@ -1593,16 +1692,16 @@
             </summary>
             <div class="faq__answer">
               <p>
-                Room, mostly. Free gives you unlimited color swatches on product
-                pages, collections, search and quick view plus 250 AI usage
-                credits a month, so plenty of stores never need to leave it. Paid
-                plans raise three limits: how many products can have per-color
-                photo galleries (5, 150, 1,500 or unlimited), how many AI usage
-                credits you get each month (250, 1,500, 15,000 or 50,000) and how
-                many product groups you can build (1, 5, 15 or 50). Grow and up
-                also show swatches on products you have not set up yet, and
-                Advance and Premium add swatch analytics and the advanced styling
-                tools.
+                Room, mostly. Starter is free forever and gives you unlimited
+                color swatches on product pages, collections, search and quick
+                view plus 250 AI usage credits a month, so plenty of stores
+                never need to leave it. Paid plans raise three limits: how many
+                products can have per-color photo galleries (5, 150, 1,500 or
+                unlimited), how many AI usage credits you get each month (250,
+                1,500, 10,000 or 25,000) and how many product groups you can
+                build (1, 5, 15 or 50). Grow and up also show swatches on
+                products you have not set up yet, and Advance and Premium add
+                swatch analytics and the advanced styling tools.
               </p>
             </div>
           </details>
@@ -1618,9 +1717,9 @@
                 option value names against the color dictionary is unlimited on
                 every plan and spends nothing. Credits are only spent when Varn
                 sends a photo to the vision model to find out which color it
-                shows. Every plan includes a monthly allowance, from 250 on Free
-                to 50,000 on Premium, and it resets at the start of each month.
-                Run out and AI setup keeps working from names and color
+                shows. Every plan includes a monthly allowance, from 250 on
+                Starter to 25,000 on Premium, and it resets at the start of each
+                month. Run out and AI setup keeps working from names and color
                 detection until the reset.
               </p>
             </div>
@@ -1636,7 +1735,7 @@
                 Every paid plan is free for 7 days. Pick a plan, approve it on
                 Shopify&rsquo;s own confirmation screen, and the first 7 days
                 cost nothing. Cancel inside those 7 days and you are never
-                billed. The Free plan needs no trial at all, so you can equally
+                billed. Starter needs no trial at all, so you can equally
                 start there and upgrade the day you outgrow it.
               </p>
             </div>
@@ -1726,6 +1825,7 @@
           <ul>
             <li><a class="site-footer__link" href="#how-it-works">How it works</a></li>
             <li><a class="site-footer__link" href="#features">Features</a></li>
+            <li><a class="site-footer__link" href="#groups">Product groups</a></li>
             <li><a class="site-footer__link" href="#studio">Style studio</a></li>
             <li><a class="site-footer__link" href="#pricing">Pricing</a></li>
             <li><a class="site-footer__link" href="docs/index.html">Documentation</a></li>

@@ -211,14 +211,26 @@ The site currently sells a waitlist, not an install.
   var MAILERLITE = { account: "2519972", form: "197865579280861031" };
   ```
 
-  **Why it is not `fetch()`.** MailerLite's classic endpoint sends no CORS
-  headers, so a fetch is blocked by the browser before MailerLite ever sees
-  it — which is exactly why their own embed falls back to `target="_blank"`.
-  The path is literally `/jsonp/`, so we call it as JSONP: a `<script>` tag
-  is not subject to CORS, and a real response tells us the signup landed
-  instead of us assuming it did. Success is their callback firing, ours
-  firing, or a clean load; a 4xx, 5xx or dropped connection is a real failure
-  and is shown as one, with the address left in the field to retry.
+  **How the submit works, and why it is not `fetch()`.** MailerLite's classic
+  endpoint sends no CORS headers, so the browser refuses to hand us the
+  response and the promise rejects — every signup looks like a failure even
+  when MailerLite stored it. That is exactly why their own embed uses a plain
+  form with `target="_blank"`. JSONP is no better: a `<script>` tag can only
+  issue a GET, and this is a POST endpoint.
+
+  So we send the form MailerLite already expects — same action, same method,
+  same field names — and point its `target` at a hidden iframe instead of a
+  new tab. A form POST is never subject to CORS, so there is no protocol left
+  to guess at.
+
+  **What that can and cannot know.** The iframe is cross-origin, so its body
+  is unreadable: a load event means MailerLite answered, so success means
+  "sent and answered", not "definitely stored". One case is worth the extra
+  request to get right — a signup killed by an ad or tracker blocker *also*
+  fires that load event, and MailerLite is on most blocklists, so it would
+  otherwise show "You're on the list" and be lost in silence. A `no-cors`
+  reachability probe runs first and, when the host is unreachable, says so in
+  words the visitor can act on instead of a useless "try again".
 
   **Without JavaScript it still works.** The `action`, `method="post"`,
   `target="_blank"`, `name="fields[email]"` and MailerLite's two hidden
