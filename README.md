@@ -167,9 +167,9 @@ in exactly one place.
 | What | Where |
 |---|---|
 | **Launch switch** (every CTA, all pages) | `LAUNCH_URL` at the top of `assets/js/main.js` |
-| **Waitlist signup endpoint** | `WAITLIST_ENDPOINT` at the top of `assets/js/waitlist.js` |
 | **Status API** | `STATUS_ENDPOINT` at the top of `assets/js/status.js` |
-| Canonical + `og:url` | `<head>` of `index.html` |
+| Canonical + `og:url` | `<head>` of each page. Index and privacy point at their published copies on `enstacked.com/varn/`; status points here. `varn.enstacked.com` is the Shopify app, never this site. Docs: `canonicalBase` in `docs/build.mjs`, then `node docs/build.mjs` |
+| Share image | `assets/img/og-cover.jpg` (1200x630), referenced by absolute URL on `varn-landing.vercel.app` |
 | Prices and plan features | the `pricing` section in `index.html` |
 | Theme / app names in the marquee | `THEME_ITEMS` in `assets/js/main.js` |
 | Demo colours, stock states, gallery sets | `DEMO_COLOURS` in `assets/js/main.js` |

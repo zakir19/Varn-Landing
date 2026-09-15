@@ -73,10 +73,12 @@
      layout on labelled preview data. */
   var STATUS_ENDPOINT_PENDING = false;
 
-  /* Incident log for the history bars. GitHub's API allows CORS GET; a
-     private repo without a token 404s and we fall back to incidents on
-     the live status payload. */
-  var GITHUB_REPO = "enstacked/varn";
+  /* Incident log for the history bars, read from a PUBLIC GitHub repo's
+     issues. enstacked/varn is private, so an anonymous request is refused
+     (403) and every page load logged two console errors while falling back
+     to the incidents on the live status payload anyway. Left empty until the
+     incident log lives in a public repo; set "owner/repo" to turn it on. */
+  var GITHUB_REPO = "";
   var GITHUB_LABEL = "incident";
 
   var COMPONENT_ALIASES = {
@@ -744,7 +746,11 @@
       payload.maintenance = maintenance;
       payload.services = services;
       payload.history = true;
-      if (typeof payload.uptime !== "number") payload.uptime = uptimeFromDays(all);
+      if (typeof payload.uptime !== "number") {
+        /* Painted from the incident log, not measured: say so downstream. */
+        payload.uptime = uptimeFromDays(all);
+        payload.uptimeDerived = true;
+      }
       payload.page = payload.page || {};
       if (!payload.page.incidentsUrl && log.repoUrl) {
         payload.page.incidentsUrl = log.repoUrl;
@@ -851,7 +857,16 @@
       label.textContent = LABEL[overall];
 
       var bits = [];
-      if (typeof payload.uptime === "number") {
+      if (payload.uptimeDerived) {
+        /* No measured samples behind this number, only the incident log, so
+           the landing page states what is actually known. */
+        var count = (payload.incidents || []).length;
+        bits.push(
+          count
+            ? count + (count === 1 ? " incident" : " incidents") + " in 90 days"
+            : "No incidents in 90 days"
+        );
+      } else if (typeof payload.uptime === "number") {
         bits.push(formatUptime(payload.uptime) + "% uptime, 90 days");
       }
       if (payload.preview) bits.push("preview data");

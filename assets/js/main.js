@@ -862,7 +862,11 @@
         if (start === null) start = now;
         var progress = Math.min((now - start) / duration, 1);
         var eased = 1 - Math.pow(1 - progress, 3);
-        el.textContent = (target * eased).toFixed(decimals) + suffix;
+        el.textContent =
+          (target * eased).toLocaleString("en-US", {
+            minimumFractionDigits: decimals,
+            maximumFractionDigits: decimals
+          }) + suffix;
         if (progress < 1) window.requestAnimationFrame(frame);
       }
 

@@ -25,7 +25,13 @@ const SITE = {
   name: "Varn",
   docsName: "Varn docs",
   tagline: "Variants & Swatches for Shopify",
-  origin: "https://varn.enstacked.com",
+  /* Where the docs are published for search engines: WordPress serves them at
+     enstacked.com/varn/docs/<page>/ (clean URLs). This static copy points its
+     canonical there so the two never compete as duplicates. varn.enstacked.com
+     is the Shopify app host and never serves these pages. */
+  canonicalBase: "https://enstacked.com/varn/docs",
+  /* Absolute host for files a crawler fetches on its own (the share image). */
+  assetOrigin: "https://varn-landing.vercel.app",
   docsBase: "/docs",
   appListing: "https://apps.shopify.com/varn-variants-swatches",
   support: "mailto:support@enstacked.com",
@@ -552,13 +558,18 @@ function parseFrontMatter(raw) {
 }
 
 /* ----------------------------------------------------------------- shell - */
+/* "index" is the docs home (/varn/docs/), every other page is a clean directory URL. */
+function canonicalFor(id) {
+  return id === "index" ? `${SITE.canonicalBase}/` : `${SITE.canonicalBase}/${id}/`;
+}
+
 function shell({ page, nav, contentHtml, toc, prev, next, breadcrumb }) {
   const id = page.id;
   const a = (f) => asset(id, f);
   const depth = id.split("/").length - 1;
   const toRoot = depth ? "../".repeat(depth) : "./";
   const site = toRoot + "../";
-  const canonical = `${SITE.origin}${SITE.docsBase}/${id}.html`;
+  const canonical = canonicalFor(id);
 
   /* Every URL in this page is relative to the page's own directory. That holds
      for every page except this one: index.html is also reachable as the bare
@@ -634,7 +645,7 @@ ${baseGuard}<title>${esc(page.title)} | ${SITE.docsName}</title>
 <meta property="og:title" content="${esc(page.title)}">
 <meta property="og:description" content="${esc(page.description || SITE.tagline)}">
 <meta property="og:url" content="${canonical}">
-<meta property="og:image" content="${SITE.origin}/assets/img/og-cover.jpg">
+<meta property="og:image" content="${SITE.assetOrigin}/assets/img/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="${site}assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="${site}assets/fonts/inter-tight-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -870,7 +881,7 @@ async function build() {
       flat
         .map(
           (p) =>
-            `  <url><loc>${SITE.origin}${SITE.docsBase}/${p.id}.html</loc><changefreq>monthly</changefreq></url>`,
+            `  <url><loc>${canonicalFor(p.id)}</loc><changefreq>monthly</changefreq></url>`,
         )
         .join("\n") +
       `\n</urlset>\n`,
