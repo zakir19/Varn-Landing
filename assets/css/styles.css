@@ -2507,6 +2507,16 @@
     display: none;
   }
 
+  /* .faq__item clips its rounded corners with overflow: hidden and the
+     question fills it edge to edge, so the site-wide focus outline, drawn
+     3px OUTSIDE the element, was cut away on three sides and a keyboard
+     user saw no ring at all. Drawn 3px inside instead, it stays whole; the
+     radius follows the item's inner curve (its 16px less the 1px border). */
+  .faq__question:focus-visible {
+    outline-offset: -3px;
+    border-radius: calc(var(--radius-md) - 1px);
+  }
+
   .faq__icon {
     inline-size: 18px;
     block-size: 18px;
@@ -3364,6 +3374,13 @@
     .legal-toc__title {
       display: block;
     }
+
+    /* The list scrolls here (overflow-y: auto clips both axes) and every
+       link spans its full width, so the outline's left and right edges
+       were cut off. Inside the link, the whole ring shows. */
+    .legal-toc__link:focus-visible {
+      outline-offset: -2px;
+    }
   }
 
   /* ---- The document ---------------------------------------------------- */
@@ -3925,6 +3942,17 @@
        ever served this scrolls rather than shrinking to invisible. */
     overflow-x: auto;
     overscroll-behavior-x: contain;
+    /* A scrolling box clips BOTH axes and each tick fills the bar's full
+       height, so a focused tick lost the top and bottom of its outline
+       (only a 2px sliver was left on a phone), and the first and last tick
+       lost their outer edge as well. The outline (2px, drawn 2px out) with
+       the 1.12 focus lift reaches about 7px past the bar vertically and 4px
+       sideways, so the padding makes that room and the negative margin
+       hands it straight back: nothing around the bar moves. */
+    padding-block: 8px;
+    padding-inline: 4px;
+    margin-block: -8px;
+    margin-inline: -4px;
   }
 
   .st-bar {
@@ -4426,10 +4454,16 @@
   /* At 390 the 90 ticks needed 359px and the bar scrolled, which puts
      today off screen on the page where today matters most. Thinner ticks
      fit the whole window; the row stays 44px tall, so the target only
-     narrows, it does not shrink. */
+     narrows, it does not shrink.
+
+     A 2px floor still did not fit: 90 ticks at 2px plus 89 1px gaps need
+     269px, and the bar is about 266px wide at 390, narrower still at 360.
+     The bar kept scrolling, with the last days (today included) under the
+     edge behind a scrollbar. With a 1px floor the ticks flex to fill the
+     bar instead, a fraction under 2px each, and every day is on screen. */
   @media (max-width: 29.99rem) {
     .st-tick {
-      min-width: 2px;
+      min-width: 1px;
       border-radius: 2px;
     }
   }
@@ -4948,5 +4982,71 @@
 @media (prefers-reduced-motion: reduce) {
   .site-header__menu-btn {
     transition: none;
+  }
+}
+
+/* =========================================================================
+   TOUCH TARGETS  -  44px on coarse pointers
+   =========================================================================
+   Every control a thumb can reach gets a 44 x 44px hit area on a touch
+   screen, the rule the rest of the site already follows (.btn, header links,
+   the menu button, the FAQ). Keyed to (pointer: coarse) rather than a width:
+   an iPad at 1024px is a touch screen and a narrow desktop window is not.
+
+   Where a control has empty space around it, the hit area grows through an
+   invisible ::before, so nothing on screen moves. Where neighbours sit
+   closer than 44px (the footer links are stacked 34px apart) an invisible
+   overlay would only steal taps from the next link, so the link itself
+   grows instead, and that list gets taller on touch screens.
+
+   Left as they are, on purpose:
+   - .st-tick: 90 days have to fit one row on a phone. The row is already
+     44px tall, and every tick is reachable by keyboard.
+   - Links inside running text: WCAG 2.5.8 exempts inline links, and padding
+     them would break the line spacing of the policy.
+   - .skip-link: it only appears for keyboard focus.
+   ========================================================================= */
+@media (pointer: coarse) {
+  @layer components {
+    .hero__pill--live,
+    .toggle__option,
+    .vgal__chip,
+    .btn--sm {
+      position: relative;
+    }
+
+    /* min() never shrinks a box that is already large enough: 50% - 22px is
+       only negative when that side is under 44px. */
+    .hero__pill--live::before,
+    .toggle__option::before,
+    .vgal__chip::before,
+    .btn--sm::before {
+      content: "";
+      position: absolute;
+      inset-block: min(0px, calc(50% - 22px));
+      inset-inline: min(0px, calc(50% - 22px));
+    }
+
+    /* A range input cannot carry a pseudo-element, so the input itself
+       becomes 44px tall and the negative margins give the extra 20px back to
+       the layout: the track, the thumb and the spacing around them stay put. */
+    .slider {
+      block-size: 44px;
+      margin-block: -10px;
+    }
+
+    /* Traced around the taller box, the focus ring ran into the field label
+       above. Drawn 7px inside, it is the same 30px-tall ring the 24px
+       slider had; the radius grows by the same 7px so the inset ring keeps
+       the site's 6px corner instead of going square. */
+    .slider:focus-visible {
+      outline-offset: -7px;
+      border-radius: calc(var(--radius-xs) + 7px);
+    }
+
+    .site-footer__link {
+      min-block-size: 44px;
+      min-inline-size: 44px; /* the shortest labels are narrower than that */
+    }
   }
 }
