@@ -1733,9 +1733,10 @@
     margin-block-start: var(--space-3xl);
   }
 
-  /* When the section heading sits above the split instead of inside it, the
-     copy column opens with its text, which needs no gap above it. */
-  .split__copy > .split__text:first-child {
+  /* Section headings sit above the split (and the maker row), not inside a
+     column, so the copy column opens with its text, which needs no gap above. */
+  .split__copy > .split__text:first-child,
+  .maker__copy > .split__text:first-child {
     margin-block-start: 0;
   }
 
