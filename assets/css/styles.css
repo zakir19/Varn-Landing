@@ -1256,6 +1256,12 @@
     align-items: start;
   }
 
+  /* Grid items default to their content's width; let both columns shrink
+     so the 320px layout never scrolls sideways. */
+  .steps > * {
+    min-width: 0;
+  }
+
   .steps__list {
     display: grid;
     gap: var(--space-xs);
@@ -3244,7 +3250,10 @@
     font-size: var(--text-xs);
     font-weight: 500;
     color: var(--color-ink-muted);
-    width: max-content;
+    /* fit-content, capped: the longer effective/updated date line wraps on a
+       phone instead of widening the page. */
+    width: fit-content;
+    max-width: 100%;
   }
 
   /* ---- At a glance ---------------------------------------------------- */
@@ -3301,6 +3310,12 @@
     display: grid;
     gap: var(--space-xl);
     align-items: start;
+  }
+
+  /* A grid item's automatic minimum is its content's width, so the policy
+     tables would otherwise widen the whole column past a phone screen. */
+  .legal-body > * {
+    min-width: 0;
   }
 
   @media (width >= 62rem) {
@@ -3424,6 +3439,41 @@
     letter-spacing: -0.015em;
     font-weight: 600;
     color: var(--color-ink);
+  }
+
+  .legal-doc h3 {
+    margin: var(--space-md) 0 var(--space-2xs);
+    font-size: var(--text-h4);
+    line-height: 1.3;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  /* Policy tables (legal basis, retention): hairlines only, and they scroll
+     inside their own box on a narrow phone rather than widening the page. */
+  .legal-table-wrap {
+    margin: 0 0 var(--space-sm);
+    overflow-x: auto;
+  }
+
+  .legal-table {
+    inline-size: 100%;
+    min-inline-size: 30rem;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+  }
+
+  .legal-table th,
+  .legal-table td {
+    padding: 0.6rem 0.75rem 0.6rem 0;
+    border-block-end: 1px solid var(--color-line);
+    text-align: start;
+    vertical-align: top;
+  }
+
+  .legal-table th {
+    color: var(--color-ink);
+    font-weight: 600;
   }
 
   .legal-doc p {
@@ -3659,9 +3709,10 @@
   /* The policy's three blocks (title, summary, document) shared a 1280px
      shell while the prose itself is capped at 68ch, which left the right
      edge ragged. One measure for all three. */
+  /* Full width, same gutter as the header; the policy text keeps its own
+     readable measure (.legal-doc max-width). */
   .legal-page {
-    max-width: 64rem;
-    margin-inline: auto;
+    max-width: none;
   }
 }
 
@@ -3866,7 +3917,7 @@
     gap: var(--space-md);
     padding: var(--space-md);
     border-radius: var(--radius-lg);
-    background: var(--color-surface-sunk);
+    background: var(--color-surface);
     border: 1px solid var(--color-line-soft);
   }
 
@@ -4195,9 +4246,9 @@
   .st-empty {
     padding: var(--space-lg) var(--space-md);
     border-radius: var(--radius-md);
-    background: var(--color-surface-sunk);
+    background: var(--color-surface);
     border: 1px dashed var(--color-line-strong);
-    text-align: center;
+    text-align: start;
   }
 
   .st-empty__title {

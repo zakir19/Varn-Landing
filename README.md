@@ -141,8 +141,8 @@ in exactly one place.
 2. **Before / After toggle** — flips the picker between a plain dropdown and Varn
    chips. It plays itself once when the demo first scrolls into view.
 3. **Theme compatibility marquee** — the Shopify-specific trust band.
-4. **How it works** — the real five-step wizard, with a pinned admin mock that
-   advances as you scroll. Step 4 animates the AI setup colour matching.
+4. **How it works**: the 4-step set-up (Varn handles 3), with a pinned admin mock
+   that advances as you scroll. Step 3 animates auto-detect naming the colors.
 5. **Feature bento** — six capabilities, each tagged with the plan it starts on
    (Free / Free to start / Advance).
 6. **Style studio** — an interactive playground mirroring the app's own style
@@ -156,7 +156,9 @@ in exactly one place.
     mirroring `app/data/plans.ts` in the app repo (the single source of truth).
 12. **Enstacked Technologies** — dedicated maker section with the logo.
 13. **FAQ** — native `<details>`, works with JavaScript disabled.
-14. **Closing CTA + footer + mobile sticky bar.**
+14. **Closing CTA + footer.** Add Varn buttons appear only in the hero and this
+    closing band (owner rule, 2026-09-15); the header, pricing cards and the old
+    mobile sticky bar carry none. Copy follows "Varn Content.docx".
 
 ---
 

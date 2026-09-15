@@ -186,7 +186,7 @@
   }
 
   function formatUptime(n) {
-    if (typeof n !== "number" || !isFinite(n)) return "—";
+    if (typeof n !== "number" || !isFinite(n)) return "n/a";
     if (n >= 99.995) return "100.0";
     return n.toFixed(2);
   }
@@ -865,7 +865,7 @@
       payload.services.slice(0, 9).forEach(function (service) {
         var pip = el("span", "status-strip__pip");
         pip.setAttribute("data-status", known(service.status));
-        pip.setAttribute("title", service.name + " — " + LABEL[known(service.status)]);
+        pip.setAttribute("title", service.name + ": " + LABEL[known(service.status)]);
         dots.appendChild(pip);
       });
       dots.setAttribute(
@@ -1411,7 +1411,7 @@
           } else {
             setNote(
               "error",
-              "Could not reach the status API. Nothing is being reported here yet — this is a problem with this page, not necessarily with Varn."
+              "Could not reach the status API. Nothing is being reported here yet. This is a problem with this page, not necessarily with Varn."
             );
             groupsHost.removeAttribute("aria-busy");
             groupsHost.textContent = "";
@@ -1450,7 +1450,7 @@
             STATUS_ENDPOINT_PENDING
               ? "Not connected yet. The status API is not answering at " +
                 STATUS_ENDPOINT +
-                " — until it is deployed, every figure below is an example, not a measurement."
+                ", and until it is deployed, every figure below is an example, not a measurement."
               : "Preview data. This page is not connected to the Varn status API yet, so every figure below is an example, not a measurement."
           );
         } else {
