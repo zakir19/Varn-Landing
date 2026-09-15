@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Varn - Variants &amp; Swatches for Shopify | Color and image swatches</title>
-  <meta name="description" content="Varn is the Shopify color swatches and variant picker app with single-click AI setup: it reads your product options and builds your swatches for you, no developer needed. Unlimited swatches on product pages, collections, search and quick view, no theme edits, and a free plan that never expires.">
+  <title>Varn: Shopify Variant Images &amp; Color Swatches AI</title>
+  <meta name="description" content="Shopify variant images and color swatches, set up in one click. Every color gets its own photo gallery. No theme edits. Free forever.">
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="https://varn.enstacked.com/">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Varn">
-  <meta property="og:title" content="Varn - Variants &amp; Swatches for Shopify">
-  <meta property="og:description" content="Single-click AI setup turns variant dropdowns into color and image swatches shoppers can see, no developer needed. No theme edits, free plan forever.">
+  <meta property="og:title" content="Varn: Shopify Variant Images &amp; Color Swatches AI">
+  <meta property="og:description" content="Variant images and color swatches with one-click AI setup, everywhere shoppers browse. No theme edits. Free forever.">
   <meta property="og:url" content="https://varn.enstacked.com/">
   <meta property="og:image" content="https://varn.enstacked.com/assets/img/og-cover.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -35,10 +35,10 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Varn - Variants & Swatches",
+    "name": "Varn - Variants & Swatches AI",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Shopify",
-    "description": "Turns Shopify product variants into color and image swatches on product pages, collection pages, search results and quick view, with AI setup that names your colors and matches your photos, a style studio, product grouping and swatch analytics.",
+    "description": "Varn turns your variant options into variant images and color swatches on product pages, collections, search, and quick view. Auto-detect names your whole catalog in one click; AI setup reads the images when a name alone cannot place the color.",
     "offers": [
       { "@type": "Offer", "name": "Starter", "price": "0", "priceCurrency": "USD" },
       { "@type": "Offer", "name": "Grow", "price": "14.99", "priceCurrency": "USD" },
@@ -60,34 +60,10 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Will Varn work with my Shopify theme?",
+        "name": "What happens to my theme if I uninstall the Shopify variant app?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Varn works on any Online Store 2.0 theme, including Dawn and Horizon, because it is a theme app extension that drives your theme's existing variant control rather than replacing it. It detects your theme's own native swatches and steps aside rather than rendering a second row."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Will Varn slow my store down?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The storefront script is deferred and split, so a page downloads only the part your settings actually use, and the build enforces a size budget on it. Swatch data arrives inside the page your theme already renders, so Varn does not add a network request for it and does not shift your layout."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What happens to my theme if I uninstall Varn?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Nothing is left behind. Varn never writes into a theme file and never injects a script tag, so removing the app removes the storefront code with it and your theme returns to its own dropdowns. Your setup stays saved on your Shopify products, so reinstalling brings it back, and Shopify cancels any paid plan the moment you uninstall."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Does Varn change my products in Shopify?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "In one place, and only when you ask for it. When you save per-color photos, the first photo you picked for each color is set as that color's variant image in Shopify, which is what makes the gallery follow the swatch in your theme. Varn only uses photos the product already has, and never uploads, edits or deletes a photo. Everything else Varn stores is kept separately rather than rewritten into your products."
+          "text": "Nothing is left behind. Varn never edits a theme file, so uninstalling returns your theme to its own dropdowns. Your product data stays untouched too."
         }
       },
       {
@@ -95,15 +71,63 @@
         "name": "Can the wrong variant end up in a cart?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. Clicking a swatch selects the value in your theme's own option control and fires its native change event, so your theme's form is still what submits to Shopify. Varn also refuses to select a value your theme has disabled."
+          "text": "No. Clicking a swatch selects the value in your theme’s own control, so your theme’s form is what submits to Shopify, not a separate system. Varn also will not select a value your theme has disabled."
         }
       },
       {
         "@type": "Question",
-        "name": "What do the paid plans actually add?",
+        "name": "Will this Shopify color swatches app slow my store down?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Room, mostly. Starter is free forever and gives you unlimited color swatches on product pages, collections, search and quick view, plus 250 AI usage credits a month. Paid plans raise three limits: how many products can have per-color photo galleries (5, 150, 1,500 or unlimited), how many AI usage credits you get each month (250, 1,500, 10,000 or 25,000) and how many product groups you can build (1, 5, 15 or 50). Grow and up also show swatches on products you have not set up yet, and Advance and Premium add swatch analytics and the advanced styling tools."
+          "text": "No, it will not. Varn is developed with lightweight code optimized for performance and will not slow your store down. It only loads the necessary features when needed, and swatch data comes with the page itself, so nothing extra has to load."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to know any code to use Varn?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The setup guide checks your theme, shows only real color options, and fills them in for you. A custom CSS field is there for anyone who wants to go further, but nothing requires it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is your Shopify variant app really free forever?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Starter is $0, with no time limit. It includes unlimited color swatches, unlimited auto-detect, agent readiness on every product, and swatches on collections, search, and quick view."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I turn on Varn in my theme?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On the Home page, click Activate on the first setup step. Turn the Varn switch on, then click Save. You do this once for each theme you use."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Auto-detect do?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It reads your option names, such as Navy blue or Forest green, and fills in the colors it is sure about. It is free on every plan, and you can change any of them afterwards. Photos are handled separately by Set up with AI on the Variant Images page."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Varn work with my theme?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Varn works with any Online Store 2.0 theme, which is almost every theme sold in the Shopify Theme Store today. Very old themes cannot run app embeds, so Varn will tell you if yours is one of them."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do the paid plans of your Shopify product options app add?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Paid plans raise three limits: how many products you can set up with variant photos, how many product groups you can create, and your monthly AI usage credits. Advance and Premium also add advanced styling and swatch click analytics. Paying yearly saves 26%."
         }
       },
       {
@@ -111,7 +135,7 @@
         "name": "What is an AI usage credit?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "One credit is one product photo the AI looks at. Credits are only spent by Set up with AI, which sends a photo to a vision model to find out which color it shows. Auto-detect, which reads your option value names against a color dictionary, is free and unlimited on every plan. Each plan includes a monthly allowance, from 250 on Starter to 25,000 on Premium, and the app shows the date yours resets. If you run out, Set up with AI stops until the reset, and auto-detect and assigning photos by hand carry on as normal."
+          "text": "One credit is one product photo the AI looks at, and it is only spent by Set up with AI. Auto-detect, which reads your option names, is free and unlimited on every plan. Each plan includes a monthly allowance, from 250 on Starter to 25,000 on Premium, and the app shows the date yours resets."
         }
       },
       {
@@ -119,15 +143,15 @@
         "name": "How does the free trial work?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Every paid plan is free for 7 days. Pick a plan, approve it on Shopify's own confirmation screen, and the first 7 days cost nothing. Cancel inside those 7 days and you are never billed. Each store gets one trial, so switching plans during it keeps the days you have left rather than starting again, and trials run on the Starter allowance of 250 AI usage credits a month. Starter needs no trial at all: it has no time limit."
+          "text": "Every paid plan starts with a 7 day free trial. Approve it on Shopify’s own confirmation screen, and cancel inside those 7 days to pay nothing. Each store gets one trial, so switching plans during it keeps the days you have left."
         }
       },
       {
         "@type": "Question",
-        "name": "My swatches are not showing on my store. What do I do?",
+        "name": "My swatches are not showing on my store. What to do?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Almost always, Varn is not switched on for the theme you are looking at. Go to the Home page, click Activate on the first setup step, turn the Varn switch on, then click Save. You do this once for each theme you use, including any unpublished themes you preview separately."
+          "text": "Varn is usually not switched on for the theme you are looking at. Go to the Home page, click Activate on the first setup step, turn the switch on, and click Save."
         }
       }
     ]
@@ -156,18 +180,36 @@
         <ul class="site-header__links">
           <li><a class="site-header__link" href="#how-it-works">How it works</a></li>
           <li><a class="site-header__link" href="#features">Features</a></li>
-          <li><a class="site-header__link" href="#groups">Groups</a></li>
-          <li><a class="site-header__link" href="#studio">Style studio</a></li>
           <li><a class="site-header__link" href="#pricing">Pricing</a></li>
-          <li><a class="site-header__link" href="docs/index.html">Docs</a></li>
           <li><a class="site-header__link" href="#faq">FAQ</a></li>
+          <li><a class="site-header__link" href="docs/index.html">Docs</a></li>
+          <li><a class="site-header__link" href="status.html">Status</a></li>
         </ul>
       </nav>
 
       <div class="site-header__actions">
-        <a class="btn btn--secondary btn--sm site-header__cta-secondary" href="#how-it-works">See how Varn works</a>
-        <a class="btn btn--primary btn--sm" href="https://apps.shopify.com/varn-variants-swatches" data-launch data-launch-label="Add Varn free"><span data-launch-text>Add Varn free</span></a>
+        <a class="btn btn--secondary btn--sm site-header__cta-secondary" href="mailto:support@enstacked.com">Contact support</a>
+        <button class="site-header__menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+          <svg class="site-header__menu-open" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M3.5 6h13M3.5 10h13M3.5 14h13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg>
+          <svg class="site-header__menu-close" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M5 5l10 10M15 5 5 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg>
+        </button>
       </div>
+    </div>
+
+    <div class="site-header__panel" id="site-menu" data-menu-panel hidden>
+      <nav class="shell" aria-label="Menu">
+        <ul class="site-header__panel-links">
+          <li><a class="site-header__panel-link" href="#how-it-works">How it works</a></li>
+          <li><a class="site-header__panel-link" href="#features">Features</a></li>
+          <li><a class="site-header__panel-link" href="#pricing">Pricing</a></li>
+          <li><a class="site-header__panel-link" href="#faq">FAQ</a></li>
+          <li><a class="site-header__panel-link" href="docs/index.html">Docs</a></li>
+          <li><a class="site-header__panel-link" href="status.html">Status</a></li>
+        </ul>
+        <div class="site-header__panel-actions">
+          <a class="btn btn--secondary btn--block" href="mailto:support@enstacked.com">Contact support</a>
+        </div>
+      </nav>
     </div>
   </header>
 
@@ -194,15 +236,14 @@
           </a>
 
           <h1 class="hero__title" id="hero-title">
-            Nobody buys a color they <span class="accent accent--violet">can&rsquo;t see</span>.
+            Shopify Swatches &amp; Variants App with <span class="accent accent--violet">Single-Click Setup</span>: Free Forever
           </h1>
 
           <p class="hero__lead">
-            Varn&rsquo;s single-click AI reads your product options and builds
-            your color and image swatches for you, no developer needed. It
-            drives your theme&rsquo;s own picker on any Online Store 2.0 theme,
-            edits no theme files, and stays light enough to leave your store
-            speed untouched.
+            Varn: Our Shopify variant &amp; swatches AI reads your product options
+            and builds your variants for you in a single click, no developer
+            needed. It&rsquo;s compatible with every Online Store 2.0 theme and is
+            super lightweight, so it doesn&rsquo;t affect your Shopify store performance.
           </p>
 
           <div class="hero__actions">
@@ -218,7 +259,7 @@
             <svg class="hero__note-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
               <path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
-            Free plan forever. Every paid plan is free for 7 days.
+            Free plan forever. Every paid plan starts with a 7 day free trial.
           </p>
         </div>
 
@@ -336,19 +377,19 @@
 
         <dl class="facts">
           <div class="facts__item">
-            <dt class="facts__label">Works with</dt>
-            <dd class="facts__value">OS 2.0 themes</dd>
+            <dt class="facts__label">Support replies</dt>
+            <dd class="facts__value">Within 24 h</dd>
           </div>
           <div class="facts__item">
             <dt class="facts__label">Theme files edited</dt>
             <dd class="facts__value">0</dd>
           </div>
           <div class="facts__item">
-            <dt class="facts__label">Storefront languages</dt>
-            <dd class="facts__value" data-count-to="18">18</dd>
+            <dt class="facts__label">Free trial on paid plans</dt>
+            <dd class="facts__value">7 days</dd>
           </div>
           <div class="facts__item">
-            <dt class="facts__label">Products on Starter</dt>
+            <dt class="facts__label">Color swatches</dt>
             <dd class="facts__value">Unlimited</dd>
           </div>
         </dl>
@@ -360,7 +401,7 @@
          ================================================================= -->
     <section class="section section--tight" aria-labelledby="themes-title">
       <div class="shell">
-        <p class="eyebrow" id="themes-title">Works with the theme you already have</p>
+        <p class="eyebrow" id="themes-title">Variants on every page, in one click</p>
       </div>
 
       <div class="marquee" data-marquee>
@@ -369,10 +410,11 @@
 
       <div class="shell">
         <p class="section__lead">
-          Varn is a theme app extension, so it works on any Online Store 2.0
-          theme. Instead of building its own picker, it drives the one your
-          theme already ships, and steps aside entirely when your theme has
-          native swatches for that option.
+          Varn turns your variant options into color swatches and image swatches
+          on product pages, collections, search, and quick view. One-click setup
+          names your whole catalog, and product grouping pulls separate products
+          into one shared swatch row. Clicking a swatch selects the option in your
+          theme&rsquo;s own picker, so the wrong variant can never reach checkout.
         </p>
       </div>
     </section>
@@ -383,14 +425,13 @@
     <section class="section section--sunk" id="how-it-works" aria-labelledby="how-title">
       <div class="shell">
         <div class="section__head section__head--center reveal">
-          <p class="eyebrow">Setup</p>
+          <p class="eyebrow">The set-up</p>
           <h2 class="section__title" id="how-title">
-            Five steps, and the app does <span class="accent accent--clay">four of them</span>.
+            The set-up has 4 steps, and Varn handles <span class="accent accent--clay">3 for you</span>.
           </h2>
           <p class="section__lead">
-            The setup wizard checks your theme for you, finds your color
-            options for you, and names your colors for you. You confirm, and
-            you are live.
+            Varn: Our Shopify variants app checks your theme, finds your color
+            options, and names your colors. You just confirm and go live.
           </p>
         </div>
 
@@ -399,78 +440,59 @@
             <li class="step is-active" data-step="0">
               <h3 class="step__head">
                 <span class="step__index" aria-hidden="true">1</span>
-                <span class="step__title">Turn it on</span>
+                <span class="step__title">Get started</span>
               </h3>
               <div class="step__body">
                 <p>
-                  One button opens your theme editor with the Varn app embed
-                  already selected. Toggle it on, hit save, done. Varn then
-                  verifies it is live by reading your theme&rsquo;s own settings,
-                  so the checkmark is a fact, not a guess.
+                  Install Varn from the Shopify App Store and enable it in the
+                  theme editor, then click Save. Varn reads your theme&rsquo;s own
+                  settings back, so you know it is really on.
                 </p>
-                <p class="step__meta">Once per theme</p>
+                <p class="step__meta">Once for each theme you use</p>
               </div>
             </li>
 
             <li class="step" data-step="1">
               <h3 class="step__head">
                 <span class="step__index" aria-hidden="true">2</span>
-                <span class="step__title">Pick a product</span>
+                <span class="step__title">Configuration &amp; auto set-up</span>
               </h3>
               <div class="step__body">
                 <p>
-                  Search your catalog, filter to products that actually have a
-                  color option, and pick one. Or skip ahead and hit
-                  <strong>Auto-detect all swatches</strong> to do the whole
-                  catalog in one pass.
+                  Choose any one product to configure variant images, and AI does
+                  the set-up for you across all of that product&rsquo;s images,
+                  filing every photo under the right color.
                 </p>
-                <p class="step__meta">Free on every plan</p>
+                <p class="step__meta">Varn does this</p>
               </div>
             </li>
 
             <li class="step" data-step="2">
               <h3 class="step__head">
                 <span class="step__index" aria-hidden="true">3</span>
-                <span class="step__title">Confirm the options</span>
+                <span class="step__title">Auto-detect</span>
               </h3>
               <div class="step__body">
                 <p>
-                  Only color options are offered, so Size and Material are never
-                  turned into swatches by accident. Varn recognizes Color,
-                  Colour, Couleur, Farbe, Colore, Kleur and Farve out of the box,
-                  and you can teach it your own name.
+                  Then go to Swatches, and Varn auto-detects and configures all
+                  your product swatches from their color names.
                 </p>
+                <p class="step__meta">Varn does this, free on every plan</p>
               </div>
             </li>
 
             <li class="step" data-step="3">
               <h3 class="step__head">
                 <span class="step__index" aria-hidden="true">4</span>
-                <span class="step__title">Let AI setup fill in the colors</span>
-              </h3>
-              <div class="step__body">
-                <p>
-                  One click reads your option names and fills in the colors it
-                  is confident about, in ten languages. For photos, Set up with AI looks
-                  at every product image and files it under the right color.
-                  Everything stays editable, and a live preview shows the result
-                  as you work.
-                </p>
-                <p class="step__meta">On every plan, including Free</p>
-              </div>
-            </li>
-
-            <li class="step" data-step="4">
-              <h3 class="step__head">
-                <span class="step__index" aria-hidden="true">5</span>
                 <span class="step__title">Go live</span>
               </h3>
               <div class="step__body">
                 <p>
-                  Save, and the swatches are on your storefront. Nothing was
-                  written into your theme, and nothing is left behind if you
-                  ever uninstall.
+                  Save, and your swatches are live in your Shopify store. Nothing
+                  was written into your theme, so uninstalling leaves nothing
+                  behind.
                 </p>
+                <p class="step__meta">Varn does this</p>
               </div>
             </li>
           </ol>
@@ -485,7 +507,7 @@
               <div class="mock__panel" data-mock-panel="0">
                 <div class="mock__row">
                   <span class="mock__row-chip"></span>
-                  <span class="mock__row-name">Horizon &mdash; live theme</span>
+                  <span class="mock__row-name">Horizon, live theme</span>
                   <span class="mock__row-state">Checking&hellip;</span>
                 </div>
                 <div class="mock__row is-matched">
@@ -498,48 +520,39 @@
               </div>
 
               <div class="mock__panel" data-mock-panel="1" hidden>
-                <div class="mock__row">
-                  <span class="mock__row-chip"></span>
-                  <span class="mock__row-name">Atelier Knit Tee</span>
-                  <span class="mock__row-state">6 colors</span>
-                </div>
-                <div class="mock__row">
-                  <span class="mock__row-chip"></span>
-                  <span class="mock__row-name">Loft Merino Cardigan</span>
-                  <span class="mock__row-state">4 colors</span>
-                </div>
-                <div class="mock__row">
-                  <span class="mock__row-chip"></span>
-                  <span class="mock__row-name">Studio Wide Trouser</span>
-                  <span class="mock__row-state">3 colors</span>
-                </div>
-                <p class="mock__note">Search, filter by status, or configure the whole catalog in one run.</p>
-              </div>
-
-              <div class="mock__panel" data-mock-panel="2" hidden>
                 <div class="mock__row is-matched">
                   <span class="mock__row-chip"></span>
-                  <span class="mock__row-name">Color &middot; 6 values</span>
-                  <span class="mock__row-state">On</span>
+                  <span class="mock__row-name">Lilac</span>
+                  <span class="mock__row-state">3 photos</span>
                 </div>
-                <p class="mock__note">Not listed: Size, Fit. Varn only turns color options into swatches.</p>
+                <div class="mock__row is-matched">
+                  <span class="mock__row-chip"></span>
+                  <span class="mock__row-name">Terracotta</span>
+                  <span class="mock__row-state">2 photos</span>
+                </div>
+                <div class="mock__row is-matched">
+                  <span class="mock__row-chip"></span>
+                  <span class="mock__row-name">Sage</span>
+                  <span class="mock__row-state">2 photos</span>
+                </div>
+                <p class="mock__note">Set up with AI filed every product photo under its color. You can change anything it picked.</p>
               </div>
 
-              <div class="mock__panel" data-mock-panel="3" hidden data-mock-ai>
+              <div class="mock__panel" data-mock-panel="2" hidden data-mock-ai>
                 <div class="mock__row" data-ai-row><span class="mock__row-chip"></span><span class="mock__row-name">Lilac</span><span class="mock__row-state">Waiting</span></div>
                 <div class="mock__row" data-ai-row><span class="mock__row-chip"></span><span class="mock__row-name">Blush</span><span class="mock__row-state">Waiting</span></div>
                 <div class="mock__row" data-ai-row><span class="mock__row-chip"></span><span class="mock__row-name">Terracotta</span><span class="mock__row-state">Waiting</span></div>
                 <div class="mock__row" data-ai-row><span class="mock__row-chip"></span><span class="mock__row-name">Sage</span><span class="mock__row-state">Waiting</span></div>
-                <p class="mock__note" data-ai-note>One-click AI setup reads the value names and fills in what it is confident about.</p>
+                <p class="mock__note" data-ai-note>Auto-detect reads the value names and fills in what it is sure about.</p>
               </div>
 
-              <div class="mock__panel" data-mock-panel="4" hidden>
+              <div class="mock__panel" data-mock-panel="3" hidden>
                 <div class="mock__row is-matched">
                   <span class="mock__row-chip"></span>
                   <span class="mock__row-name">Swatches are live</span>
                   <span class="mock__row-state">Saved</span>
                 </div>
-                <p class="mock__note">Saved to a public metafield, read by your theme at render time. No extra network request, no layout shift.</p>
+                <p class="mock__note">Saved on your products and read by your theme at render time. No extra network request, no layout shift.</p>
                 <span class="btn btn--secondary btn--sm mock__cta">Preview on your store</span>
               </div>
             </div>
@@ -554,9 +567,9 @@
     <section class="section" id="features" aria-labelledby="features-title">
       <div class="shell">
         <div class="section__head section__head--center reveal">
-          <p class="eyebrow">Capabilities</p>
+          <p class="eyebrow">Features</p>
           <h2 class="section__title" id="features-title">
-            Everything a swatch <span class="accent accent--violet">should</span> do.
+            Varn does everything a Shopify swatches app should do <span class="accent accent--violet">&amp; more</span>.
           </h2>
         </div>
 
@@ -571,13 +584,9 @@
               </div>
             </div>
             <span class="tile__tag tile__tag--free">Free</span>
-            <h3 class="tile__title">Solid, two-tone, gradient or a real photo</h3>
+            <h3 class="tile__title">Auto-detect: one click, every color named</h3>
             <p class="tile__text">
-              &ldquo;Navy / Cream&rdquo; renders as navy and cream, split down the
-              middle. Photo swatches upload at full resolution through
-              Shopify&rsquo;s Files API, so there is no quality cap and no blurry
-              thumbnails. Values with no color and no photo fall back to
-              readable text pills rather than a row of identical grey circles.
+              You click once, and auto-detect reads your option names, Color, Colour, Farbe, and ten languages&rsquo; worth of others, then fills in the matching swatch across your whole catalog. It only fills in what it&rsquo;s sure about, so anything ambiguous is left for you, never guessed, and it never overwrites a value you set by hand.
             </p>
           </article>
 
@@ -592,10 +601,7 @@
             <span class="tile__tag tile__tag--free">Free</span>
             <h3 class="tile__title">Sold out, marked honestly</h3>
             <p class="tile__text">
-              A sold-out color stays visible with a strike through it, styled as
-              a strike, a fade, or left plain. Varn refuses to select a value
-              your theme has disabled, so it can never sneak into a cart. Never
-              color alone, so screen readers hear &ldquo;Sage, sold out&rdquo; too.
+              Out-of-stock colors don&rsquo;t disappear. They stay on the page with a strike, a fade, or plain styling, and Varn won&rsquo;t let anyone select one, so it can&rsquo;t slip into a cart.
             </p>
           </article>
 
@@ -614,10 +620,7 @@
             <span class="tile__tag tile__tag--free">Free to start</span>
             <h3 class="tile__title">The gallery follows the color</h3>
             <p class="tile__text">
-              Pick Lilac and the gallery shows only the lilac photos, in the
-              order you dragged them, with your chosen cover first. It re-applies
-              itself even after your theme re-renders the section. Free on your
-              first 5 products; plans raise the limit to 150, 1,500 or unlimited.
+              Click Clay to see the clay photos. The gallery jumps to that variant&rsquo;s own images, in the order you arranged them, so nobody scrolls past six other colors to find the one they picked.
             </p>
           </article>
 
@@ -637,9 +640,7 @@
             <!-- Plan tag omitted so grouping reads as a first-class feature. -->
             <h3 class="tile__title">Separate products, one swatch row</h3>
             <p class="tile__text">
-              If your reds and blues live as different products, group them and
-              they appear as one color row on every page. Drag to set the order,
-              and a product can never sit in two groups by mistake.
+              Some stores list every color as its own product. Varn pulls them into a single row of swatches, so a shopper who lands on the navy one can see the cream one without going back to search.
             </p>
           </article>
 
@@ -657,10 +658,7 @@
             <span class="tile__tag tile__tag--advance">Advance</span>
             <h3 class="tile__title">Find out which colors actually sell</h3>
             <p class="tile__text">
-              Anonymous click and add-to-cart tracking per color, plus sold-out
-              demand: how many shoppers clicked a color that was not available.
-              Then plain-language advice on what to restock, feature,
-              investigate or retire.
+              Varn counts clicks and add-to-carts for every color. It also counts the clicks on colors you&rsquo;ve sold out of, so you can restock before you run out, not after.
             </p>
           </article>
 
@@ -681,9 +679,7 @@
             <span class="tile__tag tile__tag--free">Free</span>
             <h3 class="tile__title">Swatches everywhere shoppers browse</h3>
             <p class="tile__text">
-              Collection pages, search results, quick-view pop-ups and featured
-              rows. Hovering a chip swaps the card photo, and clicking it can
-              switch the card in place instead of navigating away.
+              Collection pages, search results, quick-view pop-ups, featured rows: the swatches show up wherever shoppers already are, not only on the product page.
             </p>
           </article>
         </div>
@@ -698,23 +694,20 @@
       <div class="shell">
         <div class="split split--reverse reveal">
           <div class="split__copy">
-            <p class="eyebrow">Agent readiness</p>
+            <p class="eyebrow">AI agent readiness, available only in Varn AI</p>
             <h2 class="section__title" id="agent-title">
-              Your next shopper might be an <span class="accent accent--violet">AI agent</span>.
+              Increase your visibility for <span class="accent accent--violet">AI shoppers</span> with our Shopify color swatches app.
             </h2>
             <p class="split__text">
-              When someone asks an AI shopping assistant for &ldquo;a sage green
-              linen shirt in a medium&rdquo;, it does not look at your
-              photography. It reads structured data: category, color, size,
-              target gender, image alt text. Miss those and you are invisible to
-              that shopper.
+              When someone asks an AI assistant for &ldquo;a sage green linen shirt
+              in a medium&rdquo;, it does not look at your photography. It reads
+              structured data: category, color, size, image alt text. Miss those,
+              and you are invisible to that shopper.
             </p>
             <p class="split__text">
-              Varn scores every product out of 100 on exactly those signals,
-              shows you the literal record an agent receives, and fixes the gaps
-              in one click, on every plan including Free. It also publishes
-              proper ProductGroup structured data for you, rendered server-side,
-              at zero JavaScript cost.
+              But Varn AI saves you on that part as well. It scores every product
+              out of 100 on exactly those signals, shows you the literal record an
+              agent receives, and also helps you fix those gaps in one click.
             </p>
             <p class="actions">
               <a class="btn btn--secondary" href="#pricing">See what&rsquo;s included</a>
@@ -726,7 +719,7 @@
               <div class="scorecard__head">
                 <div>
                   <p class="eyebrow">Agent readiness</p>
-                  <p class="scorecard__score" data-count-to="85" data-count-suffix="/100">85/100</p>
+                  <p class="scorecard__score" data-count-to="82" data-count-suffix="/100">82/100</p>
                   <p class="scorecard__note">Example score</p>
                 </div>
                 <p class="scorecard__grade" aria-label="Grade A">A</p>
@@ -735,35 +728,30 @@
               <div class="scorecard__signals">
                 <div class="signal">
                   <span>Product category</span>
-                  <span class="signal__points">30 / 30</span>
+                  <span class="signal__points">35 / 35</span>
                   <span class="signal__bar"><span class="signal__fill" data-fill-to="100"></span></span>
                 </div>
                 <div class="signal">
                   <span>Color option</span>
-                  <span class="signal__points">25 / 25</span>
+                  <span class="signal__points">29 / 29</span>
                   <span class="signal__bar"><span class="signal__fill" data-fill-to="100"></span></span>
                 </div>
                 <div class="signal">
                   <span>Size option</span>
-                  <span class="signal__points">15 / 15</span>
+                  <span class="signal__points">18 / 18</span>
                   <span class="signal__bar"><span class="signal__fill" data-fill-to="100"></span></span>
                 </div>
                 <div class="signal">
-                  <span>Target gender</span>
-                  <span class="signal__points">15 / 15</span>
-                  <span class="signal__bar"><span class="signal__fill" data-fill-to="100"></span></span>
-                </div>
-                <div class="signal">
-                  <span>Image alt text <strong>&mdash; missing</strong></span>
-                  <span class="signal__points">0 / 15</span>
+                  <span>Image alt text <strong>missing</strong></span>
+                  <span class="signal__points">0 / 18</span>
                   <span class="signal__bar signal__bar--missing"><span class="signal__fill" data-fill-to="0"></span></span>
                 </div>
               </div>
 
               <p class="scorecard__note">
-                One click writes descriptive alt text for every product image and
-                sets the standard target-gender attribute. Ambiguous products are
-                skipped rather than guessed.
+                Image alt text is the only gap here, the one thing between this
+                product and a perfect 100. Run the one-click fix to close it across
+                your whole catalog, not just this product.
               </p>
             </div>
           </div>
@@ -890,36 +878,33 @@
       <div class="shell">
         <div class="split split--reverse reveal">
           <div class="split__copy">
-            <p class="eyebrow">Product groups</p>
+            <p class="eyebrow">Product grouping</p>
             <h2 class="section__title" id="groups-title">
-              Separate products, one <span class="accent accent--clay">swatch row</span>.
+              One row, every color, and Varn <span class="accent accent--clay">builds it for you</span>.
             </h2>
             <p class="split__text">
-              Plenty of stores list each color as its own product: Aria Tee,
-              Clay; Aria Tee, Blush; Aria Tee, Lilac. Shoppers land on one and
-              never find out the others exist. A group joins those products
-              into one color row on every member&rsquo;s page.
+              Plenty of stores sell every color as its own product. A shopper who
+              lands on the Clay listing has no way of knowing other colors exist,
+              unless they search. Our Shopify swatches app&rsquo;s grouping feature
+              fixes that: pick the products with multiple colors, and Varn shows
+              them as one row of swatches on each product page.
             </p>
             <ul class="split__list">
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <span><strong>Name the row shoppers see</strong>, for example &ldquo;Also in&rdquo;. That caption sits above the chips on each member&rsquo;s product page.</span>
+                <span><strong>Name the row:</strong> give it a caption shoppers will recognize, like Also in. It sits right above the swatches on every product in the group.</span>
               </li>
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <span><strong>Add products, then drag.</strong> Search, tick, add. The member order is the swatch order shoppers see.</span>
+                <span><strong>Set the order by dragging:</strong> add the products you want, then drag them into place. Whatever order you set is what shoppers see.</span>
               </li>
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <span><strong>A product lives in one group.</strong> If it already belongs elsewhere, Varn shows a conflict and a Move here action, so nothing sits in two groups by mistake.</span>
+                <span><strong>One group per product:</strong> a product can only belong to one group. If you try to add one that&rsquo;s already in another, Varn flags it and alerts you to change it.</span>
               </li>
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <span><strong>Find groups for me.</strong> Varn clusters titles that differ only by a color-like suffix, then you add, edit or dismiss each suggestion.</span>
-              </li>
-              <li class="split__list-item">
-                <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <span><strong>If colors are variants of one product, skip this.</strong> Groups are for the separate-products case. Ordinary swatches cover variants.</span>
+                <span><strong>Or skip the manual work entirely:</strong> Varn can find the groups for you. It clusters titles that differ only by a color word and hands you a list to approve, edit, or dismiss.</span>
               </li>
             </ul>
           </div>
@@ -992,13 +977,13 @@
         <div class="section__head section__head--center reveal">
           <p class="eyebrow">Style studio</p>
           <h2 class="section__title" id="studio-title">
-            Make it look like <span class="accent accent--violet">your</span> store.
+            Match your Shopify swatches to <span class="accent accent--violet">your store&rsquo;s look</span>.
           </h2>
           <p class="section__lead">
-            Shape, size, spacing, borders, labels, hover effects, sold-out
-            treatment. No coding, no developer needed: change it here and watch
-            the swatches update, exactly the way the real style studio works
-            inside the app.
+            Customize your Shopify swatches&rsquo; shape, size, spacing, borders,
+            labels, hover effects, and sold-out look to match your store, no
+            coding, no developer needed. Change it inside Varn&rsquo;s Style Studio
+            and watch your swatches update in the live preview.
           </p>
         </div>
 
@@ -1060,10 +1045,11 @@
     <section class="section" aria-labelledby="surfaces-title">
       <div class="shell">
         <div class="section__head section__head--center reveal">
-          <p class="eyebrow">Reach</p>
+          <p class="eyebrow">Everywhere</p>
           <h2 class="section__title" id="surfaces-title">
             A shopper shouldn&rsquo;t have to open a product to <span class="accent accent--clay">see the colors</span>.
           </h2>
+          <p class="section__lead">And they will not with our Shopify variant picker app.</p>
         </div>
 
         <div class="surfaces reveal">
@@ -1086,7 +1072,7 @@
               </div>
             </div>
             <h3 class="surface-card__title">Collection pages</h3>
-            <p class="surface-card__text">Every color on the card, hover to change the photo.</p>
+            <p class="surface-card__text">A shopper scanning your collection grid sees every color without clicking into it.</p>
           </article>
 
           <article class="surface-card">
@@ -1096,7 +1082,7 @@
               <div class="product-card"><span class="product-card__media" data-fill="#F5F1E8"></span><span class="product-card__name">Result 3</span><span class="product-card__swatches"><span class="product-card__chip" data-fill="#F5F1E8"></span><span class="product-card__chip" data-fill="#9CAF88"></span></span></div>
             </div>
             <h3 class="surface-card__title">Search results</h3>
-            <p class="surface-card__text">The same chips on anything your search app returns.</p>
+            <p class="surface-card__text">The moment someone searches your store, the results already show every color available.</p>
           </article>
 
           <article class="surface-card">
@@ -1106,7 +1092,7 @@
               <div class="product-card"><span class="product-card__media" data-fill="#D85A30"></span><span class="product-card__name">Card</span><span class="product-card__swatches"><span class="product-card__chip" data-fill="#D85A30"></span><span class="product-card__chip" data-fill="#26242E"></span></span></div>
             </div>
             <h3 class="surface-card__title">Quick view</h3>
-            <p class="surface-card__text">Chips inside the pop-up, without doubling up your theme&rsquo;s own.</p>
+            <p class="surface-card__text">Shoppers get the same color choice inside the quick view pop-up, without a full page load.</p>
           </article>
 
           <article class="surface-card">
@@ -1116,7 +1102,7 @@
               <div class="product-card"><span class="product-card__media" data-fill="#26242E"></span><span class="product-card__name">Home</span><span class="product-card__swatches"><span class="product-card__chip" data-fill="#26242E"></span><span class="product-card__chip" data-fill="#9CAF88"></span></span></div>
             </div>
             <h3 class="surface-card__title">Everywhere else</h3>
-            <p class="surface-card__text">Home page rows, featured collections, related products.</p>
+            <p class="surface-card__text">Home page rows, featured collections, related products: any spot where a product shows up gets the same treatment.</p>
           </article>
         </div>
       </div>
@@ -1129,32 +1115,32 @@
       <div class="shell">
         <div class="split reveal">
           <div class="split__copy">
-            <p class="eyebrow">AI setup</p>
+            <p class="eyebrow">AI set-up</p>
             <h2 class="section__title" id="ai-title">
-              A catalog of colors, named in <span class="accent accent--violet">one pass</span>.
+              Varn handles the variants with its <span class="accent accent--violet">one-click AI setup</span>.
             </h2>
             <p class="split__text">
-              AI setup fills your color values in for you. It reads your
-              option names in ten languages, and when a name is not a color it
-              sends the product photo to a vision model and asks which color it
-              is looking at.
+              Most Shopify variant apps leave you with an empty color picker and
+              hundreds of products to fill in by hand. Varn&rsquo;s one-click AI setup
+              for Shopify variants does it for you. It reads your product option
+              names, in ten languages, and fills in the colors it is confident about.
             </p>
             <ul class="split__list">
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <span><strong>It only fills in what it is sure about.</strong> Anything ambiguous is left for you, never guessed.</span>
+                <span><strong>Only fills in what it&rsquo;s sure about:</strong> anything unclear gets left for you to set, never a guess.</span>
               </li>
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <span><strong>Names are free, photos are metered.</strong> Matching color names is unlimited on every plan. Reading a photo spends one AI usage credit, and every plan includes a monthly allowance, from 250 on Starter to 25,000 on Premium.</span>
+                <span><strong>Never overwrites your work:</strong> already set a color by hand? Varn leaves it exactly as it is.</span>
               </li>
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <span><strong>It never overwrites your work.</strong> Values you set by hand are left exactly as you left them.</span>
+                <span><strong>It can match images too:</strong> AI image match pairs the right photo with the right color automatically, no duplicate uploads.</span>
               </li>
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <span><strong>Photos too.</strong> AI photo match pairs the right existing photo with the right color, so you are not uploading anything twice.</span>
+                <span><strong>Names are free, photos use credits:</strong> reading a photo spends one AI usage credit, and every plan includes a monthly allowance.</span>
               </li>
             </ul>
           </div>
@@ -1186,32 +1172,32 @@
       <div class="shell">
         <div class="split split--reverse reveal">
           <div class="split__copy">
-            <p class="eyebrow">Swatch analytics &middot; Advance</p>
+            <p class="eyebrow">Varn analytics &middot; Advance</p>
             <h2 class="section__title" id="analytics-title">
-              Every click is a <span class="accent accent--clay">merchandising signal</span>.
+              Know which colors are <span class="accent accent--clay">actually selling</span> with Varn analytics.
             </h2>
             <p class="split__text">
-              Varn counts swatch clicks and add-to-carts per color,
-              anonymously: no shopper data, no cookies. It also reports sold-out
-              demand, meaning how many shoppers clicked a color that was not
-              available to buy.
+              Every time a shopper clicks a color or adds one to their cart, Varn
+              counts it, with no personal data collected and no cookies. Over time,
+              our Shopify variants app builds a clear picture of which colors are
+              actually working and which sold-out colors to restock.
             </p>
             <ul class="split__list">
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <span><strong>Top colors by clicks and add-to-carts</strong>, over the last 7, 30 or 90 days.</span>
+                <span><strong>Top colors by clicks and add-to-carts:</strong> see which colors get the most attention over the last 7, 30, or 90 days.</span>
               </li>
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <span><strong>Sold-out demand.</strong> Clicks on unavailable colors are the sales you are currently losing, counted.</span>
+                <span><strong>Sold-out demand:</strong> every click on a color that&rsquo;s already sold out gets counted too.</span>
               </li>
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <span><strong>Plain-language advice:</strong> what to restock, feature, investigate or retire, only once there is enough data to mean it.</span>
+                <span><strong>Plain-language advice:</strong> Varn tells you in plain words what to do: restock this color, feature that one, or look into why another isn&rsquo;t selling.</span>
               </li>
               <li class="split__list-item">
                 <svg class="split__list-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <span><strong>Self-optimizing order.</strong> Swatches can re-rank themselves by demand, never under a shopper&rsquo;s finger.</span>
+                <span><strong>Self-optimizing order:</strong> your best-selling colors can move to the front automatically, but never while a shopper&rsquo;s cursor is on a swatch.</span>
               </li>
             </ul>
           </div>
@@ -1280,13 +1266,10 @@
     <section class="section section--ink" aria-labelledby="proof-title">
       <div class="shell">
         <div class="section__head section__head--center reveal">
-          <p class="eyebrow">How Varn behaves in your store</p>
+          <p class="eyebrow">Why choose us</p>
           <h2 class="section__title" id="proof-title">
-            Exactly what it touches, and what it <span class="accent">leaves alone</span>.
+            More reasons to choose this <span class="accent">Shopify variants app</span>.
           </h2>
-          <p class="section__lead">
-            Four design decisions that shape how Varn runs on your storefront.
-          </p>
         </div>
 
         <div class="pillars reveal">
@@ -1294,14 +1277,11 @@
             <svg class="pillar__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path>
             </svg>
-            <h3 class="pillar__title">It loads deferred, and only what you use</h3>
+            <h3 class="pillar__title">It will not slow your store</h3>
             <p class="pillar__text">
-              The storefront script is deferred and split by feature, so a page
-              downloads only the part your settings actually need, and the build
-              enforces a size budget on it. Swatch data is read by your theme at
-              render time, so Varn adds no request for it and no layout shift.
+              Our Shopify variants app is tiny on purpose, under 10 KB, and stays that way. An automated check blocks any update that makes it bigger. Nothing extra loads, and nothing jumps around on your page.
             </p>
-            <p class="pillar__stat">deferred, split by feature</p>
+            <p class="pillar__stat">under 10 KB, enforced</p>
           </article>
 
           <article class="pillar">
@@ -1309,29 +1289,22 @@
               <path d="M12 2.6 20 6v6.2c0 4.6-3.3 8.1-8 9.2-4.7-1.1-8-4.6-8-9.2V6l8-3.4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path>
               <path d="M8.4 12.2 11 14.8l4.8-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
-            <h3 class="pillar__title">Your theme still owns the cart</h3>
+            <h3 class="pillar__title">It will not break your cart</h3>
             <p class="pillar__text">
-              Varn does not build its own variant picker. Clicking a swatch
-              selects the option in your theme&rsquo;s own control, so add to cart
-              is still pure Shopify and the wrong variant cannot reach a
-              checkout. If our script never loads, the shopper still gets your
-              theme&rsquo;s working dropdown.
+              Clicking a swatch just picks the color in your theme&rsquo;s own dropdown, the one Shopify already trusts. So the wrong Shopify product variant can never reach checkout. Even if the swatch script fails to load, your theme&rsquo;s dropdown still works.
             </p>
-            <p class="pillar__stat">progressive enhancement, by design</p>
+            <p class="pillar__stat">your theme owns the cart</p>
           </article>
 
           <article class="pillar">
             <svg class="pillar__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M4 7h16M9.5 7V4.8h5V7M6.5 7l.9 12.4A1.8 1.8 0 0 0 9.2 21h5.6a1.8 1.8 0 0 0 1.8-1.6L17.5 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
-            <h3 class="pillar__title">Uninstalling removes it completely</h3>
+            <h3 class="pillar__title">It will not leave a mess</h3>
             <p class="pillar__text">
-              Varn is a theme app extension, not a script tag, so there is
-              nothing to inject and nothing to clean up. Uninstall it and your
-              theme is exactly as you found it. It never edits a theme file, and
-              it only ever reads your theme to check whether it is switched on.
+              Varn never touches your theme&rsquo;s code. Uninstall it, and your theme looks exactly like it did before you installed it. Nothing is written to your theme, ever.
             </p>
-            <p class="pillar__stat">read-only theme access</p>
+            <p class="pillar__stat">0 theme files edited</p>
           </article>
 
           <article class="pillar">
@@ -1339,14 +1312,11 @@
               <circle cx="12" cy="8.2" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"></circle>
               <path d="M4.8 20.4a7.4 7.4 0 0 1 14.4 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
             </svg>
-            <h3 class="pillar__title">No code and no theme editing</h3>
+            <h3 class="pillar__title">It will not need a developer</h3>
             <p class="pillar__text">
-              No code, no theme editing, no Liquid. The setup wizard verifies
-              each step for you and blocks the ones you are not ready for, with
-              the reason written on the button. Every screen has a live preview,
-              and every style change can be rolled back from a saved backup.
+              No code, no theme editing, no hiring anyone. Our automated setup in the Shopify swatches app walks you through every step, and any change you make can be undone.
             </p>
-            <p class="pillar__stat">support@enstacked.com, all plans</p>
+            <p class="pillar__stat">no code on any plan</p>
           </article>
         </div>
       </div>
@@ -1356,17 +1326,17 @@
          PRICING
          ================================================================= -->
     <section class="section section--sunk" id="pricing" aria-labelledby="pricing-title">
-      <div class="shell shell--mid">
+      <div class="shell">
         <div class="section__head section__head--center reveal">
           <p class="eyebrow">Pricing</p>
           <h2 class="section__title" id="pricing-title">
             Start free. Upgrade when you <span class="accent accent--clay">outgrow it</span>.
           </h2>
           <p class="section__lead">
-            Every swatch feature is on Starter: product pages, collection
-            pages, search and quick view included. Paid plans raise the product,
-            group and AI credit limits, then add analytics and advanced styling
-            on top.
+            Every feature of our Shopify variants and swatches app is on our
+            Starter plan: product pages, collection pages, search, and quick view
+            included. Paid plans raise the product, group, and AI credit limits,
+            then add analytics and advanced styling on top.
           </p>
         </div>
 
@@ -1390,9 +1360,6 @@
             </p>
             <p class="plan__note">No time limit.</p>
             <p class="plan__tagline">Everything you need to launch swatches on your store.</p>
-            <p class="plan__cta">
-              <a class="btn btn--secondary" href="https://apps.shopify.com/varn-variants-swatches" data-launch data-launch-label="Start free"><span data-launch-text>Start free</span></a>
-            </p>
             <ul class="plan__features">
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Products with variant images, up to 5</span></li>
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Product grouping, only 1 group</span></li>
@@ -1412,7 +1379,6 @@
             <p class="plan__note" data-note-monthly="Billed monthly, cancel any time" data-note-yearly="Billed yearly, cancel any time">Billed monthly, cancel any time</p>
             <p class="plan__tagline">More products and groups as your catalog grows.</p>
             <p class="plan__cta">
-              <a class="btn btn--primary" href="https://apps.shopify.com/varn-variants-swatches" data-launch data-launch-label="Start with Grow"><span data-launch-text>Start with Grow</span></a>
               <span class="plan__trial">Includes 7 day trial</span>
             </p>
             <ul class="plan__features">
@@ -1436,7 +1402,6 @@
             <p class="plan__note" data-note-monthly="Billed monthly, cancel any time" data-note-yearly="Billed yearly, cancel any time">Billed monthly, cancel any time</p>
             <p class="plan__tagline">Adds advanced styling and swatch click analytics.</p>
             <p class="plan__cta">
-              <a class="btn btn--primary" href="https://apps.shopify.com/varn-variants-swatches" data-launch data-launch-label="Start with Advance"><span data-launch-text>Start with Advance</span></a>
               <span class="plan__trial">Includes 7 day trial</span>
             </p>
             <ul class="plan__features">
@@ -1461,7 +1426,6 @@
             <p class="plan__note" data-note-monthly="Billed monthly, cancel any time" data-note-yearly="Billed yearly, cancel any time">Billed monthly, cancel any time</p>
             <p class="plan__tagline">For large catalogs that need the highest limits.</p>
             <p class="plan__cta">
-              <a class="btn btn--primary" href="https://apps.shopify.com/varn-variants-swatches" data-launch data-launch-label="Start with Premium"><span data-launch-text>Start with Premium</span></a>
               <span class="plan__trial">Includes 7 day trial</span>
             </p>
             <ul class="plan__features">
@@ -1475,9 +1439,8 @@
           </article>
         </div>
 
-        <!-- Shared rows, shown once instead of on every card — same as the
-             in-app plan page. Uncomment the matching lis on a card if you
-             ever want that card to list them again. -->
+        <!-- Shared rows, shown once instead of on every card, same as the
+             in-app plan page. -->
         <div class="pricing__includes reveal">
           <h3 class="pricing__includes-title">Every plan includes</h3>
           <ul class="pricing__includes-list">
@@ -1490,11 +1453,11 @@
         </div>
 
         <p class="pricing__note">
-          One AI usage credit is one product photo the AI looks at, and the
-          count resets at the start of every month. Every paid plan is free for
-          7 days. Billing runs through Shopify&rsquo;s own confirmation screen
-          and lands on your regular Shopify bill. Change or cancel at any time
-          from inside the app.
+          One AI usage credit is one product photo the AI looks at, and your
+          allowance resets every month on the date shown in the app. Every paid
+          plan starts with a 7 day free trial. Billing runs through Shopify&rsquo;s
+          own confirmation screen and lands on your regular Shopify bill. Change
+          or cancel at any time from inside the app.
         </p>
       </div>
     </section>
@@ -1514,21 +1477,20 @@
           <div class="maker__copy">
             <p class="eyebrow">Powered by Enstacked Technologies</p>
             <h2 class="section__title" id="maker-title">
-              Built by people who work on <span class="accent accent--clay">commerce</span> every day.
+              Built by Shopify experts, for <span class="accent accent--clay">Shopify merchants</span>.
             </h2>
             <p class="split__text">
-              Varn is made by Enstacked Technologies, a commerce engineering
-              studio that builds Shopify themes, apps and storefronts. We wrote
-              Varn the way we write client work: on the current Shopify platform,
-              with a hard performance budget, an accessibility standard, and a
-              test suite that has to stay green before anything ships.
+              Varn AI is built by Enstacked, a Shopify company that builds Shopify
+              themes, apps, and ecommerce stores, and has spent years living inside
+              the Shopify ecosystem.
             </p>
             <p class="split__text">
-              That is why the storefront engine has a size limit its own build
-              enforces, why the app drives your theme&rsquo;s picker instead of
-              replacing it, and why every screen has an empty state, a loading
-              state and an error state. It is also why support goes to the people
-              who wrote the code.
+              Along the way, we&rsquo;ve installed our share of apps that didn&rsquo;t do
+              what the listing promised, ran up a client&rsquo;s bill for features nobody
+              used, left scripts behind after uninstall, and quietly slowed a store
+              down. Varn AI is exactly the opposite of it, and when you reach out for
+              support, you are talking directly to the people who wrote the code, not
+              a support queue.
             </p>
 
             <dl class="maker__stats">
@@ -1563,77 +1525,21 @@
          FAQ
          ================================================================= -->
     <section class="section section--sunk" id="faq" aria-labelledby="faq-title">
-      <div class="shell shell--narrow">
+      <div class="shell">
         <div class="section__head section__head--center reveal">
           <p class="eyebrow">Questions</p>
-          <h2 class="section__title" id="faq-title">The things merchants ask first.</h2>
+          <h2 class="section__title" id="faq-title">Frequently asked questions.</h2>
         </div>
 
         <div class="faq reveal">
           <details class="faq__item">
             <summary class="faq__question">
-              Will it work with my theme?
+              What happens to my theme if I uninstall the Shopify variant app?
               <svg class="faq__icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 3v12M3 9h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
             </summary>
             <div class="faq__answer">
               <p>
-                Varn works on any Online Store 2.0 theme, including Dawn and
-                Horizon, because it is a theme app extension that drives your
-                theme&rsquo;s existing variant control rather than replacing it.
-                It has specific handling for the way Dawn and Horizon re-render
-                their pickers, and it detects your theme&rsquo;s own native
-                swatches and steps aside rather than rendering a second row.
-              </p>
-            </div>
-          </details>
-
-          <details class="faq__item">
-            <summary class="faq__question">
-              Will it slow my store down?
-              <svg class="faq__icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 3v12M3 9h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
-            </summary>
-            <div class="faq__answer">
-              <p>
-                The storefront script is deferred and split by feature, so a
-                page downloads only the parts your settings actually use, and
-                our build holds every one of them to a size budget. Swatch data
-                arrives inside the page your theme already renders, so Varn adds
-                no network request for it and shifts nothing on the page.
-              </p>
-            </div>
-          </details>
-
-          <details class="faq__item">
-            <summary class="faq__question">
-              What happens to my theme if I uninstall?
-              <svg class="faq__icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 3v12M3 9h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
-            </summary>
-            <div class="faq__answer">
-              <p>
-                Nothing is left behind. Varn never writes into a theme file and
-                never injects a script tag, so removing the app removes the
-                storefront code with it and your theme returns to its own
-                dropdowns. Your setup stays saved on your Shopify products, so
-                reinstalling brings it back, and Shopify cancels any paid plan
-                the moment you uninstall.
-              </p>
-            </div>
-          </details>
-
-          <details class="faq__item">
-            <summary class="faq__question">
-              Does Varn change my products in Shopify?
-              <svg class="faq__icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 3v12M3 9h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
-            </summary>
-            <div class="faq__answer">
-              <p>
-                In one place, and only when you ask for it. When you save
-                per-color photos, the first photo you picked for each color is
-                set as that color&rsquo;s variant image in Shopify, which is what
-                makes the gallery follow the swatch in your theme. Varn only uses
-                photos the product already has, and never uploads, edits or
-                deletes a photo. Everything else Varn stores is kept separately
-                rather than rewritten into your products.
+                Nothing is left behind. Varn never edits a theme file, so uninstalling returns your theme to its own dropdowns. Your product data stays untouched too.
               </p>
             </div>
           </details>
@@ -1645,101 +1551,91 @@
             </summary>
             <div class="faq__answer">
               <p>
-                No. Clicking a swatch selects the value in your theme&rsquo;s own
-                option control and fires its native change event. Your
-                theme&rsquo;s form is still what submits to Shopify, so there is
-                no parallel cart path that could disagree with the picker. Varn
-                also refuses to select a value your theme has disabled.
+                No. Clicking a swatch selects the value in your theme&rsquo;s own control, so your theme&rsquo;s form is what submits to Shopify, not a separate system. Varn also will not select a value your theme has disabled.
               </p>
             </div>
           </details>
 
           <details class="faq__item">
             <summary class="faq__question">
-              Do I need to know any code?
+              Will this Shopify color swatches app slow my store down?
               <svg class="faq__icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 3v12M3 9h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
             </summary>
             <div class="faq__answer">
               <p>
-                No. The setup guide on the home page checks your theme for you,
-                and the product pages show only the options that are actually
-                colors and fill in the colors they recognize. If you do want to
-                go further, the Advance plan adds a custom CSS field, but nothing
-                on any plan requires it.
+                No, it will not. Varn is developed with lightweight code optimized for performance and will not slow your store down. It only loads the necessary features when needed, and swatch data comes with the page itself, so nothing extra has to load.
               </p>
             </div>
           </details>
 
           <details class="faq__item">
             <summary class="faq__question">
-              My color option isn&rsquo;t called &ldquo;Color&rdquo;. Does that matter?
+              Do I need to know any code to use Varn?
               <svg class="faq__icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 3v12M3 9h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
             </summary>
             <div class="faq__answer">
               <p>
-                Varn recognizes Color, Colour, Couleur, Farbe, Colore, Kleur and
-                Farve automatically. If yours is called Shade, Finish or anything
-                else, add the name once on the Appearance page and it is treated
-                the same way everywhere.
+                No. The setup guide checks your theme, shows only real color options, and fills them in for you. A custom CSS field is there for anyone who wants to go further, but nothing requires it.
               </p>
             </div>
           </details>
 
           <details class="faq__item">
             <summary class="faq__question">
-              What is the AI actually doing?
+              Is your Shopify variant app really free forever?
               <svg class="faq__icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 3v12M3 9h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
             </summary>
             <div class="faq__answer">
               <p>
-                Two separate things, and we would rather be specific than
-                mysterious about them. Auto-detect matches your option value
-                names against a color dictionary spanning ten languages, applies
-                only the matches it is confident about, and is free and unlimited
-                on every plan. Set up with AI is for photos: it sends each product
-                photo to a vision model, files it under the color it can see, and
-                puts every color&rsquo;s photos in the same order so switching color
-                does not jump the shopper to a different angle. Shots that belong
-                to no single color, such as a size chart, are kept visible for
-                every color. That one is metered in AI usage credits, one credit
-                per photo. Anything either is unsure about is left for you to set.
+                Yes. Starter is $0, with no time limit. It includes unlimited color swatches, unlimited auto-detect, agent readiness on every product, and swatches on collections, search, and quick view.
               </p>
             </div>
           </details>
 
           <details class="faq__item">
             <summary class="faq__question">
-              Does it work in other languages?
+              How do I turn on Varn in my theme?
               <svg class="faq__icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 3v12M3 9h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
             </summary>
             <div class="faq__answer">
               <p>
-                The storefront text is translated into 18 languages and follows
-                whichever locale your shopper is browsing in. Assignments are
-                translation-aware, so a color keeps its swatch across every
-                translated version of the option. The admin interface itself is
-                English.
+                On the Home page, click Activate on the first setup step. Turn the Varn switch on, then click Save. You do this once for each theme you use.
               </p>
             </div>
           </details>
 
           <details class="faq__item">
             <summary class="faq__question">
-              What do the paid plans actually add?
+              What does Auto-detect do?
               <svg class="faq__icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 3v12M3 9h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
             </summary>
             <div class="faq__answer">
               <p>
-                Room, mostly. Starter is free forever and gives you unlimited
-                color swatches on product pages, collections, search and quick
-                view plus 250 AI usage credits a month, so plenty of stores
-                never need to leave it. Paid plans raise three limits: how many
-                products can have per-color photo galleries (5, 150, 1,500 or
-                unlimited), how many AI usage credits you get each month (250,
-                1,500, 10,000 or 25,000) and how many product groups you can
-                build (1, 5, 15 or 50). Grow and up also show swatches on
-                products you have not set up yet, and Advance and Premium add
-                swatch analytics and the advanced styling tools.
+                It reads your option names, such as Navy blue or Forest green, and fills in the colors it is sure about. It is free on every plan, and you can change any of them afterwards. Photos are handled separately by Set up with AI on the Variant Images page.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__question">
+              Does Varn work with my theme?
+              <svg class="faq__icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 3v12M3 9h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
+            </summary>
+            <div class="faq__answer">
+              <p>
+                Varn works with any Online Store 2.0 theme, which is almost every theme sold in the Shopify Theme Store today. Very old themes cannot run app embeds, so Varn will tell you if yours is one of them.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__question">
+              What do the paid plans of your Shopify product options app add?
+              <svg class="faq__icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 3v12M3 9h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
+            </summary>
+            <div class="faq__answer">
+              <p>
+                Paid plans raise three limits: how many products you can set up with variant photos, how many product groups you can create, and your monthly AI usage credits. Advance and Premium also add advanced styling and swatch click analytics. Paying yearly saves 26%.
               </p>
             </div>
           </details>
@@ -1751,14 +1647,7 @@
             </summary>
             <div class="faq__answer">
               <p>
-                One credit is one product photo the AI looks at. Credits are only
-                spent by Set up with AI, which sends a photo to the vision model
-                to find out which color it shows. Auto-detect, which reads your
-                option value names, is free and unlimited on every plan. Each
-                plan includes a monthly allowance, from 250 on Starter to 25,000
-                on Premium, and the app shows the date yours resets. If you run
-                out, Set up with AI stops until the reset, while auto-detect and
-                assigning photos by hand carry on as normal.
+                One credit is one product photo the AI looks at, and it is only spent by Set up with AI. Auto-detect, which reads your option names, is free and unlimited on every plan. Each plan includes a monthly allowance, from 250 on Starter to 25,000 on Premium, and the app shows the date yours resets.
               </p>
             </div>
           </details>
@@ -1770,30 +1659,19 @@
             </summary>
             <div class="faq__answer">
               <p>
-                Every paid plan is free for 7 days. Pick a plan, approve it on
-                Shopify&rsquo;s own confirmation screen, and the first 7 days
-                cost nothing. Cancel inside those 7 days and you are never
-                billed. Each store gets one trial, so switching plans during it
-                keeps the days you have left rather than starting again, and
-                trials run on the Starter allowance of 250 AI usage credits a
-                month. Starter needs no trial at all, so you can equally start
-                there and upgrade the day you outgrow it.
+                Every paid plan starts with a 7 day free trial. Approve it on Shopify&rsquo;s own confirmation screen, and cancel inside those 7 days to pay nothing. Each store gets one trial, so switching plans during it keeps the days you have left.
               </p>
             </div>
           </details>
 
           <details class="faq__item">
             <summary class="faq__question">
-              My swatches are not showing on my store. What do I do?
+              My swatches are not showing on my store. What to do?
               <svg class="faq__icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 3v12M3 9h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
             </summary>
             <div class="faq__answer">
               <p>
-                Almost always, Varn is not switched on for the theme you are
-                looking at. Go to the Home page, click Activate on the first setup
-                step, turn the Varn switch on, then click Save. You do this
-                once for each theme you use, including any unpublished themes
-                you preview separately.
+                Varn is usually not switched on for the theme you are looking at. Go to the Home page, click Activate on the first setup step, turn the switch on, and click Save.
               </p>
             </div>
           </details>
@@ -1853,7 +1731,7 @@
               <path d="M2.5 8h11m0 0L9 3.5M13.5 8 9 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
           </a>
-          <a class="btn btn--outline-inverse btn--lg" href="mailto:support@enstacked.com">Ask us anything</a>
+          <a class="btn btn--outline-inverse btn--lg" href="mailto:support@enstacked.com">Talk to our team</a>
         </div>
       </div>
     </section>
@@ -1912,15 +1790,6 @@
     </div>
   </footer>
 
-  <!-- Mobile sticky call to action -->
-  <div class="mobile-cta" data-mobile-cta>
-    <p class="mobile-cta__copy">
-      <b>Free plan forever</b>
-      Paid plans free for 7 days
-    </p>
-    <a class="btn btn--primary btn--sm" href="https://apps.shopify.com/varn-variants-swatches" data-launch data-launch-label="Add Varn"><span data-launch-text>Add Varn</span></a>
-  </div>
-
   <!-- ===================================================================
        LAUNCH MOMENT
        The surprise: add a color to cart in the hero demo and the page
@@ -1967,6 +1836,8 @@
     </div>
   </div>
   <p class="visually-hidden" role="status" data-launch-announce></p>
+
+  <script src="assets/js/nav.js" defer></script>
 
   <script src="assets/js/main.js" defer></script>
   <script src="assets/js/status.js" defer></script>

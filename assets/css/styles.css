@@ -225,7 +225,7 @@
     --shadow-focus: 0 0 0 3px var(--color-page), 0 0 0 6px var(--color-violet);
 
     /* ---- Layout ------------------------------------------------------- */
-    --shell-max: 1280px;
+    --shell-max: 100%; /* full width: header, sections and footer share one gutter */
     --shell-narrow: 780px;
     /* The pricing block reads as a compact 2x2 card, matching the in-app
        Plan and billing screen, so it is narrower than the page shell. */
@@ -346,21 +346,17 @@
 
   /* Tinted sections are inset, rounded panels floating on the white page
      (the smile.io pattern), not full-bleed bands. */
+  /* No grey fill (owner, 2026-09-15): the page stays white and minimal.
+     A hairline marks where the section starts instead. */
   .section--sunk {
-    background: var(--color-well);
-    border-radius: clamp(24px, 3.5vw, 40px);
-    inline-size: min(100% - 16px, 1408px);
-    margin-inline: auto;
-    margin-block: var(--section-gap);
+    background: transparent;
+    border-block-start: 1px solid var(--color-line-soft);
+    border-block-end: 1px solid var(--color-line-soft);
   }
 
   .section--ink {
     background: var(--color-ink);
     color: var(--color-page);
-    border-radius: clamp(24px, 3.5vw, 40px);
-    inline-size: min(100% - 16px, 1408px);
-    margin-inline: auto;
-    margin-block: var(--section-gap);
     overflow: clip;
   }
 
@@ -371,13 +367,14 @@
     margin-block-end: var(--space-2xl);
   }
 
+  /* Kept as a hook, but aligned to the left edge like the header. */
   .section__head--center {
-    margin-inline: auto;
-    text-align: center;
+    margin-inline: 0;
+    text-align: start;
   }
 
   .section__head--center .section__lead {
-    margin-inline: auto;
+    margin-inline: 0;
   }
 
   .section__title {
@@ -597,8 +594,9 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: rgb(255 255 255 / 85%);
-    opacity: 0;
+    background: var(--color-page);
+    border-block-end: 1px solid var(--color-line-soft);
+    opacity: 1;
     transition: opacity var(--dur-base) linear;
   }
 
@@ -2237,7 +2235,7 @@
   .pricing__switch {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     gap: var(--space-xs);
     margin-block-end: var(--space-lg);
@@ -2246,7 +2244,7 @@
   .pricing__trial-line {
     font-size: var(--text-sm);
     color: var(--color-ink-subtle);
-    text-align: center;
+    text-align: start;
   }
 
   .pricing__includes {
@@ -2585,16 +2583,15 @@
   }
 
   /* ---------- Closing CTA ------------------------------------------------ */
-  /* The tour LANDS in the seam above this panel: the paper dart parks there
-     centre stage with its last note under it, so this gap has to clear the
-     whole dart and the pill off the dark edge. It is deliberately larger
-     than every other seam - main.js places the finish inside it (FINISH_GAP)
-     and both numbers have to move together. */
+  /* The paper-dart tour that needed a large seam above this band is switched
+     off, so the closing band now sits directly under the previous section.
+     If the tour comes back, restore clamp(8rem, 4rem + 9vw, 14rem) here and
+     keep it in step with FINISH_GAP in main.js. */
   .closer {
     position: relative;
     overflow: clip;
-    text-align: center;
-    margin-block-start: clamp(8rem, 4rem + 9vw, 14rem);
+    text-align: start;
+    margin-block-start: 0;
   }
 
   .closer__title {
@@ -2607,14 +2604,14 @@
   .closer__actions {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: var(--space-xs);
     margin-block-start: var(--space-lg);
   }
 
   .closer__swatches {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: var(--space-xs);
     margin-block-end: var(--space-lg);
   }
@@ -3744,8 +3741,7 @@
 
   /* ---- page shell ---------------------------------------------------- */
   .st-page {
-    max-width: 64rem;
-    margin-inline: auto;
+    max-width: none;
     padding-block: calc(var(--header-h) + var(--space-2xl)) var(--space-3xl);
   }
 
@@ -4845,6 +4841,120 @@
   }
 
   .hero__pill--live .hero__pill-arrow {
+    transition: none;
+  }
+}
+
+/* =========================================================================
+   SITE HEADER  -  shared by every page (index, status, privacy)
+   =========================================================================
+   Behaviour lives in assets/js/nav.js. Below 992px the link row is hidden,
+   so a menu button opens a panel with the same links and both calls to
+   action. The header takes its solid background while the menu is open so
+   the panel never floats over page text.
+   ========================================================================= */
+@layer components {
+  .site-header__link[aria-current="page"] {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .site-header.is-menu-open::before {
+    opacity: 1;
+    border-block-end: 1px solid var(--color-line-soft);
+  }
+
+  .site-header__menu-btn {
+    display: inline-grid;
+    place-items: center;
+    inline-size: 44px;
+    block-size: 44px;
+    margin-inline-end: calc(var(--space-2xs) * -1);
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--color-ink);
+    cursor: pointer;
+    transition: background-color var(--dur-fast) linear;
+  }
+
+  .site-header__menu-btn:hover {
+    background: var(--color-surface-sunk);
+  }
+
+  .site-header__menu-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+  }
+
+  .site-header__menu-close,
+  .site-header.is-menu-open .site-header__menu-open {
+    display: none;
+  }
+
+  .site-header.is-menu-open .site-header__menu-close {
+    display: block;
+  }
+
+  .site-header__panel {
+    position: absolute;
+    inset-block-start: 100%;
+    inset-inline: 0;
+    max-block-size: calc(100dvh - var(--header-h));
+    overflow-y: auto;
+    padding-block: var(--space-2xs) var(--space-md);
+    background: var(--color-surface);
+    border-block-end: 1px solid var(--color-line);
+    box-shadow: 0 18px 40px rgb(38 36 46 / 12%);
+  }
+
+  .site-header__panel[hidden] {
+    display: none !important;
+  }
+
+  .site-header__panel-links {
+    display: grid;
+  }
+
+  .site-header__panel-link {
+    display: flex;
+    align-items: center;
+    min-block-size: 48px;
+    border-block-end: 1px solid var(--color-line-soft);
+    font-size: var(--text-body);
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  .site-header__panel-link[aria-current="page"] {
+    font-weight: 600;
+    color: var(--color-violet-deep);
+  }
+
+  .site-header__panel-actions {
+    display: grid;
+    gap: var(--space-2xs);
+    margin-block-start: var(--space-md);
+  }
+
+  /* Tiny phones: the brand, primary button and menu button must share one
+     row, so the primary button tightens rather than wrapping. */
+  @media (max-width: 22.5em) {
+    .site-header__cta {
+      padding-inline: var(--space-xs);
+    }
+  }
+
+  @media (min-width: 62em) {
+    .site-header__menu-btn,
+    .site-header__panel {
+      display: none !important;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header__menu-btn {
     transition: none;
   }
 }

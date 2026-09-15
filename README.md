@@ -36,6 +36,8 @@ privacy.html                   privacy policy
 status.html                    live system status, fed by the dashboard API
 assets/
   css/styles.css               design tokens + components, cascade layers
+  js/nav.js                    the site header on EVERY page: background on
+                               scroll, hide on scroll down, small-screen menu
   js/main.js                   one IIFE, eleven independent modules
   js/legal.js                  privacy.html: contents list highlighting
   js/status.js                 status.html + the strip on index.html

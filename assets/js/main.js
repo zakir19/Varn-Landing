@@ -552,9 +552,8 @@
 
     var labels = [
       "Varn › Activate",
-      "Varn › Products",
-      "Varn › Options",
-      "Varn › Configure",
+      "Varn › Variant Images",
+      "Varn › Swatches",
       "Varn › Go live"
     ];
     var current = -1;
@@ -596,7 +595,8 @@
         panel.hidden = i !== index;
       });
       if (label) label.textContent = labels[index] || labels[0];
-      if (index === 3) playAiPanel();
+      // The auto-detect panel is the third step (index 2) since the set-up became 4 steps.
+      if (qs("[data-mock-ai]", root) === panels[index]) playAiPanel();
     }
 
     if (!("IntersectionObserver" in window)) {
@@ -817,39 +817,14 @@
      Sticky header condenses on scroll and hides while scrolling down.
      ===================================================================== */
 
+  // The site header itself is driven by assets/js/nav.js on every page.
+  // This module only owns the index page's mobile sticky call to action.
   function initHeader() {
-    var header = qs("[data-site-header]");
     var mobileCta = qs("[data-mobile-cta]");
-    if (!header && !mobileCta) return;
-
-    var lastY = window.scrollY;
-    var threshold = 24;
-    var pinnedUntil = 0;
+    if (!mobileCta) return;
 
     var onScroll = rafThrottle(function () {
-      var y = window.scrollY;
-
-      if (header) {
-        header.classList.toggle("is-stuck", y > threshold);
-        var scrollingDown = y > lastY && y > 240;
-        var pinned = Date.now() < pinnedUntil;
-        header.classList.toggle("is-hidden", scrollingDown && !pinned);
-      }
-
-      if (mobileCta) {
-        mobileCta.classList.toggle("is-visible", y > 620);
-      }
-
-      lastY = y;
-    });
-
-    // An in-page jump scrolls DOWN, which would otherwise hide the nav the
-    // visitor just used. Pin it for the duration of the smooth scroll.
-    document.addEventListener("click", function (event) {
-      var link = event.target.closest('a[href^="#"]');
-      if (!link || link.getAttribute("href") === "#") return;
-      pinnedUntil = Date.now() + 1200;
-      if (header) header.classList.remove("is-hidden");
+      mobileCta.classList.toggle("is-visible", window.scrollY > 620);
     });
 
     window.addEventListener("scroll", onScroll, { passive: true });

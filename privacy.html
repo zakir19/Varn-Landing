@@ -45,14 +45,35 @@
           <li><a class="site-header__link" href="index.html#how-it-works">How it works</a></li>
           <li><a class="site-header__link" href="index.html#features">Features</a></li>
           <li><a class="site-header__link" href="index.html#pricing">Pricing</a></li>
+          <li><a class="site-header__link" href="index.html#faq">FAQ</a></li>
           <li><a class="site-header__link" href="docs/index.html">Docs</a></li>
           <li><a class="site-header__link" href="status.html">Status</a></li>
         </ul>
       </nav>
 
       <div class="site-header__actions">
-        <a class="btn btn--secondary btn--sm" href="mailto:support@enstacked.com">Contact support</a>
+        <a class="btn btn--secondary btn--sm site-header__cta-secondary" href="mailto:support@enstacked.com">Contact support</a>
+        <button class="site-header__menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+          <svg class="site-header__menu-open" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M3.5 6h13M3.5 10h13M3.5 14h13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg>
+          <svg class="site-header__menu-close" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M5 5l10 10M15 5 5 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg>
+        </button>
       </div>
+    </div>
+
+    <div class="site-header__panel" id="site-menu" data-menu-panel hidden>
+      <nav class="shell" aria-label="Menu">
+        <ul class="site-header__panel-links">
+          <li><a class="site-header__panel-link" href="index.html#how-it-works">How it works</a></li>
+          <li><a class="site-header__panel-link" href="index.html#features">Features</a></li>
+          <li><a class="site-header__panel-link" href="index.html#pricing">Pricing</a></li>
+          <li><a class="site-header__panel-link" href="index.html#faq">FAQ</a></li>
+          <li><a class="site-header__panel-link" href="docs/index.html">Docs</a></li>
+          <li><a class="site-header__panel-link" href="status.html">Status</a></li>
+        </ul>
+        <div class="site-header__panel-actions">
+          <a class="btn btn--secondary btn--block" href="mailto:support@enstacked.com">Contact support</a>
+        </div>
+      </nav>
     </div>
   </header>
 
@@ -412,6 +433,8 @@
       </div>
     </div>
   </footer>
+
+  <script src="assets/js/nav.js" defer></script>
 
   <script src="assets/js/legal.js" defer></script>
 </body>
