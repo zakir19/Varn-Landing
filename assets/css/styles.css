@@ -5,7 +5,7 @@
    Architecture
    ------------
    @layer reset      normalise + box model
-   @layer base       tokens, typography, page furniture
+   @layer base       typography, page furniture
    @layer layout     shell, section rhythm, grid primitives
    @layer components purpose-named BEM blocks
    @layer utilities  single-purpose helpers (always last, always wins)
@@ -13,7 +13,8 @@
    Conventions
    -----------
    - Mobile-first. Breakpoints: 576 / 768 / 992 / 1200 / 1440.
-   - Every repeated value is a token in :root. No magic numbers in rules.
+   - Every repeated value is a token in design-tokens.css, which loads
+     first on every page. No magic numbers in rules.
    - Only transform / opacity / filter are animated.
    - prefers-reduced-motion disables every non-essential animation.
    ========================================================================= */
@@ -134,140 +135,11 @@
 }
 
 /* =========================================================================
-   BASE - design tokens
+   BASE - page furniture
    ========================================================================= */
 @layer base {
-  :root {
-    /* ---- Brand palette ------------------------------------------------ */
-    --color-violet: #7f77dd;
-    --color-violet-deep: #453aa3; /* AA text on cream */
-    --color-violet-soft: #efeefb;
-    --color-blush: #ed93b1;
-    --color-blush-deep: #a8375c; /* AA text on cream */
-    --color-blush-soft: #fdeef3;
-    --color-clay: #d85a30;
-    --color-clay-deep: #9c3d1a; /* AA text on cream */
-    --color-clay-soft: #fbeee7;
-    --color-page: #ffffff;
-    --color-enstacked: #ef6224;
-    --grad-accent: linear-gradient(
-      94deg,
-      #6c5fd3 4%,
-      #c13d6e 52%,
-      #c2491f 96%
-    );
-
-    /* ---- Warm neutrals ------------------------------------------------ */
-    --color-ink: #26242e;
-    --color-ink-muted: #55525e;
-    --color-ink-subtle: #6a6875;
-    --color-surface: #ffffff;
-    --color-surface-sunk: #f2f2f5;
-    --color-well: #f6f6f8; /* recessed visual wells inside white cards */
-    --color-line: rgb(38 36 46 / 10%);
-    --color-line-soft: rgb(38 36 46 / 6%);
-    --color-line-strong: rgb(38 36 46 / 20%);
-
-    /* ---- Semantic ----------------------------------------------------- */
-    --color-success: #2f6b41;
-    --color-success-soft: #e7f4ea;
-    --color-warn: #8a5a00;
-    --color-warn-soft: #fbf0d8;
-
-    /* ---- Typography --------------------------------------------------- */
-    --font-sans: "Instrument Sans", -apple-system, BlinkMacSystemFont,
-      "Segoe UI", roboto, helvetica, arial, sans-serif;
-    --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", menlo, consolas,
-      monospace;
-
-    /* Scale tightened 2026-09-15: every step sits roughly 15% below the
-       previous scale, the big headings most, body copy least. */
-    /* Section spacing (owner, 2026-09-15): 100px top and bottom on every
-       section from tablet up, 64px on phones where 100px would bury the copy. */
-    --section-pad: 100px;
-    --text-display: clamp(2.2rem, 1.2rem + 4.2vw, 4.25rem);
-    --text-h2: clamp(1.7rem, 1.05rem + 2.5vw, 3rem);
-    --text-h3: clamp(1.15rem, 1rem + 0.6vw, 1.5rem);
-    --text-h4: clamp(1rem, 0.95rem + 0.24vw, 1.14rem);
-    --text-lead: clamp(1rem, 0.94rem + 0.3vw, 1.15rem);
-    --text-body: clamp(0.94rem, 0.92rem + 0.1vw, 1rem);
-    --text-sm: 0.84rem;
-    --text-xs: 0.75rem;
-    --text-eyebrow: 0.7rem;
-
-    /* Both leave room below the baseline for p, y and g: gradient headline
-       words are painted with background-clip: text, and some browsers clip
-       that paint to the line box, so a line box shorter than the letters
-       cut their tails off (owner report, "AI setup"). */
-    --leading-tight: 1.06;
-    --leading-snug: 1.2;
-    --leading-normal: 1.62;
-    --tracking-tight: -0.035em;
-    --tracking-wide: 0.14em;
-
-    /* ---- Spacing scale ------------------------------------------------ */
-    --space-3xs: 0.25rem;
-    --space-2xs: 0.5rem;
-    --space-xs: 0.75rem;
-    --space-sm: 1rem;
-    --space-md: 1.5rem;
-    --space-lg: 2rem;
-    /* Large steps tightened 2026-09-15 (owner: too much white space). The
-       small steps that set spacing inside components are unchanged. */
-    --space-xl: 2.25rem;
-    --space-2xl: 2.75rem;
-    --space-3xl: 3.5rem;
-    --space-4xl: clamp(2.5rem, 1.6rem + 2.4vw, 3.75rem);
-
-    /* ---- Shape -------------------------------------------------------- */
-    --radius-xs: 6px;
-    --radius-sm: 10px;
-    --radius-md: 16px;
-    --radius-lg: 24px;
-    --radius-xl: 34px;
-    --radius-pill: 999px;
-
-    --shadow-xs: 0 1px 2px rgb(38 36 46 / 5%);
-    --shadow-sm: 0 1px 2px rgb(38 36 46 / 5%), 0 4px 12px rgb(38 36 46 / 6%);
-    --shadow-md: 0 2px 4px rgb(38 36 46 / 4%),
-      0 14px 32px -10px rgb(38 36 46 / 14%);
-    --shadow-lg: 0 2px 6px rgb(38 36 46 / 5%),
-      0 28px 64px -24px rgb(38 36 46 / 20%);
-    --shadow-focus: 0 0 0 3px var(--color-page), 0 0 0 6px var(--color-violet);
-
-    /* ---- Layout ------------------------------------------------------- */
-    --shell-max: 1320px; /* one centred column for header, sections and footer (padding included) */
-    --shell-narrow: 780px;
-    /* The pricing block reads as a compact 2x2 card, matching the in-app
-       Plan and billing screen, so it is narrower than the page shell. */
-    --shell-mid: 980px;
-    --shell-pad: 12px; /* left and right gutter at every width */
-    --header-h: 68px;
-
-    /* One gap between every floating panel (sunk / ink), so consecutive
-       panels never almost-touch while other seams run wide. Sibling margins
-       collapse, so adjacent panels share exactly one of these.
-
-       This seam is also where the journey route crosses from one side of
-       the page to the other, so it is sized to give the paper dart room to
-       be SEEN between two panels rather than squeezed against an edge. */
-    --section-gap: clamp(2rem, 1rem + 4vw, 4.5rem);
-
-    /* ---- Motion ------------------------------------------------------- */
-    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-    --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
-    --dur-fast: 140ms;
-    --dur-base: 260ms;
-    --dur-slow: 520ms;
-
-    /* ---- Swatch demo defaults (overwritten live by the style studio) --- */
-    --swatch-size: 40px;
-    --swatch-radius: 999px;
-    --swatch-gap: 12px;
-    --swatch-border: 1px;
-    --swatch-ring: var(--color-ink);
-  }
+  /* Tokens (colour, type, space, radius, shadow, layout, layers, motion)
+     live in assets/css/design-tokens.css, linked before this file. */
 
   html {
     scroll-behavior: smooth;
@@ -299,7 +171,7 @@
 
   ::selection {
     background: var(--color-violet);
-    color: #fff;
+    color: var(--color-white);
   }
 
   :focus-visible {
@@ -340,7 +212,7 @@
 
   .section {
     position: relative;
-    z-index: 2;
+    z-index: var(--z-content);
     padding-block: var(--section-pad);
   }
 
@@ -433,14 +305,14 @@
   }
 
   .section--ink .section__lead {
-    color: rgb(255 255 255 / 72%);
+    color: rgb(var(--color-white-rgb) / 72%);
   }
 
   .skip-link {
     position: absolute;
     inset-block-start: var(--space-sm);
     inset-inline-start: var(--space-sm);
-    z-index: 200;
+    z-index: var(--z-skip-link);
     padding: var(--space-2xs) var(--space-sm);
     border-radius: var(--radius-sm);
     background: var(--color-ink);
@@ -472,7 +344,7 @@
   }
 
   .section--ink .eyebrow {
-    color: rgb(255 255 255 / 62%);
+    color: rgb(var(--color-white-rgb) / 62%);
   }
 
   /* Brand-gradient accent inside display headings. Stops are tuned to
@@ -525,12 +397,12 @@
 
   .btn--primary {
     background: var(--color-violet-deep);
-    color: #fff;
+    color: var(--color-white);
     box-shadow: var(--shadow-md);
   }
 
   .btn--primary:hover {
-    background: #5449b8;
+    background: var(--color-violet-deep-hover);
     box-shadow: var(--shadow-md);
   }
 
@@ -541,7 +413,7 @@
   }
 
   .btn--secondary:hover {
-    background: rgb(38 36 46 / 5%);
+    background: rgb(var(--color-ink-rgb) / 5%);
     border-color: var(--color-ink);
   }
 
@@ -572,17 +444,17 @@
   }
 
   .btn--inverse:hover {
-    background: #fff;
+    background: var(--color-white);
   }
 
   .btn--outline-inverse {
-    border-color: rgb(255 255 255 / 34%);
+    border-color: rgb(var(--color-white-rgb) / 34%);
     color: var(--color-page);
   }
 
   .btn--outline-inverse:hover {
     border-color: var(--color-page);
-    background: rgb(255 255 255 / 8%);
+    background: rgb(var(--color-white-rgb) / 8%);
   }
 
   .btn--sm {
@@ -625,7 +497,7 @@
     position: fixed;
     inset-block-start: 0;
     inset-inline: 0;
-    z-index: 100;
+    z-index: var(--z-header);
     transition: transform var(--dur-base) var(--ease-out),
       background-color var(--dur-base) linear,
       box-shadow var(--dur-base) linear;
@@ -635,7 +507,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    z-index: -1;
+    z-index: var(--z-local-below);
     background: var(--color-page);
     border-block-end: 1px solid var(--color-line-soft);
     opacity: 1;
@@ -739,7 +611,7 @@
   /* ---------- Hero ------------------------------------------------------ */
   .hero {
     position: relative;
-    z-index: 2;
+    z-index: var(--z-content);
     /* Bottom padding is deliberately its own smaller value, not --space-3xl/
        4xl: the hero already ends with the facts row's own margin-block-start,
        and the next section (.section--tight) brings its own top padding, so
@@ -1116,7 +988,7 @@
     block-size: var(--swatch-size);
     border-radius: var(--swatch-radius);
     background-color: var(--chip-a, var(--color-surface-sunk));
-    box-shadow: inset 0 0 0 var(--swatch-border) rgb(38 36 46 / 22%);
+    box-shadow: inset 0 0 0 var(--swatch-border) rgb(var(--color-ink-rgb) / 22%);
     transition: box-shadow var(--dur-base) var(--ease-out),
       transform var(--dur-base) var(--ease-spring);
     overflow: hidden;
@@ -1141,7 +1013,7 @@
   }
 
   .swatch[aria-checked="true"] .swatch__chip {
-    box-shadow: inset 0 0 0 var(--swatch-border) rgb(38 36 46 / 22%),
+    box-shadow: inset 0 0 0 var(--swatch-border) rgb(var(--color-ink-rgb) / 22%),
       0 0 0 2px var(--color-surface), 0 0 0 4px var(--swatch-ring);
   }
 
@@ -1180,7 +1052,7 @@
     background: linear-gradient(
       to top left,
       transparent calc(50% - 1px),
-      rgb(38 36 46 / 55%) calc(50% - 1px) calc(50% + 1px),
+      rgb(var(--color-ink-rgb) / 55%) calc(50% - 1px) calc(50% + 1px),
       transparent calc(50% + 1px)
     );
   }
@@ -1201,7 +1073,7 @@
 
   .toggle__option {
     position: relative;
-    z-index: 1;
+    z-index: var(--z-local-raised);
     min-block-size: 38px;
     padding-inline: var(--space-sm);
     border-radius: var(--radius-pill);
@@ -1228,7 +1100,7 @@
   .toggle__thumb {
     position: absolute;
     inset-block: 3px;
-    z-index: 0;
+    z-index: var(--z-local-base);
     border-radius: var(--radius-pill);
     background: var(--color-ink);
     transition: transform var(--dur-slow) var(--ease-spring),
@@ -1244,18 +1116,20 @@
     position: relative;
     overflow: hidden;
     padding-block: var(--space-sm);
+    /* A mask reads only the alpha of these stops, so any opaque colour draws
+       the same fade. Ink is used so no raw colour is left in the rule. */
     mask-image: linear-gradient(
       to right,
       transparent,
-      #000 8%,
-      #000 92%,
+      var(--color-ink) 8%,
+      var(--color-ink) 92%,
       transparent
     );
     -webkit-mask-image: linear-gradient(
       to right,
       transparent,
-      #000 8%,
-      #000 92%,
+      var(--color-ink) 8%,
+      var(--color-ink) 92%,
       transparent
     );
   }
@@ -1438,7 +1312,7 @@
     block-size: 26px;
     flex: none;
     border-radius: 50%;
-    box-shadow: inset 0 0 0 1px rgb(38 36 46 / 18%);
+    box-shadow: inset 0 0 0 1px rgb(var(--color-ink-rgb) / 18%);
   }
 
   .mock__row-name {
@@ -1536,7 +1410,7 @@
   }
 
   .tile--pastel-cream {
-    background: #f5f1e8;
+    background: var(--color-cream-soft);
   }
 
   .tile--pastel-clay {
@@ -1547,7 +1421,7 @@
   .tile--pastel-blush .tile__visual,
   .tile--pastel-cream .tile__visual,
   .tile--pastel-clay .tile__visual {
-    background: rgb(255 255 255 / 62%);
+    background: rgb(var(--color-white-rgb) / 62%);
     border-color: transparent;
   }
 
@@ -1799,7 +1673,7 @@
     inline-size: 15px;
     block-size: 15px;
     border-radius: 50%;
-    box-shadow: inset 0 0 0 1px rgb(38 36 46 / 18%);
+    box-shadow: inset 0 0 0 1px rgb(var(--color-ink-rgb) / 18%);
   }
 
   .surface-card__title {
@@ -1825,8 +1699,8 @@
     gap: var(--space-xs);
     padding: var(--space-md);
     border-radius: var(--radius-md);
-    border: 1px solid rgb(255 255 255 / 14%);
-    background: rgb(255 255 255 / 4%);
+    border: 1px solid rgb(var(--color-white-rgb) / 14%);
+    background: rgb(var(--color-white-rgb) / 4%);
   }
 
   .pillar__icon {
@@ -1843,7 +1717,7 @@
 
   .pillar__text {
     font-size: var(--text-sm);
-    color: rgb(255 255 255 / 70%);
+    color: rgb(var(--color-white-rgb) / 70%);
   }
 
   /* Cards in a row share row tracks, so the titles, the body copy and the
@@ -1908,7 +1782,7 @@
   }
 
   .section--ink .split__text {
-    color: rgb(255 255 255 / 72%);
+    color: rgb(var(--color-white-rgb) / 72%);
   }
 
   .section--ink .split__list-icon {
@@ -1989,9 +1863,9 @@
     background: repeating-linear-gradient(
       45deg,
       var(--color-clay-soft) 0 5px,
-      #f6d8ca 5px 10px
+      var(--color-clay-hatch) 5px 10px
     );
-    box-shadow: inset 0 0 0 1px rgb(216 90 48 / 35%);
+    box-shadow: inset 0 0 0 1px rgb(var(--color-clay-rgb) / 35%);
   }
 
   .signal__points {
@@ -2056,7 +1930,7 @@
     inline-size: 12px;
     block-size: 12px;
     border-radius: 50%;
-    box-shadow: inset 0 0 0 1px rgb(38 36 46 / 12%);
+    box-shadow: inset 0 0 0 1px rgb(var(--color-ink-rgb) / 12%);
   }
 
   .vgal__grid {
@@ -2099,7 +1973,7 @@
   }
 
   .vgal__badge--n {
-    background: rgb(255 255 255 / 88%);
+    background: rgb(var(--color-white-rgb) / 88%);
     color: var(--color-ink);
   }
 
@@ -2153,7 +2027,7 @@
     inline-size: 12px;
     block-size: 12px;
     border-radius: 50%;
-    box-shadow: inset 0 0 0 1px rgb(38 36 46 / 12%);
+    box-shadow: inset 0 0 0 1px rgb(var(--color-ink-rgb) / 12%);
   }
 
   .gjoin__members {
@@ -2193,7 +2067,7 @@
     block-size: 28px;
     flex: none;
     border-radius: 8px;
-    box-shadow: inset 0 0 0 1px rgb(38 36 46 / 10%);
+    box-shadow: inset 0 0 0 1px rgb(var(--color-ink-rgb) / 10%);
   }
 
   .gjoin__meta {
@@ -2725,7 +2599,7 @@
   /* ---------- Footer ----------------------------------------------------- */
   .site-footer {
     position: relative;
-    z-index: 2;
+    z-index: var(--z-content);
     padding-block: var(--space-2xl) var(--space-xl);
     border-block-start: 1px solid var(--color-line);
   }
@@ -2795,13 +2669,13 @@
     position: fixed;
     inset-block-end: 0;
     inset-inline: 0;
-    z-index: 90;
+    z-index: var(--z-sticky-cta);
     display: flex;
     align-items: center;
     gap: var(--space-xs);
     padding: var(--space-2xs) var(--space-sm)
       calc(var(--space-2xs) + env(safe-area-inset-bottom, 0px));
-    background: rgb(255 255 255 / 92%);
+    background: rgb(var(--color-white-rgb) / 92%);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-block-start: 1px solid var(--color-line);
@@ -2834,7 +2708,7 @@
      section to section. Markup is generated by main.js; desktop only, and
      the module never runs under prefers-reduced-motion.
 
-     z-index 1 keeps the whole route UNDER the sections (they are z-index 2),
+     --z-route keeps the whole route UNDER the sections (--z-content),
      so the line dives behind every sunk / ink panel and card and re-emerges
      in the seams between them, instead of drawing over content. That is the
      fallback: on a viewport narrow enough that the outer margin cannot hold
@@ -2842,7 +2716,7 @@
   .journey {
     position: absolute;
     inset: 0;
-    z-index: 1;
+    z-index: var(--z-route);
     pointer-events: none;
     display: none;
   }
@@ -2854,7 +2728,7 @@
      it only crosses the blank edge of a panel, which is what keeps the trail
      and the plane in view for the whole page instead of half of it. */
   .journey--over {
-    z-index: 3;
+    z-index: var(--z-route-over);
   }
 
   @media (min-width: 992px) {
@@ -2907,7 +2781,7 @@
      journey module never runs under prefers-reduced-motion, so this
      animation cannot reach a reduced-motion visitor. */
   .journey__traveler {
-    filter: drop-shadow(0 3px 10px rgb(38 36 46 / 30%));
+    filter: drop-shadow(0 3px 10px rgb(var(--color-ink-rgb) / 30%));
     will-change: transform;
   }
 
@@ -2935,11 +2809,11 @@
   }
 
   .journey__plane-bot {
-    fill: #dededf;
+    fill: var(--color-plane-shade);
   }
 
   .journey__plane-keel {
-    fill: #b7b6bb;
+    fill: var(--color-plane-keel);
   }
 
   .journey__logo {
@@ -2960,7 +2834,7 @@
   /* The notification layer rides ABOVE the sections AND above the route, so
      a bubble is never swallowed by a panel or crossed by the trail. */
   .journey--top {
-    z-index: 4;
+    z-index: var(--z-route-notes);
   }
 
   .jtoast {
@@ -3172,12 +3046,6 @@
 
 /* ---- 992px ------------------------------------------------------------- */
 @media (min-width: 62em) {
-  @layer base {
-    :root {
-      --header-h: 76px;
-    }
-  }
-
   @layer components {
     .site-header__nav {
       display: block;
@@ -3283,13 +3151,13 @@
   }
 
   body {
-    background: #fff;
+    background: var(--color-white);
   }
 }
 
 
 /* =========================================================================
-   LEGAL  —  privacy.html and any future policy page
+   LEGAL  -  privacy.html and any future policy page
    =========================================================================
    A long document nobody reads front to back. The layout answers "is the
    part I care about in here", so the contents list is a real control on
@@ -3372,7 +3240,7 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: #fff;
+    background: var(--color-white);
     border: 1px solid var(--color-line);
     color: var(--color-violet-deep);
   }
@@ -3607,7 +3475,7 @@
     margin-block: 0 var(--space-sm);
     border-radius: var(--radius-md);
     background: var(--color-violet-soft);
-    border: 1px solid rgb(127 119 221 / 22%);
+    border: 1px solid rgb(var(--color-violet-rgb) / 22%);
     color: var(--color-ink-muted);
   }
 
@@ -3633,7 +3501,7 @@
 
 
 /* =========================================================================
-   MOTION PREFERENCES  —  waitlist + legal blocks
+   MOTION PREFERENCES  -  waitlist + legal blocks
    Everything lands on its final state; nothing is left mid-transition.
    ========================================================================= */
 @media (prefers-reduced-motion: reduce) {
@@ -3661,7 +3529,7 @@
   /* The spinner is the only signal that a submit is in flight, so with
      motion off it becomes a static ring rather than nothing at all. */
   .wl__spinner {
-    border-top-color: rgb(255 255 255 / 55%);
+    border-top-color: rgb(var(--color-white-rgb) / 55%);
   }
 
   .wl__submit:hover svg,
@@ -3675,7 +3543,7 @@
 }
 
 /* =========================================================================
-   PRINT  —  the policy is the one page people actually print or file.
+   PRINT  -  the policy is the one page people actually print or file.
    ========================================================================= */
 @media print {
   .legal-toc,
@@ -3694,7 +3562,8 @@
 
   .legal-doc {
     max-width: none;
-    color: #000;
+    /* Pure black on paper only, on purpose: see --color-print-ink. */
+    color: var(--color-print-ink);
   }
 
   .legal-doc > section + section {
@@ -3762,7 +3631,7 @@
   .wl__brand {
     padding-inline: 0.75rem 0.9rem;
     border-radius: var(--radius-pill);
-    background: rgb(255 255 255 / 72%);
+    background: rgb(var(--color-white-rgb) / 72%);
     border: 1px solid var(--color-line);
     backdrop-filter: blur(8px);
   }
@@ -3770,8 +3639,8 @@
   .wl__foot {
     padding: 0.6rem var(--space-md);
     border-radius: var(--radius-md);
-    background: rgb(255 255 255 / 78%);
-    border: 1px solid rgb(255 255 255 / 60%);
+    background: rgb(var(--color-white-rgb) / 78%);
+    border: 1px solid rgb(var(--color-white-rgb) / 60%);
     backdrop-filter: blur(10px);
     color: var(--color-ink-muted);
   }
@@ -3819,31 +3688,11 @@
 
 
 /* =========================================================================
-   STATUS  —  status.html, plus the strip on index.html
+   STATUS  -  status.html, plus the strip on index.html
    =========================================================================
-   Status tones borrow the brand where the brand already means the right
-   thing: a partial outage is clay, maintenance is violet. Green and red
-   stay conventional, because guessing at those costs a reader real time.
-   Every tone has a fill (for ticks and dots) and a darker text pair that
-   passes AA on white.
+   The --st-* tone palette lives in design-tokens.css (Status tones), with
+   the reasoning for each colour and its AA text pair.
    ========================================================================= */
-@layer base {
-  :root {
-    --st-operational: #3f9a63;
-    --st-operational-ink: #2f6b41;
-    --st-degraded: #e0a02a;
-    --st-degraded-ink: #8a5a00;
-    --st-partial: #d85a30;
-    --st-partial-ink: #9c3d1a;
-    --st-major: #b3261e;
-    --st-major-ink: #8f1d17;
-    --st-maintenance: #7f77dd;
-    --st-maintenance-ink: #453aa3;
-
-    --st-tick-radius: 3px;
-  }
-}
-
 @layer components {
   /* ---- tone plumbing: one attribute drives dot, tick and badge ------- */
   [data-status="operational"] { --st-tone: var(--st-operational); --st-tone-ink: var(--st-operational-ink); }
@@ -3892,13 +3741,13 @@
 
   .st-note[data-kind="preview"] {
     background: var(--color-warn-soft);
-    border: 1px solid rgb(138 90 0 / 22%);
+    border: 1px solid rgb(var(--color-warn-rgb) / 22%);
     color: var(--color-warn);
   }
 
   .st-note[data-kind="error"] {
     background: var(--color-clay-soft);
-    border: 1px solid rgb(156 61 26 / 22%);
+    border: 1px solid rgb(var(--color-clay-deep-rgb) / 22%);
     color: var(--color-clay-deep);
   }
 
@@ -4152,12 +4001,12 @@
   /* ---- tooltip ----------------------------------------------------------- */
   .st-tip {
     position: fixed;
-    z-index: 60;
+    z-index: var(--z-tooltip);
     transform: translate(-50%, -100%);
     padding: 0.45rem 0.65rem;
     border-radius: var(--radius-xs);
     background: var(--color-ink);
-    color: #fff;
+    color: var(--color-white);
     pointer-events: none;
     box-shadow: var(--shadow-md);
   }
@@ -4172,7 +4021,7 @@
   .st-tip__body {
     margin: 0.1rem 0 0;
     font-size: var(--text-xs);
-    color: rgb(255 255 255 / 72%);
+    color: rgb(var(--color-white-rgb) / 72%);
   }
 
   /* ---- legend -------------------------------------------------------------- */
@@ -4247,7 +4096,7 @@
 
   .st-inc__badge[data-state="resolved"] {
     background: var(--color-success-soft);
-    border-color: rgb(47 107 65 / 22%);
+    border-color: rgb(var(--color-success-rgb) / 22%);
     color: var(--color-success);
   }
 
@@ -4255,7 +4104,7 @@
   .st-inc__badge[data-state="identified"],
   .st-inc__badge[data-state="monitoring"] {
     background: var(--color-warn-soft);
-    border-color: rgb(138 90 0 / 22%);
+    border-color: rgb(var(--color-warn-rgb) / 22%);
     color: var(--color-warn);
   }
 
@@ -4425,7 +4274,7 @@
   }
 
   /* =======================================================================
-     THE STRIP  —  index.html
+     THE STRIP  -  index.html
      A live line, not a badge: it says the state, the number behind it, and
      where to go for the detail. It reserves its own height so arriving data
      never shifts the page.
@@ -4543,7 +4392,7 @@
 
 @layer components {
   /* .btn sets display: inline-flex, which outranks the user agent's
-     [hidden] rule — so a hidden button stayed on screen. Caught by seeing
+     [hidden] rule, so a hidden button stayed on screen. Caught by seeing
      "Try again" sitting under a healthy status board. */
   .btn[hidden],
   .st-page [hidden] {
@@ -4560,7 +4409,7 @@
     padding: var(--space-md);
     border-radius: var(--radius-lg);
     background: var(--color-clay-soft);
-    border: 1px solid rgb(216 90 48 / 22%);
+    border: 1px solid rgb(var(--color-clay-rgb) / 22%);
     border-inline-start: 3px solid var(--color-clay);
   }
 
@@ -4670,14 +4519,14 @@
   .hero__pill--live {
     color: var(--color-violet-deep);
     text-decoration: none;
-    box-shadow: inset 0 0 0 1px rgb(127 119 221 / 22%);
+    box-shadow: inset 0 0 0 1px rgb(var(--color-violet-rgb) / 22%);
     transition: background-color var(--dur-fast) linear,
       box-shadow var(--dur-fast) linear, transform var(--dur-base) var(--ease-out);
   }
 
   .hero__pill--live:hover {
-    background: #e4e2f8;
-    box-shadow: inset 0 0 0 1px rgb(127 119 221 / 45%);
+    background: var(--color-violet-soft-hover);
+    box-shadow: inset 0 0 0 1px rgb(var(--color-violet-rgb) / 45%);
   }
 
   .hero__pill--live:focus-visible {
@@ -4703,7 +4552,7 @@
     padding: 1px 8px;
     border-radius: var(--radius-pill);
     background: var(--color-ink);
-    color: #fff;
+    color: var(--color-white);
     font-size: var(--text-xs);
     letter-spacing: 0.02em;
   }
@@ -4728,17 +4577,17 @@
   }
 
   @keyframes launch-nudge {
-    0% { box-shadow: 0 0 0 0 rgb(127 119 221 / 55%); transform: translateY(0); }
+    0% { box-shadow: 0 0 0 0 rgb(var(--color-violet-rgb) / 55%); transform: translateY(0); }
     30% { transform: translateY(-2px); }
-    60% { box-shadow: 0 0 0 12px rgb(127 119 221 / 0%); transform: translateY(0); }
-    100% { box-shadow: 0 0 0 0 rgb(127 119 221 / 0%); }
+    60% { box-shadow: 0 0 0 12px rgb(var(--color-violet-rgb) / 0%); transform: translateY(0); }
+    100% { box-shadow: 0 0 0 0 rgb(var(--color-violet-rgb) / 0%); }
   }
 
   /* ---- Confetti: swatch chips, positioned by JS, animated by WAAPI --- */
   .confetti-layer {
     position: fixed;
     inset: 0;
-    z-index: 130;
+    z-index: var(--z-confetti);
     overflow: hidden;
     pointer-events: none;
   }
@@ -4746,7 +4595,7 @@
   .confetti-bit {
     position: absolute;
     border-radius: 3px;
-    box-shadow: inset 0 0 0 1px rgb(38 36 46 / 12%);
+    box-shadow: inset 0 0 0 1px rgb(var(--color-ink-rgb) / 12%);
     will-change: transform, opacity;
   }
 
@@ -4763,7 +4612,7 @@
     position: fixed;
     inset-inline: 0;
     inset-block-end: calc(var(--space-md) + env(safe-area-inset-bottom, 0px));
-    z-index: 120;
+    z-index: var(--z-modal);
     display: flex;
     justify-content: center;
     padding-inline: var(--space-sm);
@@ -4780,8 +4629,8 @@
     padding: var(--space-md);
     border-radius: var(--radius-lg);
     background: var(--color-surface);
-    box-shadow: 0 0 0 1px var(--color-line), 0 24px 60px rgb(38 36 46 / 22%),
-      0 4px 12px rgb(38 36 46 / 8%);
+    box-shadow: 0 0 0 1px var(--color-line), 0 24px 60px rgb(var(--color-ink-rgb) / 22%),
+      0 4px 12px rgb(var(--color-ink-rgb) / 8%);
     pointer-events: auto;
     opacity: 0;
     transform: translateY(24px) scale(0.97);
@@ -4797,7 +4646,13 @@
     inset-inline: var(--space-md);
     block-size: 4px;
     border-radius: 0 0 4px 4px;
-    background: linear-gradient(90deg, #7f77dd 0 25%, #ed93b1 25% 50%, #d85a30 50% 75%, #26242e 75% 100%);
+    background: linear-gradient(
+      90deg,
+      var(--color-violet) 0 25%,
+      var(--color-blush) 25% 50%,
+      var(--color-clay) 50% 75%,
+      var(--color-ink) 75% 100%
+    );
   }
 
   .launch-moment.is-open .launch-moment__card {
@@ -4846,7 +4701,7 @@
     block-size: 36px;
     border-radius: 50%;
     background-size: cover;
-    box-shadow: inset 0 0 0 1px rgb(38 36 46 / 14%), 0 0 0 2px #fff, 0 0 0 3.5px var(--color-ink);
+    box-shadow: inset 0 0 0 1px rgb(var(--color-ink-rgb) / 14%), 0 0 0 2px var(--color-white), 0 0 0 3.5px var(--color-ink);
   }
 
   .launch-moment__receipt-lines {
@@ -4877,7 +4732,7 @@
     margin-inline-start: auto;
     border-radius: 50%;
     background: var(--color-success);
-    color: #fff;
+    color: var(--color-white);
   }
 
   .launch-moment.is-open .launch-moment__receipt-tick {
@@ -5042,7 +4897,7 @@
     padding-block: var(--space-2xs) var(--space-md);
     background: var(--color-surface);
     border-block-end: 1px solid var(--color-line);
-    box-shadow: 0 18px 40px rgb(38 36 46 / 12%);
+    box-shadow: 0 18px 40px rgb(var(--color-ink-rgb) / 12%);
   }
 
   .site-header__panel[hidden] {

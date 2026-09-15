@@ -35,7 +35,8 @@ vercel.json / _redirects       send old waitlist.html links to the App Store lis
 privacy.html                   privacy policy
 status.html                    live system status, fed by the dashboard API
 assets/
-  css/styles.css               design tokens + components, cascade layers
+  css/design-tokens.css        every design token, loaded first on all pages
+  css/styles.css               components and layout, cascade layers
   js/nav.js                    the site header on EVERY page: background on
                                scroll, hide on scroll down, small-screen menu
   js/main.js                   one IIFE, eleven independent modules
@@ -174,16 +175,16 @@ in exactly one place.
 | Theme / app names in the marquee | `THEME_ITEMS` in `assets/js/main.js` |
 | Demo colours, stock states, gallery sets | `DEMO_COLOURS` in `assets/js/main.js` |
 | AI setup demo outcome | `AI_SETUP_MATCHES` in `assets/js/main.js` |
-| Brand palette, type scale, spacing | the `:root` token block in `assets/css/styles.css` |
+| Brand palette, type scale, spacing, layers | `assets/css/design-tokens.css` |
 
-The four brand colours live in one place:
+The four brand colours live in one place, `assets/css/design-tokens.css`:
 
 ```css
---color-violet: #7f77dd;
---color-blush:  #ed93b1;
---color-clay:   #d85a30;
---color-cream:  #f5f1e8;
---color-ink:    #26242e;   /* sampled from the official Varn icon */
+--color-violet:     #7f77dd;
+--color-blush:      #ed93b1;
+--color-clay:       #d85a30;
+--color-cream-soft: #f5f1e8;   /* the cream pastel tile */
+--color-ink:        #26242e;   /* sampled from the official Varn icon */
 ```
 
 The site is a clean white SaaS theme. The dark "ink" used for text, buttons
@@ -410,7 +411,7 @@ The markup is already shaped for it.
 | each `<section class="section">` | a **section** |
 | `.tile`, `.plan`, `.pillar`, `.step`, `.faq__item`, `.marquee__item` | **blocks** (repeatable) |
 | `.btn`, `.swatch`, `.product-card`, `.brand` | **snippets** |
-| the `:root` token block | **theme settings** (colours, radii, spacing) |
+| `design-tokens.css` | **theme settings** (colours, radii, spacing) |
 | `DEMO_COLOURS`, `THEME_ITEMS`, `AI_MATCHES` | block settings / metafields |
 
 Colours are passed through `data-chip` / `data-fill` attributes rather than
