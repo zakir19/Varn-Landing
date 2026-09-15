@@ -195,8 +195,12 @@
     --text-xs: 0.75rem;
     --text-eyebrow: 0.7rem;
 
-    --leading-tight: 0.94;
-    --leading-snug: 1.14;
+    /* Both leave room below the baseline for p, y and g: gradient headline
+       words are painted with background-clip: text, and some browsers clip
+       that paint to the line box, so a line box shorter than the letters
+       cut their tails off (owner report, "AI setup"). */
+    --leading-tight: 1.06;
+    --leading-snug: 1.2;
     --leading-normal: 1.62;
     --tracking-tight: -0.035em;
     --tracking-wide: 0.14em;
@@ -473,7 +477,17 @@
 
   /* Brand-gradient accent inside display headings. Stops are tuned to
      >= 3:1 on both white and ink so large text stays AA everywhere. */
+  /* The gradient only paints inside the element's box, and with tight
+     heading line-heights that box stops above the descenders, so the tails
+     of p, y, g were cut off. The extra block padding grows the painted area
+     to cover them; the matching negative margin keeps line spacing exactly
+     as it was. "clone" repeats that padding on every line when a phrase
+     wraps, so the second line is covered too. */
   .accent {
+    padding-block: 0.1em 0.2em;
+    margin-block: -0.1em -0.2em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
     background: var(--grad-accent);
     -webkit-background-clip: text;
     background-clip: text;
@@ -770,7 +784,7 @@
      the page gutters, capped at 46px. */
   .hero__title {
     font-size: clamp(1.8rem, 1.25rem + 2.4vw, 2.3rem);
-    line-height: 1.04;
+    line-height: 1.14;
     letter-spacing: -0.028em;
     font-weight: 600;
     margin-block-start: var(--space-md);
