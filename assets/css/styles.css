@@ -736,8 +736,12 @@
     background: var(--color-violet);
   }
 
+  /* Phones: the headline wraps naturally. From tablet up it is exactly two
+     lines, one per .hero__line, and the size is tied to the viewport so the
+     longer first line (about 17.4 times the font size wide) always fits inside
+     the page gutters, capped at 52px. */
   .hero__title {
-    font-size: clamp(2.55rem, 1.4rem + 4.6vw, 4.4rem);
+    font-size: clamp(2rem, 1.35rem + 2.8vw, 2.6rem);
     line-height: 1.04;
     letter-spacing: -0.028em;
     font-weight: 600;
@@ -2993,6 +2997,17 @@
    ========================================================================= */
 @layer utilities {
   /* Keeps a hyphenated phrase ("Single-Click") on one line. */
+  @media (min-width: 48em) {
+    .hero__title {
+      font-size: min(3.25rem, calc((94.8vw - 40px) / 17.4));
+    }
+
+    .hero__line {
+      display: block;
+      white-space: nowrap;
+    }
+  }
+
   .nowrap {
     white-space: nowrap;
   }
