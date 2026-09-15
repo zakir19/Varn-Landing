@@ -180,15 +180,17 @@
     --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", menlo, consolas,
       monospace;
 
-    --text-display: clamp(2.7rem, 1.35rem + 5.4vw, 5.5rem);
-    --text-h2: clamp(2rem, 1.15rem + 3.6vw, 4rem);
-    --text-h3: clamp(1.3rem, 1.1rem + 0.85vw, 1.8rem);
-    --text-h4: clamp(1.08rem, 1rem + 0.36vw, 1.28rem);
-    --text-lead: clamp(1.06rem, 0.98rem + 0.46vw, 1.32rem);
-    --text-body: clamp(0.98rem, 0.95rem + 0.16vw, 1.06rem);
-    --text-sm: 0.875rem;
-    --text-xs: 0.78rem;
-    --text-eyebrow: 0.72rem;
+    /* Scale tightened 2026-09-15: every step sits roughly 15% below the
+       previous scale, the big headings most, body copy least. */
+    --text-display: clamp(2.2rem, 1.2rem + 4.2vw, 4.25rem);
+    --text-h2: clamp(1.7rem, 1.05rem + 2.5vw, 3rem);
+    --text-h3: clamp(1.15rem, 1rem + 0.6vw, 1.5rem);
+    --text-h4: clamp(1rem, 0.95rem + 0.24vw, 1.14rem);
+    --text-lead: clamp(1rem, 0.94rem + 0.3vw, 1.15rem);
+    --text-body: clamp(0.94rem, 0.92rem + 0.1vw, 1rem);
+    --text-sm: 0.84rem;
+    --text-xs: 0.75rem;
+    --text-eyebrow: 0.7rem;
 
     --leading-tight: 0.94;
     --leading-snug: 1.14;
@@ -431,14 +433,6 @@
     color: var(--color-ink-subtle);
   }
 
-  .eyebrow::before {
-    content: "";
-    inline-size: 20px;
-    block-size: 1px;
-    background: currentcolor;
-    opacity: 0.5;
-  }
-
   .section--ink .eyebrow {
     color: rgb(255 255 255 / 62%);
   }
@@ -552,7 +546,7 @@
   .btn--lg {
     min-block-size: 56px;
     padding-inline: var(--space-lg);
-    font-size: 1rem;
+    font-size: 0.94rem;
   }
 
   .btn--block {
@@ -739,9 +733,9 @@
   /* Phones: the headline wraps naturally. From tablet up it is exactly two
      lines, one per .hero__line, and the size is tied to the viewport so the
      longer first line (about 17.4 times the font size wide) always fits inside
-     the page gutters, capped at 52px. */
+     the page gutters, capped at 46px. */
   .hero__title {
-    font-size: clamp(2rem, 1.35rem + 2.8vw, 2.6rem);
+    font-size: clamp(1.8rem, 1.25rem + 2.4vw, 2.3rem);
     line-height: 1.04;
     letter-spacing: -0.028em;
     font-weight: 600;
@@ -822,7 +816,7 @@
   .facts__value {
     display: block;
     margin-inline-start: 0;
-    font-size: clamp(1.28rem, 1.1rem + 0.8vw, 1.6rem);
+    font-size: clamp(1.15rem, 1rem + 0.7vw, 1.4rem);
     font-weight: 600;
     letter-spacing: -0.025em;
     line-height: 1.1;
@@ -1892,7 +1886,7 @@
   }
 
   .scorecard__score {
-    font-size: clamp(2.4rem, 2rem + 1.6vw, 3.2rem);
+    font-size: clamp(2.1rem, 1.8rem + 1.3vw, 2.75rem);
     font-weight: 600;
     letter-spacing: -0.04em;
     line-height: 1;
@@ -1907,7 +1901,7 @@
     border-radius: var(--radius-sm);
     background: var(--color-success-soft);
     color: var(--color-success);
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     font-weight: 700;
   }
 
@@ -2215,7 +2209,7 @@
   }
 
   .dash__num {
-    font-size: clamp(1.2rem, 1.05rem + 0.7vw, 1.55rem);
+    font-size: clamp(1.1rem, 1rem + 0.55vw, 1.4rem);
     font-weight: 600;
     letter-spacing: -0.02em;
     line-height: 1.1;
@@ -2392,7 +2386,7 @@
   }
 
   .plan__amount {
-    font-size: clamp(2.1rem, 1.7rem + 1.5vw, 2.75rem);
+    font-size: clamp(1.9rem, 1.6rem + 1.2vw, 2.4rem);
     font-weight: 600;
     letter-spacing: -0.04em;
     line-height: 1;
@@ -2511,7 +2505,7 @@
 
   .maker__wordmark {
     margin-block-start: var(--space-md);
-    font-size: clamp(1.6rem, 1.2rem + 1.8vw, 2.4rem);
+    font-size: clamp(1.45rem, 1.1rem + 1.5vw, 2.05rem);
     font-weight: 700;
     letter-spacing: -0.035em;
     line-height: 1.05;
@@ -2548,7 +2542,7 @@
   .maker__stat-value {
     display: block;
     margin-inline-start: 0;
-    font-size: clamp(1.3rem, 1.1rem + 0.9vw, 1.7rem);
+    font-size: clamp(1.15rem, 1rem + 0.7vw, 1.45rem);
     font-weight: 600;
     letter-spacing: -0.03em;
   }
@@ -2999,7 +2993,7 @@
   /* Keeps a hyphenated phrase ("Single-Click") on one line. */
   @media (min-width: 48em) {
     .hero__title {
-      font-size: min(3.25rem, calc((94.8vw - 40px) / 17.4));
+      font-size: min(2.9rem, calc((94.8vw - 40px) / 17.4));
     }
 
     .hero__line {
@@ -3266,7 +3260,7 @@
 
   .legal-hero__title {
     margin: 0;
-    font-size: clamp(2.1rem, 1.4rem + 2.8vw, 3.25rem);
+    font-size: clamp(1.85rem, 1.3rem + 2.2vw, 2.8rem);
     line-height: var(--leading-snug);
     letter-spacing: var(--tracking-tight);
     font-weight: 600;
@@ -3893,7 +3887,7 @@
   .st-title {
     margin: 0;
     max-width: 20ch;
-    font-size: clamp(2.1rem, 1.35rem + 3.2vw, 3.6rem);
+    font-size: clamp(1.9rem, 1.3rem + 2.6vw, 3.1rem);
     line-height: var(--leading-snug);
     letter-spacing: var(--tracking-tight);
     font-weight: 600;
