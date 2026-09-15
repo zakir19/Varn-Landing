@@ -27,7 +27,7 @@ const SITE = {
   tagline: "Variants & Swatches for Shopify",
   origin: "https://varn.enstacked.com",
   docsBase: "/docs",
-  appListing: "https://apps.shopify.com/varn-variants-swatches-ai",
+  appListing: "https://apps.shopify.com/varn-variants-swatches",
   support: "mailto:support@enstacked.com",
 };
 

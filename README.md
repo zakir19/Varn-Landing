@@ -31,13 +31,12 @@ to any static host or S3 bucket. There is nothing to compile.
 
 ```
 index.html                     the landing page, semantic HTML only
-waitlist.html                  pre-launch signup page, where every CTA goes
+vercel.json / _redirects       send old waitlist.html links to the App Store listing
 privacy.html                   privacy policy
 status.html                    live system status, fed by the dashboard API
 assets/
   css/styles.css               design tokens + components, cascade layers
-  js/main.js                   one IIFE, ten independent modules
-  js/waitlist.js               waitlist.html: brand field + signup form
+  js/main.js                   one IIFE, eleven independent modules
   js/legal.js                  privacy.html: contents list highlighting
   js/status.js                 status.html + the strip on index.html
   fonts/                       legacy woff2 files, no longer referenced by
@@ -194,64 +193,39 @@ passes WCAG AA. If you change a brand colour, re-derive its `-deep` companion.
 
 ---
 
-## Pre-launch state
+## Launch state (live since September 2026)
 
-The site currently sells a waitlist, not an install.
+Varn is live on the Shopify App Store:
+**https://apps.shopify.com/varn-variants-swatches**
 
-- Every call to action on every page links to `waitlist.html` **in the markup**,
-  so it is correct with JavaScript disabled and correct if `main.js` never
-  loads. Each one also carries `data-launch` and a `data-launch-label` holding
-  the wording it should show on launch day.
-- `waitlist.html` collects the email and **sends it to MailerLite**. The two
-  ids at the top of `assets/js/waitlist.js` are the only part of MailerLite's
-  generated embed we kept — the markup, styling and states are ours, so the
-  page reads as Varn rather than as a MailerLite widget:
+- Every call to action links to the listing **in the markup**, with its launch
+  wording, so it is correct with JavaScript disabled. `LAUNCH_URL` at the top of
+  `assets/js/main.js` holds the same URL as a belt for any `[data-launch]` link
+  added later.
+- The waitlist page, its script and its stylesheet block were removed.
+  `vercel.json` (Vercel) and `_redirects` (Netlify / Cloudflare Pages) send any
+  old `waitlist.html` link, such as one in a MailerLite email, to the listing
+  with a 301. MailerLite itself is no longer called from this site.
+- The hero pill reads "Now live on the Shopify App Store" and links there.
 
-  ```js
-  var MAILERLITE = { account: "2519972", form: "197865579280861031" };
-  ```
+### The launch moment (the surprise)
 
-  **How the submit works, and why it is not `fetch()`.** MailerLite's classic
-  endpoint sends no CORS headers, so the browser refuses to hand us the
-  response and the promise rejects — every signup looks like a failure even
-  when MailerLite stored it. That is exactly why their own embed uses a plain
-  form with `target="_blank"`. JSONP is no better: a `<script>` tag can only
-  issue a GET, and this is a POST endpoint.
+The hero demo is the page's product, so the surprise lives there:
 
-  So we send the form MailerLite already expects — same action, same method,
-  same field names — and point its `target` at a hidden iframe instead of a
-  new tab. A form POST is never subject to CORS, so there is no protocol left
-  to guess at.
+1. Try three different colors in the demo and **Add to cart** gets a gentle
+   nudge (a violet pulse, three beats).
+2. Press **Add to cart** and the swatches burst out of the button as confetti
+   (brand colors plus the color you picked, some carrying its photo texture),
+   then a receipt card rises: "That's a sale. Your shoppers get this exact
+   moment." with **Add Varn free** and **Keep exploring**.
 
-  **What that can and cannot know.** The iframe is cross-origin, so its body
-  is unreadable: a load event means MailerLite answered, so success means
-  "sent and answered", not "definitely stored". One case is worth the extra
-  request to get right — a signup killed by an ad or tracker blocker *also*
-  fires that load event, and MailerLite is on most blocklists, so it would
-  otherwise show "You're on the list" and be lost in silence. A `no-cors`
-  reachability probe runs first and, when the host is unreachable, says so in
-  words the visitor can act on instead of a useless "try again".
-
-  **Without JavaScript it still works.** The `action`, `method="post"`,
-  `target="_blank"`, `name="fields[email]"` and MailerLite's two hidden
-  fields are all in the markup, so the form posts straight to MailerLite and
-  the visitor lands on MailerLite's own confirmation page.
-
-  `WAITLIST_ENDPOINT` in the same file overrides MailerLite with any endpoint
-  that accepts a JSON POST (`{ email, source, ts }`) — the seam to use if the
-  list moves or signups should hit your own server first. With both blank the
-  page runs in **demo mode**: the flow plays, nothing is stored, and the
-  console says so on every submit.
-- The form covers empty, invalid, submitting, success, network failure and
-  returning-visitor. A honeypot field catches bots and answers them exactly as
-  if they had succeeded.
-
-**On launch day:** paste the App Store listing URL into `LAUNCH_URL` at the top
-of `assets/js/main.js`. That one edit repoints every `[data-launch]` link,
-restores each link's own launch-day wording, and removes the "Launching soon"
-prefix in the hero. Nothing else changes. Note that `privacy.html` deliberately
-has no launch-dependent call to action, so it needs no edit and does not load
-`main.js`.
+Rules: never on load or scroll, the card shows once per browser session
+(`sessionStorage`), confetti every time. Non-modal, Escape or click-outside
+closes, focus returns to the button. Under `prefers-reduced-motion` there is no
+confetti or movement and the card simply appears. The result is announced in a
+polite live region either way. Code: `initLaunchMoment` in `main.js`, styles in
+the `LAUNCH` block at the end of `styles.css`, markup just above the scripts in
+`index.html`.
 
 ---
 

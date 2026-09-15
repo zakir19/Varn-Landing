@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/waitlist.html", "destination": "https://apps.shopify.com/varn-variants-swatches", "permanent": true },
+    { "source": "/waitlist", "destination": "https://apps.shopify.com/varn-variants-swatches", "permanent": true }
+  ]
+}

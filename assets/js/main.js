@@ -52,19 +52,15 @@
   }
 
   /* =======================================================================
-     LAUNCH SWITCH  -  the one place the site flips from waitlist to live
+     LAUNCH SWITCH  -  LIVE since September 2026
      =======================================================================
-     Before launch every call to action points at waitlist.html, which is
-     what the markup ships with, so the page is correct with JavaScript
-     disabled and correct if this file never loads.
-
-     ON LAUNCH DAY: paste the App Store listing URL into LAUNCH_URL below.
-     That single edit repoints every [data-launch] link, restores each
-     link's own launch-day wording from its data-launch-label, and drops
-     the "Launching soon" wording. Nothing else on the site has to change.
+     Varn is on the Shopify App Store, so the markup itself now links every
+     call to action to the listing with its launch wording (correct with
+     JavaScript disabled). This switch is kept as a belt: any [data-launch]
+     link added later is repointed here too. The waitlist page is gone.
      ===================================================================== */
 
-  var LAUNCH_URL = "";
+  var LAUNCH_URL = "https://apps.shopify.com/varn-variants-swatches";
 
   (function launchSwitch() {
     if (!LAUNCH_URL) return;
@@ -202,6 +198,7 @@
     var badge = qs("[data-demo-badge]", root);
     var thumbs = qsa("[data-demo-thumb]", root);
     var atc = qs("[data-demo-atc]", root);
+    var priceOut = qs("[data-demo-price]", root);
     if (!stage || !select || !swatchRow) return;
 
     var buttons = [];
@@ -328,10 +325,26 @@
       filterGallery(colour);
     }
 
+    // Surprise hook: once a visitor has explored a few colors, nudge the
+    // Add to cart button. Only real interaction counts, never the auto-play.
+    var explored = {};
+    var nudged = false;
+    function noteExplored(index) {
+      explored[index] = true;
+      if (nudged || !atc || Object.keys(explored).length < 3) return;
+      nudged = true;
+      atc.classList.add("is-nudging");
+      window.setTimeout(function () {
+        atc.classList.remove("is-nudging");
+      }, 4200);
+    }
+
     function onSwatchClick(event) {
       var button = event.target.closest(".swatch");
       if (!button) return;
-      select_(buttons.indexOf(button));
+      var index = buttons.indexOf(button);
+      select_(index);
+      if (DEMO_COLOURS[index] && DEMO_COLOURS[index].state === "in") noteExplored(index);
     }
 
     // Roving focus, the standard radiogroup keyboard contract.
@@ -356,6 +369,7 @@
 
       buttons[next].focus();
       select_(next);
+      if (DEMO_COLOURS[next] && DEMO_COLOURS[next].state === "in") noteExplored(next);
     }
 
     buildOptions();
@@ -365,6 +379,7 @@
     swatchRow.addEventListener("keydown", onSwatchKeydown);
     select.addEventListener("change", function () {
       select_(Number(select.value), true);
+      noteExplored(Number(select.value));
     });
 
     thumbs.forEach(function (thumb) {
@@ -377,10 +392,31 @@
 
     if (atc) {
       atc.addEventListener("click", function () {
-        atc.textContent = "Added - " + DEMO_COLOURS[activeIndex].name;
+        var colour = DEMO_COLOURS[activeIndex];
+        atc.textContent = "Added - " + colour.name;
+        atc.classList.remove("is-nudging");
         window.setTimeout(function () {
           atc.textContent = "Add to cart";
         }, 1600);
+
+        // Hand the moment to initLaunchMoment. An event, not a direct call,
+        // so either module can be removed without breaking the other.
+        var detail = {
+          name: colour.name,
+          hex: colour.hex,
+          hex2: colour.hex2 || "",
+          image: colour.image ? fabricImage(colour.hex) : "",
+          price: priceOut ? priceOut.textContent : "",
+          origin: atc
+        };
+        var event;
+        try {
+          event = new CustomEvent("varn:demo-add", { detail: detail });
+        } catch (err) {
+          event = document.createEvent("CustomEvent");
+          event.initCustomEvent("varn:demo-add", false, false, detail);
+        }
+        document.dispatchEvent(event);
       });
     }
 
@@ -946,7 +982,7 @@
     var DESKTOP = window.matchMedia("(min-width: 992px)");
     var COLORS = ["#7F77DD", "#ED93B1", "#D85A30", "#9CAF88"];
     var SAMPLE_STEP = 6; // px of path length per cached sample
-    var APP_URL = "https://apps.shopify.com/varn-variants-swatches-ai";
+    var APP_URL = LAUNCH_URL;
     /* How far the dart reaches from the point it is drawn at: 34px nose,
        21px half-wingspan, plus stroke and drop shadow. Every clearance
        below is measured against this, so resizing the dart in build()
@@ -1503,6 +1539,193 @@
   }
 
   /* =======================================================================
+     MODULE - Launch moment (the surprise)
+     =======================================================================
+     Add a color to cart in the hero demo and the page celebrates it the way
+     a merchant's own store would: the swatches burst out of the button as
+     confetti, and a small "That's a sale" card explains that this is what
+     their shoppers get, with the one call to action that matters now that
+     Varn is live.
+
+     Rules it keeps:
+     - Never fires on load or on scroll. Only a deliberate add-to-cart.
+     - The card shows once per browser session; confetti plays every time
+       (it is the reward, and it is cheap: ~40 DOM nodes, removed on finish).
+     - prefers-reduced-motion: no confetti, no movement, the card simply
+       appears. The result is announced to screen readers either way.
+     - Non-modal. Focus is not stolen; Escape or either close control
+       dismisses it and focus returns to the button that was pressed.
+     ===================================================================== */
+
+  function initLaunchMoment() {
+    var host = qs("[data-launch-moment]");
+    if (!host) return;
+
+    var card = qs(".launch-moment__card", host);
+    var chip = qs("[data-launch-chip]", host);
+    var product = qs("[data-launch-product]", host);
+    var meta = qs(".launch-moment__receipt-meta", host);
+    var announce = qs("[data-launch-announce]");
+    var closers = qsa("[data-launch-close]", host);
+    var SEEN_KEY = "varn-launch-moment-seen";
+    var BRAND = ["#7F77DD", "#ED93B1", "#D85A30", "#F5F1E8", "#26242E"];
+    var returnFocus = null;
+    var hideTimer = null;
+
+    function seen() {
+      try {
+        return window.sessionStorage.getItem(SEEN_KEY) === "1";
+      } catch (err) {
+        return false;
+      }
+    }
+
+    function markSeen() {
+      try {
+        window.sessionStorage.setItem(SEEN_KEY, "1");
+      } catch (err) {
+        /* private mode: the card may show again, which is harmless */
+      }
+    }
+
+    function burst(origin, detail) {
+      if (REDUCED_MOTION.matches || !origin || !origin.getBoundingClientRect) return;
+      if (typeof document.body.animate !== "function") return;
+
+      var rect = origin.getBoundingClientRect();
+      var x0 = rect.left + rect.width / 2;
+      var y0 = rect.top + rect.height / 2;
+      var layer = document.createElement("div");
+      layer.className = "confetti-layer";
+      layer.setAttribute("aria-hidden", "true");
+      document.body.appendChild(layer);
+
+      var palette = BRAND.concat([detail.hex, detail.hex, detail.hex]);
+      var count = window.innerWidth < 600 ? 28 : 42;
+      var remaining = count;
+
+      for (var i = 0; i < count; i++) {
+        var bit = document.createElement("span");
+        var size = 8 + Math.random() * 10;
+        var shape = Math.random();
+        bit.className = "confetti-bit" + (shape < 0.45 ? " confetti-bit--round" : shape < 0.75 ? " confetti-bit--pill" : "");
+        bit.style.inlineSize = size + "px";
+        bit.style.blockSize = (shape >= 0.45 && shape < 0.75 ? size * 0.45 : size) + "px";
+        bit.style.left = x0 + "px";
+        bit.style.top = y0 + "px";
+
+        // A few chips carry the chosen color's photo texture, like image swatches.
+        if (detail.image && i % 7 === 0) {
+          bit.style.backgroundImage = detail.image;
+          bit.style.backgroundSize = "cover";
+        } else {
+          bit.style.backgroundColor = palette[i % palette.length];
+        }
+        layer.appendChild(bit);
+
+        var angle = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.15;
+        var power = 150 + Math.random() * 230;
+        var dx = Math.cos(angle) * power;
+        var peak = Math.sin(angle) * power;
+        var fall = 260 + Math.random() * 260;
+        var spin = (Math.random() - 0.5) * 900;
+
+        var anim = bit.animate(
+          [
+            { transform: "translate(-50%, -50%) translate(0px, 0px) rotate(0deg) scale(0.6)", opacity: 1 },
+            { transform: "translate(-50%, -50%) translate(" + dx * 0.7 + "px, " + peak + "px) rotate(" + spin * 0.5 + "deg) scale(1)", opacity: 1, offset: 0.38 },
+            { transform: "translate(-50%, -50%) translate(" + dx + "px, " + (peak + fall) + "px) rotate(" + spin + "deg) scale(0.9)", opacity: 0 }
+          ],
+          {
+            duration: 1100 + Math.random() * 700,
+            easing: "cubic-bezier(0.2, 0.7, 0.35, 1)",
+            fill: "forwards"
+          }
+        );
+        anim.onfinish = function () {
+          remaining -= 1;
+          if (remaining <= 0 && layer.parentNode) layer.parentNode.removeChild(layer);
+        };
+      }
+
+      // Belt: never leave the layer behind if an animation is cancelled.
+      window.setTimeout(function () {
+        if (layer.parentNode) layer.parentNode.removeChild(layer);
+      }, 2600);
+    }
+
+    function open(detail) {
+      if (chip) {
+        chip.style.backgroundColor = detail.hex;
+        chip.style.backgroundImage = detail.image
+          ? detail.image
+          : detail.hex2
+            ? "linear-gradient(135deg, " + detail.hex + " 50%, " + detail.hex2 + " 50%)"
+            : "none";
+      }
+      if (product) product.textContent = "Atelier Knit Tee, " + detail.name;
+      if (meta && detail.price) meta.textContent = "Added to cart · " + detail.price;
+
+      window.clearTimeout(hideTimer);
+      host.hidden = false;
+      // Next frame, so the entrance transition runs from the hidden state.
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(function () {
+          host.classList.add("is-open");
+        });
+      });
+      markSeen();
+    }
+
+    function close() {
+      if (host.hidden) return;
+      host.classList.remove("is-open");
+      hideTimer = window.setTimeout(function () {
+        host.hidden = true;
+      }, REDUCED_MOTION.matches ? 0 : 320);
+      if (returnFocus && document.body.contains(returnFocus)) returnFocus.focus();
+      returnFocus = null;
+    }
+
+    document.addEventListener("varn:demo-add", function (event) {
+      var detail = event.detail || {};
+      burst(detail.origin, detail);
+
+      if (announce) {
+        announce.textContent = "";
+        window.setTimeout(function () {
+          announce.textContent =
+            detail.name + " added to cart. That is the moment your shoppers get with Varn, now live on the Shopify App Store.";
+        }, 60);
+      }
+
+      if (seen() || !host.hidden) return;
+      returnFocus = detail.origin || null;
+      // Let the confetti read first, then the card rises.
+      window.setTimeout(function () {
+        open(detail);
+      }, REDUCED_MOTION.matches ? 0 : 520);
+    });
+
+    closers.forEach(function (button) {
+      button.addEventListener("click", close);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") close();
+    });
+
+    // Clicking outside the card dismisses it (the host is click-through
+    // except for the card itself, so this never blocks the page).
+    document.addEventListener("click", function (event) {
+      if (host.hidden || !card) return;
+      if (card.contains(event.target)) return;
+      if (event.target.closest && event.target.closest("[data-demo-atc]")) return;
+      close();
+    });
+  }
+
+  /* =======================================================================
      MODULE - Footer year
      ===================================================================== */
 
@@ -1527,6 +1750,7 @@
     initReveals();
     initVariantsGallery();
     initJourney();
+    initLaunchMoment();
     initYear();
   }
 

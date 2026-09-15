@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Varn - Variants &amp; Swatches for Shopify | Color and image swatches</title>
-  <meta name="description" content="Varn turns Shopify variant dropdowns into color and image swatches on product pages, collections, search and quick view. Automatic color setup, no theme edits, and a free plan that never expires.">
+  <meta name="description" content="Varn is the Shopify color swatches and variant picker app with single-click AI setup: it reads your product options and builds your swatches for you, no developer needed. Unlimited swatches on product pages, collections, search and quick view, no theme edits, and a free plan that never expires.">
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="https://varn.enstacked.com/">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Varn">
   <meta property="og:title" content="Varn - Variants &amp; Swatches for Shopify">
-  <meta property="og:description" content="Turn variant dropdowns into color and image swatches shoppers can see. Automatic color setup, no theme edits, free plan forever.">
+  <meta property="og:description" content="Single-click AI setup turns variant dropdowns into color and image swatches shoppers can see, no developer needed. No theme edits, free plan forever.">
   <meta property="og:url" content="https://varn.enstacked.com/">
   <meta property="og:image" content="https://varn.enstacked.com/assets/img/og-cover.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -121,6 +121,14 @@
           "@type": "Answer",
           "text": "Every paid plan is free for 7 days. Pick a plan, approve it on Shopify's own confirmation screen, and the first 7 days cost nothing. Cancel inside those 7 days and you are never billed. Each store gets one trial, so switching plans during it keeps the days you have left rather than starting again, and trials run on the Starter allowance of 250 AI usage credits a month. Starter needs no trial at all: it has no time limit."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "My swatches are not showing on my store. What do I do?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Almost always, Varn is not switched on for the theme you are looking at. Go to the Home page, click Activate on the first setup step, turn the Varn switch on, then click Save. You do this once for each theme you use, including any unpublished themes you preview separately."
+        }
       }
     ]
   }
@@ -157,8 +165,8 @@
       </nav>
 
       <div class="site-header__actions">
-        <a class="btn btn--secondary btn--sm site-header__cta-secondary" href="#how-it-works">See how it works</a>
-        <a class="btn btn--primary btn--sm" href="waitlist.html" data-launch data-launch-label="Add Varn free"><span data-launch-text>Join the waitlist</span></a>
+        <a class="btn btn--secondary btn--sm site-header__cta-secondary" href="#how-it-works">See how Varn works</a>
+        <a class="btn btn--primary btn--sm" href="https://apps.shopify.com/varn-variants-swatches" data-launch data-launch-label="Add Varn free"><span data-launch-text>Add Varn free</span></a>
       </div>
     </div>
   </header>
@@ -178,28 +186,32 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="shell">
         <div class="hero__copy">
-          <p class="hero__pill">
+          <a class="hero__pill hero__pill--live" href="https://apps.shopify.com/varn-variants-swatches">
             <span class="hero__pill-dot" aria-hidden="true"></span>
-            <span data-prelaunch>Launching soon &middot; </span>Variants &amp; Swatches for Shopify
-          </p>
+            <span class="hero__pill-tag">Now live</span>
+            <span>on the Shopify App Store</span>
+            <svg class="hero__pill-arrow" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M2.5 8h11m0 0L9 3.5M13.5 8 9 12.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </a>
 
           <h1 class="hero__title" id="hero-title">
             Nobody buys a color they <span class="accent accent--violet">can&rsquo;t see</span>.
           </h1>
 
           <p class="hero__lead">
-            Varn turns your variant dropdown into color and image swatches that
-            drive your theme&rsquo;s own picker. It edits no theme files, and the
-            setup wizard walks you through every step.
+            Varn&rsquo;s single-click AI reads your product options and builds
+            your color and image swatches for you, no developer needed. It
+            drives your theme&rsquo;s own picker on any Online Store 2.0 theme,
+            edits no theme files, and stays light enough to leave your store
+            speed untouched.
           </p>
 
           <div class="hero__actions">
-            <a class="btn btn--primary btn--lg" href="waitlist.html" data-launch data-launch-label="Add Varn free">
-              <span data-launch-text>Join the waitlist</span><svg class="btn__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <a class="btn btn--primary btn--lg" href="https://apps.shopify.com/varn-variants-swatches" data-launch data-launch-label="Add Varn free">
+              <span data-launch-text>Add Varn free</span><svg class="btn__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
                 <path d="M2.5 8h11m0 0L9 3.5M13.5 8 9 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
               </svg>
             </a>
-            <a class="btn btn--secondary btn--lg" href="#how-it-works">See how it works</a>
+            <a class="btn btn--secondary btn--lg" href="#how-it-works">See how Varn works</a>
           </div>
 
           <p class="hero__note">
@@ -318,7 +330,7 @@
           </article>
 
           <p class="demo__caption">
-            A real swatch picker, running in this page. Click a color.
+            A real swatch picker, running in this page. Try a few colors, then add one to cart.
           </p>
         </div>
 
@@ -329,7 +341,7 @@
           </div>
           <div class="facts__item">
             <dt class="facts__label">Theme files edited</dt>
-            <dd class="facts__value">None</dd>
+            <dd class="facts__value">0</dd>
           </div>
           <div class="facts__item">
             <dt class="facts__label">Storefront languages</dt>
@@ -409,7 +421,7 @@
                 <p>
                   Search your catalog, filter to products that actually have a
                   color option, and pick one. Or skip ahead and hit
-                  <strong>Auto-configure all products</strong> to do the whole
+                  <strong>Auto-detect all swatches</strong> to do the whole
                   catalog in one pass.
                 </p>
                 <p class="step__meta">Free on every plan</p>
@@ -439,8 +451,8 @@
               <div class="step__body">
                 <p>
                   One click reads your option names and fills in the colors it
-                  is confident about, in ten languages. When a name is not a
-                  color, a vision model looks at the product photo instead.
+                  is confident about, in ten languages. For photos, Set up with AI looks
+                  at every product image and files it under the right color.
                   Everything stays editable, and a live preview shows the result
                   as you work.
                 </p>
@@ -984,8 +996,9 @@
           </h2>
           <p class="section__lead">
             Shape, size, spacing, borders, labels, hover effects, sold-out
-            treatment. Change it here and watch the swatches update, exactly the
-            way the real style studio works inside the app.
+            treatment. No coding, no developer needed: change it here and watch
+            the swatches update, exactly the way the real style studio works
+            inside the app.
           </p>
         </div>
 
@@ -1378,7 +1391,7 @@
             <p class="plan__note">No time limit.</p>
             <p class="plan__tagline">Everything you need to launch swatches on your store.</p>
             <p class="plan__cta">
-              <a class="btn btn--secondary" href="waitlist.html" data-launch data-launch-label="Start free"><span data-launch-text>Join the waitlist</span></a>
+              <a class="btn btn--secondary" href="https://apps.shopify.com/varn-variants-swatches" data-launch data-launch-label="Start free"><span data-launch-text>Start free</span></a>
             </p>
             <ul class="plan__features">
               <li class="plan__feature"><svg class="plan__feature-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Products with variant images, up to 5</span></li>
@@ -1399,7 +1412,7 @@
             <p class="plan__note" data-note-monthly="Billed monthly, cancel any time" data-note-yearly="Billed yearly, cancel any time">Billed monthly, cancel any time</p>
             <p class="plan__tagline">More products and groups as your catalog grows.</p>
             <p class="plan__cta">
-              <a class="btn btn--primary" href="waitlist.html" data-launch data-launch-label="Start with Grow"><span data-launch-text>Join the waitlist</span></a>
+              <a class="btn btn--primary" href="https://apps.shopify.com/varn-variants-swatches" data-launch data-launch-label="Start with Grow"><span data-launch-text>Start with Grow</span></a>
               <span class="plan__trial">Includes 7 day trial</span>
             </p>
             <ul class="plan__features">
@@ -1423,7 +1436,7 @@
             <p class="plan__note" data-note-monthly="Billed monthly, cancel any time" data-note-yearly="Billed yearly, cancel any time">Billed monthly, cancel any time</p>
             <p class="plan__tagline">Adds advanced styling and swatch click analytics.</p>
             <p class="plan__cta">
-              <a class="btn btn--primary" href="waitlist.html" data-launch data-launch-label="Start with Advance"><span data-launch-text>Join the waitlist</span></a>
+              <a class="btn btn--primary" href="https://apps.shopify.com/varn-variants-swatches" data-launch data-launch-label="Start with Advance"><span data-launch-text>Start with Advance</span></a>
               <span class="plan__trial">Includes 7 day trial</span>
             </p>
             <ul class="plan__features">
@@ -1448,7 +1461,7 @@
             <p class="plan__note" data-note-monthly="Billed monthly, cancel any time" data-note-yearly="Billed yearly, cancel any time">Billed monthly, cancel any time</p>
             <p class="plan__tagline">For large catalogs that need the highest limits.</p>
             <p class="plan__cta">
-              <a class="btn btn--primary" href="waitlist.html" data-launch data-launch-label="Start with Premium"><span data-launch-text>Join the waitlist</span></a>
+              <a class="btn btn--primary" href="https://apps.shopify.com/varn-variants-swatches" data-launch data-launch-label="Start with Premium"><span data-launch-text>Start with Premium</span></a>
               <span class="plan__trial">Includes 7 day trial</span>
             </p>
             <ul class="plan__features">
@@ -1768,6 +1781,22 @@
               </p>
             </div>
           </details>
+
+          <details class="faq__item">
+            <summary class="faq__question">
+              My swatches are not showing on my store. What do I do?
+              <svg class="faq__icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 3v12M3 9h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
+            </summary>
+            <div class="faq__answer">
+              <p>
+                Almost always, Varn is not switched on for the theme you are
+                looking at. Go to the Home page, click Activate on the first setup
+                step, turn the Varn switch on, then click Save. You do this
+                once for each theme you use, including any unpublished themes
+                you preview separately.
+              </p>
+            </div>
+          </details>
         </div>
       </div>
     </section>
@@ -1819,8 +1848,8 @@
         </h2>
 
         <div class="closer__actions">
-          <a class="btn btn--inverse btn--lg" href="waitlist.html" data-launch data-launch-label="Add Varn free">
-            <span data-launch-text>Join the waitlist</span><svg class="btn__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <a class="btn btn--inverse btn--lg" href="https://apps.shopify.com/varn-variants-swatches" data-launch data-launch-label="Add Varn free">
+            <span data-launch-text>Add Varn free</span><svg class="btn__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
               <path d="M2.5 8h11m0 0L9 3.5M13.5 8 9 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
           </a>
@@ -1866,7 +1895,7 @@
           <ul>
             <li><a class="site-footer__link" href="https://enstacked.com" rel="noopener">Enstacked Technologies</a></li>
             <li><a class="site-footer__link" href="mailto:support@enstacked.com">support@enstacked.com</a></li>
-            <li><a class="site-footer__link" href="waitlist.html" data-launch data-launch-label="Shopify App Store"><span data-launch-text>Join the waitlist</span></a></li>
+            <li><a class="site-footer__link" href="https://apps.shopify.com/varn-variants-swatches" data-launch data-launch-label="Shopify App Store"><span data-launch-text>Shopify App Store</span></a></li>
             <li><a class="site-footer__link" href="status.html">System status</a></li>
             <li><a class="site-footer__link" href="privacy.html">Privacy policy</a></li>
           </ul>
@@ -1889,8 +1918,55 @@
       <b>Free plan forever</b>
       Paid plans free for 7 days
     </p>
-    <a class="btn btn--primary btn--sm" href="waitlist.html" data-launch data-launch-label="Add Varn"><span data-launch-text>Join waitlist</span></a>
+    <a class="btn btn--primary btn--sm" href="https://apps.shopify.com/varn-variants-swatches" data-launch data-launch-label="Add Varn"><span data-launch-text>Add Varn</span></a>
   </div>
+
+  <!-- ===================================================================
+       LAUNCH MOMENT
+       The surprise: add a color to cart in the hero demo and the page
+       celebrates the sale the way a merchant's store would. Built by
+       main.js initLaunchMoment. Hidden until triggered, never on load.
+       =================================================================== -->
+  <div class="launch-moment" data-launch-moment hidden>
+    <div class="launch-moment__card" role="dialog" aria-modal="false" aria-labelledby="launch-moment-title" aria-describedby="launch-moment-text">
+      <button class="launch-moment__close" type="button" data-launch-close aria-label="Close">
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
+      </button>
+
+      <div class="launch-moment__receipt" aria-hidden="true">
+        <span class="launch-moment__receipt-chip" data-launch-chip></span>
+        <span class="launch-moment__receipt-lines">
+          <span class="launch-moment__receipt-name" data-launch-product>Atelier Knit Tee, Lilac</span>
+          <span class="launch-moment__receipt-meta">Added to cart &middot; $68.00</span>
+        </span>
+        <span class="launch-moment__receipt-tick">
+          <svg viewBox="0 0 16 16" width="14" height="14" focusable="false"><path d="M3 8.5 6.2 11.7 13 4.9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </span>
+      </div>
+
+      <p class="launch-moment__eyebrow">That&rsquo;s a sale.</p>
+      <h2 class="launch-moment__title" id="launch-moment-title">
+        Your shoppers get <span class="accent accent--violet">this exact moment</span>.
+      </h2>
+      <p class="launch-moment__text" id="launch-moment-text" data-launch-text-out>
+        You saw every color, the photos followed your pick, and it was in the
+        cart in seconds. No dropdown guessing. That is Varn on your store.
+      </p>
+
+      <p class="launch-moment__live">
+        <span class="launch-moment__live-dot" aria-hidden="true"></span>
+        Now live on the Shopify App Store. Starter is free forever.
+      </p>
+
+      <div class="launch-moment__actions">
+        <a class="btn btn--primary" href="https://apps.shopify.com/varn-variants-swatches" data-launch-cta>
+          Add Varn free<svg class="btn__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2.5 8h11m0 0L9 3.5M13.5 8 9 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </a>
+        <button class="btn btn--secondary" type="button" data-launch-close>Keep exploring</button>
+      </div>
+    </div>
+  </div>
+  <p class="visually-hidden" role="status" data-launch-announce></p>
 
   <script src="assets/js/main.js" defer></script>
   <script src="assets/js/status.js" defer></script>

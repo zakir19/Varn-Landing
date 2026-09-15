@@ -3200,562 +3200,6 @@
 
 
 /* =========================================================================
-   WAITLIST  —  waitlist.html only
-   =========================================================================
-   The page ground is a WebGL liquid field (assets/js/waitlist.js) painted
-   into .wl__flow. Everything readable sits on an opaque white card above it,
-   so no text ever depends on the shader for its contrast. If WebGL is
-   missing the canvas stays transparent and the CSS gradient underneath is
-   the ground - the page is complete either way.
-   ========================================================================= */
-@layer components {
-  .wl {
-    position: relative;
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    isolation: isolate;
-    background:
-      radial-gradient(120% 90% at 18% 8%, #efeefb 0%, rgb(239 238 251 / 0%) 55%),
-      radial-gradient(110% 80% at 88% 22%, #fdeef3 0%, rgb(253 238 243 / 0%) 52%),
-      radial-gradient(120% 100% at 55% 105%, #fbeee7 0%, rgb(251 238 231 / 0%) 55%),
-      var(--color-cream, #f5f1e8);
-  }
-
-  /* Fixed, not absolute: the page scrolls, the field does not. */
-  .wl__flow {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 0.9s var(--ease-out);
-  }
-
-  .wl__flow.is-live {
-    opacity: 1;
-  }
-
-  .wl__shell {
-    width: min(100% - (var(--shell-pad) * 2), 68rem);
-    margin-inline: auto;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    gap: var(--space-lg);
-    padding-block: var(--space-md) var(--space-xl);
-  }
-
-  /* ---- Top bar ------------------------------------------------------- */
-  .wl__top {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-sm);
-    min-height: 44px;
-  }
-
-  .wl__brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    font-weight: 600;
-    font-size: 1.05rem;
-    letter-spacing: -0.02em;
-    color: var(--color-ink);
-    text-decoration: none;
-  }
-
-  .wl__brand img {
-    border-radius: 7px;
-    display: block;
-  }
-
-  .wl__brand-by {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    padding-inline-start: 0.55rem;
-    margin-inline-start: 0.1rem;
-    border-inline-start: 1px solid var(--color-line);
-    font-size: var(--text-xs);
-    font-weight: 500;
-    color: var(--color-ink-subtle);
-  }
-
-  .wl__back {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    min-height: 44px;
-    padding-inline: 0.9rem;
-    border-radius: var(--radius-pill);
-    background: rgb(255 255 255 / 72%);
-    border: 1px solid var(--color-line);
-    color: var(--color-ink);
-    font-size: var(--text-sm);
-    font-weight: 500;
-    text-decoration: none;
-    backdrop-filter: blur(8px);
-    transition: background var(--dur-fast) var(--ease-out),
-      border-color var(--dur-fast) var(--ease-out);
-  }
-
-  .wl__back:hover {
-    background: #fff;
-    border-color: var(--color-line-strong);
-  }
-
-  .wl__back svg {
-    flex: none;
-  }
-
-  /* ---- The card ------------------------------------------------------ */
-  .wl__card {
-    position: relative;
-    flex: 1;
-    display: grid;
-    align-content: center;
-    gap: var(--space-lg);
-    padding: clamp(1.5rem, 1rem + 2.6vw, 3.25rem);
-    border-radius: var(--radius-xl);
-    background: rgb(255 255 255 / 92%);
-    border: 1px solid rgb(255 255 255 / 70%);
-    box-shadow: var(--shadow-lg);
-    backdrop-filter: blur(18px) saturate(1.1);
-    overflow: hidden;
-  }
-
-  .wl__grid {
-    display: grid;
-    gap: var(--space-lg);
-    align-items: center;
-  }
-
-  @media (width >= 62rem) {
-    .wl__grid {
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: clamp(2rem, 1rem + 3vw, 3.5rem);
-    }
-  }
-
-  .wl__pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    margin: 0 0 var(--space-sm);
-    padding: 0.34rem 0.75rem 0.34rem 0.55rem;
-    border-radius: var(--radius-pill);
-    background: var(--color-violet-soft);
-    color: var(--color-violet-deep);
-    font-size: var(--text-eyebrow);
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .wl__pill-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--color-violet);
-    position: relative;
-  }
-
-  .wl__pill-dot::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: inherit;
-    animation: wl-ping 2.4s var(--ease-out) infinite;
-  }
-
-  @keyframes wl-ping {
-    0% { transform: scale(1); opacity: 0.55; }
-    70%, 100% { transform: scale(2.6); opacity: 0; }
-  }
-
-  .wl__title {
-    margin: 0;
-    font-size: clamp(2.05rem, 1.3rem + 3.2vw, 3.5rem);
-    line-height: var(--leading-snug);
-    letter-spacing: var(--tracking-tight);
-    font-weight: 600;
-    color: var(--color-ink);
-    text-wrap: balance;
-  }
-
-  .wl__lead {
-    margin: var(--space-sm) 0 0;
-    max-width: 34ch;
-    font-size: var(--text-lead);
-    line-height: 1.5;
-    color: var(--color-ink-muted);
-  }
-
-  .wl__by {
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    margin: var(--space-md) 0 0;
-    font-size: var(--text-sm);
-    color: var(--color-ink-subtle);
-  }
-
-  /* ---- Form ---------------------------------------------------------- */
-  .wl__panel {
-    padding: clamp(1.15rem, 0.85rem + 1.2vw, 1.75rem);
-    border-radius: var(--radius-lg);
-    background: var(--color-well);
-    border: 1px solid var(--color-line-soft);
-  }
-
-  .wl__form-title {
-    margin: 0 0 0.25rem;
-    font-size: var(--text-h4);
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    color: var(--color-ink);
-  }
-
-  .wl__form-note {
-    margin: 0 0 var(--space-sm);
-    font-size: var(--text-sm);
-    line-height: 1.5;
-    color: var(--color-ink-subtle);
-  }
-
-  .wl__field {
-    display: grid;
-    gap: 0.6rem;
-  }
-
-  .wl__input {
-    width: 100%;
-    min-height: 52px;
-    padding: 0 1rem;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--color-line-strong);
-    background: #fff;
-    color: var(--color-ink);
-    font: inherit;
-    font-size: 1rem; /* >=16px: iOS must not zoom on focus */
-    transition: border-color var(--dur-fast) var(--ease-out),
-      box-shadow var(--dur-fast) var(--ease-out);
-  }
-
-  .wl__input::placeholder {
-    color: var(--color-ink-subtle);
-    opacity: 0.75;
-  }
-
-  .wl__input:focus-visible {
-    outline: none;
-    border-color: var(--color-violet);
-    box-shadow: 0 0 0 3px rgb(127 119 221 / 22%);
-  }
-
-  .wl__input[data-state="error"] {
-    border-color: var(--color-clay-deep);
-    box-shadow: 0 0 0 3px rgb(216 90 48 / 16%);
-  }
-
-  .wl__submit {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    width: 100%;
-    min-height: 52px;
-    padding-inline: 1.25rem;
-    border: 0;
-    border-radius: var(--radius-sm);
-    background: var(--color-ink);
-    color: #fff;
-    font: inherit;
-    font-size: var(--text-body);
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform var(--dur-fast) var(--ease-out),
-      background var(--dur-fast) var(--ease-out);
-  }
-
-  .wl__submit:hover:not(:disabled) {
-    background: #131119;
-  }
-
-  .wl__submit:active:not(:disabled) {
-    transform: translateY(1px);
-  }
-
-  .wl__submit:disabled {
-    cursor: default;
-    opacity: 0.72;
-  }
-
-  .wl__submit svg {
-    flex: none;
-    transition: transform var(--dur-base) var(--ease-out);
-  }
-
-  .wl__submit:hover:not(:disabled) svg {
-    transform: translateX(3px);
-  }
-
-  .wl__spinner {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    border: 2px solid rgb(255 255 255 / 32%);
-    border-top-color: #fff;
-    animation: wl-spin 0.7s linear infinite;
-  }
-
-  @keyframes wl-spin {
-    to { transform: rotate(360deg); }
-  }
-
-  /* Empty by default, so it takes no space until something is announced. */
-  .wl__msg {
-    margin: 0;
-    font-size: var(--text-sm);
-    line-height: 1.5;
-    color: var(--color-clay-deep);
-  }
-
-  .wl__msg:empty {
-    display: none;
-  }
-
-  .wl__msg[data-tone="ok"] {
-    color: var(--color-success);
-  }
-
-  .wl__proof {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin: var(--space-sm) 0 0;
-    font-size: var(--text-xs);
-    line-height: 1.5;
-    color: var(--color-ink-subtle);
-  }
-
-  .wl__dots {
-    display: inline-flex;
-    flex: none;
-  }
-
-  .wl__dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 1.5px solid #fff;
-    margin-inline-start: -4px;
-  }
-
-  .wl__dot:first-child {
-    margin-inline-start: 0;
-  }
-
-  /* Honeypot: a real field for a bot to fill, invisible and unreachable
-     for a person. Not display:none - some bots skip those. */
-  .wl__trap {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-
-  /* ---- Success state -------------------------------------------------- */
-  .wl__done {
-    display: grid;
-    justify-items: center;
-    text-align: center;
-    gap: var(--space-sm);
-    padding-block: var(--space-md);
-  }
-
-  .wl__done:focus-visible {
-    outline: none;
-  }
-
-  .wl__done-mark {
-    display: grid;
-    place-items: center;
-    width: 62px;
-    height: 62px;
-    margin: 0;
-    border-radius: 50%;
-    background: var(--color-success-soft);
-    color: var(--color-success);
-  }
-
-  .wl__done-title {
-    margin: 0;
-    font-size: clamp(1.75rem, 1.2rem + 2.4vw, 2.75rem);
-    line-height: var(--leading-snug);
-    letter-spacing: var(--tracking-tight);
-    font-weight: 600;
-    color: var(--color-ink);
-    text-wrap: balance;
-  }
-
-  .wl__done-copy {
-    margin: 0;
-    max-width: 46ch;
-    font-size: var(--text-body);
-    line-height: var(--leading-normal);
-    color: var(--color-ink-muted);
-  }
-
-  .wl__done-actions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--space-2xs);
-    margin-top: var(--space-2xs);
-  }
-
-  .wl__done-swatches {
-    display: flex;
-    gap: 0.4rem;
-    margin: var(--space-2xs) 0 0;
-  }
-
-  .wl__done-swatch {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    border: 1px solid var(--color-line);
-    animation: wl-pop 0.5s var(--ease-spring) both;
-    animation-delay: var(--d, 0s);
-  }
-
-  @keyframes wl-pop {
-    from { transform: scale(0.2); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
-
-  /* ---- What you get -------------------------------------------------- */
-  .wl__perks {
-    display: grid;
-    gap: var(--space-sm);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  @media (width >= 48rem) {
-    .wl__perks {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .wl__perk {
-    display: grid;
-    gap: 0.35rem;
-    padding: var(--space-sm) var(--space-md);
-    border-radius: var(--radius-md);
-    background: rgb(255 255 255 / 82%);
-    border: 1px solid rgb(255 255 255 / 65%);
-    box-shadow: var(--shadow-xs);
-    backdrop-filter: blur(10px);
-  }
-
-  .wl__perk-title {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-size: var(--text-sm);
-    font-weight: 600;
-    color: var(--color-ink);
-  }
-
-  .wl__perk-title svg {
-    flex: none;
-    color: var(--color-violet-deep);
-  }
-
-  .wl__perk-copy {
-    margin: 0;
-    font-size: var(--text-xs);
-    line-height: 1.55;
-    color: var(--color-ink-muted);
-  }
-
-  /* ---- Footer -------------------------------------------------------- */
-  .wl__foot {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-2xs) var(--space-md);
-    font-size: var(--text-xs);
-    color: var(--color-ink-subtle);
-  }
-
-  .wl__foot p {
-    margin: 0;
-  }
-
-  .wl__foot-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-  }
-
-  .wl__foot a {
-    color: var(--color-ink-muted);
-    text-decoration: none;
-    border-bottom: 1px solid var(--color-line-strong);
-    padding-block-end: 1px;
-  }
-
-  .wl__foot a:hover {
-    color: var(--color-ink);
-    border-color: currentcolor;
-  }
-
-  /* Entrance: one staggered reveal, nothing loops. */
-  .wl__pill,
-  .wl__title,
-  .wl__lead,
-  .wl__by,
-  .wl__panel,
-  .wl__perk {
-    animation: wl-in 0.6s var(--ease-out) both;
-  }
-
-  .wl__pill  { animation-delay: 0.10s; }
-  .wl__title { animation-delay: 0.16s; }
-  .wl__lead  { animation-delay: 0.24s; }
-  .wl__by    { animation-delay: 0.32s; }
-  .wl__panel { animation-delay: 0.22s; }
-  .wl__perk:nth-child(1) { animation-delay: 0.34s; }
-  .wl__perk:nth-child(2) { animation-delay: 0.40s; }
-  .wl__perk:nth-child(3) { animation-delay: 0.46s; }
-
-  @keyframes wl-in {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: none; }
-  }
-
-  .wl__view.is-leaving {
-    opacity: 0;
-    transform: translateY(-8px);
-    transition: opacity 0.22s var(--ease-out), transform 0.22s var(--ease-out);
-  }
-}
-
-
-/* =========================================================================
    LEGAL  —  privacy.html and any future policy page
    =========================================================================
    A long document nobody reads front to back. The layout answers "is the
@@ -5076,5 +4520,331 @@
   .st-inc__all {
     margin: 0;
     text-align: center;
+  }
+}
+
+
+/* =========================================================================
+   LAUNCH  -  "Now live" hero pill + the launch moment surprise
+   =========================================================================
+   The surprise is earned, never pushed: explore a few colors in the hero
+   demo and Add to cart gets a gentle nudge; press it and the swatches burst
+   out as confetti and a small receipt card rises from the bottom. Built by
+   initLaunchMoment in main.js. Every motion is off under reduced motion.
+   ========================================================================= */
+@layer components {
+  /* ---- Hero pill, now a link to the live listing --------------------- */
+  .hero__pill--live {
+    color: var(--color-violet-deep);
+    text-decoration: none;
+    box-shadow: inset 0 0 0 1px rgb(127 119 221 / 22%);
+    transition: background-color var(--dur-fast) linear,
+      box-shadow var(--dur-fast) linear, transform var(--dur-base) var(--ease-out);
+  }
+
+  .hero__pill--live:hover {
+    background: #e4e2f8;
+    box-shadow: inset 0 0 0 1px rgb(127 119 221 / 45%);
+  }
+
+  .hero__pill--live:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+  }
+
+  .hero__pill--live .hero__pill-dot {
+    position: relative;
+    background: var(--color-success);
+  }
+
+  .hero__pill--live .hero__pill-dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--color-success);
+    animation: launch-ping 1.8s var(--ease-out) infinite;
+  }
+
+  .hero__pill-tag {
+    padding: 1px 8px;
+    border-radius: var(--radius-pill);
+    background: var(--color-ink);
+    color: #fff;
+    font-size: var(--text-xs);
+    letter-spacing: 0.02em;
+  }
+
+  .hero__pill-arrow {
+    flex: none;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  .hero__pill--live:hover .hero__pill-arrow {
+    transform: translateX(3px);
+  }
+
+  @keyframes launch-ping {
+    0% { transform: scale(1); opacity: 0.55; }
+    80%, 100% { transform: scale(2.6); opacity: 0; }
+  }
+
+  /* ---- Add to cart nudge, after a few colors were explored ----------- */
+  .demo__atc .btn.is-nudging {
+    animation: launch-nudge 1.4s var(--ease-out) 3;
+  }
+
+  @keyframes launch-nudge {
+    0% { box-shadow: 0 0 0 0 rgb(127 119 221 / 55%); transform: translateY(0); }
+    30% { transform: translateY(-2px); }
+    60% { box-shadow: 0 0 0 12px rgb(127 119 221 / 0%); transform: translateY(0); }
+    100% { box-shadow: 0 0 0 0 rgb(127 119 221 / 0%); }
+  }
+
+  /* ---- Confetti: swatch chips, positioned by JS, animated by WAAPI --- */
+  .confetti-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 130;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .confetti-bit {
+    position: absolute;
+    border-radius: 3px;
+    box-shadow: inset 0 0 0 1px rgb(38 36 46 / 12%);
+    will-change: transform, opacity;
+  }
+
+  .confetti-bit--round {
+    border-radius: 50%;
+  }
+
+  .confetti-bit--pill {
+    border-radius: var(--radius-pill);
+  }
+
+  /* ---- The card ------------------------------------------------------- */
+  .launch-moment {
+    position: fixed;
+    inset-inline: 0;
+    inset-block-end: calc(var(--space-md) + env(safe-area-inset-bottom, 0px));
+    z-index: 120;
+    display: flex;
+    justify-content: center;
+    padding-inline: var(--space-sm);
+    pointer-events: none;
+  }
+
+  .launch-moment[hidden] {
+    display: none !important;
+  }
+
+  .launch-moment__card {
+    position: relative;
+    inline-size: min(100%, 440px);
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: 0 0 0 1px var(--color-line), 0 24px 60px rgb(38 36 46 / 22%),
+      0 4px 12px rgb(38 36 46 / 8%);
+    pointer-events: auto;
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+    transition: opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-slow) var(--ease-spring);
+  }
+
+  /* Brand rule across the top: the four Varn colors as one stripe. */
+  .launch-moment__card::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline: var(--space-md);
+    block-size: 4px;
+    border-radius: 0 0 4px 4px;
+    background: linear-gradient(90deg, #7f77dd 0 25%, #ed93b1 25% 50%, #d85a30 50% 75%, #26242e 75% 100%);
+  }
+
+  .launch-moment.is-open .launch-moment__card {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .launch-moment__close {
+    position: absolute;
+    inset-block-start: var(--space-xs);
+    inset-inline-end: var(--space-xs);
+    display: grid;
+    place-items: center;
+    inline-size: 44px;
+    block-size: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-ink-subtle);
+    cursor: pointer;
+  }
+
+  .launch-moment__close:hover {
+    background: var(--color-surface-sunk);
+    color: var(--color-ink);
+  }
+
+  .launch-moment__close:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+  }
+
+  .launch-moment__receipt {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-inline-end: 44px;
+    padding: var(--space-2xs) var(--space-xs);
+    border-radius: var(--radius-md);
+    background: var(--color-well);
+  }
+
+  .launch-moment__receipt-chip {
+    flex: none;
+    inline-size: 36px;
+    block-size: 36px;
+    border-radius: 50%;
+    background-size: cover;
+    box-shadow: inset 0 0 0 1px rgb(38 36 46 / 14%), 0 0 0 2px #fff, 0 0 0 3.5px var(--color-ink);
+  }
+
+  .launch-moment__receipt-lines {
+    display: grid;
+    min-inline-size: 0;
+    line-height: 1.3;
+  }
+
+  .launch-moment__receipt-name {
+    overflow: hidden;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .launch-moment__receipt-meta {
+    font-size: var(--text-xs);
+    color: var(--color-ink-subtle);
+  }
+
+  .launch-moment__receipt-tick {
+    display: grid;
+    flex: none;
+    place-items: center;
+    inline-size: 26px;
+    block-size: 26px;
+    margin-inline-start: auto;
+    border-radius: 50%;
+    background: var(--color-success);
+    color: #fff;
+  }
+
+  .launch-moment.is-open .launch-moment__receipt-tick {
+    animation: launch-tick var(--dur-slow) var(--ease-spring) 0.18s both;
+  }
+
+  @keyframes launch-tick {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+  }
+
+  .launch-moment__eyebrow {
+    margin-block-start: var(--space-sm);
+    font-size: var(--text-eyebrow);
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-clay-deep);
+  }
+
+  .launch-moment__title {
+    margin-block-start: var(--space-3xs);
+    font-size: var(--text-h4);
+    line-height: var(--leading-snug);
+    letter-spacing: -0.015em;
+    font-weight: 600;
+  }
+
+  .launch-moment__text {
+    margin-block-start: var(--space-2xs);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--color-ink-muted);
+  }
+
+  .launch-moment__live {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2xs);
+    margin-block-start: var(--space-sm);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-success);
+  }
+
+  .launch-moment__live-dot {
+    flex: none;
+    margin-block-start: 0.45em;
+    inline-size: 8px;
+    block-size: 8px;
+    border-radius: 50%;
+    background: var(--color-success);
+    box-shadow: 0 0 0 4px var(--color-success-soft);
+  }
+
+  .launch-moment__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+    margin-block-start: var(--space-sm);
+  }
+
+  .launch-moment__actions .btn {
+    flex: 1 1 160px;
+    justify-content: center;
+  }
+
+  /* Phones: sit above the sticky call to action bar. */
+  @media (max-width: 767px) {
+    .launch-moment {
+      inset-block-end: calc(76px + env(safe-area-inset-bottom, 0px));
+    }
+  }
+
+  /* Small phones: the receipt, headline and CTA carry the moment; the
+     longer sentence is the first thing to go so the card stays short. */
+  @media (max-width: 479px) {
+    .launch-moment__card {
+      padding: var(--space-sm);
+    }
+
+    .launch-moment__text {
+      display: none;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__pill--live .hero__pill-dot::after,
+  .demo__atc .btn.is-nudging,
+  .launch-moment.is-open .launch-moment__receipt-tick {
+    animation: none !important;
+  }
+
+  .launch-moment__card {
+    transform: none;
+    transition: opacity var(--dur-fast) linear;
+  }
+
+  .hero__pill--live .hero__pill-arrow {
+    transition: none;
   }
 }
