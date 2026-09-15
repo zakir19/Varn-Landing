@@ -182,6 +182,9 @@
 
     /* Scale tightened 2026-09-15: every step sits roughly 15% below the
        previous scale, the big headings most, body copy least. */
+    /* Section spacing (owner, 2026-09-15): 100px top and bottom on every
+       section from tablet up, 64px on phones where 100px would bury the copy. */
+    --section-pad: 100px;
     --text-display: clamp(2.2rem, 1.2rem + 4.2vw, 4.25rem);
     --text-h2: clamp(1.7rem, 1.05rem + 2.5vw, 3rem);
     --text-h3: clamp(1.15rem, 1rem + 0.6vw, 1.5rem);
@@ -229,12 +232,12 @@
     --shadow-focus: 0 0 0 3px var(--color-page), 0 0 0 6px var(--color-violet);
 
     /* ---- Layout ------------------------------------------------------- */
-    --shell-max: 100%; /* full width: header, sections and footer share one gutter */
+    --shell-max: 1320px; /* one centred column for header, sections and footer (padding included) */
     --shell-narrow: 780px;
     /* The pricing block reads as a compact 2x2 card, matching the in-app
        Plan and billing screen, so it is narrower than the page shell. */
     --shell-mid: 980px;
-    --shell-pad: clamp(1.15rem, 0.6rem + 2.6vw, 3rem);
+    --shell-pad: 12px; /* left and right gutter at every width */
     --header-h: 68px;
 
     /* One gap between every floating panel (sunk / ink), so consecutive
@@ -334,11 +337,18 @@
   .section {
     position: relative;
     z-index: 2;
-    padding-block: var(--space-4xl);
+    padding-block: var(--section-pad);
   }
 
   .section--tight {
-    padding-block: var(--space-3xl);
+    padding-block: var(--section-pad);
+  }
+
+  @media (max-width: 47.99em) {
+    .section,
+    .section--tight {
+      padding-block: 64px;
+    }
   }
 
   /* This section sits directly under the hero, whose own bottom padding
@@ -358,10 +368,32 @@
     border-block-end: 1px solid var(--color-line-soft);
   }
 
+  /* Coloured sections are rounded panels inside the 1320px column, never
+     full-bleed bands (owner, 2026-09-15). The panel's outer edge lines up with
+     the content edge of every other section, and the content inside gets its
+     own, wider inset so it never sits against the rounded edge. */
   .section--ink {
+    inline-size: calc(100% - 2 * var(--shell-pad));
+    max-inline-size: calc(var(--shell-max) - 2 * var(--shell-pad));
+    margin-inline: auto;
+    border-radius: clamp(20px, 3.5vw, 40px);
     background: var(--color-ink);
     color: var(--color-page);
     overflow: clip;
+  }
+
+  .section--ink > .shell {
+    padding-inline: clamp(20px, 1rem + 3vw, 56px);
+  }
+
+  /* The panel already separates itself, so a neighbour's hairline would only
+     draw a line against its rounded edge. */
+  .section--ink + .section--sunk {
+    border-block-start: 0;
+  }
+
+  .section--sunk:has(+ .section--ink) {
+    border-block-end: 0;
   }
 
   /* Headings run the full measure and wrap naturally - no forced breaks,
@@ -2620,6 +2652,8 @@
     overflow: clip;
     text-align: start;
     margin-block-start: 0;
+    /* A panel now, so it needs air before the footer's top rule. */
+    margin-block-end: var(--space-2xl);
   }
 
   .closer__title {
@@ -2995,7 +3029,7 @@
   /* Keeps a hyphenated phrase ("Single-Click") on one line. */
   @media (min-width: 48em) {
     .hero__title {
-      font-size: min(2.9rem, calc((94.8vw - 40px) / 17.4));
+      font-size: min(2.9rem, calc((100vw - 48px) / 17.4));
     }
 
     .hero__line {
@@ -3747,10 +3781,10 @@
   /* The policy's three blocks (title, summary, document) shared a 1280px
      shell while the prose itself is capped at 68ch, which left the right
      edge ragged. One measure for all three. */
-  /* Full width, same gutter as the header; the policy text keeps its own
-     readable measure (.legal-doc max-width). */
+  /* Same 1320px column and gutter as the header; the policy text keeps its
+     own readable measure (.legal-doc max-width). */
   .legal-page {
-    max-width: none;
+    max-width: var(--shell-max);
   }
 }
 
@@ -3830,7 +3864,7 @@
 
   /* ---- page shell ---------------------------------------------------- */
   .st-page {
-    max-width: none;
+    max-width: var(--shell-max);
     padding-block: calc(var(--header-h) + var(--space-2xl)) var(--space-3xl);
   }
 
