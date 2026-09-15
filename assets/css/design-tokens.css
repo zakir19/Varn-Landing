@@ -32,6 +32,48 @@
 
 @layer reset, base, layout, components, utilities;
 
+/* =========================================================================
+   BREAKPOINTS  (reference only)
+
+   A custom property cannot be read inside a media query condition, and
+   @custom-media has no browser support yet, so the scale lives here as the
+   reference every @media in styles.css must use: one unit (rem) and the
+   classic min-width / max-width syntax.
+
+     step   rem       px     used for
+     -----  --------  -----  ---------------------------------------------
+     xs     22.5rem    360   max-width only: tiniest phones (header CTA)
+     sm     30rem      480   status axis labels; small-phone exceptions
+     md     36rem      576   first multi-column grids
+     lg     48rem      768   section padding, tablet two-up layouts
+     xl     62rem      992   desktop nav, header height, legal sidebar
+     2xl    75rem     1200   roomy desktop refinements
+     3xl    90rem     1440   reserved; nothing needs it yet
+
+   Why rem, not px: a px breakpoint ignores the visitor's browser font-size
+   setting, so someone reading at 20px would get the desktop layout with
+   only about 800px worth of 16px-equivalent room. Inside a media query em
+   and rem both resolve against the browser's initial font size, never a
+   local font-size, so they cannot compound either way; rem is chosen
+   because it reads the same as the unit used everywhere else here.
+
+   Why min-width / max-width, not the newer (width >= 48rem) range syntax:
+   the homepage's main layout already used the classic form, and the range
+   form needs Safari 16.4+. Moving the few range queries (legal, status) to
+   the classic form widens their support instead of narrowing the home's.
+
+   Mobile-first: the smallest screen is the default and min-width queries
+   add to it. max-width is kept only for a genuine narrow-band exception,
+   and then it stops 0.01rem short of the step (47.99rem) so the two sides
+   of a breakpoint never overlap. The single exception is xs, which is
+   inclusive of 360px on purpose; see its call site.
+
+   JavaScript mirrors two of these with matchMedia: nav.js "(min-width:
+   62em)" and legal.js "(width < 62rem)". Both equal xl exactly. main.js
+   "(min-width: 992px)" belongs to the journey module, which is switched
+   off (initJourney returns early), so it cannot disagree with the CSS.
+   ========================================================================= */
+
 @layer base {
   :root {
     /* ---- Brand palette ------------------------------------------------ */
@@ -235,8 +277,11 @@
     --header-h: 68px; /* 76px from 992px up, see the media block below */
 
     /* Section spacing (owner, 2026-09-15): 100px top and bottom on every
-       section from tablet up, 64px on phones where 100px would bury the copy. */
-    --section-pad: 100px;
+       section from tablet up, 64px on phones where 100px would bury the copy.
+       The phone value is the default and the media block below raises it,
+       so the token says what a section gets instead of a separate
+       max-width override in styles.css quietly overruling it. */
+    --section-pad: 64px; /* 100px from 48rem */
 
     /* One gap between every floating panel (sunk / ink), so consecutive
        panels never almost-touch while other seams run wide. Sibling margins
@@ -326,7 +371,13 @@
   /* The header grows with the desktop nav. This stays a responsive override
      rather than one value: 68px is tuned for the phone row (brand, primary
      button, menu button) and 76px for the full link row. */
-  @media (min-width: 62em) {
+  @media (min-width: 48rem) {
+    :root {
+      --section-pad: 100px;
+    }
+  }
+
+  @media (min-width: 62rem) {
     :root {
       --header-h: 76px;
     }

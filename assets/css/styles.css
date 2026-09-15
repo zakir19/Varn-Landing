@@ -12,7 +12,9 @@
 
    Conventions
    -----------
-   - Mobile-first. Breakpoints: 576 / 768 / 992 / 1200 / 1440.
+   - Mobile-first. Breakpoints use the rem scale documented in
+     design-tokens.css: 30 / 36 / 48 / 62 / 75rem (480 / 576 / 768 / 992 /
+     1200px), plus 22.5rem (360px) for the tiniest phones.
    - Every repeated value is a token in design-tokens.css, which loads
      first on every page. No magic numbers in rules.
    - Only transform / opacity / filter are animated.
@@ -210,6 +212,7 @@
     max-inline-size: var(--shell-mid);
   }
 
+  /* 64px on phones, 100px from 48rem: the step lives in --section-pad. */
   .section {
     position: relative;
     z-index: var(--z-content);
@@ -218,13 +221,6 @@
 
   .section--tight {
     padding-block: var(--section-pad);
-  }
-
-  @media (max-width: 47.99em) {
-    .section,
-    .section--tight {
-      padding-block: 64px;
-    }
   }
 
   /* This section sits directly under the hero, whose own bottom padding
@@ -2731,7 +2727,7 @@
     z-index: var(--z-route-over);
   }
 
-  @media (min-width: 992px) {
+  @media (min-width: 62rem) {
     .journey {
       display: block;
     }
@@ -2915,7 +2911,7 @@
    ========================================================================= */
 @layer utilities {
   /* Keeps a hyphenated phrase ("Single-Click") on one line. */
-  @media (min-width: 48em) {
+  @media (min-width: 48rem) {
     .hero__title {
       font-size: min(2.9rem, calc((100vw - 48px) / 17.4));
     }
@@ -2977,8 +2973,8 @@
    RESPONSIVE  -  one block per breakpoint, mobile-first
    ========================================================================= */
 
-/* ---- 576px ------------------------------------------------------------- */
-@media (min-width: 36em) {
+/* ---- 36rem / 576px ----------------------------------------------------- */
+@media (min-width: 36rem) {
   @layer components {
     .facts {
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -3003,8 +2999,8 @@
   }
 }
 
-/* ---- 768px ------------------------------------------------------------- */
-@media (min-width: 48em) {
+/* ---- 48rem / 768px ----------------------------------------------------- */
+@media (min-width: 48rem) {
   @layer components {
     .brand__by {
       display: inline-flex;
@@ -3044,8 +3040,8 @@
   }
 }
 
-/* ---- 992px ------------------------------------------------------------- */
-@media (min-width: 62em) {
+/* ---- 62rem / 992px ----------------------------------------------------- */
+@media (min-width: 62rem) {
   @layer components {
     .site-header__nav {
       display: block;
@@ -3097,8 +3093,8 @@
   }
 }
 
-/* ---- 1200px ------------------------------------------------------------ */
-@media (min-width: 75em) {
+/* ---- 75rem / 1200px ---------------------------------------------------- */
+@media (min-width: 75rem) {
   @layer components {
     .demo {
       --demo-pad: 1.75rem;
@@ -3217,7 +3213,7 @@
     margin-block: var(--space-xl);
   }
 
-  @media (width >= 48rem) {
+  @media (min-width: 48rem) {
     .legal-glance {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -3272,7 +3268,7 @@
     min-width: 0;
   }
 
-  @media (width >= 62rem) {
+  @media (min-width: 62rem) {
     .legal-body {
       grid-template-columns: 15rem minmax(0, 1fr);
       gap: var(--space-2xl);
@@ -3351,7 +3347,7 @@
     font-weight: 600;
   }
 
-  @media (width >= 62rem) {
+  @media (min-width: 62rem) {
     .legal-toc {
       position: sticky;
       top: calc(var(--header-h) + var(--space-md));
@@ -3651,7 +3647,7 @@
 
   /* On a phone the top row has to stay one row, and "Built by Enstacked
      Technologies" is already spelled out inside the card. */
-  @media (width < 30rem) {
+  @media (max-width: 29.99rem) {
     .wl__brand-by {
       display: none;
     }
@@ -3985,7 +3981,7 @@
     display: none;
   }
 
-  @media (width >= 30rem) {
+  @media (min-width: 30rem) {
     .st-axis__mid {
       display: inline;
     }
@@ -4256,7 +4252,7 @@
     color: var(--color-ink-muted);
   }
 
-  @media (width >= 48rem) {
+  @media (min-width: 48rem) {
     .st-about__grid {
       grid-template-columns: 1fr 1fr;
       gap: var(--space-lg);
@@ -4286,15 +4282,19 @@
     gap: var(--space-sm) var(--space-md);
     min-height: 64px;
     padding: var(--space-sm) var(--space-md);
-    border-radius: var(--radius-pill);
+    /* Below 48rem the strip wraps to two rows, and a pill radius on a
+       two-row box draws a capsule. The old 40rem switch sat inside that
+       band (at 640px the strip is still two rows), so the pill now starts
+       at 48rem, the same step that pulls the service pips back up. */
+    border-radius: var(--radius-lg);
     background: var(--color-surface);
     border: 1px solid var(--color-line);
     box-shadow: var(--shadow-xs);
   }
 
-  @media (width < 40rem) {
+  @media (min-width: 48rem) {
     .status-strip {
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius-pill);
     }
   }
 
@@ -4320,12 +4320,11 @@
   .status-strip__services {
     display: flex;
     gap: 3px;
-    margin-inline-start: auto;
   }
 
-  @media (width < 48rem) {
+  @media (min-width: 48rem) {
     .status-strip__services {
-      margin-inline-start: 0;
+      margin-inline-start: auto;
     }
   }
 
@@ -4428,7 +4427,7 @@
      today off screen on the page where today matters most. Thinner ticks
      fit the whole window; the row stays 44px tall, so the target only
      narrows, it does not shrink. */
-  @media (width < 30rem) {
+  @media (max-width: 29.99rem) {
     .st-tick {
       min-width: 2px;
       border-radius: 2px;
@@ -4801,7 +4800,7 @@
   }
 
   /* Phones: sit above the sticky call to action bar. */
-  @media (max-width: 767px) {
+  @media (max-width: 47.99rem) {
     .launch-moment {
       inset-block-end: calc(76px + env(safe-area-inset-bottom, 0px));
     }
@@ -4809,7 +4808,7 @@
 
   /* Small phones: the receipt, headline and CTA carry the moment; the
      longer sentence is the first thing to go so the card stays short. */
-  @media (max-width: 479px) {
+  @media (max-width: 29.99rem) {
     .launch-moment__card {
       padding: var(--space-sm);
     }
@@ -4930,14 +4929,15 @@
   }
 
   /* Tiny phones: the brand, primary button and menu button must share one
-     row, so the primary button tightens rather than wrapping. */
-  @media (max-width: 22.5em) {
+     row, so the primary button tightens rather than wrapping. Inclusive of
+     360px on purpose (no 0.01rem step back): 360 is the phone it is for. */
+  @media (max-width: 22.5rem) {
     .site-header__cta {
       padding-inline: var(--space-xs);
     }
   }
 
-  @media (min-width: 62em) {
+  @media (min-width: 62rem) {
     .site-header__menu-btn,
     .site-header__panel {
       display: none !important;
