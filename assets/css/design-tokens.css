@@ -268,7 +268,7 @@
     --shadow-focus: 0 0 0 3px var(--color-page), 0 0 0 6px var(--color-violet);
 
     /* ---- Layout ------------------------------------------------------- */
-    --shell-max: 1320px; /* one centred column for header, sections and footer (padding included) */
+    --shell-max: 1320px; /* content width of the one centred column (header, sections, footer); the --shell-pad gutters sit outside it */
     --shell-narrow: 780px;
     /* The pricing block reads as a compact 2x2 card, matching the in-app
        Plan and billing screen, so it is narrower than the page shell. */

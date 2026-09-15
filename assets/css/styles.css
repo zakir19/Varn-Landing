@@ -197,9 +197,11 @@
     position: relative;
   }
 
+  /* --shell-max is the CONTENT width (1320px); the gutters sit outside it,
+     so on a wide screen the text column measures exactly 1320px. */
   .shell {
     inline-size: 100%;
-    max-inline-size: var(--shell-max);
+    max-inline-size: calc(var(--shell-max) + 2 * var(--shell-pad));
     margin-inline: auto;
     padding-inline: var(--shell-pad);
   }
@@ -230,14 +232,11 @@
     padding-block-start: var(--space-lg);
   }
 
-  /* Tinted sections are inset, rounded panels floating on the white page
-     (the smile.io pattern), not full-bleed bands. */
-  /* No grey fill (owner, 2026-09-15): the page stays white and minimal.
-     A hairline marks where the section starts instead. */
+  /* No grey fill and no hairlines (owner, 2026-09-15): the page stays white
+     and minimal, and sections are separated by their padding alone. The
+     class stays in the markup as a hook for a future tint. */
   .section--sunk {
     background: transparent;
-    border-block-start: 1px solid var(--color-line-soft);
-    border-block-end: 1px solid var(--color-line-soft);
   }
 
   /* Coloured sections are rounded panels inside the 1320px column, never
@@ -246,7 +245,7 @@
      own, wider inset so it never sits against the rounded edge. */
   .section--ink {
     inline-size: calc(100% - 2 * var(--shell-pad));
-    max-inline-size: calc(var(--shell-max) - 2 * var(--shell-pad));
+    max-inline-size: var(--shell-max);
     margin-inline: auto;
     border-radius: clamp(20px, 3.5vw, 40px);
     background: var(--color-ink);
@@ -256,16 +255,6 @@
 
   .section--ink > .shell {
     padding-inline: clamp(20px, 1rem + 3vw, 56px);
-  }
-
-  /* The panel already separates itself, so a neighbour's hairline would only
-     draw a line against its rounded edge. */
-  .section--ink + .section--sunk {
-    border-block-start: 0;
-  }
-
-  .section--sunk:has(+ .section--ink) {
-    border-block-end: 0;
   }
 
   /* Headings run the full measure and wrap naturally - no forced breaks,
@@ -350,10 +339,21 @@
      of p, y, g were cut off. The extra block padding grows the painted area
      to cover them; the matching negative margin keeps line spacing exactly
      as it was. "clone" repeats that padding on every line when a phrase
-     wraps, so the second line is covered too. */
+     wraps, so the second line is covered too.
+
+     The same clipping happened sideways, on the LAST letter of every accent.
+     Headings use negative letter-spacing, and letter-spacing is also applied
+     after the final character, so the span's box ends a few pixels before
+     that letter's ink does (measured up to 3.4px at 45px type, on "k", "e",
+     "p", "s", "t"). The gradient stopped painting at the box edge and cut
+     the letter off. Inline padding carries the painted area past the ink on
+     both sides; the matching negative margin keeps every letter, and the
+     punctuation after the accent, exactly where it was. */
   .accent {
     padding-block: 0.1em 0.2em;
+    padding-inline: 0.05em 0.12em;
     margin-block: -0.1em -0.2em;
+    margin-inline: -0.05em -0.12em;
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
     background: var(--grad-accent);
@@ -475,17 +475,6 @@
     flex-wrap: wrap;
     gap: var(--space-xs);
     margin-block-start: var(--space-lg);
-  }
-
-  .btn__icon {
-    inline-size: 16px;
-    block-size: 16px;
-    flex: none;
-    transition: transform var(--dur-base) var(--ease-out);
-  }
-
-  .btn:hover .btn__icon {
-    transform: translateX(3px);
   }
 
   /* ---------- Site header ---------------------------------------------- */
@@ -1742,6 +1731,12 @@
 
   .split + .split {
     margin-block-start: var(--space-3xl);
+  }
+
+  /* When the section heading sits above the split instead of inside it, the
+     copy column opens with its text, which needs no gap above it. */
+  .split__copy > .split__text:first-child {
+    margin-block-start: 0;
   }
 
   .split__title {
@@ -3680,7 +3675,7 @@
   /* Same 1320px column and gutter as the header; the policy text keeps its
      own readable measure (.legal-doc max-width). */
   .legal-page {
-    max-width: var(--shell-max);
+    max-width: calc(var(--shell-max) + 2 * var(--shell-pad));
   }
 }
 
@@ -3740,7 +3735,7 @@
 
   /* ---- page shell ---------------------------------------------------- */
   .st-page {
-    max-width: var(--shell-max);
+    max-width: calc(var(--shell-max) + 2 * var(--shell-pad));
     padding-block: calc(var(--header-h) + var(--space-2xl)) var(--space-3xl);
   }
 
