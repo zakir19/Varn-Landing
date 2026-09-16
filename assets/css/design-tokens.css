@@ -1,0 +1,398 @@
+/* =========================================================================
+   Varn - Variants & Swatches AI  |  Design tokens
+   Built by Enstacked Technologies
+
+   The single source of truth for every colour, type size, space, radius,
+   shadow, layer and duration used by index.html, privacy.html and
+   status.html. assets/css/styles.css consumes these tokens and never
+   defines a global one of its own.
+
+   Load order, identical on all three pages:
+     <link rel="stylesheet" href="assets/css/design-tokens.css">
+     <link rel="stylesheet" href="assets/css/styles.css">
+
+   Why this file repeats the @layer order statement
+   ------------------------------------------------
+   Cascade layers are ordered by their FIRST appearance. This file loads
+   before styles.css, so if it opened with `@layer base { ... }` the browser
+   would create `base` first and `reset` second, and from then on every reset
+   rule would beat every base rule (body font, focus ring, selection colour).
+   Stating the full order here keeps it identical to styles.css; the same
+   statement at the top of styles.css then changes nothing.
+
+   Naming
+   ------
+   Every token that existed was extracted under its original name. Renaming
+   would touch thousands of lines of styles.css for no visual gain. New
+   tokens follow the existing pattern: --color-<family>[-<step>][-<state>].
+
+   Not in scope: ui/ (the React component library) and docs/ (the docs
+   site) each ship their own token set on purpose; they are other products.
+   ========================================================================= */
+
+@layer reset, base, layout, components, utilities;
+
+/* =========================================================================
+   BREAKPOINTS  (reference only)
+
+   A custom property cannot be read inside a media query condition, and
+   @custom-media has no browser support yet, so the scale lives here as the
+   reference every @media in styles.css must use: one unit (px) and the
+   classic min-width / max-width syntax.
+
+     step   px     used for
+     -----  -----  ----------------------------------------------------
+     xs      360   max-width only: tiniest phones (header CTA)
+     sm      480   status axis labels; small-phone exceptions
+     md      576   first multi-column grids
+     lg      768   section padding, tablet two-up layouts
+     xl      992   desktop nav, header height, legal sidebar
+     2xl    1200   roomy desktop refinements
+     3xl    1440   reserved; nothing needs it yet
+
+   These were rem until 2026-09-16, when the whole sheet moved to px on the
+   owner's instruction (every size is px now; no rem, em or ch anywhere).
+   The values are the same numbers a 16px root resolved to, so the layout
+   switches at exactly the same widths it always did.
+
+   What the move costs, recorded so nobody rediscovers it as a bug: a px
+   breakpoint ignores the visitor's browser font-size setting. Someone
+   reading at 20px used to get the phone layout until their window was
+   genuinely roomy; now they get the desktop layout at 992 device px with
+   only about 800px worth of 16px-equivalent room. The same applies to the
+   type scale: px text does not grow with that setting, though page zoom
+   still scales everything.
+
+   Why min-width / max-width, not the newer (width >= 768px) range syntax:
+   the homepage's main layout already used the classic form, and the range
+   form needs Safari 16.4+. Moving the few range queries (legal, status) to
+   the classic form widens their support instead of narrowing the home's.
+
+   Mobile-first: the smallest screen is the default and min-width queries
+   add to it. max-width is kept only for a genuine narrow-band exception,
+   and then it stops just short of the step (767.84px, 479.84px) so the two
+   sides of a breakpoint never overlap. Those odd endings are what the old
+   47.99rem / 29.99rem resolved to and they are kept exactly, since rounding
+   them to 767px would move the seam. The single exception is xs, which is
+   inclusive of 360px on purpose; see its call site.
+
+   JavaScript mirrors two of these with matchMedia: nav.js "(min-width:
+   992px)" and legal.js "(width < 992px)". Both equal xl exactly, and both
+   were converted with this sheet. main.js "(min-width: 992px)" belongs to
+   the journey module, which is switched off (initJourney returns early),
+   so it cannot disagree with the CSS.
+   ========================================================================= */
+
+@layer base {
+  :root {
+    /* ---- Brand palette ------------------------------------------------ */
+    /* Three brand families, each in three steps with one job apiece:
+         <family>       the fill: dots, ticks, borders, illustration
+         <family>-deep  the TEXT step, darkened until it passes AA on white
+         <family>-soft  a tint for panels and pills, light enough that ink
+                        and ink-muted text keep AA on top of it
+       Ratios are WCAG 2.x contrast, measured against the colour named. The
+       older comments here said "AA text on cream": the page has since moved
+       to white, and every deep step passes on white by a wider margin. */
+    --color-violet: #7f77dd;
+    --color-violet-deep: #453aa3; /* text: 8.80:1 on white, 7.66:1 on violet-soft */
+    --color-violet-soft: #efeefb;
+    --color-blush: #ed93b1;
+    --color-blush-deep: #a8375c; /* text: 6.24:1 on white */
+    --color-blush-soft: #fdeef3;
+    --color-clay: #d85a30;
+    --color-clay-deep: #9c3d1a; /* text: 6.78:1 on white, 5.97:1 on clay-soft */
+    --color-clay-soft: #fbeee7;
+    --color-enstacked: #ef6224; /* the maker's own orange, used only in its wordmark */
+
+    /* The fourth pastel tile. Violet, blush and clay each have a -soft step
+       and their tiles used it; the cream tile carried a bare literal, so the
+       pastel family read as three tokens and one stray hex. The README lists
+       this value as the brand's cream, but on the site it only ever tints a
+       tile (there is no cream fill or cream text step), so it is named for
+       the job it does. Text on it: ink 13.56:1, ink-muted 6.76:1. */
+    --color-cream-soft: #f5f1e8;
+
+    /* Hover steps, one per surface that darkens or deepens on hover.
+       They stay literals rather than a color-mix() at the call site:
+       #5449b8 is not an exact mix of any two existing tokens, and although
+       #e4e2f8 is violet mixed 10% into violet-soft to the nearest 8-bit
+       step, color-mix() computes to a fractional color(srgb ...) value and
+       needs Safari 16.2+, so it could not promise the identical pixel.
+       Naming them puts each next to the colour it belongs to, which is
+       where a future re-tint will look. */
+    --color-violet-deep-hover: #5449b8; /* .btn--primary:hover; white label 6.95:1 */
+    --color-violet-soft-hover: #e4e2f8; /* .hero__pill--live:hover; violet-deep text 6.93:1 */
+
+    /* The darker stripe of the "missing signal" hatch, drawn alternately
+       with --color-clay-soft. It is not --color-clay at an alpha: the
+       closest alpha over clay-soft (about 15%) misses every channel by one
+       to three steps, which would visibly shift the stripe. */
+    --color-clay-hatch: #f6d8ca;
+
+    /* Brand gradient for display-heading accents. The stops are deliberately
+       their own values, darker than the brand fills, tuned so large gradient
+       text holds 3:1 on both white and ink (see .accent in styles.css). They
+       are not var()s of the palette on purpose: re-tinting a fill must not
+       quietly drop a heading below AA. */
+    --grad-accent: linear-gradient(
+      94deg,
+      #6c5fd3 4%,
+      #c13d6e 52%,
+      #c2491f 96%
+    );
+
+    /* ---- Neutrals ------------------------------------------------------ */
+    --color-page: #ffffff;
+    --color-ink: #26242e; /* 15.28:1 on white */
+    --color-ink-muted: #55525e; /* 7.62:1 on white */
+    --color-ink-subtle: #6a6875; /* 5.45:1 on white, 4.88:1 on surface-sunk */
+    --color-surface: #ffffff;
+    --color-surface-sunk: #f2f2f5;
+    --color-well: #f6f6f8; /* recessed visual wells inside white cards */
+    --color-line: rgb(var(--color-ink-rgb) / 10%);
+    --color-line-soft: rgb(var(--color-ink-rgb) / 6%);
+    --color-line-strong: rgb(var(--color-ink-rgb) / 20%);
+
+    /* Why --color-white exists beside --color-page and --color-surface.
+       Page and surface are ROLES: "the page ground" and "a card". Both are
+       #ffffff today, but this palette's "on cream" history shows the page
+       has been tinted before and may be again. Text and icons that sit on a
+       dark or saturated fill (the primary button label, the tooltip, the
+       receipt tick, selected text) must stay pure white whatever the page
+       ground does, or their contrast silently drops. So those call sites
+       use --color-white, a value with no role, and anything that IS the
+       page or a card keeps using --color-page / --color-surface.
+       .btn--inverse:hover uses it too: the inverse button already rests on
+       --color-page, and its hover was written to lift it to pure white,
+       which --color-page would have turned into a no-op on a tinted page. */
+    --color-white: #ffffff;
+
+    /* ---- Semantic ----------------------------------------------------- */
+    --color-success: #2f6b41; /* 6.36:1 on white, 5.61:1 on success-soft */
+    --color-success-soft: #e7f4ea;
+    --color-warn: #8a5a00; /* 5.93:1 on white, 5.24:1 on warn-soft */
+    --color-warn-soft: #fbf0d8;
+
+    /* ---- Channel triplets, for translucent colour ---------------------
+       `rgb(var(--color-ink-rgb) / 12%)` is how a token gets an alpha here.
+       It works in every browser this site supports and computes to exactly
+       the value of the literal it replaced; color-mix() serialises
+       differently and needs Safari 16.2+. Two tokens per colour is the
+       price, so each triplet MUST match its hex token: change both or
+       neither. */
+    --color-ink-rgb: 38 36 46; /* = --color-ink */
+    --color-white-rgb: 255 255 255; /* = --color-white */
+    --color-violet-rgb: 127 119 221; /* = --color-violet */
+    --color-clay-rgb: 216 90 48; /* = --color-clay */
+    --color-clay-deep-rgb: 156 61 26; /* = --color-clay-deep */
+    --color-success-rgb: 47 107 65; /* = --color-success */
+    --color-warn-rgb: 138 90 0; /* = --color-warn */
+
+    /* ---- Status tones (status.html + the strip on index.html) ---------
+       Status tones borrow the brand where the brand already means the right
+       thing: a partial outage is clay, maintenance is violet. Green and red
+       stay conventional, because guessing at those costs a reader real time.
+       Every tone has a fill (for ticks and dots) and a darker text pair that
+       passes AA on white: operational 6.36:1, degraded 5.93:1, partial
+       6.78:1, major 8.91:1, maintenance 8.80:1.
+
+       Several of these equal a brand or semantic value today (partial is
+       clay, maintenance is violet, and the -ink steps match success, warn,
+       clay-deep and violet-deep). They are literals on purpose and not
+       var() aliases: a status colour carries a meaning and an AA pairing
+       that were checked on their own, and a brand re-tint must not move
+       them silently. */
+    --st-operational: #3f9a63;
+    --st-operational-ink: #2f6b41;
+    --st-degraded: #e0a02a;
+    --st-degraded-ink: #8a5a00;
+    --st-partial: #d85a30;
+    --st-partial-ink: #9c3d1a;
+    --st-major: #b3261e;
+    --st-major-ink: #8f1d17;
+    --st-maintenance: #7f77dd;
+    --st-maintenance-ink: #453aa3;
+
+    --st-tick-radius: 3px;
+
+    /* ---- Typography --------------------------------------------------- */
+    --font-sans: "Instrument Sans", -apple-system, BlinkMacSystemFont,
+      "Segoe UI", roboto, helvetica, arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", menlo, consolas,
+      monospace;
+
+    /* Scale tightened 2026-09-15: every step sits roughly 15% below the
+       previous scale, the big headings most, body copy least. */
+    --text-display: clamp(35.2px, 19.2px + 4.2vw, 68px);
+    --text-h2: clamp(27.2px, 16.8px + 2.5vw, 48px);
+    --text-h3: clamp(18.4px, 16px + 0.6vw, 24px);
+    --text-h4: clamp(16px, 15.2px + 0.24vw, 18.24px);
+    --text-lead: clamp(16px, 15.04px + 0.3vw, 12px);
+    --text-body: clamp(15.04px, 14.72px + 0.1vw, 16px);
+    --text-sm: 13.44px;
+    --text-xs: 12px;
+    --text-eyebrow: 11.2px;
+
+    /* Both leave room below the baseline for p, y and g: gradient headline
+       words are painted with background-clip: text, and some browsers clip
+       that paint to the line box, so a line box shorter than the letters
+       cut their tails off (owner report, "AI setup"). */
+    --leading-tight: 1.06;
+    --leading-snug: 1.2;
+    --leading-normal: 1.62;
+    /* Tracking is a RATIO of the text it sits on, so with the type scale in
+       px these are unitless multipliers. A call site writes
+       letter-spacing: calc(var(--text-h2) * var(--tracking-tight)), which
+       computes exactly what -0.035em did, with no em left in the file. */
+    --tracking-tight: -0.035;
+    --tracking-wide: 0.14;
+
+    /* ---- Spacing scale ------------------------------------------------ */
+    --space-3xs: 4px;
+    --space-2xs: 8px;
+    --space-xs: 12px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 32px;
+    /* Large steps tightened 2026-09-15 (owner: too much white space). The
+       small steps that set spacing inside components are unchanged. */
+    --space-xl: 36px;
+    --space-2xl: 44px;
+    --space-3xl: 56px;
+    --space-4xl: clamp(40px, 25.6px + 2.4vw, 60px);
+
+    /* ---- Shape -------------------------------------------------------- */
+    --radius-xs: 6px;
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 34px;
+    --radius-pill: 999px;
+
+    /* ---- Shadow ------------------------------------------------------- */
+    --shadow-xs: 0 1px 2px rgb(var(--color-ink-rgb) / 5%);
+    --shadow-sm: 0 1px 2px rgb(var(--color-ink-rgb) / 5%),
+      0 4px 12px rgb(var(--color-ink-rgb) / 6%);
+    --shadow-md: 0 2px 4px rgb(var(--color-ink-rgb) / 4%),
+      0 14px 32px -10px rgb(var(--color-ink-rgb) / 14%);
+    --shadow-lg: 0 2px 6px rgb(var(--color-ink-rgb) / 5%),
+      0 28px 64px -24px rgb(var(--color-ink-rgb) / 20%);
+    --shadow-focus: 0 0 0 3px var(--color-page), 0 0 0 6px var(--color-violet);
+
+    /* ---- Layout ------------------------------------------------------- */
+    --shell-max: 1320px; /* content width of the one centred column (header, sections, footer); the --shell-pad gutters sit outside it */
+    --shell-narrow: 780px;
+    /* The pricing block reads as a compact 2x2 card, matching the in-app
+       Plan and billing screen, so it is narrower than the page shell. */
+    --shell-mid: 980px;
+    --shell-pad: 12px; /* left and right gutter at every width */
+    --header-h: 68px; /* 76px from 992px up, see the media block below */
+
+    /* Section spacing (owner, 2026-09-15): 100px top and bottom on every
+       section from tablet up, 64px on phones where 100px would bury the copy.
+       The phone value is the default and the media block below raises it,
+       so the token says what a section gets instead of a separate
+       max-width override in styles.css quietly overruling it. */
+    --section-pad: 64px; /* 100px from 992px */
+
+    /* One gap between every floating panel (sunk / ink), so consecutive
+       panels never almost-touch while other seams run wide. Sibling margins
+       collapse, so adjacent panels share exactly one of these.
+
+       This seam is also where the journey route crosses from one side of
+       the page to the other, so it is sized to give the paper dart room to
+       be SEEN between two panels rather than squeezed against an edge. */
+    --section-gap: clamp(32px, 16px + 4vw, 72px);
+
+    /* ---- Layers (z-index) ---------------------------------------------
+       Every stacking value on the site, in paint order. The numbers are the
+       ones the stylesheet already used, so moving them into tokens changed
+       nothing on screen, and the gaps between page layers are kept so a new
+       layer can slot in without renumbering the rest.
+
+       Local layers only order children INSIDE one component's own stacking
+       context (the header's backdrop, a toggle's sliding thumb). They never
+       compete with page layers, which is why they may reuse -1, 0 and 1.
+
+       Page layers, bottom to top:
+         route        1    journey trail, dives UNDER the sections
+         content      2    .section, .hero, .site-footer: one shared layer
+         route-over   3    journey trail lifted over panels on wide screens
+         route-notes  4    journey notification bubbles, over the trail
+         tooltip      60   status tick tooltip (position: fixed)
+         sticky-cta   90   mobile sticky call-to-action bar
+         header       100  fixed site header and its mobile menu panel
+         modal        120  launch-moment receipt card
+         confetti     130  launch confetti, drawn over the card it celebrates
+         skip-link    200  keyboard skip link, over everything when focused
+
+       Flagged for owner review, deliberately NOT changed because either
+       change would alter what paints on top:
+         - tooltip (60) is under header (100). A tooltip for a tick scrolled
+           close to the top of the viewport can slide under the header.
+         - modal (120) is over header (100). If the mobile menu panel is
+           ever open while the launch card is showing, the card covers the
+           bottom of the panel. */
+    --z-local-below: -1;
+    --z-local-base: 0;
+    --z-local-raised: 1;
+    --z-route: 1;
+    --z-content: 2;
+    --z-route-over: 3;
+    --z-route-notes: 4;
+    --z-tooltip: 60;
+    --z-sticky-cta: 90;
+    --z-header: 100;
+    --z-modal: 120;
+    --z-confetti: 130;
+    --z-skip-link: 200;
+
+    /* ---- Motion ------------------------------------------------------- */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+    --dur-fast: 140ms;
+    --dur-base: 260ms;
+    --dur-slow: 520ms;
+
+    /* ---- Journey paper plane (module currently switched off) ----------
+       Opaque paper greys, never ink at an alpha: the note on
+       .journey__plane-* in styles.css explains why transparency dissolved
+       over the ink panels. Named so every plane fill is a token (the near
+       wing is --color-surface and the outline is --color-ink). */
+    --color-plane-shade: #dededf; /* far wing */
+    --color-plane-keel: #b7b6bb; /* underside fold */
+
+    /* ---- Print -------------------------------------------------------
+       The one deliberate pure black. On screen, copy is --color-ink, a warm
+       near-black. A printer builds that from coloured toner and it comes out
+       soft and slightly dithered; #000000 prints on the black channel alone
+       and stays crisp. The privacy policy is the page people actually print
+       or file, so its print stylesheet asks for real black. Nothing on
+       screen uses this token. */
+    --color-print-ink: #000000;
+
+    /* ---- Swatch demo defaults (overwritten live by the style studio) --- */
+    --swatch-size: 40px;
+    --swatch-radius: 999px;
+    --swatch-gap: 12px;
+    --swatch-border: 1px;
+    --swatch-ring: var(--color-ink);
+  }
+
+  /* The header grows with the desktop nav. This stays a responsive override
+     rather than one value: 68px is tuned for the phone row (brand, primary
+     button, menu button) and 76px for the full link row. */
+  @media (min-width: 768px) {
+    :root {
+      --section-pad: 35px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    :root {
+      --header-h: 76px;
+    }
+  }
+}
