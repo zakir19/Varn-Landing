@@ -37,41 +37,50 @@
 
    A custom property cannot be read inside a media query condition, and
    @custom-media has no browser support yet, so the scale lives here as the
-   reference every @media in styles.css must use: one unit (rem) and the
+   reference every @media in styles.css must use: one unit (px) and the
    classic min-width / max-width syntax.
 
-     step   rem       px     used for
-     -----  --------  -----  ---------------------------------------------
-     xs     22.5rem    360   max-width only: tiniest phones (header CTA)
-     sm     30rem      480   status axis labels; small-phone exceptions
-     md     36rem      576   first multi-column grids
-     lg     48rem      768   section padding, tablet two-up layouts
-     xl     62rem      992   desktop nav, header height, legal sidebar
-     2xl    75rem     1200   roomy desktop refinements
-     3xl    90rem     1440   reserved; nothing needs it yet
+     step   px     used for
+     -----  -----  ----------------------------------------------------
+     xs      360   max-width only: tiniest phones (header CTA)
+     sm      480   status axis labels; small-phone exceptions
+     md      576   first multi-column grids
+     lg      768   section padding, tablet two-up layouts
+     xl      992   desktop nav, header height, legal sidebar
+     2xl    1200   roomy desktop refinements
+     3xl    1440   reserved; nothing needs it yet
 
-   Why rem, not px: a px breakpoint ignores the visitor's browser font-size
-   setting, so someone reading at 20px would get the desktop layout with
-   only about 800px worth of 16px-equivalent room. Inside a media query em
-   and rem both resolve against the browser's initial font size, never a
-   local font-size, so they cannot compound either way; rem is chosen
-   because it reads the same as the unit used everywhere else here.
+   These were rem until 2026-09-16, when the whole sheet moved to px on the
+   owner's instruction (every size is px now; no rem, em or ch anywhere).
+   The values are the same numbers a 16px root resolved to, so the layout
+   switches at exactly the same widths it always did.
 
-   Why min-width / max-width, not the newer (width >= 48rem) range syntax:
+   What the move costs, recorded so nobody rediscovers it as a bug: a px
+   breakpoint ignores the visitor's browser font-size setting. Someone
+   reading at 20px used to get the phone layout until their window was
+   genuinely roomy; now they get the desktop layout at 992 device px with
+   only about 800px worth of 16px-equivalent room. The same applies to the
+   type scale: px text does not grow with that setting, though page zoom
+   still scales everything.
+
+   Why min-width / max-width, not the newer (width >= 768px) range syntax:
    the homepage's main layout already used the classic form, and the range
    form needs Safari 16.4+. Moving the few range queries (legal, status) to
    the classic form widens their support instead of narrowing the home's.
 
    Mobile-first: the smallest screen is the default and min-width queries
    add to it. max-width is kept only for a genuine narrow-band exception,
-   and then it stops 0.01rem short of the step (47.99rem) so the two sides
-   of a breakpoint never overlap. The single exception is xs, which is
+   and then it stops just short of the step (767.84px, 479.84px) so the two
+   sides of a breakpoint never overlap. Those odd endings are what the old
+   47.99rem / 29.99rem resolved to and they are kept exactly, since rounding
+   them to 767px would move the seam. The single exception is xs, which is
    inclusive of 360px on purpose; see its call site.
 
    JavaScript mirrors two of these with matchMedia: nav.js "(min-width:
-   62em)" and legal.js "(width < 62rem)". Both equal xl exactly. main.js
-   "(min-width: 992px)" belongs to the journey module, which is switched
-   off (initJourney returns early), so it cannot disagree with the CSS.
+   992px)" and legal.js "(width < 992px)". Both equal xl exactly, and both
+   were converted with this sheet. main.js "(min-width: 992px)" belongs to
+   the journey module, which is switched off (initJourney returns early),
+   so it cannot disagree with the CSS.
    ========================================================================= */
 
 @layer base {
@@ -215,15 +224,15 @@
 
     /* Scale tightened 2026-09-15: every step sits roughly 15% below the
        previous scale, the big headings most, body copy least. */
-    --text-display: clamp(2.2rem, 1.2rem + 4.2vw, 4.25rem);
-    --text-h2: clamp(1.7rem, 1.05rem + 2.5vw, 3rem);
-    --text-h3: clamp(1.15rem, 1rem + 0.6vw, 1.5rem);
-    --text-h4: clamp(1rem, 0.95rem + 0.24vw, 1.14rem);
-    --text-lead: clamp(1rem, 0.94rem + 0.3vw, 1.15rem);
-    --text-body: clamp(0.94rem, 0.92rem + 0.1vw, 1rem);
-    --text-sm: 0.84rem;
-    --text-xs: 0.75rem;
-    --text-eyebrow: 0.7rem;
+    --text-display: clamp(35.2px, 19.2px + 4.2vw, 68px);
+    --text-h2: clamp(27.2px, 16.8px + 2.5vw, 48px);
+    --text-h3: clamp(18.4px, 16px + 0.6vw, 24px);
+    --text-h4: clamp(16px, 15.2px + 0.24vw, 18.24px);
+    --text-lead: clamp(16px, 15.04px + 0.3vw, 12px);
+    --text-body: clamp(15.04px, 14.72px + 0.1vw, 16px);
+    --text-sm: 13.44px;
+    --text-xs: 12px;
+    --text-eyebrow: 11.2px;
 
     /* Both leave room below the baseline for p, y and g: gradient headline
        words are painted with background-clip: text, and some browsers clip
@@ -232,22 +241,26 @@
     --leading-tight: 1.06;
     --leading-snug: 1.2;
     --leading-normal: 1.62;
-    --tracking-tight: -0.035em;
-    --tracking-wide: 0.14em;
+    /* Tracking is a RATIO of the text it sits on, so with the type scale in
+       px these are unitless multipliers. A call site writes
+       letter-spacing: calc(var(--text-h2) * var(--tracking-tight)), which
+       computes exactly what -0.035em did, with no em left in the file. */
+    --tracking-tight: -0.035;
+    --tracking-wide: 0.14;
 
     /* ---- Spacing scale ------------------------------------------------ */
-    --space-3xs: 0.25rem;
-    --space-2xs: 0.5rem;
-    --space-xs: 0.75rem;
-    --space-sm: 1rem;
-    --space-md: 1.5rem;
-    --space-lg: 2rem;
+    --space-3xs: 4px;
+    --space-2xs: 8px;
+    --space-xs: 12px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 32px;
     /* Large steps tightened 2026-09-15 (owner: too much white space). The
        small steps that set spacing inside components are unchanged. */
-    --space-xl: 2.25rem;
-    --space-2xl: 2.75rem;
-    --space-3xl: 3.5rem;
-    --space-4xl: clamp(2.5rem, 1.6rem + 2.4vw, 3.75rem);
+    --space-xl: 36px;
+    --space-2xl: 44px;
+    --space-3xl: 56px;
+    --space-4xl: clamp(40px, 25.6px + 2.4vw, 60px);
 
     /* ---- Shape -------------------------------------------------------- */
     --radius-xs: 6px;
@@ -281,7 +294,7 @@
        The phone value is the default and the media block below raises it,
        so the token says what a section gets instead of a separate
        max-width override in styles.css quietly overruling it. */
-    --section-pad: 64px; /* 100px from 48rem */
+    --section-pad: 64px; /* 100px from 992px */
 
     /* One gap between every floating panel (sunk / ink), so consecutive
        panels never almost-touch while other seams run wide. Sibling margins
@@ -290,7 +303,7 @@
        This seam is also where the journey route crosses from one side of
        the page to the other, so it is sized to give the paper dart room to
        be SEEN between two panels rather than squeezed against an edge. */
-    --section-gap: clamp(2rem, 1rem + 4vw, 4.5rem);
+    --section-gap: clamp(32px, 16px + 4vw, 72px);
 
     /* ---- Layers (z-index) ---------------------------------------------
        Every stacking value on the site, in paint order. The numbers are the
@@ -371,13 +384,13 @@
   /* The header grows with the desktop nav. This stays a responsive override
      rather than one value: 68px is tuned for the phone row (brand, primary
      button, menu button) and 76px for the full link row. */
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     :root {
-      --section-pad: 100px;
+      --section-pad: 35px;
     }
   }
 
-  @media (min-width: 62rem) {
+  @media (min-width: 992px) {
     :root {
       --header-h: 76px;
     }

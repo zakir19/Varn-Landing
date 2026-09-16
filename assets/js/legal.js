@@ -56,7 +56,7 @@
      hidden and the list has to be visible without it. On a phone that
      would push the policy itself a screen down, so it is closed here —
      with this file missing the worst case is a visible contents list. */
-  if (toc && window.matchMedia("(width < 62rem)").matches) {
+  if (toc && window.matchMedia("(width < 992px)").matches) {
     toc.open = false;
   }
 
@@ -64,7 +64,7 @@
      just jumped to would hide the answer. */
   links.forEach(function (link) {
     link.addEventListener("click", function () {
-      if (toc && toc.open && window.matchMedia("(width < 62rem)").matches) {
+      if (toc && toc.open && window.matchMedia("(width < 992px)").matches) {
         toc.open = false;
       }
     });

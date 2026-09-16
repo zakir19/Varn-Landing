@@ -12,9 +12,13 @@
 
    Conventions
    -----------
-   - Mobile-first. Breakpoints use the rem scale documented in
-     design-tokens.css: 30 / 36 / 48 / 62 / 75rem (480 / 576 / 768 / 992 /
-     1200px), plus 22.5rem (360px) for the tiniest phones.
+   - Mobile-first. Breakpoints use the px scale documented in
+     design-tokens.css: 480 / 576 / 768 / 992 / 1200px, plus 360px for the
+     tiniest phones.
+   - Every size in this file is px. No rem, em or ch: a ratio that used to
+     ride on the element's own size (tracking, a 25ch measure) is written as
+     calc() against the same font-size the rule declares, so a rule that
+     changes a size must restate them.
    - Every repeated value is a token in design-tokens.css, which loads
      first on every page. No magic numbers in rules.
    - Only transform / opacity / filter are animated.
@@ -34,8 +38,6 @@
    never downloaded and never used anywhere on this page - see the font-style
    guard in @layer reset, which also blocks the browser's synthetic oblique.
    ========================================================================= */
-
-
 
 /* =========================================================================
    RESET
@@ -100,12 +102,15 @@
     text-decoration: none;
   }
 
+  /* The 25-character measure that used to live here as max-width: 25ch now
+     sits on each rule that owns a heading's size, because a character measure
+     resolves against the element's own font-size and cannot survive as one
+     shared px value. */
   h1,
   h2,
   h3,
   h4 {
     font-weight: 500;
-    text-wrap: balance;
   }
 
   p {
@@ -214,7 +219,7 @@
     max-inline-size: var(--shell-mid);
   }
 
-  /* 64px on phones, 100px from 48rem: the step lives in --section-pad. */
+  /* 64px on phones, 100px from 768px: the step lives in --section-pad. */
   .section {
     position: relative;
     z-index: var(--z-content);
@@ -254,7 +259,7 @@
   }
 
   .section--ink > .shell {
-    padding-inline: clamp(20px, 1rem + 3vw, 56px);
+    padding-inline: clamp(20px, 16px + 3vw, 56px);
   }
 
   /* Headings run the full measure and wrap naturally - no forced breaks,
@@ -276,14 +281,15 @@
 
   .section__title {
     font-size: var(--text-h2);
+    max-width: calc(var(--text-h2) * 16.925);
     line-height: var(--leading-snug);
-    letter-spacing: var(--tracking-tight);
+    letter-spacing: calc(var(--text-h2) * var(--tracking-tight));
     font-weight: 600;
     margin-block-start: var(--space-sm);
   }
 
   .section__lead {
-    max-inline-size: 58ch;
+    max-inline-size: calc(var(--text-lead) * 38.628);
     font-size: var(--text-lead);
     color: var(--color-ink-muted);
     margin-block-start: var(--space-md);
@@ -323,7 +329,7 @@
     gap: var(--space-2xs);
     font-size: var(--text-eyebrow);
     font-weight: 600;
-    letter-spacing: var(--tracking-wide);
+    letter-spacing: calc(var(--text-eyebrow) * var(--tracking-wide));
     text-transform: uppercase;
     color: var(--color-ink-subtle);
   }
@@ -350,10 +356,10 @@
      both sides; the matching negative margin keeps every letter, and the
      punctuation after the accent, exactly where it was. */
   .accent {
-    padding-block: 0.1em 0.2em;
-    padding-inline: 0.05em 0.12em;
-    margin-block: -0.1em -0.2em;
-    margin-inline: -0.05em -0.12em;
+    padding-block: 6.8px 13.6px;
+    padding-inline: 3.4px 8.16px;
+    margin-block: -6.8px -13.6px;
+    margin-inline: -3.4px -8.16px;
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
     background: var(--grad-accent);
@@ -374,13 +380,15 @@
     border-radius: var(--radius-pill);
     font-size: var(--text-sm);
     font-weight: 600;
-    letter-spacing: -0.006em;
+    letter-spacing: calc(var(--text-sm) * -0.006);
     text-align: center;
     white-space: nowrap;
-    transition: transform var(--dur-fast) var(--ease-out),
+    transition:
+      transform var(--dur-fast) var(--ease-out),
       background-color var(--dur-fast) var(--ease-out),
       border-color var(--dur-fast) var(--ease-out),
-      box-shadow var(--dur-base) var(--ease-out), color var(--dur-fast) linear;
+      box-shadow var(--dur-base) var(--ease-out),
+      color var(--dur-fast) linear;
   }
 
   .btn:hover {
@@ -424,7 +432,8 @@
     text-decoration: underline;
     text-decoration-color: transparent;
     text-underline-offset: 4px;
-    transition: color var(--dur-fast) var(--ease-out),
+    transition:
+      color var(--dur-fast) var(--ease-out),
       text-decoration-color var(--dur-fast) var(--ease-out);
   }
 
@@ -453,16 +462,21 @@
     background: rgb(var(--color-white-rgb) / 8%);
   }
 
+  /* Tracking is a ratio of the label's size, so a size modifier restates it
+     against its own size. With em this followed automatically; in px each
+     size has to say it, or a large button keeps the small button's tracking. */
   .btn--sm {
     min-block-size: 40px;
     padding-inline: var(--space-sm);
     font-size: var(--text-xs);
+    letter-spacing: calc(var(--text-xs) * -0.006);
   }
 
   .btn--lg {
     min-block-size: 56px;
     padding-inline: var(--space-lg);
-    font-size: 0.94rem;
+    font-size: 15.04px;
+    letter-spacing: calc(15.04px * -0.006);
   }
 
   .btn--block {
@@ -483,7 +497,8 @@
     inset-block-start: 0;
     inset-inline: 0;
     z-index: var(--z-header);
-    transition: transform var(--dur-base) var(--ease-out),
+    transition:
+      transform var(--dur-base) var(--ease-out),
       background-color var(--dur-base) linear,
       box-shadow var(--dur-base) linear;
   }
@@ -569,9 +584,9 @@
   }
 
   .brand__name {
-    font-size: 1.14rem;
+    font-size: 18.24px;
     font-weight: 700;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.5472px;
   }
 
   .brand__by {
@@ -605,15 +620,22 @@
     overflow: clip;
   }
 
-  /* Centered, smile.io-style: pill, headline, lead and actions stacked on
-     the page axis, with the live demo below inside a tinted stage panel. */
+  /* Two columns from 992px: pill, headline, lead, actions and the proof
+     chips on the left, the live demo on the right, so the demo is in the
+     first screen. Below 992px it is one column and the demo follows the
+     copy. */
+  .hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
   .hero__copy {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    max-inline-size: 58rem;
-    margin-inline: auto;
-    text-align: center;
+    align-items: flex-start;
+    text-align: start;
   }
 
   .hero__pill {
@@ -635,20 +657,21 @@
     background: var(--color-violet);
   }
 
-  /* Phones: the headline wraps naturally. From tablet up it is exactly two
-     lines, one per .hero__line, and the size is tied to the viewport so the
-     longer first line (about 17.4 times the font size wide) always fits inside
-     the page gutters, capped at 46px. */
+  /* The headline is the anchor of the left column, so it runs at the display
+     step and wraps naturally over as many lines as the column needs. The
+     .hero__line spans are inline, so they no longer force a break. */
   .hero__title {
-    font-size: clamp(1.8rem, 1.25rem + 2.4vw, 2.3rem);
-    line-height: 1.14;
-    letter-spacing: -0.028em;
+    font-size: var(--text-h2);
+    max-width: calc(var(--text-display) * 16.925);
+    line-height: 1.06;
+    letter-spacing: calc(var(--text-display) * -0.04);
     font-weight: 600;
     margin-block-start: var(--space-md);
+    text-wrap: balance;
   }
 
   .hero__lead {
-    max-inline-size: 48ch;
+    max-inline-size: calc(var(--text-lead) * 31.968);
     margin-block-start: var(--space-md);
     font-size: var(--text-lead);
     color: var(--color-ink-muted);
@@ -657,7 +680,6 @@
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: var(--space-xs);
     margin-block-start: var(--space-lg);
   }
@@ -665,7 +687,6 @@
   .hero__note {
     display: flex;
     align-items: center;
-    justify-content: center;
     text-align: start;
     text-wrap: balance;
     gap: var(--space-2xs);
@@ -674,15 +695,25 @@
     color: var(--color-ink-subtle);
   }
 
+  /* No filled panel behind the demo any more. A soft wash, drawn from the
+     brand violet and clay at low alpha, lifts the card off the white page
+     without darkening the section. It sits behind the card, is purely
+     decorative, and never catches a pointer. */
   .hero__stage {
+    position: relative;
     margin-block-start: var(--space-2xl);
-    padding: clamp(1rem, 0.4rem + 2.8vw, 3rem);
-    background: var(--color-violet-soft);
-    border-radius: clamp(20px, 3.5vw, 40px);
+  }
+
+  .hero__stage::before {
+    content: "";
+    position: absolute;
+    z-index: var(--z-local-below);
+    inset: -8% -6% -10%;
+    pointer-events: none;
   }
 
   .hero__stage .demo {
-    max-inline-size: 900px;
+    max-inline-size: 640px;
     margin-inline: auto;
   }
 
@@ -693,15 +724,38 @@
     color: var(--color-success);
   }
 
+  /* The theme strip closes the hero: its label sits beside the moving row
+     rather than above it, under a hairline that separates the strip from the
+     copy and the demo. The marquee keeps its own mask and animation. */
+  .themes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs) var(--space-md);
+    margin-block-start: var(--space-2xl);
+    padding-block-start: var(--space-md);
+    border-block-start: 1px solid var(--color-line-soft);
+  }
+
+  .themes .marquee {
+    flex: 1 1 320px;
+    min-inline-size: 0;
+    padding-block: 0;
+  }
+
   /* ---------- Fact strip ------------------------------------------------ */
+  /* Four proof chips under the buttons. A card each, so they read as facts
+     rather than a caption. Two by two on phones, one row of four from 768px.
+     From 992px the row sits in the hero's left column (about 450px to
+     620px wide), so the value size and card padding tighten there to keep
+     "Within 24 h" on one line. Grid rows keep paired cards the same height
+     when one label wraps. */
   .facts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-md) var(--space-sm);
-    max-inline-size: 920px;
-    margin-inline: auto;
-    margin-block-start: var(--space-2xl);
-    text-align: center;
+    gap: var(--space-2xs);
+    inline-size: 100%;
+    margin-block-start: var(--space-xl);
   }
 
   /* Definition lists must be <dt> then <dd>, but the value reads first.
@@ -715,16 +769,27 @@
     display: flex;
     flex-direction: column-reverse;
     justify-content: flex-end;
-    align-items: center;
+    align-items: flex-start;
+    min-inline-size: 0;
+    /* Side padding eases from 16px to 12px below ~400px so the longest
+       value still fits on one line at 320px. */
+    padding: var(--space-xs) clamp(12px, 4.8vw - 3px, 16px);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-xs);
   }
 
   .facts__value {
     display: block;
+    --facts-value-size: clamp(18.4px, 16px + 0.7vw, 22.4px);
+
     margin-inline-start: 0;
-    font-size: clamp(1.15rem, 1rem + 0.7vw, 1.4rem);
+    font-size: var(--facts-value-size);
     font-weight: 600;
-    letter-spacing: -0.025em;
+    letter-spacing: calc(var(--facts-value-size) * -0.025);
     line-height: 1.1;
+    white-space: nowrap;
   }
 
   .facts__label {
@@ -737,7 +802,7 @@
 
   /* ---------- Product demo (hero + reused elsewhere) -------------------- */
   .demo {
-    --demo-pad: clamp(1rem, 0.4rem + 2vw, 1.75rem);
+    --demo-pad: clamp(16px, 6.4px + 2vw, 28px);
 
     position: relative;
     border-radius: var(--radius-lg);
@@ -773,7 +838,7 @@
     border-radius: var(--radius-xs);
     background: var(--color-surface-sunk);
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 10.88px;
     color: var(--color-ink-subtle);
     text-align: center;
     overflow: hidden;
@@ -817,7 +882,8 @@
     font-weight: 600;
     opacity: 0;
     transform: translateY(-4px);
-    transition: opacity var(--dur-base) var(--ease-out),
+    transition:
+      opacity var(--dur-base) var(--ease-out),
       transform var(--dur-base) var(--ease-out);
   }
 
@@ -840,7 +906,8 @@
     border: 1px solid var(--color-line);
     background: var(--color-surface-sunk);
     overflow: hidden;
-    transition: border-color var(--dur-fast) linear,
+    transition:
+      border-color var(--dur-fast) linear,
       opacity var(--dur-base) var(--ease-out);
   }
 
@@ -855,7 +922,7 @@
   .demo__title {
     font-size: var(--text-h4);
     font-weight: 600;
-    letter-spacing: -0.02em;
+    letter-spacing: calc(var(--text-h4) * -0.02);
   }
 
   .demo__meta {
@@ -866,7 +933,7 @@
   }
 
   .demo__price {
-    font-size: 1.05rem;
+    font-size: 16.8px;
     font-weight: 600;
   }
 
@@ -910,7 +977,7 @@
 
   .demo__stock {
     display: block;
-    min-block-size: 1.2em;
+    min-block-size: calc(var(--text-xs) * 1.2);
     margin-block-start: var(--space-2xs);
     font-size: var(--text-xs);
     font-weight: 600;
@@ -935,7 +1002,8 @@
 
   .demo__panel {
     grid-area: 1 / 1;
-    transition: opacity var(--dur-base) var(--ease-out),
+    transition:
+      opacity var(--dur-base) var(--ease-out),
       transform var(--dur-base) var(--ease-out);
   }
 
@@ -974,7 +1042,8 @@
     border-radius: var(--swatch-radius);
     background-color: var(--chip-a, var(--color-surface-sunk));
     box-shadow: inset 0 0 0 var(--swatch-border) rgb(var(--color-ink-rgb) / 22%);
-    transition: box-shadow var(--dur-base) var(--ease-out),
+    transition:
+      box-shadow var(--dur-base) var(--ease-out),
       transform var(--dur-base) var(--ease-spring);
     overflow: hidden;
   }
@@ -998,8 +1067,10 @@
   }
 
   .swatch[aria-checked="true"] .swatch__chip {
-    box-shadow: inset 0 0 0 var(--swatch-border) rgb(var(--color-ink-rgb) / 22%),
-      0 0 0 2px var(--color-surface), 0 0 0 4px var(--swatch-ring);
+    box-shadow:
+      inset 0 0 0 var(--swatch-border) rgb(var(--color-ink-rgb) / 22%),
+      0 0 0 2px var(--color-surface),
+      0 0 0 4px var(--swatch-ring);
   }
 
   .swatch:hover .swatch__chip {
@@ -1008,7 +1079,7 @@
 
   .swatch__label {
     max-inline-size: 76px;
-    font-size: 0.72rem;
+    font-size: 11.52px;
     line-height: 1.25;
     color: var(--color-ink-muted);
     text-align: center;
@@ -1088,7 +1159,8 @@
     z-index: var(--z-local-base);
     border-radius: var(--radius-pill);
     background: var(--color-ink);
-    transition: transform var(--dur-slow) var(--ease-spring),
+    transition:
+      transform var(--dur-slow) var(--ease-spring),
       inline-size var(--dur-slow) var(--ease-spring);
   }
 
@@ -1117,6 +1189,8 @@
       var(--color-ink) 92%,
       transparent
     );
+    max-width: var(--shell-max);
+    margin-inline: auto;
   }
 
   .marquee__track {
@@ -1180,7 +1254,8 @@
     padding: var(--space-sm) var(--space-md);
     border-radius: var(--radius-md);
     border: 1px solid transparent;
-    transition: background-color var(--dur-base) var(--ease-out),
+    transition:
+      background-color var(--dur-base) var(--ease-out),
       border-color var(--dur-base) var(--ease-out);
   }
 
@@ -1191,6 +1266,9 @@
   }
 
   .step__head {
+    /* No font-size here: this h3 renders at the browser's default heading
+       size, so its 25-character measure is that size times 16.775. */
+    max-width: 314.03px;
     display: flex;
     align-items: center;
     gap: var(--space-xs);
@@ -1207,8 +1285,10 @@
     font-size: var(--text-xs);
     font-weight: 700;
     font-variant-numeric: tabular-nums;
-    transition: background-color var(--dur-base) linear,
-      color var(--dur-base) linear, border-color var(--dur-base) linear;
+    transition:
+      background-color var(--dur-base) linear,
+      color var(--dur-base) linear,
+      border-color var(--dur-base) linear;
   }
 
   .step.is-active .step__index {
@@ -1220,7 +1300,7 @@
   .step__title {
     font-size: var(--text-h4);
     font-weight: 600;
-    letter-spacing: -0.018em;
+    letter-spacing: calc(var(--text-h4) * -0.018);
   }
 
   .step__body {
@@ -1344,7 +1424,8 @@
     border-radius: var(--radius-lg);
     background: var(--color-surface);
     box-shadow: var(--shadow-xs);
-    transition: transform var(--dur-base) var(--ease-out),
+    transition:
+      transform var(--dur-base) var(--ease-out),
       box-shadow var(--dur-base) var(--ease-out);
   }
 
@@ -1366,8 +1447,9 @@
 
   .tile__title {
     font-size: var(--text-h4);
+    max-width: calc(var(--text-h4) * 16.925);
     font-weight: 600;
-    letter-spacing: -0.018em;
+    letter-spacing: calc(var(--text-h4) * -0.018);
   }
 
   .tile__text {
@@ -1416,7 +1498,7 @@
     border-radius: var(--radius-pill);
     font-size: var(--text-xs);
     font-weight: 700;
-    letter-spacing: 0.02em;
+    letter-spacing: calc(var(--text-xs) * 0.02);
   }
 
   .tile__tag--free {
@@ -1467,7 +1549,7 @@
     gap: var(--space-2xs);
     font-size: var(--text-xs);
     font-weight: 600;
-    letter-spacing: 0.02em;
+    letter-spacing: calc(var(--text-xs) * 0.02);
     text-transform: uppercase;
     color: var(--color-ink-subtle);
   }
@@ -1497,7 +1579,8 @@
     font-size: var(--text-xs);
     font-weight: 600;
     color: var(--color-ink-muted);
-    transition: background-color var(--dur-fast) linear,
+    transition:
+      background-color var(--dur-fast) linear,
       color var(--dur-fast) linear;
   }
 
@@ -1641,7 +1724,7 @@
   }
 
   .product-card__name {
-    font-size: 0.7rem;
+    font-size: 11.2px;
     font-weight: 600;
     line-height: 1.3;
     overflow: hidden;
@@ -1663,8 +1746,9 @@
 
   .surface-card__title {
     font-size: var(--text-h4);
+    max-width: calc(var(--text-h4) * 16.925);
     font-weight: 600;
-    letter-spacing: -0.018em;
+    letter-spacing: calc(var(--text-h4) * -0.018);
   }
 
   .surface-card__text {
@@ -1696,8 +1780,9 @@
 
   .pillar__title {
     font-size: var(--text-h4);
+    max-width: calc(var(--text-h4) * 16.925);
     font-weight: 600;
-    letter-spacing: -0.018em;
+    letter-spacing: calc(var(--text-h4) * -0.018);
   }
 
   .pillar__text {
@@ -1733,17 +1818,16 @@
     margin-block-start: var(--space-3xl);
   }
 
-  /* Section headings sit above the split (and the maker row), not inside a
-     column, so the copy column opens with its text, which needs no gap above. */
-  .split__copy > .split__text:first-child,
-  .maker__copy > .split__text:first-child {
+  /* Section headings sit above the split, not inside a column, so the copy
+     column opens with its text, which needs no gap above. */
+  .split__copy > .split__text:first-child {
     margin-block-start: 0;
   }
 
   .split__title {
     font-size: var(--text-h3);
     font-weight: 600;
-    letter-spacing: -0.024em;
+    letter-spacing: calc(var(--text-h3) * -0.024);
     margin-block-start: var(--space-2xs);
   }
 
@@ -1800,9 +1884,9 @@
   }
 
   .scorecard__score {
-    font-size: clamp(2.1rem, 1.8rem + 1.3vw, 2.75rem);
+    font-size: clamp(33.6px, 28.8px + 1.3vw, 44px);
     font-weight: 600;
-    letter-spacing: -0.04em;
+    letter-spacing: calc(clamp(33.6px, 28.8px + 1.3vw, 44px) * -0.04);
     line-height: 1;
     font-variant-numeric: tabular-nums;
   }
@@ -1815,7 +1899,7 @@
     border-radius: var(--radius-sm);
     background: var(--color-success-soft);
     color: var(--color-success);
-    font-size: 1.25rem;
+    font-size: 20px;
     font-weight: 700;
   }
 
@@ -1902,7 +1986,8 @@
     font-size: var(--text-sm);
     font-weight: 600;
     color: var(--color-ink-muted);
-    transition: border-color var(--dur-fast) var(--ease-out),
+    transition:
+      border-color var(--dur-fast) var(--ease-out),
       color var(--dur-fast) var(--ease-out),
       background-color var(--dur-fast) var(--ease-out);
   }
@@ -1959,9 +2044,9 @@
     border-radius: var(--radius-pill);
     background: var(--color-ink);
     color: var(--color-page);
-    font-size: 0.66rem;
+    font-size: 10.56px;
     font-weight: 700;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.2112px;
   }
 
   .vgal__badge--n {
@@ -1979,7 +2064,7 @@
   .gjoin__kicker {
     font-size: var(--text-xs);
     font-weight: 700;
-    letter-spacing: 0.06em;
+    letter-spacing: calc(var(--text-xs) * 0.06);
     text-transform: uppercase;
     color: var(--color-ink-subtle);
   }
@@ -2049,8 +2134,12 @@
     inline-size: 8px;
     block-size: 14px;
     flex: none;
-    background:
-      radial-gradient(circle, var(--color-ink-subtle) 1.1px, transparent 1.2px) 0 0 / 4px 5px;
+    background: radial-gradient(
+        circle,
+        var(--color-ink-subtle) 1.1px,
+        transparent 1.2px
+      )
+      0 0 / 4px 5px;
     opacity: 0.55;
   }
 
@@ -2071,7 +2160,7 @@
   .gjoin__title {
     font-size: var(--text-sm);
     font-weight: 600;
-    letter-spacing: -0.01em;
+    letter-spacing: calc(var(--text-sm) * -0.01);
   }
 
   .gjoin__sub {
@@ -2123,9 +2212,9 @@
   }
 
   .dash__num {
-    font-size: clamp(1.1rem, 1rem + 0.55vw, 1.4rem);
+    font-size: clamp(17.6px, 16px + 0.55vw, 22.4px);
     font-weight: 600;
-    letter-spacing: -0.02em;
+    letter-spacing: calc(clamp(17.6px, 16px + 0.55vw, 22.4px) * -0.02);
     line-height: 1.1;
     font-variant-numeric: tabular-nums;
   }
@@ -2144,7 +2233,7 @@
     margin-block-start: var(--space-md);
     font-size: var(--text-xs);
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: calc(var(--text-xs) * 0.08);
     text-transform: uppercase;
     color: var(--color-ink-subtle);
   }
@@ -2165,13 +2254,27 @@
   }
 
   /* ---------- Pricing ---------------------------------------------------- */
+  /* The heading and the billing switch share one row from 992px (see that
+     media block), so the switch sits beside the prices it changes instead of
+     on a line of its own above them. */
+  .pricing__head {
+    display: grid;
+    gap: var(--space-md);
+    align-items: end;
+    margin-block-end: var(--space-xl);
+  }
+
+  /* The head's own bottom margin belongs to the grid here. */
+  .pricing__head .section__head {
+    margin-block-end: 0;
+  }
+
   .pricing__switch {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     gap: var(--space-xs);
-    margin-block-end: var(--space-lg);
   }
 
   .pricing__trial-line {
@@ -2180,8 +2283,14 @@
     text-align: start;
   }
 
+  /* One strip under the cards rather than a block: the title labels the row
+     and the shared features wrap along it, so the section ends on a line
+     instead of a second card of lists. */
   .pricing__includes {
-    margin-block-start: var(--space-lg);
+    display: grid;
+    gap: var(--space-sm);
+    align-items: center;
+    margin-block-start: var(--space-md);
     padding: var(--space-md);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-lg);
@@ -2190,14 +2299,15 @@
 
   .pricing__includes-title {
     font-size: var(--text-h4);
+    max-width: calc(var(--text-h4) * 16.925);
     font-weight: 600;
-    letter-spacing: -0.018em;
-    margin-block-end: var(--space-sm);
+    letter-spacing: calc(var(--text-h4) * -0.018);
   }
 
   .pricing__includes-list {
-    display: grid;
-    gap: var(--space-2xs);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs) var(--space-lg);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -2224,9 +2334,26 @@
     background: var(--color-surface);
     box-shadow: var(--shadow-xs);
     overflow: hidden;
-    transition: transform var(--dur-base) var(--ease-out),
+    transition:
+      transform var(--dur-base) var(--ease-out),
       box-shadow var(--dur-base) var(--ease-out),
       border-color var(--dur-base) linear;
+  }
+
+  /* Every card has the same six parts (name, price, billing note, tagline,
+     trial line, feature list), so the cards share the grid's rows: each part
+     starts on one line across a row of cards however long any one card's copy
+     runs, and the feature dividers line up. The row gap here only spaces the
+     parts inside a card; the grid's own gap still separates the cards.
+     Browsers without subgrid keep the stacked flex layout above. */
+  @supports (grid-template-rows: subgrid) {
+    .plan {
+      display: grid;
+      grid-row: span 6;
+      grid-template-rows: subgrid;
+      row-gap: var(--space-sm);
+      align-content: start;
+    }
   }
 
   .plan:hover {
@@ -2245,17 +2372,24 @@
     background: var(--color-line-soft);
   }
 
+  /* The chosen plan is ringed in the brand gradient. A border cannot carry a
+     gradient directly, so the card's own surface fills the padding box and
+     the gradient fills the border box behind it. */
   .plan--highlight {
-    border-color: var(--color-violet);
+    border-color: transparent;
+    background:
+      linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+      var(--grad-accent) border-box;
     box-shadow: var(--shadow-lg);
   }
 
+  /* The crown would draw a second gradient inside the ring. */
   .plan--highlight::before {
-    background: var(--grad-accent);
+    display: none;
   }
 
   .plan--highlight:hover {
-    border-color: var(--color-violet);
+    border-color: transparent;
     box-shadow: var(--shadow-lg);
   }
 
@@ -2268,8 +2402,9 @@
 
   .plan__name {
     font-size: var(--text-h4);
+    max-width: calc(var(--text-h4) * 16.925);
     font-weight: 600;
-    letter-spacing: -0.02em;
+    letter-spacing: calc(var(--text-h4) * -0.02);
   }
 
   .plan__flag {
@@ -2300,9 +2435,9 @@
   }
 
   .plan__amount {
-    font-size: clamp(1.9rem, 1.6rem + 1.2vw, 2.4rem);
+    font-size: clamp(30.4px, 25.6px + 1.2vw, 38.4px);
     font-weight: 600;
-    letter-spacing: -0.04em;
+    letter-spacing: calc(clamp(30.4px, 25.6px + 1.2vw, 38.4px) * -0.04);
     line-height: 1;
     font-variant-numeric: tabular-nums;
   }
@@ -2362,6 +2497,10 @@
   .plan__features {
     display: grid;
     gap: var(--space-2xs);
+    /* The list fills its shared row (so every divider lines up), and a shorter
+       list beside a longer one would otherwise spread its items over the extra
+       height. Packed to the top, every list keeps the same spacing. */
+    align-content: start;
     font-size: var(--text-sm);
   }
 
@@ -2398,52 +2537,100 @@
 
   .pricing__note {
     margin-block-start: var(--space-lg);
-    max-inline-size: 72ch;
+    max-inline-size: calc(var(--text-sm) * 47.952);
     text-align: start;
     font-size: var(--text-sm);
     color: var(--color-ink-subtle);
   }
 
   /* ---------- Enstacked ------------------------------------------------- */
+  /* The maker band closes the ink proof panel (revamp, 2026-09-15). It was a
+     white section of its own between pricing and the FAQ; "why trust this
+     app" and "who built it" now read as one moment right before pricing.
+
+     The band reuses the pillar card surface, so it reads as the last card of
+     the same panel, and every colour here is one the ink panel already uses.
+     This supersedes the earlier "Enstacked keeps its earlier design" scale:
+     inside a card the heading steps down to the h3 size and the wordmark
+     becomes a lockup beside the logo. The eyebrow keeps its short rule. */
   .maker {
     display: grid;
     gap: var(--space-xl);
     align-items: center;
+    margin-block-start: var(--space-sm); /* the same seam as between pillars */
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid rgb(var(--color-white-rgb) / 14%);
+    background: rgb(var(--color-white-rgb) / 4%);
   }
 
+  .maker__identity {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .maker__copy .eyebrow::before {
+    content: "";
+    inline-size: 20px;
+    block-size: 1px;
+    background: currentcolor;
+    opacity: 0.5;
+  }
+
+  /* Inline SVG: the dark strokes are currentColor, so they turn white on
+     ink. The orange strokes stay the maker's own orange. */
   .maker__logo {
-    inline-size: clamp(88px, 18vw, 132px);
+    flex: none;
+    inline-size: clamp(52px, 4.5vw, 64px);
     block-size: auto;
     aspect-ratio: 1;
+    color: var(--color-white);
+  }
+
+  .maker__logo-accent {
+    fill: var(--color-enstacked);
   }
 
   .maker__wordmark {
-    margin-block-start: var(--space-md);
-    font-size: clamp(1.45rem, 1.1rem + 1.5vw, 2.05rem);
+    font-size: clamp(17.6px, 16px + 0.4vw, 20.8px);
     font-weight: 700;
-    letter-spacing: -0.035em;
+    letter-spacing: calc(clamp(17.6px, 16px + 0.4vw, 20.8px) * -0.035);
     line-height: 1.05;
   }
 
+  /* Enstacked orange on ink: 4.69:1, AA at any size. */
   .maker__wordmark span {
     color: var(--color-enstacked);
   }
 
   .maker__tagline {
     margin-block-start: var(--space-2xs);
-    font-size: var(--text-sm);
-    letter-spacing: 0.1em;
+    font-size: var(--text-xs);
+    letter-spacing: calc(var(--text-xs) * 0.1);
     text-transform: uppercase;
-    color: var(--color-ink-subtle);
+    color: rgb(var(--color-white-rgb) / 62%);
+  }
+
+  .maker__title {
+    margin-block-start: var(--space-xs);
+    font-size: var(--text-h3);
+    max-width: calc(var(--text-h3) * 16.925);
+    font-weight: 600;
+    line-height: var(--leading-snug);
+    letter-spacing: calc(var(--text-h3) * -0.025);
+  }
+
+  .maker__text {
+    margin-block-start: var(--space-xs);
+    font-size: var(--text-sm);
+    color: rgb(var(--color-white-rgb) / 70%);
   }
 
   .maker__stats {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-md);
-    margin-block-start: var(--space-lg);
-    padding-block-start: var(--space-lg);
-    border-block-start: 1px solid var(--color-line);
   }
 
   /* Same shared-baseline rule as .facts__item, see the note there. */
@@ -2456,19 +2643,47 @@
   .maker__stat-value {
     display: block;
     margin-inline-start: 0;
-    font-size: clamp(1.15rem, 1rem + 0.7vw, 1.45rem);
+    font-size: clamp(20.8px, 17.6px + 0.9vw, 27.2px);
     font-weight: 600;
-    letter-spacing: -0.03em;
+    letter-spacing: calc(clamp(20.8px, 17.6px + 0.9vw, 27.2px) * -0.03);
   }
 
   .maker__stat-label {
     display: block;
     margin-block-start: 2px;
     font-size: var(--text-xs);
-    color: var(--color-ink-subtle);
+    color: rgb(var(--color-white-rgb) / 62%);
   }
 
   /* ---------- FAQ -------------------------------------------------------- */
+  /* Two columns from 992px (see that media block): the heading, the support
+     path and the live status strip on the left, the questions on the right.
+     One column below it, heading first. */
+  .faq-grid {
+    display: grid;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  /* A measure is a ratio of the text it holds, so a rule that changes the
+     size restates it. With ch this followed the element on its own. */
+  .faq-side .section__lead {
+    font-size: var(--text-body);
+    max-inline-size: calc(var(--text-body) * 38.628);
+  }
+
+  .faq-side .actions {
+    margin-block-start: var(--space-md);
+  }
+
+  /* In the side column the strip is a narrow two-row box, so it keeps the
+     card radius instead of the pill the full-width strip takes from 768px.
+     The compound selector beats that rule wherever it sits in the file. */
+  .status-strip.status-strip--side {
+    margin-block-start: var(--space-lg);
+    border-radius: var(--radius-lg);
+  }
+
   .faq {
     display: grid;
     gap: var(--space-2xs);
@@ -2494,7 +2709,7 @@
     padding: var(--space-sm) var(--space-md);
     font-size: var(--text-h4);
     font-weight: 500;
-    letter-spacing: -0.015em;
+    letter-spacing: calc(var(--text-h4) * -0.015);
     cursor: pointer;
     list-style: none;
   }
@@ -2527,7 +2742,7 @@
 
   .faq__answer {
     padding: 0 var(--space-md) var(--space-md);
-    max-inline-size: 68ch;
+    max-inline-size: calc(var(--text-sm) * 45.288);
     color: var(--color-ink-muted);
     font-size: var(--text-sm);
   }
@@ -2535,7 +2750,7 @@
   /* ---------- Closing CTA ------------------------------------------------ */
   /* The paper-dart tour that needed a large seam above this band is switched
      off, so the closing band now sits directly under the previous section.
-     If the tour comes back, restore clamp(8rem, 4rem + 9vw, 14rem) here and
+     If the tour comes back, restore clamp(128px, 64px + 9vw, 224px) here and
      keep it in step with FINISH_GAP in main.js. */
   .closer {
     position: relative;
@@ -2548,8 +2763,9 @@
 
   .closer__title {
     font-size: var(--text-display);
+    max-width: calc(var(--text-display) * 16.775);
     line-height: var(--leading-tight);
-    letter-spacing: var(--tracking-tight);
+    letter-spacing: calc(var(--text-display) * var(--tracking-tight));
     font-weight: 500;
   }
 
@@ -2612,7 +2828,7 @@
   }
 
   .site-footer__blurb {
-    max-inline-size: 40ch;
+    max-inline-size: calc(var(--text-sm) * 26.64);
     margin-block-start: var(--space-sm);
     font-size: var(--text-sm);
     color: var(--color-ink-muted);
@@ -2621,7 +2837,7 @@
   .site-footer__nav-title {
     font-size: var(--text-xs);
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: calc(var(--text-xs) * 0.1);
     text-transform: uppercase;
     color: var(--color-ink-subtle);
     margin-block-end: var(--space-2xs);
@@ -2733,7 +2949,7 @@
     z-index: var(--z-route-over);
   }
 
-  @media (min-width: 62rem) {
+  @media (min-width: 992px) {
     .journey {
       display: block;
     }
@@ -2844,7 +3060,7 @@
     display: flex;
     align-items: center;
     gap: var(--space-2xs);
-    padding: 0.45rem 0.9rem;
+    padding: 7.2px 14.4px;
     background: var(--color-surface);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-pill);
@@ -2916,18 +3132,13 @@
    UTILITIES
    ========================================================================= */
 @layer utilities {
-  /* Keeps a hyphenated phrase ("Single-Click") on one line. */
-  @media (min-width: 48rem) {
-    .hero__title {
-      font-size: min(2.9rem, calc((100vw - 48px) / 17.4));
-    }
+  /* The headline used to run the full page width as exactly two unbreakable
+     lines, so it carried a viewport-tied size cap here and .hero__line was a
+     nowrap block. It now sits in the hero's left column and wraps to fit, so
+     both rules are gone and the size comes from --text-display in the
+     components layer. .hero__line stays in the markup as an inline span.
 
-    .hero__line {
-      display: block;
-      white-space: nowrap;
-    }
-  }
-
+     Keeps a hyphenated phrase ("Single-Click") on one line. */
   .nowrap {
     white-space: nowrap;
   }
@@ -2979,13 +3190,9 @@
    RESPONSIVE  -  one block per breakpoint, mobile-first
    ========================================================================= */
 
-/* ---- 36rem / 576px ----------------------------------------------------- */
-@media (min-width: 36rem) {
+/* ---- 576px -------------------------------------------------------- */
+@media (min-width: 576px) {
   @layer components {
-    .facts {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
     .demo__body {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
       align-items: start;
@@ -3005,8 +3212,8 @@
   }
 }
 
-/* ---- 48rem / 768px ----------------------------------------------------- */
-@media (min-width: 48rem) {
+/* ---- 768px -------------------------------------------------------- */
+@media (min-width: 768px) {
   @layer components {
     .brand__by {
       display: inline-flex;
@@ -3026,17 +3233,24 @@
       min-block-size: 230px;
     }
 
+    /* The band is still stacked here, so the four stats fit in one row. */
+    .maker {
+      padding: var(--space-lg);
+    }
+
     .maker__stats {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
-    /* Four plans read as a 2x2 grid from tablet up, matching the in-app
-       plan page. Four across would crush the feature lists. */
-    .pricing__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* Hero copy is still full width, so the proof cards fit four across. */
+    .facts {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
-    .pricing__includes-list {
+    /* Plans pair up two across on tablets and small laptops, and sit in one
+       row of four from 1200px (see that block), where every card still has
+       room for its name, the badge and the price on one line. */
+    .pricing__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
@@ -3046,8 +3260,8 @@
   }
 }
 
-/* ---- 62rem / 992px ----------------------------------------------------- */
-@media (min-width: 62rem) {
+/* ---- 992px -------------------------------------------------------- */
+@media (min-width: 992px) {
   @layer components {
     .site-header__nav {
       display: block;
@@ -3055,6 +3269,48 @@
 
     .hero {
       padding-block: calc(var(--header-h) + var(--space-2xl)) var(--space-lg);
+    }
+
+    /* The demo column is a touch wider than the copy: the card carries the
+       product image, the swatch row and the button. */
+    .hero__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr);
+      gap: var(--space-3xl);
+    }
+
+    /* The grid's column gap is the seam now, so the stacked spacing goes. */
+    .hero__stage {
+      margin-block-start: 0;
+    }
+
+    /* Still four across, now inside the narrower left column: the value
+       scales with the column (about 15px at 992px up to 22.4px once the
+       shell stops growing) and the side padding drops to 12px. */
+    .facts__item {
+      padding-inline: var(--space-xs);
+    }
+
+    .facts__value {
+      --facts-value-size: clamp(14.4px, 2.2vw - 7.2px, 22.4px);
+    }
+
+    .pricing__head {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .pricing__switch {
+      align-items: flex-end;
+    }
+
+    .faq-grid {
+      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.4fr);
+      gap: var(--space-3xl);
+    }
+
+    /* Support and live status stay on screen while the list is read. */
+    .faq-side {
+      position: sticky;
+      inset-block-start: calc(var(--header-h) + var(--space-md));
     }
 
     .steps {
@@ -3088,9 +3344,28 @@
       order: -1;
     }
 
+    /* Two columns: logo lockup over the copy on the left, stats and buttons
+       on the right. Three columns would squeeze the copy to about 290px at
+       992px, so that waits for 1200px. */
     .maker {
-      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-      gap: var(--space-4xl);
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      column-gap: var(--space-2xl);
+    }
+
+    .maker__identity,
+    .maker__copy {
+      grid-column: 1;
+    }
+
+    .maker__aside {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+    }
+
+    /* Beside the copy the aside is too narrow for four stats at their size
+       ("WCAG AA" ran into "Direct" at 1024px), so they pair up from here on. */
+    .maker__stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .mobile-cta {
@@ -3099,11 +3374,35 @@
   }
 }
 
-/* ---- 75rem / 1200px ---------------------------------------------------- */
-@media (min-width: 75rem) {
+/* ---- 1200px ------------------------------------------------------- */
+@media (min-width: 1200px) {
   @layer components {
+    /* Logo lockup, copy, then stats and buttons, all in one row. The stats
+       stay two by two: the aside column is still too narrow for four. */
+    .maker {
+      grid-template-columns: auto minmax(0, 1.2fr) minmax(0, 1fr);
+    }
+
+    .maker__identity,
+    .maker__copy,
+    .maker__aside {
+      grid-column: auto;
+      grid-row: auto;
+    }
+
+    /* All four plans in one row. */
+    .pricing__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    /* The label and the wrapped feature row sit side by side. */
+    .pricing__includes {
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: var(--space-lg);
+    }
+
     .demo {
-      --demo-pad: 1.75rem;
+      --demo-pad: 28px;
     }
 
     .site-header__links {
@@ -3157,7 +3456,6 @@
   }
 }
 
-
 /* =========================================================================
    LEGAL  -  privacy.html and any future policy page
    =========================================================================
@@ -3180,16 +3478,17 @@
 
   .legal-hero__title {
     margin: 0;
-    font-size: clamp(1.85rem, 1.3rem + 2.2vw, 2.8rem);
+    font-size: clamp(29.6px, 20.8px + 2.2vw, 44.8px);
+    max-width: calc(clamp(29.6px, 20.8px + 2.2vw, 44.8px) * 16.925);
     line-height: var(--leading-snug);
-    letter-spacing: var(--tracking-tight);
+    letter-spacing: calc(clamp(29.6px, 20.8px + 2.2vw, 44.8px) * var(--tracking-tight));
     font-weight: 600;
     color: var(--color-ink);
   }
 
   .legal-hero__meta {
     margin: 0;
-    max-width: 62ch;
+    max-width: calc(var(--text-body) * 41.292);
     font-size: var(--text-body);
     line-height: var(--leading-normal);
     color: var(--color-ink-muted);
@@ -3198,8 +3497,8 @@
   .legal-hero__stamp {
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
-    padding: 0.3rem 0.7rem;
+    gap: 7.2px;
+    padding: 4.8px 11.2px;
     border-radius: var(--radius-pill);
     background: var(--color-surface-sunk);
     border: 1px solid var(--color-line);
@@ -3219,7 +3518,7 @@
     margin-block: var(--space-xl);
   }
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     .legal-glance {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -3228,7 +3527,7 @@
   .legal-glance__item {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: 0.75rem;
+    gap: 12px;
     align-items: start;
     padding: var(--space-sm) var(--space-md);
     border-radius: var(--radius-md);
@@ -3248,7 +3547,7 @@
   }
 
   .legal-glance__title {
-    margin: 0 0 0.15rem;
+    margin: 0 0 2.4px;
     font-size: var(--text-sm);
     font-weight: 600;
     color: var(--color-ink);
@@ -3274,9 +3573,9 @@
     min-width: 0;
   }
 
-  @media (min-width: 62rem) {
+  @media (min-width: 992px) {
     .legal-body {
-      grid-template-columns: 15rem minmax(0, 1fr);
+      grid-template-columns: 240px minmax(0, 1fr);
       gap: var(--space-2xl);
     }
   }
@@ -3315,7 +3614,7 @@
     margin: 0 0 var(--space-2xs);
     font-size: var(--text-eyebrow);
     font-weight: 600;
-    letter-spacing: var(--tracking-wide);
+    letter-spacing: calc(var(--text-eyebrow) * var(--tracking-wide));
     text-transform: uppercase;
     color: var(--color-ink-subtle);
   }
@@ -3330,14 +3629,15 @@
 
   .legal-toc__link {
     display: block;
-    padding: 0.5rem 0.7rem;
+    padding: 8px 11.2px;
     border-radius: var(--radius-xs);
     border-inline-start: 2px solid transparent;
     font-size: var(--text-sm);
     line-height: 1.4;
     color: var(--color-ink-muted);
     text-decoration: none;
-    transition: color var(--dur-fast) var(--ease-out),
+    transition:
+      color var(--dur-fast) var(--ease-out),
       background var(--dur-fast) var(--ease-out);
   }
 
@@ -3353,7 +3653,7 @@
     font-weight: 600;
   }
 
-  @media (min-width: 62rem) {
+  @media (min-width: 992px) {
     .legal-toc {
       position: sticky;
       top: calc(var(--header-h) + var(--space-md));
@@ -3381,7 +3681,7 @@
 
   /* ---- The document ---------------------------------------------------- */
   .legal-doc {
-    max-width: 68ch;
+    max-width: calc(var(--text-body) * 45.288);
     font-size: var(--text-body);
     line-height: var(--leading-normal);
     color: var(--color-ink-muted);
@@ -3398,8 +3698,9 @@
     scroll-margin-top: calc(var(--header-h) + var(--space-md));
     margin: 0 0 var(--space-xs);
     font-size: var(--text-h3);
+    max-width: calc(var(--text-h3) * 16.925);
     line-height: 1.25;
-    letter-spacing: -0.015em;
+    letter-spacing: calc(var(--text-h3) * -0.015);
     font-weight: 600;
     color: var(--color-ink);
   }
@@ -3407,6 +3708,7 @@
   .legal-doc h3 {
     margin: var(--space-md) 0 var(--space-2xs);
     font-size: var(--text-h4);
+    max-width: calc(var(--text-h4) * 16.925);
     line-height: 1.3;
     font-weight: 600;
     color: var(--color-ink);
@@ -3421,14 +3723,14 @@
 
   .legal-table {
     inline-size: 100%;
-    min-inline-size: 30rem;
+    min-inline-size: 480px;
     border-collapse: collapse;
     font-size: var(--text-sm);
   }
 
   .legal-table th,
   .legal-table td {
-    padding: 0.6rem 0.75rem 0.6rem 0;
+    padding: 9.6px 12px 9.6px 0;
     border-block-end: 1px solid var(--color-line);
     text-align: start;
     vertical-align: top;
@@ -3449,13 +3751,13 @@
 
   .legal-doc ul {
     margin: 0 0 var(--space-sm);
-    padding-inline-start: 1.15rem;
+    padding-inline-start: 18.4px;
     display: grid;
-    gap: 0.6rem;
+    gap: 9.6px;
   }
 
   .legal-doc li {
-    padding-inline-start: 0.2rem;
+    padding-inline-start: 3.2px;
   }
 
   .legal-doc li::marker {
@@ -3479,7 +3781,7 @@
 
   .legal-callout {
     display: grid;
-    gap: 0.4rem;
+    gap: 6.4px;
     padding: var(--space-md);
     margin-block: 0 var(--space-sm);
     border-radius: var(--radius-md);
@@ -3492,7 +3794,7 @@
     margin: 0;
     display: flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 7.2px;
     font-size: var(--text-sm);
     font-weight: 600;
     color: var(--color-violet-deep);
@@ -3507,7 +3809,6 @@
     border-block-start: 1px solid var(--color-line);
   }
 }
-
 
 /* =========================================================================
    MOTION PREFERENCES  -  waitlist + legal blocks
@@ -3581,11 +3882,10 @@
 
   .legal-doc a::after {
     content: " (" attr(href) ")";
-    font-size: 0.85em;
+    font-size: calc(var(--text-body) * 0.85);
     word-break: break-all;
   }
 }
-
 
 /* =========================================================================
    FIXES verified in the browser at 390 / 768 / 1440
@@ -3629,7 +3929,6 @@
   }
 }
 
-
 /* =========================================================================
    REFINEMENTS after inspecting the render
    ========================================================================= */
@@ -3638,7 +3937,7 @@
      promised. Everything outside the main card now carries its own light
      ground instead of borrowing the shader's. */
   .wl__brand {
-    padding-inline: 0.75rem 0.9rem;
+    padding-inline: 12px 14.4px;
     border-radius: var(--radius-pill);
     background: rgb(var(--color-white-rgb) / 72%);
     border: 1px solid var(--color-line);
@@ -3646,7 +3945,7 @@
   }
 
   .wl__foot {
-    padding: 0.6rem var(--space-md);
+    padding: 9.6px var(--space-md);
     border-radius: var(--radius-md);
     background: rgb(var(--color-white-rgb) / 78%);
     border: 1px solid rgb(var(--color-white-rgb) / 60%);
@@ -3660,13 +3959,13 @@
 
   /* On a phone the top row has to stay one row, and "Built by Enstacked
      Technologies" is already spelled out inside the card. */
-  @media (max-width: 29.99rem) {
+  @media (max-width: 479.84px) {
     .wl__brand-by {
       display: none;
     }
 
     .wl__back {
-      padding-inline: 0.75rem;
+      padding-inline: 12px;
     }
   }
 
@@ -3695,7 +3994,6 @@
   }
 }
 
-
 /* =========================================================================
    STATUS  -  status.html, plus the strip on index.html
    =========================================================================
@@ -3704,11 +4002,26 @@
    ========================================================================= */
 @layer components {
   /* ---- tone plumbing: one attribute drives dot, tick and badge ------- */
-  [data-status="operational"] { --st-tone: var(--st-operational); --st-tone-ink: var(--st-operational-ink); }
-  [data-status="degraded"]    { --st-tone: var(--st-degraded);    --st-tone-ink: var(--st-degraded-ink); }
-  [data-status="partial"]     { --st-tone: var(--st-partial);     --st-tone-ink: var(--st-partial-ink); }
-  [data-status="major"]       { --st-tone: var(--st-major);       --st-tone-ink: var(--st-major-ink); }
-  [data-status="maintenance"] { --st-tone: var(--st-maintenance); --st-tone-ink: var(--st-maintenance-ink); }
+  [data-status="operational"] {
+    --st-tone: var(--st-operational);
+    --st-tone-ink: var(--st-operational-ink);
+  }
+  [data-status="degraded"] {
+    --st-tone: var(--st-degraded);
+    --st-tone-ink: var(--st-degraded-ink);
+  }
+  [data-status="partial"] {
+    --st-tone: var(--st-partial);
+    --st-tone-ink: var(--st-partial-ink);
+  }
+  [data-status="major"] {
+    --st-tone: var(--st-major);
+    --st-tone-ink: var(--st-major-ink);
+  }
+  [data-status="maintenance"] {
+    --st-tone: var(--st-maintenance);
+    --st-tone-ink: var(--st-maintenance-ink);
+  }
 
   .st-dot {
     position: relative;
@@ -3730,8 +4043,15 @@
   }
 
   @keyframes st-ping {
-    0% { transform: scale(1); opacity: 0.5; }
-    70%, 100% { transform: scale(2.8); opacity: 0; }
+    0% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    70%,
+    100% {
+      transform: scale(2.8);
+      opacity: 0;
+    }
   }
 
   /* ---- page shell ---------------------------------------------------- */
@@ -3769,9 +4089,9 @@
   .st-pill {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 8px;
     margin: 0 0 var(--space-md);
-    padding: 0.42rem 0.9rem;
+    padding: 6.72px 14.4px;
     border-radius: var(--radius-pill);
     background: var(--color-surface-sunk);
     border: 1px solid var(--color-line);
@@ -3794,10 +4114,10 @@
 
   .st-title {
     margin: 0;
-    max-width: 20ch;
-    font-size: clamp(1.9rem, 1.3rem + 2.6vw, 3.1rem);
+    max-width: calc(clamp(30.4px, 20.8px + 2.6vw, 49.6px) * 13.54);
+    font-size: clamp(30.4px, 20.8px + 2.6vw, 49.6px);
     line-height: var(--leading-snug);
-    letter-spacing: var(--tracking-tight);
+    letter-spacing: calc(clamp(30.4px, 20.8px + 2.6vw, 49.6px) * var(--tracking-tight));
     font-weight: 600;
     color: var(--color-ink);
     text-wrap: balance;
@@ -3805,7 +4125,7 @@
 
   .st-lead {
     margin: var(--space-sm) 0 0;
-    max-width: 54ch;
+    max-width: calc(var(--text-lead) * 35.964);
     font-size: var(--text-lead);
     line-height: 1.55;
     color: var(--color-ink-muted);
@@ -3828,14 +4148,15 @@
   .st-section__title {
     margin: 0;
     font-size: var(--text-h3);
+    max-width: calc(var(--text-h3) * 16.925);
     line-height: 1.25;
-    letter-spacing: -0.015em;
+    letter-spacing: calc(var(--text-h3) * -0.015);
     font-weight: 600;
     color: var(--color-ink);
   }
 
   .st-section__sub {
-    margin: 0.35rem 0 0;
+    margin: 5.6px 0 0;
     font-size: var(--text-sm);
     line-height: 1.55;
     color: var(--color-ink-subtle);
@@ -3868,15 +4189,16 @@
   .st-group__title {
     margin: 0;
     font-size: var(--text-eyebrow);
+    max-width: calc(var(--text-eyebrow) * 16.925);
     font-weight: 600;
-    letter-spacing: var(--tracking-wide);
+    letter-spacing: calc(var(--text-eyebrow) * var(--tracking-wide));
     text-transform: uppercase;
     color: var(--color-ink-subtle);
   }
 
   .st-svc {
     display: grid;
-    gap: 0.6rem;
+    gap: 9.6px;
     padding: var(--space-sm) var(--space-md) var(--space-md);
     border-radius: var(--radius-md);
     background: var(--color-surface);
@@ -3888,13 +4210,13 @@
     flex-wrap: wrap;
     align-items: baseline;
     justify-content: space-between;
-    gap: 0.35rem var(--space-md);
+    gap: 5.6px var(--space-md);
   }
 
   .st-svc__name {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 8px;
     margin: 0;
     font-size: var(--text-body);
     font-weight: 600;
@@ -3902,8 +4224,8 @@
   }
 
   .st-svc__desc {
-    margin: 0.15rem 0 0;
-    padding-inline-start: 1.05rem;
+    margin: 2.4px 0 0;
+    padding-inline-start: 16.8px;
     font-size: var(--text-xs);
     line-height: 1.5;
     color: var(--color-ink-subtle);
@@ -3967,7 +4289,8 @@
     border-radius: var(--st-tick-radius);
     background: var(--st-tone, var(--st-operational));
     cursor: pointer;
-    transition: transform var(--dur-fast) var(--ease-out),
+    transition:
+      transform var(--dur-fast) var(--ease-out),
       opacity var(--dur-fast) var(--ease-out);
   }
 
@@ -3996,7 +4319,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-block-start: 0.45rem;
+    margin-block-start: 7.2px;
     font-size: var(--text-xs);
     color: var(--color-ink-subtle);
   }
@@ -4005,7 +4328,7 @@
     display: none;
   }
 
-  @media (min-width: 30rem) {
+  @media (min-width: 480px) {
     .st-axis__mid {
       display: inline;
     }
@@ -4023,7 +4346,7 @@
     position: fixed;
     z-index: var(--z-tooltip);
     transform: translate(-50%, -100%);
-    padding: 0.45rem 0.65rem;
+    padding: 7.2px 10.4px;
     border-radius: var(--radius-xs);
     background: var(--color-ink);
     color: var(--color-white);
@@ -4039,7 +4362,7 @@
   }
 
   .st-tip__body {
-    margin: 0.1rem 0 0;
+    margin: 1.6px 0 0;
     font-size: var(--text-xs);
     color: rgb(var(--color-white-rgb) / 72%);
   }
@@ -4059,7 +4382,7 @@
   .st-legend__item {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 6.4px;
   }
 
   /* ---- incidents ----------------------------------------------------------- */
@@ -4084,7 +4407,7 @@
     flex-wrap: wrap;
     align-items: baseline;
     justify-content: space-between;
-    gap: 0.5rem var(--space-md);
+    gap: 8px var(--space-md);
   }
 
   .st-inc__title,
@@ -4098,14 +4421,14 @@
 
   .st-inc__badges {
     display: flex;
-    gap: 0.35rem;
+    gap: 5.6px;
     margin: 0;
   }
 
   .st-inc__badge {
     display: inline-flex;
     align-items: center;
-    padding: 0.15rem 0.55rem;
+    padding: 2.4px 8.8px;
     border-radius: var(--radius-pill);
     background: var(--color-surface-sunk);
     border: 1px solid var(--color-line);
@@ -4129,7 +4452,7 @@
   }
 
   .st-inc__meta {
-    margin: 0.5rem 0 0;
+    margin: 8px 0 0;
     font-size: var(--text-xs);
     color: var(--color-ink-subtle);
     font-variant-numeric: tabular-nums;
@@ -4159,7 +4482,7 @@
     content: "";
     position: absolute;
     inset-inline-start: calc(var(--space-md) * -1 - 5px);
-    top: 0.42rem;
+    top: 6.72px;
     width: 8px;
     height: 8px;
     border-radius: 50%;
@@ -4174,7 +4497,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: 0.5rem;
+    gap: 8px;
     margin: 0;
   }
 
@@ -4191,7 +4514,7 @@
   }
 
   .st-inc__update-body {
-    margin: 0.15rem 0 0;
+    margin: 2.4px 0 0;
     font-size: var(--text-sm);
     line-height: var(--leading-normal);
     color: var(--color-ink-muted);
@@ -4214,8 +4537,8 @@
   }
 
   .st-empty__copy {
-    margin: 0.3rem 0 0;
-    max-width: 52ch;
+    margin: 4.8px 0 0;
+    max-width: calc(var(--text-sm) * 34.632);
     margin-inline: auto;
     font-size: var(--text-sm);
     line-height: 1.55;
@@ -4228,7 +4551,7 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--space-2xs);
-    padding: 0.5rem 0.6rem 0.5rem var(--space-md);
+    padding: 8px 9.6px 8px var(--space-md);
     border-radius: var(--radius-pill);
     background: var(--color-violet-soft);
     font-size: var(--text-sm);
@@ -4238,7 +4561,7 @@
 
   .st-skel {
     display: grid;
-    gap: 0.6rem;
+    gap: 9.6px;
     padding: var(--space-md);
     border-radius: var(--radius-md);
     background: var(--color-surface-sunk);
@@ -4258,12 +4581,22 @@
     animation: st-shimmer 1.4s linear infinite;
   }
 
-  .st-skel__line { width: 40%; height: 14px; }
-  .st-skel__bar  { width: 100%; height: 44px; }
+  .st-skel__line {
+    width: 40%;
+    height: 14px;
+  }
+  .st-skel__bar {
+    width: 100%;
+    height: 44px;
+  }
 
   @keyframes st-shimmer {
-    from { background-position: 100% 0; }
-    to   { background-position: 0 0; }
+    from {
+      background-position: 100% 0;
+    }
+    to {
+      background-position: 0 0;
+    }
   }
 
   /* ---- about --------------------------------------------------------------- */
@@ -4276,7 +4609,7 @@
     color: var(--color-ink-muted);
   }
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     .st-about__grid {
       grid-template-columns: 1fr 1fr;
       gap: var(--space-lg);
@@ -4306,17 +4639,17 @@
     gap: var(--space-sm) var(--space-md);
     min-height: 64px;
     padding: var(--space-sm) var(--space-md);
-    /* Below 48rem the strip wraps to two rows, and a pill radius on a
-       two-row box draws a capsule. The old 40rem switch sat inside that
+    /* Below 768px the strip wraps to two rows, and a pill radius on a
+       two-row box draws a capsule. The old 640px switch sat inside that
        band (at 640px the strip is still two rows), so the pill now starts
-       at 48rem, the same step that pulls the service pips back up. */
+       at 768px, the same step that pulls the service pips back up. */
     border-radius: var(--radius-lg);
     background: var(--color-surface);
     border: 1px solid var(--color-line);
     box-shadow: var(--shadow-xs);
   }
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     .status-strip {
       border-radius: var(--radius-pill);
     }
@@ -4325,7 +4658,7 @@
   .status-strip__state {
     display: flex;
     align-items: center;
-    gap: 0.55rem;
+    gap: 8.8px;
     min-width: 0;
   }
 
@@ -4346,7 +4679,7 @@
     gap: 3px;
   }
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     .status-strip__services {
       margin-inline-start: auto;
     }
@@ -4362,9 +4695,9 @@
   .status-strip__link {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 5.6px;
     min-height: 44px;
-    padding-inline: 0.9rem;
+    padding-inline: 14.4px;
     border-radius: var(--radius-pill);
     border: 1px solid var(--color-line);
     font-size: var(--text-sm);
@@ -4440,8 +4773,12 @@
     margin-block-start: var(--space-sm);
   }
 
+  /* Smaller here, so the measure and the tracking are restated against this
+     size; with ch and em both followed the element automatically. */
   .st-active .st-section__title {
     font-size: var(--text-h4);
+    max-width: calc(var(--text-h4) * 16.925);
+    letter-spacing: calc(var(--text-h4) * -0.015);
     color: var(--color-clay-deep);
   }
 }
@@ -4457,7 +4794,7 @@
      The bar kept scrolling, with the last days (today included) under the
      edge behind a scrollbar. With a 1px floor the ticks flex to fill the
      bar instead, a fraction under 2px each, and every day is on screen. */
-  @media (max-width: 29.99rem) {
+  @media (max-width: 479.84px) {
     .st-tick {
       min-width: 1px;
       border-radius: 2px;
@@ -4508,7 +4845,7 @@
   .st-inc__all a {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 5.6px;
     min-height: 44px;
     font-size: var(--text-sm);
     font-weight: 500;
@@ -4534,7 +4871,6 @@
   }
 }
 
-
 /* =========================================================================
    LAUNCH  -  "Now live" hero pill + the launch moment surprise
    =========================================================================
@@ -4549,8 +4885,10 @@
     color: var(--color-violet-deep);
     text-decoration: none;
     box-shadow: inset 0 0 0 1px rgb(var(--color-violet-rgb) / 22%);
-    transition: background-color var(--dur-fast) linear,
-      box-shadow var(--dur-fast) linear, transform var(--dur-base) var(--ease-out);
+    transition:
+      background-color var(--dur-fast) linear,
+      box-shadow var(--dur-fast) linear,
+      transform var(--dur-base) var(--ease-out);
   }
 
   .hero__pill--live:hover {
@@ -4583,7 +4921,7 @@
     background: var(--color-ink);
     color: var(--color-white);
     font-size: var(--text-xs);
-    letter-spacing: 0.02em;
+    letter-spacing: calc(var(--text-xs) * 0.02);
   }
 
   .hero__pill-arrow {
@@ -4596,8 +4934,15 @@
   }
 
   @keyframes launch-ping {
-    0% { transform: scale(1); opacity: 0.55; }
-    80%, 100% { transform: scale(2.6); opacity: 0; }
+    0% {
+      transform: scale(1);
+      opacity: 0.55;
+    }
+    80%,
+    100% {
+      transform: scale(2.6);
+      opacity: 0;
+    }
   }
 
   /* ---- Add to cart nudge, after a few colors were explored ----------- */
@@ -4606,10 +4951,20 @@
   }
 
   @keyframes launch-nudge {
-    0% { box-shadow: 0 0 0 0 rgb(var(--color-violet-rgb) / 55%); transform: translateY(0); }
-    30% { transform: translateY(-2px); }
-    60% { box-shadow: 0 0 0 12px rgb(var(--color-violet-rgb) / 0%); transform: translateY(0); }
-    100% { box-shadow: 0 0 0 0 rgb(var(--color-violet-rgb) / 0%); }
+    0% {
+      box-shadow: 0 0 0 0 rgb(var(--color-violet-rgb) / 55%);
+      transform: translateY(0);
+    }
+    30% {
+      transform: translateY(-2px);
+    }
+    60% {
+      box-shadow: 0 0 0 12px rgb(var(--color-violet-rgb) / 0%);
+      transform: translateY(0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgb(var(--color-violet-rgb) / 0%);
+    }
   }
 
   /* ---- Confetti: swatch chips, positioned by JS, animated by WAAPI --- */
@@ -4658,12 +5013,15 @@
     padding: var(--space-md);
     border-radius: var(--radius-lg);
     background: var(--color-surface);
-    box-shadow: 0 0 0 1px var(--color-line), 0 24px 60px rgb(var(--color-ink-rgb) / 22%),
+    box-shadow:
+      0 0 0 1px var(--color-line),
+      0 24px 60px rgb(var(--color-ink-rgb) / 22%),
       0 4px 12px rgb(var(--color-ink-rgb) / 8%);
     pointer-events: auto;
     opacity: 0;
     transform: translateY(24px) scale(0.97);
-    transition: opacity var(--dur-base) var(--ease-out),
+    transition:
+      opacity var(--dur-base) var(--ease-out),
       transform var(--dur-slow) var(--ease-spring);
   }
 
@@ -4730,7 +5088,10 @@
     block-size: 36px;
     border-radius: 50%;
     background-size: cover;
-    box-shadow: inset 0 0 0 1px rgb(var(--color-ink-rgb) / 14%), 0 0 0 2px var(--color-white), 0 0 0 3.5px var(--color-ink);
+    box-shadow:
+      inset 0 0 0 1px rgb(var(--color-ink-rgb) / 14%),
+      0 0 0 2px var(--color-white),
+      0 0 0 3.5px var(--color-ink);
   }
 
   .launch-moment__receipt-lines {
@@ -4769,15 +5130,19 @@
   }
 
   @keyframes launch-tick {
-    from { transform: scale(0); }
-    to { transform: scale(1); }
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
   }
 
   .launch-moment__eyebrow {
     margin-block-start: var(--space-sm);
     font-size: var(--text-eyebrow);
     font-weight: 600;
-    letter-spacing: var(--tracking-wide);
+    letter-spacing: calc(var(--text-eyebrow) * var(--tracking-wide));
     text-transform: uppercase;
     color: var(--color-clay-deep);
   }
@@ -4785,8 +5150,9 @@
   .launch-moment__title {
     margin-block-start: var(--space-3xs);
     font-size: var(--text-h4);
+    max-width: calc(var(--text-h4) * 16.925);
     line-height: var(--leading-snug);
-    letter-spacing: -0.015em;
+    letter-spacing: calc(var(--text-h4) * -0.015);
     font-weight: 600;
   }
 
@@ -4809,7 +5175,7 @@
 
   .launch-moment__live-dot {
     flex: none;
-    margin-block-start: 0.45em;
+    margin-block-start: calc(var(--text-sm) * 0.45);
     inline-size: 8px;
     block-size: 8px;
     border-radius: 50%;
@@ -4830,7 +5196,7 @@
   }
 
   /* Phones: sit above the sticky call to action bar. */
-  @media (max-width: 47.99rem) {
+  @media (max-width: 767.84px) {
     .launch-moment {
       inset-block-end: calc(76px + env(safe-area-inset-bottom, 0px));
     }
@@ -4838,7 +5204,7 @@
 
   /* Small phones: the receipt, headline and CTA carry the moment; the
      longer sentence is the first thing to go so the card stays short. */
-  @media (max-width: 29.99rem) {
+  @media (max-width: 479.84px) {
     .launch-moment__card {
       padding: var(--space-sm);
     }
@@ -4960,14 +5326,14 @@
 
   /* Tiny phones: the brand, primary button and menu button must share one
      row, so the primary button tightens rather than wrapping. Inclusive of
-     360px on purpose (no 0.01rem step back): 360 is the phone it is for. */
-  @media (max-width: 22.5rem) {
+     360px on purpose (no 0.16px step back): 360 is the phone it is for. */
+  @media (max-width: 360px) {
     .site-header__cta {
       padding-inline: var(--space-xs);
     }
   }
 
-  @media (min-width: 62rem) {
+  @media (min-width: 992px) {
     .site-header__menu-btn,
     .site-header__panel {
       display: none !important;

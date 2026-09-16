@@ -35,13 +35,17 @@ vercel.json / _redirects       send old waitlist.html links to the App Store lis
 privacy.html                   privacy policy
 status.html                    live system status, fed by the dashboard API
 assets/
-  css/design-tokens.css        every design token, loaded first on all pages
-  css/styles.css               components and layout, cascade layers
+  css/home.css                 index.html only: the V2 Noir design (tokens,
+                               light/dark themes, layout) in one file
+  css/design-tokens.css        design tokens for privacy.html and status.html
+  css/styles.css               components and layout for privacy.html and status.html
   js/nav.js                    the site header on EVERY page: background on
                                scroll, hide on scroll down, small-screen menu
   js/main.js                   one IIFE, eleven independent modules
   js/legal.js                  privacy.html: contents list highlighting
   js/status.js                 status.html + the strip on index.html
+  js/micro.js                  index.html only: theme toggle, reveals and
+                               micro-interactions (off under reduced motion)
   fonts/                       legacy woff2 files, no longer referenced by
                                index.html (docs/ still uses Inter Tight)
   img/
@@ -141,7 +145,10 @@ in exactly one place.
    and shows the low-stock and sold-out states.
 2. **Before / After toggle** — flips the picker between a plain dropdown and Varn
    chips. It plays itself once when the demo first scrolls into view.
-3. **Theme compatibility marquee** — the Shopify-specific trust band.
+3. **Theme compatibility marquee** — the Shopify-specific trust band. It closes
+   the hero rather than sitting in its own section: the label sits beside the
+   moving row, under a hairline. The paragraph that used to follow it now opens
+   Features.
 4. **How it works**: the 4-step set-up (Varn handles 3), with a pinned admin mock
    that advances as you scroll. Step 3 animates auto-detect naming the colors.
 5. **Feature bento** — six capabilities, each tagged with the plan it starts on
@@ -151,13 +158,17 @@ in exactly one place.
 7. **Where swatches show up** — collection, search, quick view, everywhere else.
 8. **AI setup** — with a push-button demo that also shows the value it
    deliberately *doesn't* guess.
-9. **Proof pillars** — the four objections every Shopify merchant has.
+9. **Proof pillars** — the four objections every Shopify merchant has, closed by
+   the Enstacked Technologies maker band (logo, stats, contact) inside the same
+   ink panel.
 10. **Agent readiness** — the differentiator no competitor has.
 11. **Pricing** — Free / Grow / Advance / Premium with a monthly–yearly switch,
     mirroring `app/data/plans.ts` in the app repo (the single source of truth).
-12. **Enstacked Technologies** — dedicated maker section with the logo.
-13. **FAQ** — native `<details>`, works with JavaScript disabled.
-14. **Closing CTA + footer.** Add Varn buttons appear only in the hero and this
+12. **FAQ** — native `<details>`, works with JavaScript disabled. Two columns
+    from 992px: a sticky left column carries the heading, the support buttons
+    and the live status strip (moved here from its own section); the questions
+    run on the right.
+13. **Closing CTA + footer.** Add Varn buttons appear only in the hero and this
     closing band (owner rule, 2026-09-15); the header, pricing cards and the old
     mobile sticky bar carry none. Copy follows "Varn Content.docx".
 

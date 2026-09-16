@@ -20,7 +20,7 @@
 
   var menuButton = header.querySelector("[data-menu-toggle]");
   var panel = header.querySelector("[data-menu-panel]");
-  var DESKTOP = window.matchMedia("(min-width: 62em)");
+  var DESKTOP = window.matchMedia("(min-width: 992px)");
   var THRESHOLD = 24;
   var lastY = window.scrollY;
   var pinnedUntil = 0;
